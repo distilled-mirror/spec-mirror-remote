@@ -1,0 +1,2036 @@
+{
+  "source": "https://developer.remote.com/llms.txt",
+  "count": 406,
+  "pages": [
+    {
+      "page": "https://developer.remote.com/reference/background_checkstatusupdated",
+      "markdown": "https://developer.remote.com/reference/background_checkstatusupdated.md",
+      "file": "reference/background_checkstatusupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/benefit_renewal_requestcreated",
+      "markdown": "https://developer.remote.com/reference/benefit_renewal_requestcreated.md",
+      "file": "reference/benefit_renewal_requestcreated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/billing_documentissued-1",
+      "markdown": "https://developer.remote.com/reference/billing_documentissued-1.md",
+      "file": "reference/billing_documentissued-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyactivated-1",
+      "markdown": "https://developer.remote.com/reference/companyactivated-1.md",
+      "file": "reference/companyactivated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyarchived-1",
+      "markdown": "https://developer.remote.com/reference/companyarchived-1.md",
+      "file": "reference/companyarchived-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyeor_hiringadditional_information_required-1",
+      "markdown": "https://developer.remote.com/reference/companyeor_hiringadditional_information_required-1.md",
+      "file": "reference/companyeor_hiringadditional_information_required-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyeor_hiringno_reserve_payment_requested-1",
+      "markdown": "https://developer.remote.com/reference/companyeor_hiringno_reserve_payment_requested-1.md",
+      "file": "reference/companyeor_hiringno_reserve_payment_requested-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyeor_hiringreferred-1",
+      "markdown": "https://developer.remote.com/reference/companyeor_hiringreferred-1.md",
+      "file": "reference/companyeor_hiringreferred-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyeor_hiringreserve_payment_requested-1",
+      "markdown": "https://developer.remote.com/reference/companyeor_hiringreserve_payment_requested-1.md",
+      "file": "reference/companyeor_hiringreserve_payment_requested-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyeor_hiringverification_completed-1",
+      "markdown": "https://developer.remote.com/reference/companyeor_hiringverification_completed-1.md",
+      "file": "reference/companyeor_hiringverification_completed-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companymanager_created-1",
+      "markdown": "https://developer.remote.com/reference/companymanager_created-1.md",
+      "file": "reference/companymanager_created-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companymanager_deleted-1",
+      "markdown": "https://developer.remote.com/reference/companymanager_deleted-1.md",
+      "file": "reference/companymanager_deleted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companymanager_updated-1",
+      "markdown": "https://developer.remote.com/reference/companymanager_updated-1.md",
+      "file": "reference/companymanager_updated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyowner_changed",
+      "markdown": "https://developer.remote.com/reference/companyowner_changed.md",
+      "file": "reference/companyowner_changed.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companypartner_offboarded-1",
+      "markdown": "https://developer.remote.com/reference/companypartner_offboarded-1.md",
+      "file": "reference/companypartner_offboarded-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companypricing_planupdated-1",
+      "markdown": "https://developer.remote.com/reference/companypricing_planupdated-1.md",
+      "file": "reference/companypricing_planupdated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contract_amendmentcanceled",
+      "markdown": "https://developer.remote.com/reference/contract_amendmentcanceled.md",
+      "file": "reference/contract_amendmentcanceled.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contract_amendmentdeleted",
+      "markdown": "https://developer.remote.com/reference/contract_amendmentdeleted.md",
+      "file": "reference/contract_amendmentdeleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contract_amendmentdone",
+      "markdown": "https://developer.remote.com/reference/contract_amendmentdone.md",
+      "file": "reference/contract_amendmentdone.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contract_amendmentreview_started",
+      "markdown": "https://developer.remote.com/reference/contract_amendmentreview_started.md",
+      "file": "reference/contract_amendmentreview_started.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contract_amendmentsubmitted",
+      "markdown": "https://developer.remote.com/reference/contract_amendmentsubmitted.md",
+      "file": "reference/contract_amendmentsubmitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contract_documentstatuschanged-1",
+      "markdown": "https://developer.remote.com/reference/contract_documentstatuschanged-1.md",
+      "file": "reference/contract_documentstatuschanged-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contractor_invoiceemployer_paid",
+      "markdown": "https://developer.remote.com/reference/contractor_invoiceemployer_paid.md",
+      "file": "reference/contractor_invoiceemployer_paid.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contractor_invoiceissued",
+      "markdown": "https://developer.remote.com/reference/contractor_invoiceissued.md",
+      "file": "reference/contractor_invoiceissued.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contractor_invoicepaid_out",
+      "markdown": "https://developer.remote.com/reference/contractor_invoicepaid_out.md",
+      "file": "reference/contractor_invoicepaid_out.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contractor_invoicepayment_initiated",
+      "markdown": "https://developer.remote.com/reference/contractor_invoicepayment_initiated.md",
+      "file": "reference/contractor_invoicepayment_initiated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contracttermination_date_reached",
+      "markdown": "https://developer.remote.com/reference/contracttermination_date_reached.md",
+      "file": "reference/contracttermination_date_reached.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/custom_fieldvalue_updated-1",
+      "markdown": "https://developer.remote.com/reference/custom_fieldvalue_updated-1.md",
+      "file": "reference/custom_fieldvalue_updated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_company-managers_user_id",
+      "markdown": "https://developer.remote.com/reference/delete_v1_company-managers_user_id.md",
+      "file": "reference/delete_v1_company-managers_user_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_contractors_employments_employment_id_contractor-cor-subscription",
+      "markdown": "https://developer.remote.com/reference/delete_v1_contractors_employments_employment_id_contractor-cor-subscription.md",
+      "file": "reference/delete_v1_contractors_employments_employment_id_contractor-cor-subscription.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_incentives_id",
+      "markdown": "https://developer.remote.com/reference/delete_v1_incentives_id.md",
+      "file": "reference/delete_v1_incentives_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_incentives_recurring_id",
+      "markdown": "https://developer.remote.com/reference/delete_v1_incentives_recurring_id.md",
+      "file": "reference/delete_v1_incentives_recurring_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_acknowledge",
+      "markdown": "https://developer.remote.com/reference/delete_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_acknowledge.md",
+      "file": "reference/delete_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_acknowledge.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_pay-items_id",
+      "markdown": "https://developer.remote.com/reference/delete_v1_pay-items_id.md",
+      "file": "reference/delete_v1_pay-items_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_sandbox_employments_employment_id",
+      "markdown": "https://developer.remote.com/reference/delete_v1_sandbox_employments_employment_id.md",
+      "file": "reference/delete_v1_sandbox_employments_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/delete_v1_webhook-callbacks_id",
+      "markdown": "https://developer.remote.com/reference/delete_v1_webhook-callbacks_id.md",
+      "file": "reference/delete_v1_webhook-callbacks_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employment_basic_informationupdated",
+      "markdown": "https://developer.remote.com/reference/employment_basic_informationupdated.md",
+      "file": "reference/employment_basic_informationupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employment_company_structure_nodeupdated-1",
+      "markdown": "https://developer.remote.com/reference/employment_company_structure_nodeupdated-1.md",
+      "file": "reference/employment_company_structure_nodeupdated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employment_contractactive_contract_updated",
+      "markdown": "https://developer.remote.com/reference/employment_contractactive_contract_updated.md",
+      "file": "reference/employment_contractactive_contract_updated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employment_contractadjusted_during_onboarding-1",
+      "markdown": "https://developer.remote.com/reference/employment_contractadjusted_during_onboarding-1.md",
+      "file": "reference/employment_contractadjusted_during_onboarding-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentaccountupdated",
+      "markdown": "https://developer.remote.com/reference/employmentaccountupdated.md",
+      "file": "reference/employmentaccountupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentadministrative_detailsupdated",
+      "markdown": "https://developer.remote.com/reference/employmentadministrative_detailsupdated.md",
+      "file": "reference/employmentadministrative_detailsupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentcontractor_management_planupdated-1",
+      "markdown": "https://developer.remote.com/reference/employmentcontractor_management_planupdated-1.md",
+      "file": "reference/employmentcontractor_management_planupdated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentcontractor_of_record_terminationcancelled-1",
+      "markdown": "https://developer.remote.com/reference/employmentcontractor_of_record_terminationcancelled-1.md",
+      "file": "reference/employmentcontractor_of_record_terminationcancelled-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentcor_hiringinvoice_created-1",
+      "markdown": "https://developer.remote.com/reference/employmentcor_hiringinvoice_created-1.md",
+      "file": "reference/employmentcor_hiringinvoice_created-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentcor_hiringproof_of_payment_accepted-1",
+      "markdown": "https://developer.remote.com/reference/employmentcor_hiringproof_of_payment_accepted-1.md",
+      "file": "reference/employmentcor_hiringproof_of_payment_accepted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentcor_hiringproof_of_payment_submitted-1",
+      "markdown": "https://developer.remote.com/reference/employmentcor_hiringproof_of_payment_submitted-1.md",
+      "file": "reference/employmentcor_hiringproof_of_payment_submitted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentdetailsupdated",
+      "markdown": "https://developer.remote.com/reference/employmentdetailsupdated.md",
+      "file": "reference/employmentdetailsupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentemployment_agreementavailable",
+      "markdown": "https://developer.remote.com/reference/employmentemployment_agreementavailable.md",
+      "file": "reference/employmentemployment_agreementavailable.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmenteor_hiringinvoice_created",
+      "markdown": "https://developer.remote.com/reference/employmenteor_hiringinvoice_created.md",
+      "file": "reference/employmenteor_hiringinvoice_created.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_accepted",
+      "markdown": "https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_accepted.md",
+      "file": "reference/employmenteor_hiringproof_of_payment_accepted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_submitted",
+      "markdown": "https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_submitted.md",
+      "file": "reference/employmenteor_hiringproof_of_payment_submitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentjob_title_reviewapproved",
+      "markdown": "https://developer.remote.com/reference/employmentjob_title_reviewapproved.md",
+      "file": "reference/employmentjob_title_reviewapproved.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentjob_title_reviewrejected",
+      "markdown": "https://developer.remote.com/reference/employmentjob_title_reviewrejected.md",
+      "file": "reference/employmentjob_title_reviewrejected.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentjob_title_reviewstarted",
+      "markdown": "https://developer.remote.com/reference/employmentjob_title_reviewstarted.md",
+      "file": "reference/employmentjob_title_reviewstarted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentno_longer_eligible_for_onboarding_cancellation",
+      "markdown": "https://developer.remote.com/reference/employmentno_longer_eligible_for_onboarding_cancellation.md",
+      "file": "reference/employmentno_longer_eligible_for_onboarding_cancellation.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentonboarding_taskcompleted",
+      "markdown": "https://developer.remote.com/reference/employmentonboarding_taskcompleted.md",
+      "file": "reference/employmentonboarding_taskcompleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentonboardingcancelled",
+      "markdown": "https://developer.remote.com/reference/employmentonboardingcancelled.md",
+      "file": "reference/employmentonboardingcancelled.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentonboardingcompleted",
+      "markdown": "https://developer.remote.com/reference/employmentonboardingcompleted.md",
+      "file": "reference/employmentonboardingcompleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentonboardingstarted-1",
+      "markdown": "https://developer.remote.com/reference/employmentonboardingstarted-1.md",
+      "file": "reference/employmentonboardingstarted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentpersonal_informationupdated",
+      "markdown": "https://developer.remote.com/reference/employmentpersonal_informationupdated.md",
+      "file": "reference/employmentpersonal_informationupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobation_completion_lettercancelled",
+      "markdown": "https://developer.remote.com/reference/employmentprobation_completion_lettercancelled.md",
+      "file": "reference/employmentprobation_completion_lettercancelled.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobation_completion_lettercompleted",
+      "markdown": "https://developer.remote.com/reference/employmentprobation_completion_lettercompleted.md",
+      "file": "reference/employmentprobation_completion_lettercompleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobation_completion_lettersubmitted",
+      "markdown": "https://developer.remote.com/reference/employmentprobation_completion_lettersubmitted.md",
+      "file": "reference/employmentprobation_completion_lettersubmitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobation_period_extensioncancelled",
+      "markdown": "https://developer.remote.com/reference/employmentprobation_period_extensioncancelled.md",
+      "file": "reference/employmentprobation_period_extensioncancelled.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobation_period_extensioncompleted",
+      "markdown": "https://developer.remote.com/reference/employmentprobation_period_extensioncompleted.md",
+      "file": "reference/employmentprobation_period_extensioncompleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobation_period_extensionsubmitted",
+      "markdown": "https://developer.remote.com/reference/employmentprobation_period_extensionsubmitted.md",
+      "file": "reference/employmentprobation_period_extensionsubmitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentprobationperiod_ending_reminder_sent",
+      "markdown": "https://developer.remote.com/reference/employmentprobationperiod_ending_reminder_sent.md",
+      "file": "reference/employmentprobationperiod_ending_reminder_sent.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentstart_datechanged",
+      "markdown": "https://developer.remote.com/reference/employmentstart_datechanged.md",
+      "file": "reference/employmentstart_datechanged.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentstatusupdated",
+      "markdown": "https://developer.remote.com/reference/employmentstatusupdated.md",
+      "file": "reference/employmentstatusupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentupdated",
+      "markdown": "https://developer.remote.com/reference/employmentupdated.md",
+      "file": "reference/employmentupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentuser_statusactivated",
+      "markdown": "https://developer.remote.com/reference/employmentuser_statusactivated.md",
+      "file": "reference/employmentuser_statusactivated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentuser_statusdeactivated",
+      "markdown": "https://developer.remote.com/reference/employmentuser_statusdeactivated.md",
+      "file": "reference/employmentuser_statusdeactivated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentuser_statusinitiated",
+      "markdown": "https://developer.remote.com/reference/employmentuser_statusinitiated.md",
+      "file": "reference/employmentuser_statusinitiated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentuser_statusinvited",
+      "markdown": "https://developer.remote.com/reference/employmentuser_statusinvited.md",
+      "file": "reference/employmentuser_statusinvited.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentwork_emailupdated",
+      "markdown": "https://developer.remote.com/reference/employmentwork_emailupdated.md",
+      "file": "reference/employmentwork_emailupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expenseapproved",
+      "markdown": "https://developer.remote.com/reference/expenseapproved.md",
+      "file": "reference/expenseapproved.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expensecreated-1",
+      "markdown": "https://developer.remote.com/reference/expensecreated-1.md",
+      "file": "reference/expensecreated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expensedeclined",
+      "markdown": "https://developer.remote.com/reference/expensedeclined.md",
+      "file": "reference/expensedeclined.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expensedeleted",
+      "markdown": "https://developer.remote.com/reference/expensedeleted.md",
+      "file": "reference/expensedeleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expensereimbursed",
+      "markdown": "https://developer.remote.com/reference/expensereimbursed.md",
+      "file": "reference/expensereimbursed.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expensesubmitted",
+      "markdown": "https://developer.remote.com/reference/expensesubmitted.md",
+      "file": "reference/expensesubmitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/expenseupdated",
+      "markdown": "https://developer.remote.com/reference/expenseupdated.md",
+      "file": "reference/expenseupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_adp_subscription-cancellations",
+      "markdown": "https://developer.remote.com/reference/get_v1_adp_subscription-cancellations.md",
+      "file": "reference/get_v1_adp_subscription-cancellations.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_adp_subscription-changes",
+      "markdown": "https://developer.remote.com/reference/get_v1_adp_subscription-changes.md",
+      "file": "reference/get_v1_adp_subscription-changes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_adp_subscription-orders",
+      "markdown": "https://developer.remote.com/reference/get_v1_adp_subscription-orders.md",
+      "file": "reference/get_v1_adp_subscription-orders.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_adp_subscription-status",
+      "markdown": "https://developer.remote.com/reference/get_v1_adp_subscription-status.md",
+      "file": "reference/get_v1_adp_subscription-status.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_adp_user-assignments",
+      "markdown": "https://developer.remote.com/reference/get_v1_adp_user-assignments.md",
+      "file": "reference/get_v1_adp_user-assignments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_adp_user-unassignments",
+      "markdown": "https://developer.remote.com/reference/get_v1_adp_user-unassignments.md",
+      "file": "reference/get_v1_adp_user-unassignments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_benefit-offers",
+      "markdown": "https://developer.remote.com/reference/get_v1_benefit-offers.md",
+      "file": "reference/get_v1_benefit-offers.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_benefit-offers_country-summaries",
+      "markdown": "https://developer.remote.com/reference/get_v1_benefit-offers_country-summaries.md",
+      "file": "reference/get_v1_benefit-offers_country-summaries.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_benefit-renewal-requests",
+      "markdown": "https://developer.remote.com/reference/get_v1_benefit-renewal-requests.md",
+      "file": "reference/get_v1_benefit-renewal-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id.md",
+      "file": "reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id_schema",
+      "markdown": "https://developer.remote.com/reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id_schema.md",
+      "file": "reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id_schema.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents.md",
+      "file": "reference/get_v1_billing-documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id.md",
+      "file": "reference/get_v1_billing-documents_billing_document_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown.md",
+      "file": "reference/get_v1_billing-documents_billing_document_id_breakdown.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf.md",
+      "file": "reference/get_v1_billing-documents_billing_document_id_pdf.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_bulk-employment-jobs_job_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_bulk-employment-jobs_job_id.md",
+      "file": "reference/get_v1_bulk-employment-jobs_job_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_bulk-employment-jobs_job_id_rows",
+      "markdown": "https://developer.remote.com/reference/get_v1_bulk-employment-jobs_job_id_rows.md",
+      "file": "reference/get_v1_bulk-employment-jobs_job_id_rows.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies.md",
+      "file": "reference/get_v1_companies.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id.md",
+      "file": "reference/get_v1_companies_company_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_actions",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_actions.md",
+      "file": "reference/get_v1_companies_company_id_actions.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_compliance-profile",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_compliance-profile.md",
+      "file": "reference/get_v1_companies_company_id_compliance-profile.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_employments_employment_id_onboarding-reserves-status",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_employments_employment_id_onboarding-reserves-status.md",
+      "file": "reference/get_v1_companies_company_id_employments_employment_id_onboarding-reserves-status.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities.md",
+      "file": "reference/get_v1_companies_company_id_legal-entities.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details.md",
+      "file": "reference/get_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_contractor-eligibility",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_contractor-eligibility.md",
+      "file": "reference/get_v1_companies_company_id_legal-entities_legal_entity_id_contractor-eligibility.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_pay-codes",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_pay-codes.md",
+      "file": "reference/get_v1_companies_company_id_legal-entities_legal_entity_id_pay-codes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_pricing-plans",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_pricing-plans.md",
+      "file": "reference/get_v1_companies_company_id_pricing-plans.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_product-prices",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_product-prices.md",
+      "file": "reference/get_v1_companies_company_id_product-prices.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_company_id_webhook-callbacks",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_company_id_webhook-callbacks.md",
+      "file": "reference/get_v1_companies_company_id_webhook-callbacks.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_companies_schema",
+      "markdown": "https://developer.remote.com/reference/get_v1_companies_schema.md",
+      "file": "reference/get_v1_companies_schema.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_company_company_id_cost-center-allocations",
+      "markdown": "https://developer.remote.com/reference/get_v1_company_company_id_cost-center-allocations.md",
+      "file": "reference/get_v1_company_company_id_cost-center-allocations.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_company-currencies",
+      "markdown": "https://developer.remote.com/reference/get_v1_company-currencies.md",
+      "file": "reference/get_v1_company-currencies.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_company-departments",
+      "markdown": "https://developer.remote.com/reference/get_v1_company-departments.md",
+      "file": "reference/get_v1_company-departments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_company-managers",
+      "markdown": "https://developer.remote.com/reference/get_v1_company-managers.md",
+      "file": "reference/get_v1_company-managers.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_company-managers_user_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_company-managers_user_id.md",
+      "file": "reference/get_v1_company-managers_user_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contract-amendments",
+      "markdown": "https://developer.remote.com/reference/get_v1_contract-amendments.md",
+      "file": "reference/get_v1_contract-amendments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contract-amendments_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_contract-amendments_id.md",
+      "file": "reference/get_v1_contract-amendments_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contract-amendments_schema",
+      "markdown": "https://developer.remote.com/reference/get_v1_contract-amendments_schema.md",
+      "file": "reference/get_v1_contract-amendments_schema.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractor-invoice-schedules",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractor-invoice-schedules.md",
+      "file": "reference/get_v1_contractor-invoice-schedules.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractor-invoice-schedules_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractor-invoice-schedules_id.md",
+      "file": "reference/get_v1_contractor-invoice-schedules_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractor-invoices",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractor-invoices.md",
+      "file": "reference/get_v1_contractor-invoices.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractor-invoices_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractor-invoices_id.md",
+      "file": "reference/get_v1_contractor-invoices_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_cor-termination-requests",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_cor-termination-requests.md",
+      "file": "reference/get_v1_contractors_cor-termination-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_contract-documents_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_contract-documents_id.md",
+      "file": "reference/get_v1_contractors_employments_employment_id_contract-documents_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_contractor-currencies",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_contractor-currencies.md",
+      "file": "reference/get_v1_contractors_employments_employment_id_contractor-currencies.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_contractor-subscriptions",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_contractor-subscriptions.md",
+      "file": "reference/get_v1_contractors_employments_employment_id_contractor-subscriptions.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_cor-termination-requests_termination_request_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_cor-termination-requests_termination_request_id.md",
+      "file": "reference/get_v1_contractors_employments_employment_id_cor-termination-requests_termination_request_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_rates",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_employments_employment_id_rates.md",
+      "file": "reference/get_v1_contractors_employments_employment_id_rates.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractors_schemas_eligibility-questionnaire",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractors_schemas_eligibility-questionnaire.md",
+      "file": "reference/get_v1_contractors_schemas_eligibility-questionnaire.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_cost-calculator_countries",
+      "markdown": "https://developer.remote.com/reference/get_v1_cost-calculator_countries.md",
+      "file": "reference/get_v1_cost-calculator_countries.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_cost-calculator_regions_slug_fields",
+      "markdown": "https://developer.remote.com/reference/get_v1_cost-calculator_regions_slug_fields.md",
+      "file": "reference/get_v1_cost-calculator_regions_slug_fields.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_countries",
+      "markdown": "https://developer.remote.com/reference/get_v1_countries.md",
+      "file": "reference/get_v1_countries.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_countries_country_code_contractor-contract-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_contractor-contract-details.md",
+      "file": "reference/get_v1_countries_country_code_contractor-contract-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_countries_country_code_engagement-agreement-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_engagement-agreement-details.md",
+      "file": "reference/get_v1_countries_country_code_engagement-agreement-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_countries_country_code_form",
+      "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_form.md",
+      "file": "reference/get_v1_countries_country_code_form.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_countries_country_code_holidays_year",
+      "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_holidays_year.md",
+      "file": "reference/get_v1_countries_country_code_holidays_year.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_countries_country_code_legal_entity_forms_form",
+      "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_legal_entity_forms_form.md",
+      "file": "reference/get_v1_countries_country_code_legal_entity_forms_form.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_custom-fields",
+      "markdown": "https://developer.remote.com/reference/get_v1_custom-fields.md",
+      "file": "reference/get_v1_custom-fields.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_custom-fields_custom_field_id_values_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_custom-fields_custom_field_id_values_employment_id.md",
+      "file": "reference/get_v1_custom-fields_custom_field_id_values_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_direct-offboardings",
+      "markdown": "https://developer.remote.com/reference/get_v1_direct-offboardings.md",
+      "file": "reference/get_v1_direct-offboardings.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_address",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_address.md",
+      "file": "reference/get_v1_employee_address.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_bank-account",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_bank-account.md",
+      "file": "reference/get_v1_employee_bank-account.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_current",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_current.md",
+      "file": "reference/get_v1_employee_current.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_documents",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_documents.md",
+      "file": "reference/get_v1_employee_documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_documents_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_documents_id.md",
+      "file": "reference/get_v1_employee_documents_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_emergency-contact",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_emergency-contact.md",
+      "file": "reference/get_v1_employee_emergency-contact.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_expense-categories",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_expense-categories.md",
+      "file": "reference/get_v1_employee_expense-categories.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_expenses",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_expenses.md",
+      "file": "reference/get_v1_employee_expenses.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_incentives",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_incentives.md",
+      "file": "reference/get_v1_employee_incentives.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_leave-policies",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_leave-policies.md",
+      "file": "reference/get_v1_employee_leave-policies.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_leave-policies_summary",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_leave-policies_summary.md",
+      "file": "reference/get_v1_employee_leave-policies_summary.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_payslip-files",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_payslip-files.md",
+      "file": "reference/get_v1_employee_payslip-files.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_payslips",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_payslips.md",
+      "file": "reference/get_v1_employee_payslips.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_personal-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_personal-details.md",
+      "file": "reference/get_v1_employee_personal-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_personal-information",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_personal-information.md",
+      "file": "reference/get_v1_employee_personal-information.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_timeoff",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_timeoff.md",
+      "file": "reference/get_v1_employee_timeoff.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_timesheets",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_timesheets.md",
+      "file": "reference/get_v1_employee_timesheets.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employment-contracts",
+      "markdown": "https://developer.remote.com/reference/get_v1_employment-contracts.md",
+      "file": "reference/get_v1_employment-contracts.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employment-contracts_employment_id_pending-changes",
+      "markdown": "https://developer.remote.com/reference/get_v1_employment-contracts_employment_id_pending-changes.md",
+      "file": "reference/get_v1_employment-contracts_employment_id_pending-changes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments.md",
+      "file": "reference/get_v1_employments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_bulk",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_bulk.md",
+      "file": "reference/get_v1_employments_bulk.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id.md",
+      "file": "reference/get_v1_employments_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_background-checks_background_check_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_background-checks_background_check_id.md",
+      "file": "reference/get_v1_employments_employment_id_background-checks_background_check_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_benefit-offers",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_benefit-offers.md",
+      "file": "reference/get_v1_employments_employment_id_benefit-offers.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_benefit-offers_schema",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_benefit-offers_schema.md",
+      "file": "reference/get_v1_employments_employment_id_benefit-offers_schema.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_company-structure-nodes",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_company-structure-nodes.md",
+      "file": "reference/get_v1_employments_employment_id_company-structure-nodes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_contract-documents",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_contract-documents.md",
+      "file": "reference/get_v1_employments_employment_id_contract-documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_cost-center-allocations",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_cost-center-allocations.md",
+      "file": "reference/get_v1_employments_employment_id_cost-center-allocations.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_custom-fields",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_custom-fields.md",
+      "file": "reference/get_v1_employments_employment_id_custom-fields.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_employment-agreement_download",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_employment-agreement_download.md",
+      "file": "reference/get_v1_employments_employment_id_employment-agreement_download.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_employment-agreement_preview",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_employment-agreement_preview.md",
+      "file": "reference/get_v1_employments_employment_id_employment-agreement_preview.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_engagement-agreement-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_engagement-agreement-details.md",
+      "file": "reference/get_v1_employments_employment_id_engagement-agreement-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_files",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_files.md",
+      "file": "reference/get_v1_employments_employment_id_files.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_job",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_job.md",
+      "file": "reference/get_v1_employments_employment_id_job.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employments_employment_id_onboarding-steps",
+      "markdown": "https://developer.remote.com/reference/get_v1_employments_employment_id_onboarding-steps.md",
+      "file": "reference/get_v1_employments_employment_id_onboarding-steps.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_expenses",
+      "markdown": "https://developer.remote.com/reference/get_v1_expenses.md",
+      "file": "reference/get_v1_expenses.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_expenses_categories",
+      "markdown": "https://developer.remote.com/reference/get_v1_expenses_categories.md",
+      "file": "reference/get_v1_expenses_categories.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_expenses_expense_id_receipt",
+      "markdown": "https://developer.remote.com/reference/get_v1_expenses_expense_id_receipt.md",
+      "file": "reference/get_v1_expenses_expense_id_receipt.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_expenses_expense_id_receipts_receipt_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_expenses_expense_id_receipts_receipt_id.md",
+      "file": "reference/get_v1_expenses_expense_id_receipts_receipt_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_expenses_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_expenses_id.md",
+      "file": "reference/get_v1_expenses_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_files_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_files_id.md",
+      "file": "reference/get_v1_files_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_help-center-articles_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_help-center-articles_id.md",
+      "file": "reference/get_v1_help-center-articles_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_identity_current",
+      "markdown": "https://developer.remote.com/reference/get_v1_identity_current.md",
+      "file": "reference/get_v1_identity_current.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_identity-verification_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_identity-verification_employment_id.md",
+      "file": "reference/get_v1_identity-verification_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_incentives",
+      "markdown": "https://developer.remote.com/reference/get_v1_incentives.md",
+      "file": "reference/get_v1_incentives.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_incentives_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_incentives_id.md",
+      "file": "reference/get_v1_incentives_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_incentives_recurring",
+      "markdown": "https://developer.remote.com/reference/get_v1_incentives_recurring.md",
+      "file": "reference/get_v1_incentives_recurring.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_job-title-screenings_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_job-title-screenings_id.md",
+      "file": "reference/get_v1_job-title-screenings_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_leave-policies_details_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_leave-policies_details_employment_id.md",
+      "file": "reference/get_v1_leave-policies_details_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_leave-policies_summary_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_leave-policies_summary_employment_id.md",
+      "file": "reference/get_v1_leave-policies_summary_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_offboardings",
+      "markdown": "https://developer.remote.com/reference/get_v1_offboardings.md",
+      "file": "reference/get_v1_offboardings.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_offboardings_employments_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_offboardings_employments_employment_id.md",
+      "file": "reference/get_v1_offboardings_employments_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_offboardings_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_offboardings_id.md",
+      "file": "reference/get_v1_offboardings_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_onboarding_employments_employment_id_pre-onboarding-document-requirements",
+      "markdown": "https://developer.remote.com/reference/get_v1_onboarding_employments_employment_id_pre-onboarding-document-requirements.md",
+      "file": "reference/get_v1_onboarding_employments_employment_id_pre-onboarding-document-requirements.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_onboarding_employments_employment_id_pre-onboarding-documents_id-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_onboarding_employments_employment_id_pre-onboarding-documents_id-1.md",
+      "file": "reference/get_v1_onboarding_employments_employment_id_pre-onboarding-documents_id-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_onboarding_employments_employment_id_pre-onboarding-requirements",
+      "markdown": "https://developer.remote.com/reference/get_v1_onboarding_employments_employment_id_pre-onboarding-requirements.md",
+      "file": "reference/get_v1_onboarding_employments_employment_id_pre-onboarding-requirements.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_pay-items",
+      "markdown": "https://developer.remote.com/reference/get_v1_pay-items.md",
+      "file": "reference/get_v1_pay-items.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-calendars",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-calendars.md",
+      "file": "reference/get_v1_payroll-calendars.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-calendars_cycle",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-calendars_cycle.md",
+      "file": "reference/get_v1_payroll-calendars_cycle.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-runs",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-runs.md",
+      "file": "reference/get_v1_payroll-runs.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id.md",
+      "file": "reference/get_v1_payroll-runs_payroll_run_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id_employee-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id_employee-details.md",
+      "file": "reference/get_v1_payroll-runs_payroll_run_id_employee-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id_gl-reports_gl_report_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id_gl-reports_gl_report_id.md",
+      "file": "reference/get_v1_payroll-runs_payroll_run_id_gl-reports_gl_report_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id_gl-reports_gl_report_id_download",
+      "markdown": "https://developer.remote.com/reference/get_v1_payroll-runs_payroll_run_id_gl-reports_gl_report_id_download.md",
+      "file": "reference/get_v1_payroll-runs_payroll_run_id_gl-reports_gl_report_id_download.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payslips",
+      "markdown": "https://developer.remote.com/reference/get_v1_payslips.md",
+      "file": "reference/get_v1_payslips.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payslips_payslip_id_pdf",
+      "markdown": "https://developer.remote.com/reference/get_v1_payslips_payslip_id_pdf.md",
+      "file": "reference/get_v1_payslips_payslip_id_pdf.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_pricing-plan-partner-templates",
+      "markdown": "https://developer.remote.com/reference/get_v1_pricing-plan-partner-templates.md",
+      "file": "reference/get_v1_pricing-plan-partner-templates.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_probation-completion-letter_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_probation-completion-letter_id.md",
+      "file": "reference/get_v1_probation-completion-letter_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_probation-extensions_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_probation-extensions_id.md",
+      "file": "reference/get_v1_probation-extensions_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id.md",
+      "file": "reference/get_v1_resignations_offboarding_request_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id_resignation-letter",
+      "markdown": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id_resignation-letter.md",
+      "file": "reference/get_v1_resignations_offboarding_request_id_resignation-letter.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_scim_v2_groups",
+      "markdown": "https://developer.remote.com/reference/get_v1_scim_v2_groups.md",
+      "file": "reference/get_v1_scim_v2_groups.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_scim_v2_groups_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_scim_v2_groups_id.md",
+      "file": "reference/get_v1_scim_v2_groups_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+      "markdown": "https://developer.remote.com/reference/get_v1_scim_v2_users.md",
+      "file": "reference/get_v1_scim_v2_users.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_scim_v2_users_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_scim_v2_users_id.md",
+      "file": "reference/get_v1_scim_v2_users_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_sso-configuration",
+      "markdown": "https://developer.remote.com/reference/get_v1_sso-configuration.md",
+      "file": "reference/get_v1_sso-configuration.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_sso-configuration_details",
+      "markdown": "https://developer.remote.com/reference/get_v1_sso-configuration_details.md",
+      "file": "reference/get_v1_sso-configuration_details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_test-schema",
+      "markdown": "https://developer.remote.com/reference/get_v1_test-schema.md",
+      "file": "reference/get_v1_test-schema.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_timeoff",
+      "markdown": "https://developer.remote.com/reference/get_v1_timeoff.md",
+      "file": "reference/get_v1_timeoff.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_timeoff_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_timeoff_id.md",
+      "file": "reference/get_v1_timeoff_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_timeoff_types",
+      "markdown": "https://developer.remote.com/reference/get_v1_timeoff_types.md",
+      "file": "reference/get_v1_timeoff_types.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_timeoff-balances_employment_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_timeoff-balances_employment_id.md",
+      "file": "reference/get_v1_timeoff-balances_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_timesheets",
+      "markdown": "https://developer.remote.com/reference/get_v1_timesheets.md",
+      "file": "reference/get_v1_timesheets.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_timesheets_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_timesheets_id.md",
+      "file": "reference/get_v1_timesheets_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_travel-letter-requests",
+      "markdown": "https://developer.remote.com/reference/get_v1_travel-letter-requests.md",
+      "file": "reference/get_v1_travel-letter-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_travel-letter-requests_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_travel-letter-requests_id.md",
+      "file": "reference/get_v1_travel-letter-requests_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_webhook-events",
+      "markdown": "https://developer.remote.com/reference/get_v1_webhook-events.md",
+      "file": "reference/get_v1_webhook-events.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_work-authorization-requests",
+      "markdown": "https://developer.remote.com/reference/get_v1_work-authorization-requests.md",
+      "file": "reference/get_v1_work-authorization-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_work-authorization-requests_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_work-authorization-requests_id.md",
+      "file": "reference/get_v1_work-authorization-requests_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v2_employments_employment_id_basic-information",
+      "markdown": "https://developer.remote.com/reference/get_v2_employments_employment_id_basic-information.md",
+      "file": "reference/get_v2_employments_employment_id_basic-information.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v2_employments_employment_id_engagement-agreement-details",
+      "markdown": "https://developer.remote.com/reference/get_v2_employments_employment_id_engagement-agreement-details.md",
+      "file": "reference/get_v2_employments_employment_id_engagement-agreement-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v2_offboardings",
+      "markdown": "https://developer.remote.com/reference/get_v2_offboardings.md",
+      "file": "reference/get_v2_offboardings.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v2_offboardings_id",
+      "markdown": "https://developer.remote.com/reference/get_v2_offboardings_id.md",
+      "file": "reference/get_v2_offboardings_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/identity_verificationverification_required-1",
+      "markdown": "https://developer.remote.com/reference/identity_verificationverification_required-1.md",
+      "file": "reference/identity_verificationverification_required-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/incentivecreated",
+      "markdown": "https://developer.remote.com/reference/incentivecreated.md",
+      "file": "reference/incentivecreated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/incentivedeleted",
+      "markdown": "https://developer.remote.com/reference/incentivedeleted.md",
+      "file": "reference/incentivedeleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/incentivepaid",
+      "markdown": "https://developer.remote.com/reference/incentivepaid.md",
+      "file": "reference/incentivepaid.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/incentiveprocessing_started",
+      "markdown": "https://developer.remote.com/reference/incentiveprocessing_started.md",
+      "file": "reference/incentiveprocessing_started.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/incentiveupdated",
+      "markdown": "https://developer.remote.com/reference/incentiveupdated.md",
+      "file": "reference/incentiveupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/offboardingcompleted",
+      "markdown": "https://developer.remote.com/reference/offboardingcompleted.md",
+      "file": "reference/offboardingcompleted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/offboardingdeleted-1",
+      "markdown": "https://developer.remote.com/reference/offboardingdeleted-1.md",
+      "file": "reference/offboardingdeleted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/offboardingdone",
+      "markdown": "https://developer.remote.com/reference/offboardingdone.md",
+      "file": "reference/offboardingdone.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/offboardingreview_started-1",
+      "markdown": "https://developer.remote.com/reference/offboardingreview_started-1.md",
+      "file": "reference/offboardingreview_started-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/offboardingsubmitted_to_payroll-1",
+      "markdown": "https://developer.remote.com/reference/offboardingsubmitted_to_payroll-1.md",
+      "file": "reference/offboardingsubmitted_to_payroll-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/offboardingsubmitted-1",
+      "markdown": "https://developer.remote.com/reference/offboardingsubmitted-1.md",
+      "file": "reference/offboardingsubmitted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_companies_company_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_companies_company_id.md",
+      "file": "reference/patch_v1_companies_company_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_companies_company_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_companies_company_id-2.md",
+      "file": "reference/patch_v1_companies_company_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_company-managers_user_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_company-managers_user_id.md",
+      "file": "reference/patch_v1_company-managers_user_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_company-managers_user_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_company-managers_user_id-2.md",
+      "file": "reference/patch_v1_company-managers_user_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_contractor-invoice-schedules_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_contractor-invoice-schedules_id.md",
+      "file": "reference/patch_v1_contractor-invoice-schedules_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_contractor-invoice-schedules_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_contractor-invoice-schedules_id-2.md",
+      "file": "reference/patch_v1_contractor-invoice-schedules_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_custom-fields_custom_field_id_values_employment_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_custom-fields_custom_field_id_values_employment_id.md",
+      "file": "reference/patch_v1_custom-fields_custom_field_id_values_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_custom-fields_custom_field_id_values_employment_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_custom-fields_custom_field_id_values_employment_id-2.md",
+      "file": "reference/patch_v1_custom-fields_custom_field_id_values_employment_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id.md",
+      "file": "reference/patch_v1_employee_timeoff_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-2.md",
+      "file": "reference/patch_v1_employee_timeoff_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_employments_employment_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_employments_employment_id.md",
+      "file": "reference/patch_v1_employments_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_employments_employment_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_employments_employment_id-2.md",
+      "file": "reference/patch_v1_employments_employment_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_expenses_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_expenses_id.md",
+      "file": "reference/patch_v1_expenses_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_expenses_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_expenses_id-2.md",
+      "file": "reference/patch_v1_expenses_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_incentives_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_incentives_id.md",
+      "file": "reference/patch_v1_incentives_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_incentives_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_incentives_id-2.md",
+      "file": "reference/patch_v1_incentives_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_pay-items_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_pay-items_id.md",
+      "file": "reference/patch_v1_pay-items_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_sandbox_employments_employment_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_sandbox_employments_employment_id.md",
+      "file": "reference/patch_v1_sandbox_employments_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_sandbox_employments_employment_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_sandbox_employments_employment_id-2.md",
+      "file": "reference/patch_v1_sandbox_employments_employment_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_timeoff_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_timeoff_id.md",
+      "file": "reference/patch_v1_timeoff_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_timeoff_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_timeoff_id-2.md",
+      "file": "reference/patch_v1_timeoff_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_travel-letter-requests_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_travel-letter-requests_id.md",
+      "file": "reference/patch_v1_travel-letter-requests_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_travel-letter-requests_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_travel-letter-requests_id-2.md",
+      "file": "reference/patch_v1_travel-letter-requests_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_webhook-callbacks_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_webhook-callbacks_id.md",
+      "file": "reference/patch_v1_webhook-callbacks_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_work-authorization-requests_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_work-authorization-requests_id.md",
+      "file": "reference/patch_v1_work-authorization-requests_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_work-authorization-requests_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v1_work-authorization-requests_id-2.md",
+      "file": "reference/patch_v1_work-authorization-requests_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v2_employments_employment_id",
+      "markdown": "https://developer.remote.com/reference/patch_v2_employments_employment_id.md",
+      "file": "reference/patch_v2_employments_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v2_employments_employment_id-2",
+      "markdown": "https://developer.remote.com/reference/patch_v2_employments_employment_id-2.md",
+      "file": "reference/patch_v2_employments_employment_id-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/payslipreleased",
+      "markdown": "https://developer.remote.com/reference/payslipreleased.md",
+      "file": "reference/payslipreleased.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_auth_oauth2_token",
+      "markdown": "https://developer.remote.com/reference/post_auth_oauth2_token.md",
+      "file": "reference/post_auth_oauth2_token.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_benefit-renewal-requests_benefit_renewal_request_id",
+      "markdown": "https://developer.remote.com/reference/post_v1_benefit-renewal-requests_benefit_renewal_request_id.md",
+      "file": "reference/post_v1_benefit-renewal-requests_benefit_renewal_request_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_bulk-employment-jobs",
+      "markdown": "https://developer.remote.com/reference/post_v1_bulk-employment-jobs.md",
+      "file": "reference/post_v1_bulk-employment-jobs.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_cancel-onboarding_employment_id",
+      "markdown": "https://developer.remote.com/reference/post_v1_cancel-onboarding_employment_id.md",
+      "file": "reference/post_v1_cancel-onboarding_employment_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_companies",
+      "markdown": "https://developer.remote.com/reference/post_v1_companies.md",
+      "file": "reference/post_v1_companies.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_companies_company_id_create-token",
+      "markdown": "https://developer.remote.com/reference/post_v1_companies_company_id_create-token.md",
+      "file": "reference/post_v1_companies_company_id_create-token.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_companies_company_id_pricing-plans",
+      "markdown": "https://developer.remote.com/reference/post_v1_companies_company_id_pricing-plans.md",
+      "file": "reference/post_v1_companies_company_id_pricing-plans.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_company-departments",
+      "markdown": "https://developer.remote.com/reference/post_v1_company-departments.md",
+      "file": "reference/post_v1_company-departments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_company-managers",
+      "markdown": "https://developer.remote.com/reference/post_v1_company-managers.md",
+      "file": "reference/post_v1_company-managers.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contract-amendments",
+      "markdown": "https://developer.remote.com/reference/post_v1_contract-amendments.md",
+      "file": "reference/post_v1_contract-amendments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contract-amendments_automatable",
+      "markdown": "https://developer.remote.com/reference/post_v1_contract-amendments_automatable.md",
+      "file": "reference/post_v1_contract-amendments_automatable.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractor-invoice-schedules",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractor-invoice-schedules.md",
+      "file": "reference/post_v1_contractor-invoice-schedules.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_eligibility-questionnaire",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_eligibility-questionnaire.md",
+      "file": "reference/post_v1_contractors_eligibility-questionnaire.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contract-documents",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contract-documents.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_contract-documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contract-documents_contract_document_id_sign",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contract-documents_contract_document_id_sign.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_contract-documents_contract_document_id_sign.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contractor-cor-subscription",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contractor-cor-subscription.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_contractor-cor-subscription.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contractor-plus-subscription",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contractor-plus-subscription.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_contractor-plus-subscription.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_cor-termination-requests",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_cor-termination-requests.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_cor-termination-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_terminate-cor-employment",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_terminate-cor-employment.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_terminate-cor-employment.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_timesheets",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_timesheets.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_timesheets.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_cost-calculator_estimation",
+      "markdown": "https://developer.remote.com/reference/post_v1_cost-calculator_estimation.md",
+      "file": "reference/post_v1_cost-calculator_estimation.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_cost-calculator_estimation-csv",
+      "markdown": "https://developer.remote.com/reference/post_v1_cost-calculator_estimation-csv.md",
+      "file": "reference/post_v1_cost-calculator_estimation-csv.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_cost-calculator_estimation-pdf",
+      "markdown": "https://developer.remote.com/reference/post_v1_cost-calculator_estimation-pdf.md",
+      "file": "reference/post_v1_cost-calculator_estimation-pdf.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_currency-converter_effective",
+      "markdown": "https://developer.remote.com/reference/post_v1_currency-converter_effective.md",
+      "file": "reference/post_v1_currency-converter_effective.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_currency-converter_effective-2",
+      "markdown": "https://developer.remote.com/reference/post_v1_currency-converter_effective-2.md",
+      "file": "reference/post_v1_currency-converter_effective-2.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_currency-converter_raw",
+      "markdown": "https://developer.remote.com/reference/post_v1_currency-converter_raw.md",
+      "file": "reference/post_v1_currency-converter_raw.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_custom-fields",
+      "markdown": "https://developer.remote.com/reference/post_v1_custom-fields.md",
+      "file": "reference/post_v1_custom-fields.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_documents",
+      "markdown": "https://developer.remote.com/reference/post_v1_documents.md",
+      "file": "reference/post_v1_documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employee_documents",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_documents.md",
+      "file": "reference/post_v1_employee_documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employee_expenses",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_expenses.md",
+      "file": "reference/post_v1_employee_expenses.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employee_timeoff",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_timeoff.md",
+      "file": "reference/post_v1_employee_timeoff.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employee_timeoff_id_cancel",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_timeoff_id_cancel.md",
+      "file": "reference/post_v1_employee_timeoff_id_cancel.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments.md",
+      "file": "reference/post_v1_employments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments_employment_id_contract-eligibility",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments_employment_id_contract-eligibility.md",
+      "file": "reference/post_v1_employments_employment_id_contract-eligibility.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments_employment_id_contract-origin",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments_employment_id_contract-origin.md",
+      "file": "reference/post_v1_employments_employment_id_contract-origin.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments_employment_id_contractor-invoices_preview",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments_employment_id_contractor-invoices_preview.md",
+      "file": "reference/post_v1_employments_employment_id_contractor-invoices_preview.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments_employment_id_engagement-agreement-details",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments_employment_id_engagement-agreement-details.md",
+      "file": "reference/post_v1_employments_employment_id_engagement-agreement-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments_employment_id_invite",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments_employment_id_invite.md",
+      "file": "reference/post_v1_employments_employment_id_invite.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_employments_employment_id_risk-reserve-proof-of-payments-1",
+      "markdown": "https://developer.remote.com/reference/post_v1_employments_employment_id_risk-reserve-proof-of-payments-1.md",
+      "file": "reference/post_v1_employments_employment_id_risk-reserve-proof-of-payments-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_expenses",
+      "markdown": "https://developer.remote.com/reference/post_v1_expenses.md",
+      "file": "reference/post_v1_expenses.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_identity-verification_employment_id_decline",
+      "markdown": "https://developer.remote.com/reference/post_v1_identity-verification_employment_id_decline.md",
+      "file": "reference/post_v1_identity-verification_employment_id_decline.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_identity-verification_employment_id_verify",
+      "markdown": "https://developer.remote.com/reference/post_v1_identity-verification_employment_id_verify.md",
+      "file": "reference/post_v1_identity-verification_employment_id_verify.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_incentives",
+      "markdown": "https://developer.remote.com/reference/post_v1_incentives.md",
+      "file": "reference/post_v1_incentives.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_incentives_recurring",
+      "markdown": "https://developer.remote.com/reference/post_v1_incentives_recurring.md",
+      "file": "reference/post_v1_incentives_recurring.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_job-title-screenings",
+      "markdown": "https://developer.remote.com/reference/post_v1_job-title-screenings.md",
+      "file": "reference/post_v1_job-title-screenings.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_magic-link",
+      "markdown": "https://developer.remote.com/reference/post_v1_magic-link.md",
+      "file": "reference/post_v1_magic-link.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_offboardings",
+      "markdown": "https://developer.remote.com/reference/post_v1_offboardings.md",
+      "file": "reference/post_v1_offboardings.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-documents",
+      "markdown": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-documents.md",
+      "file": "reference/post_v1_onboarding_employments_employment_id_pre-onboarding-documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-documents_id_sign-1",
+      "markdown": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-documents_id_sign-1.md",
+      "file": "reference/post_v1_onboarding_employments_employment_id_pre-onboarding-documents_id_sign-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_acknowledge",
+      "markdown": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_acknowledge.md",
+      "file": "reference/post_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_acknowledge.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_documents",
+      "markdown": "https://developer.remote.com/reference/post_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_documents.md",
+      "file": "reference/post_v1_onboarding_employments_employment_id_pre-onboarding-requirements_requirement_slug_documents.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_pay-items_bulk",
+      "markdown": "https://developer.remote.com/reference/post_v1_pay-items_bulk.md",
+      "file": "reference/post_v1_pay-items_bulk.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_payroll-runs_payroll_run_id_gl-reports",
+      "markdown": "https://developer.remote.com/reference/post_v1_payroll-runs_payroll_run_id_gl-reports.md",
+      "file": "reference/post_v1_payroll-runs_payroll_run_id_gl-reports.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_probation-completion-letter",
+      "markdown": "https://developer.remote.com/reference/post_v1_probation-completion-letter.md",
+      "file": "reference/post_v1_probation-completion-letter.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_probation-extensions",
+      "markdown": "https://developer.remote.com/reference/post_v1_probation-extensions.md",
+      "file": "reference/post_v1_probation-extensions.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_ready",
+      "markdown": "https://developer.remote.com/reference/post_v1_ready.md",
+      "file": "reference/post_v1_ready.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_risk-reserve",
+      "markdown": "https://developer.remote.com/reference/post_v1_risk-reserve.md",
+      "file": "reference/post_v1_risk-reserve.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_benefit-renewal-requests",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_benefit-renewal-requests.md",
+      "file": "reference/post_v1_sandbox_benefit-renewal-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_bypass-eligibility-checks",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_bypass-eligibility-checks.md",
+      "file": "reference/post_v1_sandbox_companies_company_id_bypass-eligibility-checks.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_legal-entities",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_legal-entities.md",
+      "file": "reference/post_v1_sandbox_companies_company_id_legal-entities.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_legal-entities_legal_entity_id_activate-global-payroll",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_legal-entities_legal_entity_id_activate-global-payroll.md",
+      "file": "reference/post_v1_sandbox_companies_company_id_legal-entities_legal_entity_id_activate-global-payroll.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_legal-entities_legal_entity_id_set-credit-risk-status",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_legal-entities_legal_entity_id_set-credit-risk-status.md",
+      "file": "reference/post_v1_sandbox_companies_company_id_legal-entities_legal_entity_id_set-credit-risk-status.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_contractors_employments_employment_id_rates",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_contractors_employments_employment_id_rates.md",
+      "file": "reference/post_v1_sandbox_contractors_employments_employment_id_rates.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_employments",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_employments.md",
+      "file": "reference/post_v1_sandbox_employments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_risk-reserve-proof-of-payments_approve-1",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_risk-reserve-proof-of-payments_approve-1.md",
+      "file": "reference/post_v1_sandbox_employments_employment_id_risk-reserve-proof-of-payments_approve-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_webhook-callbacks_trigger",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_webhook-callbacks_trigger.md",
+      "file": "reference/post_v1_sandbox_webhook-callbacks_trigger.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sdk_telemetry-errors",
+      "markdown": "https://developer.remote.com/reference/post_v1_sdk_telemetry-errors.md",
+      "file": "reference/post_v1_sdk_telemetry-errors.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sso-configuration",
+      "markdown": "https://developer.remote.com/reference/post_v1_sso-configuration.md",
+      "file": "reference/post_v1_sso-configuration.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timeoff",
+      "markdown": "https://developer.remote.com/reference/post_v1_timeoff.md",
+      "file": "reference/post_v1_timeoff.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_approve",
+      "markdown": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_approve.md",
+      "file": "reference/post_v1_timeoff_timeoff_id_approve.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_cancel",
+      "markdown": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_cancel.md",
+      "file": "reference/post_v1_timeoff_timeoff_id_cancel.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_cancel-request_approve",
+      "markdown": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_cancel-request_approve.md",
+      "file": "reference/post_v1_timeoff_timeoff_id_cancel-request_approve.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_cancel-request_decline",
+      "markdown": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_cancel-request_decline.md",
+      "file": "reference/post_v1_timeoff_timeoff_id_cancel-request_decline.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_decline",
+      "markdown": "https://developer.remote.com/reference/post_v1_timeoff_timeoff_id_decline.md",
+      "file": "reference/post_v1_timeoff_timeoff_id_decline.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timesheets_timesheet_id_approve",
+      "markdown": "https://developer.remote.com/reference/post_v1_timesheets_timesheet_id_approve.md",
+      "file": "reference/post_v1_timesheets_timesheet_id_approve.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_timesheets_timesheet_id_send-back",
+      "markdown": "https://developer.remote.com/reference/post_v1_timesheets_timesheet_id_send-back.md",
+      "file": "reference/post_v1_timesheets_timesheet_id_send-back.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_webhook-callbacks",
+      "markdown": "https://developer.remote.com/reference/post_v1_webhook-callbacks.md",
+      "file": "reference/post_v1_webhook-callbacks.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_webhook-events_replay",
+      "markdown": "https://developer.remote.com/reference/post_v1_webhook-events_replay.md",
+      "file": "reference/post_v1_webhook-events_replay.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v2_employments_employment_id_engagement-agreement-details",
+      "markdown": "https://developer.remote.com/reference/post_v2_employments_employment_id_engagement-agreement-details.md",
+      "file": "reference/post_v2_employments_employment_id_engagement-agreement-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details",
+      "markdown": "https://developer.remote.com/reference/put_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details.md",
+      "file": "reference/put_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employee_address",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_address.md",
+      "file": "reference/put_v1_employee_address.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employee_bank-account",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_bank-account.md",
+      "file": "reference/put_v1_employee_bank-account.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employee_emergency-contact",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_emergency-contact.md",
+      "file": "reference/put_v1_employee_emergency-contact.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employee_federal-taxes",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_federal-taxes.md",
+      "file": "reference/put_v1_employee_federal-taxes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employee_personal-details",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_personal-details.md",
+      "file": "reference/put_v1_employee_personal-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction.md",
+      "file": "reference/put_v1_employee_state-taxes_jurisdiction.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employments_employment_id_basic-information",
+      "markdown": "https://developer.remote.com/reference/put_v1_employments_employment_id_basic-information.md",
+      "file": "reference/put_v1_employments_employment_id_basic-information.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employments_employment_id_benefit-offers",
+      "markdown": "https://developer.remote.com/reference/put_v1_employments_employment_id_benefit-offers.md",
+      "file": "reference/put_v1_employments_employment_id_benefit-offers.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employments_employment_id_federal-taxes",
+      "markdown": "https://developer.remote.com/reference/put_v1_employments_employment_id_federal-taxes.md",
+      "file": "reference/put_v1_employments_employment_id_federal-taxes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_employments_employment_id_personal-details",
+      "markdown": "https://developer.remote.com/reference/put_v1_employments_employment_id_personal-details.md",
+      "file": "reference/put_v1_employments_employment_id_personal-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_resignations_offboarding_request_id_validate",
+      "markdown": "https://developer.remote.com/reference/put_v1_resignations_offboarding_request_id_validate.md",
+      "file": "reference/put_v1_resignations_offboarding_request_id_validate.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_sandbox_companies_company_id_default-legal-entity_legal_entity_id",
+      "markdown": "https://developer.remote.com/reference/put_v1_sandbox_companies_company_id_default-legal-entity_legal_entity_id.md",
+      "file": "reference/put_v1_sandbox_companies_company_id_default-legal-entity_legal_entity_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_sandbox_contract-amendments_contract_amendment_request_id_approve",
+      "markdown": "https://developer.remote.com/reference/put_v1_sandbox_contract-amendments_contract_amendment_request_id_approve.md",
+      "file": "reference/put_v1_sandbox_contract-amendments_contract_amendment_request_id_approve.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v1_sandbox_contract-amendments_contract_amendment_request_id_cancel",
+      "markdown": "https://developer.remote.com/reference/put_v1_sandbox_contract-amendments_contract_amendment_request_id_cancel.md",
+      "file": "reference/put_v1_sandbox_contract-amendments_contract_amendment_request_id_cancel.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_address-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_address-details.md",
+      "file": "reference/put_v2_employments_employment_id_address-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_administrative-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_administrative-details.md",
+      "file": "reference/put_v2_employments_employment_id_administrative-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_bank-account-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_bank-account-details.md",
+      "file": "reference/put_v2_employments_employment_id_bank-account-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_basic-information",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_basic-information.md",
+      "file": "reference/put_v2_employments_employment_id_basic-information.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_billing-address-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_billing-address-details.md",
+      "file": "reference/put_v2_employments_employment_id_billing-address-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_contract-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_contract-details.md",
+      "file": "reference/put_v2_employments_employment_id_contract-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_emergency-contact",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_emergency-contact.md",
+      "file": "reference/put_v2_employments_employment_id_emergency-contact.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_federal-taxes",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_federal-taxes.md",
+      "file": "reference/put_v2_employments_employment_id_federal-taxes.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_personal-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_personal-details.md",
+      "file": "reference/put_v2_employments_employment_id_personal-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/put_v2_employments_employment_id_pricing-plan-details",
+      "markdown": "https://developer.remote.com/reference/put_v2_employments_employment_id_pricing-plan-details.md",
+      "file": "reference/put_v2_employments_employment_id_pricing-plan-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/sso_configurationdisabled-1",
+      "markdown": "https://developer.remote.com/reference/sso_configurationdisabled-1.md",
+      "file": "reference/sso_configurationdisabled-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/sso_configurationenabled-1",
+      "markdown": "https://developer.remote.com/reference/sso_configurationenabled-1.md",
+      "file": "reference/sso_configurationenabled-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/sso_configurationupdated-1",
+      "markdown": "https://developer.remote.com/reference/sso_configurationupdated-1.md",
+      "file": "reference/sso_configurationupdated-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffapproved-1",
+      "markdown": "https://developer.remote.com/reference/timeoffapproved-1.md",
+      "file": "reference/timeoffapproved-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffcanceled-1",
+      "markdown": "https://developer.remote.com/reference/timeoffcanceled-1.md",
+      "file": "reference/timeoffcanceled-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffcancellation_requested-1",
+      "markdown": "https://developer.remote.com/reference/timeoffcancellation_requested-1.md",
+      "file": "reference/timeoffcancellation_requested-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffdate_changed",
+      "markdown": "https://developer.remote.com/reference/timeoffdate_changed.md",
+      "file": "reference/timeoffdate_changed.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffdeclined",
+      "markdown": "https://developer.remote.com/reference/timeoffdeclined.md",
+      "file": "reference/timeoffdeclined.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffrequested-1",
+      "markdown": "https://developer.remote.com/reference/timeoffrequested-1.md",
+      "file": "reference/timeoffrequested-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffstarted-1",
+      "markdown": "https://developer.remote.com/reference/timeoffstarted-1.md",
+      "file": "reference/timeoffstarted-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeofftaken",
+      "markdown": "https://developer.remote.com/reference/timeofftaken.md",
+      "file": "reference/timeofftaken.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timeoffupdated",
+      "markdown": "https://developer.remote.com/reference/timeoffupdated.md",
+      "file": "reference/timeoffupdated.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/timesheetsubmitted",
+      "markdown": "https://developer.remote.com/reference/timesheetsubmitted.md",
+      "file": "reference/timesheetsubmitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/travel_letterapproved_by_manager",
+      "markdown": "https://developer.remote.com/reference/travel_letterapproved_by_manager.md",
+      "file": "reference/travel_letterapproved_by_manager.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/travel_letterapproved_by_remote",
+      "markdown": "https://developer.remote.com/reference/travel_letterapproved_by_remote.md",
+      "file": "reference/travel_letterapproved_by_remote.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/travel_letterdeclined_by_manager",
+      "markdown": "https://developer.remote.com/reference/travel_letterdeclined_by_manager.md",
+      "file": "reference/travel_letterdeclined_by_manager.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/travel_letterdeclined_by_remote",
+      "markdown": "https://developer.remote.com/reference/travel_letterdeclined_by_remote.md",
+      "file": "reference/travel_letterdeclined_by_remote.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/travel_letterrequested",
+      "markdown": "https://developer.remote.com/reference/travel_letterrequested.md",
+      "file": "reference/travel_letterrequested.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/welcome-to-remote-api",
+      "markdown": "https://developer.remote.com/reference/welcome-to-remote-api.md",
+      "file": "reference/welcome-to-remote-api.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/work_authorizationapproved_by_manager",
+      "markdown": "https://developer.remote.com/reference/work_authorizationapproved_by_manager.md",
+      "file": "reference/work_authorizationapproved_by_manager.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/work_authorizationapproved_by_remote",
+      "markdown": "https://developer.remote.com/reference/work_authorizationapproved_by_remote.md",
+      "file": "reference/work_authorizationapproved_by_remote.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/work_authorizationcancelled",
+      "markdown": "https://developer.remote.com/reference/work_authorizationcancelled.md",
+      "file": "reference/work_authorizationcancelled.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/work_authorizationdeclined_by_manager",
+      "markdown": "https://developer.remote.com/reference/work_authorizationdeclined_by_manager.md",
+      "file": "reference/work_authorizationdeclined_by_manager.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/work_authorizationdeclined_by_remote",
+      "markdown": "https://developer.remote.com/reference/work_authorizationdeclined_by_remote.md",
+      "file": "reference/work_authorizationdeclined_by_remote.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/work_authorizationrequested",
+      "markdown": "https://developer.remote.com/reference/work_authorizationrequested.md",
+      "file": "reference/work_authorizationrequested.md"
+    }
+  ]
+}
