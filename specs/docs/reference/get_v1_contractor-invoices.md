@@ -4,7 +4,7 @@ updatedAt: 2026-05-27T21:24:38.000Z
 
 Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
-# List Contractor Invoices
+# List Contractor Invoices. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.
 
 Lists Contractor Invoice records.
 
@@ -758,7 +758,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "92b27569-4ad2-45b7-8706-739df62b2a6a",
+            "example": "e3914c55-43d2-44f3-8972-f042d64978ec",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -973,7 +973,7 @@ This endpoint accepts any one of the following token types:
             ]
           }
         ],
-        "summary": "List Contractor Invoices",
+        "summary": "List Contractor Invoices. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
         "tags": [
           "Invoices"
         ]

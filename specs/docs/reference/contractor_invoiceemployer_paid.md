@@ -33256,7 +33256,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "cf72f235-9559-4ebd-b3de-decdde3d92e5",
+            "example": "6225b4a6-8a3d-4ddb-ac9e-06b1806303e7",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -33687,7 +33687,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a643d97a-a2dc-4ac3-971d-d3f05fef10c0",
+            "example": "2e121db6-aeb8-42d0-ba5d-5f54cf55a1a2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -33801,7 +33801,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "89a86d14-7bf5-4b75-bc92-05f40da60b52",
+            "example": "a25fc73e-edb2-4efb-bc31-9a9332493cc3",
             "in": "path",
             "name": "id",
             "required": true,
@@ -33902,7 +33902,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c2e848bd-bf56-4aaf-8574-edb9fc01cbfd",
+            "example": "10ded340-fb5a-4dbe-93ee-b460cdccf37e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34015,7 +34015,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "92b27569-4ad2-45b7-8706-739df62b2a6a",
+            "example": "e3914c55-43d2-44f3-8972-f042d64978ec",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -34230,7 +34230,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
             ]
           }
         ],
-        "summary": "List Contractor Invoices",
+        "summary": "List Contractor Invoices. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
         "tags": [
           "Invoices"
         ]
@@ -34245,7 +34245,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "340623c7-b2f3-47c0-80be-8d4e5e6f0383",
+            "example": "e9919f6a-57bf-4afb-bf73-e5cc0e9e8aa1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -35800,7 +35800,7 @@ The payload is stateless. Use the contractor invoice ID and employment ID to ret
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "348508ce-7b93-4e3d-a85e-1c97b00e7ce9",
+            "example": "13c56bad-d878-40f4-9388-1e8a1001fa14",
             "in": "path",
             "name": "employment_id",
             "required": true,
