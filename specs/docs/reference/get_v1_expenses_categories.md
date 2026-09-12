@@ -429,6 +429,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -538,6 +539,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },

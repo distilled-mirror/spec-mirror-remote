@@ -414,6 +414,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -523,6 +524,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -548,7 +550,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "13c56bad-d878-40f4-9388-1e8a1001fa14",
+            "example": "3e7fa0ab-e6f1-43ea-bd6f-a6dc43270faa",
             "in": "path",
             "name": "employment_id",
             "required": true,

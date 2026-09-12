@@ -590,6 +590,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -699,6 +700,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -724,7 +726,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a25fc73e-edb2-4efb-bc31-9a9332493cc3",
+            "example": "720de2a9-766a-4a1a-8821-ca1b289b48b5",
             "in": "path",
             "name": "id",
             "required": true,

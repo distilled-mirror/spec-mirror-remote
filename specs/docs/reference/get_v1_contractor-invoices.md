@@ -614,6 +614,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -723,6 +724,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -758,7 +760,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "e3914c55-43d2-44f3-8972-f042d64978ec",
+            "example": "3dc44d82-6756-4523-985f-72fd36b12e29",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,

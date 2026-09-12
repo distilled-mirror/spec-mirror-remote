@@ -271,7 +271,8 @@ This endpoint accepts any one of the following token types:
                 "integration": {
                   "name": "greenhouse"
                 },
-                "role": "employee"
+                "role": "employee",
+                "sync_to_remote_status": "enabled"
               }
             ],
             "invited_by": {
@@ -561,7 +562,8 @@ This endpoint accepts any one of the following token types:
                   "integration": {
                     "name": "greenhouse"
                   },
-                  "role": "employee"
+                  "role": "employee",
+                  "sync_to_remote_status": "enabled"
                 }
               ],
               "invited_by": {
@@ -768,7 +770,8 @@ This endpoint accepts any one of the following token types:
           "integration": {
             "name": "greenhouse"
           },
-          "role": "employee"
+          "role": "employee",
+          "sync_to_remote_status": "enabled"
         },
         "properties": {
           "external_user_id": {
@@ -792,6 +795,15 @@ This endpoint accepts any one of the following token types:
               "employee",
               "employer"
             ],
+            "type": "string"
+          },
+          "sync_to_remote_status": {
+            "description": "Whether the employee should be synced to Remote based on the sync_to_remote flag in the external HRIS",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "nullable": true,
             "type": "string"
           }
         },
@@ -967,7 +979,8 @@ This endpoint accepts any one of the following token types:
                   "integration": {
                     "name": "greenhouse"
                   },
-                  "role": "employee"
+                  "role": "employee",
+                  "sync_to_remote_status": "enabled"
                 }
               ],
               "invited_by": {
@@ -1262,6 +1275,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -1371,6 +1385,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },

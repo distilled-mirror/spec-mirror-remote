@@ -349,7 +349,7 @@ This endpoint accepts any one of the following token types:
         "properties": {
           "engagement_agreement_details": {
             "additionalProperties": false,
-            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_engagement_agreement_details_country) endpoint\npassing the country code.\n",
+            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_v1_countries_country_code_form) endpoint\npassing the country code and the `engagement_agreement_details` form name.\n",
             "oneOf": [
               {
                 "additionalProperties": false,
@@ -605,6 +605,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -714,6 +715,7 @@ This endpoint accepts any one of the following token types:
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },

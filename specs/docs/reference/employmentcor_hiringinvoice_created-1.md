@@ -1570,6 +1570,17 @@ This event is triggered when a invoice report is created for a employment.
         "title": "UpdateEmploymentCustomFieldValueParams",
         "type": "object"
       },
+      "ProjectStatus": {
+        "enum": [
+          "active",
+          "archived",
+          "completed"
+        ],
+        "example": "active",
+        "nullable": false,
+        "title": "ProjectStatus",
+        "type": "string"
+      },
       "CompanyDepartmentCreatedResponse": {
         "additionalProperties": false,
         "example": {
@@ -3491,6 +3502,13 @@ This event is triggered when a invoice report is created for a employment.
         "title": "CostCalculatorEstimatePDFResponse",
         "type": "object"
       },
+      "ProjectID": {
+        "description": "Project identifier.",
+        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+        "format": "uuid",
+        "title": "ProjectID",
+        "type": "string"
+      },
       "IdentityVerificationResponse": {
         "additionalProperties": false,
         "description": "Identity Verification response",
@@ -4723,6 +4741,61 @@ This event is triggered when a invoice report is created for a employment.
         "title": "EmployeeDetails",
         "type": "object"
       },
+      "ListProjectsResponse": {
+        "description": "Paginated response schema listing company projects.",
+        "example": {
+          "current_page": 1,
+          "projects": [
+            {
+              "budget": {
+                "amount": 250000,
+                "currency": "USD"
+              },
+              "code": "WEB-001",
+              "end_date": null,
+              "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+              "lead_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ],
+              "name": "Website redesign",
+              "start_date": "2026-01-01",
+              "status": "active",
+              "team_member_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ]
+            }
+          ],
+          "total_count": 1,
+          "total_pages": 1
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "current_page": {
+                "description": "The current page among all of the total_pages",
+                "type": "integer"
+              },
+              "projects": {
+                "items": {
+                  "$ref": "#/components/schemas/Project"
+                },
+                "type": "array"
+              },
+              "total_count": {
+                "description": "The total number of records in the result",
+                "type": "integer"
+              },
+              "total_pages": {
+                "description": "The total number of pages the user can go through",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "title": "ListProjectsResponse",
+        "type": "object"
+      },
       "Variance": {
         "example": {
           "currentPay": {
@@ -4995,6 +5068,46 @@ This event is triggered when a invoice report is created for a employment.
         },
         "nullable": true,
         "title": "MaybeBenefitTier",
+        "type": "object"
+      },
+      "ProjectResponse": {
+        "description": "Response schema for a single company project.",
+        "example": {
+          "data": {
+            "project": {
+              "budget": {
+                "amount": 250000,
+                "currency": "USD"
+              },
+              "code": "WEB-001",
+              "end_date": null,
+              "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+              "lead_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ],
+              "name": "Website redesign",
+              "start_date": "2026-01-01",
+              "status": "active",
+              "team_member_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ]
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "project": {
+                "$ref": "#/components/schemas/Project"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "ProjectResponse",
         "type": "object"
       },
       "EmployeeFileParams": {
@@ -6013,6 +6126,36 @@ This event is triggered when a invoice report is created for a employment.
         "format": "uuid",
         "title": "ContractorInvoiceID",
         "type": "string"
+      },
+      "JobTitleEligibilityCheckResponse": {
+        "additionalProperties": false,
+        "example": {
+          "data": {
+            "job_title_eligibility_check": {
+              "check_id": "8f2c1a7e-2b64-4f4e-9c1a-5d0f2a9b7c33",
+              "verdict": "needs_review"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "additionalProperties": false,
+            "properties": {
+              "job_title_eligibility_check": {
+                "$ref": "#/components/schemas/JobTitleEligibilityCheck"
+              }
+            },
+            "required": [
+              "job_title_eligibility_check"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "JobTitleEligibilityCheckResponse",
+        "type": "object"
       },
       "AccountsLoginSyncedWith": {
         "description": "Indicates which email type the account login is synchronized with.",
@@ -11160,7 +11303,8 @@ This event is triggered when a invoice report is created for a employment.
                 "integration": {
                   "name": "greenhouse"
                 },
-                "role": "employee"
+                "role": "employee",
+                "sync_to_remote_status": "enabled"
               }
             ],
             "invited_by": {
@@ -11450,7 +11594,8 @@ This event is triggered when a invoice report is created for a employment.
                   "integration": {
                     "name": "greenhouse"
                   },
-                  "role": "employee"
+                  "role": "employee",
+                  "sync_to_remote_status": "enabled"
                 }
               ],
               "invited_by": {
@@ -12899,6 +13044,30 @@ This event is triggered when a invoice report is created for a employment.
           "status"
         ],
         "title": "Integrations.Scim.ErrorResponse",
+        "type": "object"
+      },
+      "ProjectBudget": {
+        "additionalProperties": false,
+        "description": "A project's budget: amount and its currency.",
+        "example": {
+          "amount": 250000,
+          "currency": "USD"
+        },
+        "nullable": true,
+        "properties": {
+          "amount": {
+            "description": "Budget amount, in cents.",
+            "type": "integer"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "title": "ProjectBudget",
         "type": "object"
       },
       "TimeoffDaysParams": {
@@ -17589,7 +17758,8 @@ This event is triggered when a invoice report is created for a employment.
           "integration": {
             "name": "greenhouse"
           },
-          "role": "employee"
+          "role": "employee",
+          "sync_to_remote_status": "enabled"
         },
         "properties": {
           "external_user_id": {
@@ -17613,6 +17783,15 @@ This event is triggered when a invoice report is created for a employment.
               "employee",
               "employer"
             ],
+            "type": "string"
+          },
+          "sync_to_remote_status": {
+            "description": "Whether the employee should be synced to Remote based on the sync_to_remote flag in the external HRIS",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "nullable": true,
             "type": "string"
           }
         },
@@ -18841,6 +19020,45 @@ This event is triggered when a invoice report is created for a employment.
           "currency"
         ],
         "title": "ParamsToCreateEmployeeExpense",
+        "type": "object"
+      },
+      "CreateJobTitleEligibilityCheckParams": {
+        "additionalProperties": false,
+        "example": {
+          "job_title": "Nurse",
+          "role_description": "Provides bedside care on a hospital ward",
+          "role_is_onsite": "yes",
+          "role_requires_license": "yes"
+        },
+        "properties": {
+          "job_title": {
+            "description": "The job title to check. Defaults to the employment's current job title when omitted.",
+            "type": "string"
+          },
+          "role_description": {
+            "description": "A description of the role. Required when the job title alone is inconclusive; the response says so.",
+            "type": "string"
+          },
+          "role_is_onsite": {
+            "description": "Whether the role requires working onsite.",
+            "enum": [
+              "yes",
+              "no",
+              "not_applicable"
+            ],
+            "type": "string"
+          },
+          "role_requires_license": {
+            "description": "Whether the role requires a professional license.",
+            "enum": [
+              "yes",
+              "no",
+              "not_applicable"
+            ],
+            "type": "string"
+          }
+        },
+        "title": "CreateJobTitleEligibilityCheckParams",
         "type": "object"
       },
       "OnboardingTasks": {
@@ -20426,7 +20644,8 @@ This event is triggered when a invoice report is created for a employment.
                   "integration": {
                     "name": "greenhouse"
                   },
-                  "role": "employee"
+                  "role": "employee",
+                  "sync_to_remote_status": "enabled"
                 }
               ],
               "invited_by": {
@@ -24031,6 +24250,35 @@ This event is triggered when a invoice report is created for a employment.
         "title": "EmployeesProcessed",
         "type": "object"
       },
+      "JobTitleEligibilityCheck": {
+        "additionalProperties": false,
+        "example": {
+          "check_id": "8f2c1a7e-2b64-4f4e-9c1a-5d0f2a9b7c33",
+          "verdict": "needs_review"
+        },
+        "properties": {
+          "check_id": {
+            "description": "The identifier of the recorded check. Send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, so the verdict is reused rather than recalculated. `null` when the job title alone settled the verdict and there is nothing to reuse.",
+            "nullable": true,
+            "type": "string"
+          },
+          "verdict": {
+            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`.",
+            "enum": [
+              "eligible",
+              "not_eligible",
+              "needs_review",
+              "eligible_with_risk_acknowledgement"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict"
+        ],
+        "title": "JobTitleEligibilityCheck",
+        "type": "object"
+      },
       "IdentityCompanyAccessTokenResponse": {
         "description": "Returned when the current token was obtained via the OAuth2 Authorization Code flow and is scoped to a specific company managed by an integration partner. Contains the full context: the integration's credentials, the company being accessed, and the user who authorized access.",
         "example": {
@@ -24348,6 +24596,111 @@ This event is triggered when a invoice report is created for a employment.
           }
         },
         "title": "PayItemBulkCreateFailures",
+        "type": "object"
+      },
+      "Project": {
+        "additionalProperties": false,
+        "description": "Company project",
+        "example": {
+          "budget": {
+            "amount": 250000,
+            "currency": "USD"
+          },
+          "code": "WEB-001",
+          "end_date": null,
+          "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+          "lead_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ],
+          "name": "Website redesign",
+          "start_date": "2026-01-01",
+          "status": "active",
+          "team_member_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ]
+        },
+        "properties": {
+          "budget": {
+            "additionalProperties": false,
+            "description": "A project's budget: amount and its currency.",
+            "example": {
+              "amount": 250000,
+              "currency": "USD"
+            },
+            "nullable": true,
+            "properties": {
+              "amount": {
+                "description": "Budget amount, in cents.",
+                "type": "integer"
+              },
+              "currency": {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            },
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "title": "ProjectBudget",
+            "type": "object"
+          },
+          "code": {
+            "description": "Code/identifier of the project.",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Date when the project ends.",
+            "example": "2026-12-31",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "description": "Project identifier.",
+            "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "format": "uuid",
+            "title": "ProjectID",
+            "type": "string"
+          },
+          "lead_ids": {
+            "description": "User IDs of the company admins assigned as the project's leads. These are user IDs, unlike `team_member_ids`, which are employment IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the project.",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Date when the project starts.",
+            "example": "2026-01-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "team_member_ids": {
+            "description": "Employment IDs of the contractors assigned to the project as team members. These are employment IDs, unlike `lead_ids`, which are user IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "code",
+          "status",
+          "team_member_ids",
+          "lead_ids",
+          "budget"
+        ],
+        "title": "Project",
         "type": "object"
       },
       "ContractorSubscriptions.Summary": {
@@ -26058,7 +26411,8 @@ This event is triggered when a invoice report is created for a employment.
               "integration": {
                 "name": "greenhouse"
               },
-              "role": "employee"
+              "role": "employee",
+              "sync_to_remote_status": "enabled"
             }
           ],
           "invited_by": {
@@ -29335,67 +29689,6 @@ This event is triggered when a invoice report is created for a employment.
         "title": "EmploymentBankAccountDetailsParams",
         "type": "object"
       },
-      "EngagementAgreementDetailsResponse": {
-        "description": "Response for engagement agreement details",
-        "example": {
-          "data": {
-            "schema": {
-              "properties": {
-                "has_business_presence": {
-                  "enum": [
-                    "yes",
-                    "no"
-                  ],
-                  "title": "Do you currently have any business presence in Germany?",
-                  "type": "string"
-                },
-                "has_cba": {
-                  "enum": [
-                    "yes",
-                    "no"
-                  ],
-                  "title": "Are your German employees covered by any collective bargaining agreement (CBA)?",
-                  "type": "string"
-                },
-                "has_similar_roles": {
-                  "enum": [
-                    "yes",
-                    "no"
-                  ],
-                  "title": "Do you currently have team members in similar roles to this hire?",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "version": 1
-          }
-        },
-        "properties": {
-          "data": {
-            "additionalProperties": false,
-            "description": "Engagement agreement details response data",
-            "properties": {
-              "schema": {
-                "additionalProperties": true,
-                "description": "Engagement agreement details schema object with variable fields based on country",
-                "type": "object"
-              },
-              "version": {
-                "description": "JSON schema version number",
-                "type": "integer"
-              }
-            },
-            "required": [
-              "version",
-              "schema"
-            ],
-            "type": "object"
-          }
-        },
-        "title": "EngagementAgreementDetailsResponse",
-        "type": "object"
-      },
       "PayslipItem": {
         "description": "A payslip with file, payslip, payroll run, and payroll output metadata.",
         "example": {
@@ -31113,7 +31406,7 @@ This event is triggered when a invoice report is created for a employment.
         "properties": {
           "engagement_agreement_details": {
             "additionalProperties": false,
-            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_engagement_agreement_details_country) endpoint\npassing the country code.\n",
+            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_v1_countries_country_code_form) endpoint\npassing the country code and the `engagement_agreement_details` form name.\n",
             "oneOf": [
               {
                 "additionalProperties": false,
@@ -33005,6 +33298,7 @@ This event is triggered when a invoice report is created for a employment.
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -33147,6 +33441,7 @@ This event is triggered when a invoice report is created for a employment.
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -33251,7 +33546,7 @@ This event is triggered when a invoice report is created for a employment.
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "6225b4a6-8a3d-4ddb-ac9e-06b1806303e7",
+            "example": "3ce38661-5a59-47d4-a98a-d467075b0682",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -33682,7 +33977,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "2e121db6-aeb8-42d0-ba5d-5f54cf55a1a2",
+            "example": "c6b51210-9c35-44f7-9da1-a3905e0c932b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -33796,7 +34091,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a25fc73e-edb2-4efb-bc31-9a9332493cc3",
+            "example": "720de2a9-766a-4a1a-8821-ca1b289b48b5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -33897,7 +34192,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "10ded340-fb5a-4dbe-93ee-b460cdccf37e",
+            "example": "5628ca70-79e3-4f3f-ab5b-bdefe0820bf4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34010,7 +34305,7 @@ This event is triggered when a invoice report is created for a employment.
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "e3914c55-43d2-44f3-8972-f042d64978ec",
+            "example": "3dc44d82-6756-4523-985f-72fd36b12e29",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -34240,7 +34535,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e9919f6a-57bf-4afb-bf73-e5cc0e9e8aa1",
+            "example": "c3ea65b1-9e76-46fe-81b8-2b4ec90bc3e8",
             "in": "path",
             "name": "id",
             "required": true,
@@ -35795,7 +36090,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "13c56bad-d878-40f4-9388-1e8a1001fa14",
+            "example": "3e7fa0ab-e6f1-43ea-bd6f-a6dc43270faa",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -35891,6 +36186,204 @@ This event is triggered when a invoice report is created for a employment.
         "summary": "Preview a Contractor Invoice",
         "tags": [
           "Invoices"
+        ]
+      }
+    },
+    "/v1/projects": {
+      "get": {
+        "callbacks": {},
+        "deprecated": false,
+        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | - |",
+        "operationId": "get_v1_projects",
+        "parameters": [
+          {
+            "description": "Filters projects by status.",
+            "example": "active",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ProjectStatus"
+            }
+          },
+          {
+            "description": "Starts fetching records after the given page",
+            "example": 1,
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of items per page",
+            "example": 20,
+            "in": "query",
+            "name": "page_size",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListProjectsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "OAuth2AuthorizationCode": [
+              "https://gateway.remote.com/company.manage",
+              "project:read",
+              "time_and_attendance",
+              "all:write",
+              "all:read"
+            ]
+          }
+        ],
+        "summary": "List company projects",
+        "tags": [
+          "Projects"
+        ]
+      }
+    },
+    "/v1/projects/{id}": {
+      "get": {
+        "callbacks": {},
+        "deprecated": false,
+        "description": "Shows a single contractor project by its ID.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | - |",
+        "operationId": "get_v1_projects_id",
+        "parameters": [
+          {
+            "description": "Project identifier",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "x-resource-type": "project"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "OAuth2AuthorizationCode": [
+              "https://gateway.remote.com/company.manage",
+              "project:read",
+              "time_and_attendance",
+              "all:write",
+              "all:read"
+            ]
+          }
+        ],
+        "summary": "Show a single company project",
+        "tags": [
+          "Projects"
         ]
       }
     }

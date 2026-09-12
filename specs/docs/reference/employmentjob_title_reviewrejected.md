@@ -1575,6 +1575,17 @@ guaranteed.
         "title": "UpdateEmploymentCustomFieldValueParams",
         "type": "object"
       },
+      "ProjectStatus": {
+        "enum": [
+          "active",
+          "archived",
+          "completed"
+        ],
+        "example": "active",
+        "nullable": false,
+        "title": "ProjectStatus",
+        "type": "string"
+      },
       "CompanyDepartmentCreatedResponse": {
         "additionalProperties": false,
         "example": {
@@ -3496,6 +3507,13 @@ guaranteed.
         "title": "CostCalculatorEstimatePDFResponse",
         "type": "object"
       },
+      "ProjectID": {
+        "description": "Project identifier.",
+        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+        "format": "uuid",
+        "title": "ProjectID",
+        "type": "string"
+      },
       "IdentityVerificationResponse": {
         "additionalProperties": false,
         "description": "Identity Verification response",
@@ -4728,6 +4746,61 @@ guaranteed.
         "title": "EmployeeDetails",
         "type": "object"
       },
+      "ListProjectsResponse": {
+        "description": "Paginated response schema listing company projects.",
+        "example": {
+          "current_page": 1,
+          "projects": [
+            {
+              "budget": {
+                "amount": 250000,
+                "currency": "USD"
+              },
+              "code": "WEB-001",
+              "end_date": null,
+              "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+              "lead_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ],
+              "name": "Website redesign",
+              "start_date": "2026-01-01",
+              "status": "active",
+              "team_member_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ]
+            }
+          ],
+          "total_count": 1,
+          "total_pages": 1
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "current_page": {
+                "description": "The current page among all of the total_pages",
+                "type": "integer"
+              },
+              "projects": {
+                "items": {
+                  "$ref": "#/components/schemas/Project"
+                },
+                "type": "array"
+              },
+              "total_count": {
+                "description": "The total number of records in the result",
+                "type": "integer"
+              },
+              "total_pages": {
+                "description": "The total number of pages the user can go through",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "title": "ListProjectsResponse",
+        "type": "object"
+      },
       "Variance": {
         "example": {
           "currentPay": {
@@ -5000,6 +5073,46 @@ guaranteed.
         },
         "nullable": true,
         "title": "MaybeBenefitTier",
+        "type": "object"
+      },
+      "ProjectResponse": {
+        "description": "Response schema for a single company project.",
+        "example": {
+          "data": {
+            "project": {
+              "budget": {
+                "amount": 250000,
+                "currency": "USD"
+              },
+              "code": "WEB-001",
+              "end_date": null,
+              "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+              "lead_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ],
+              "name": "Website redesign",
+              "start_date": "2026-01-01",
+              "status": "active",
+              "team_member_ids": [
+                "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+              ]
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "project": {
+                "$ref": "#/components/schemas/Project"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "ProjectResponse",
         "type": "object"
       },
       "EmployeeFileParams": {
@@ -6018,6 +6131,36 @@ guaranteed.
         "format": "uuid",
         "title": "ContractorInvoiceID",
         "type": "string"
+      },
+      "JobTitleEligibilityCheckResponse": {
+        "additionalProperties": false,
+        "example": {
+          "data": {
+            "job_title_eligibility_check": {
+              "check_id": "8f2c1a7e-2b64-4f4e-9c1a-5d0f2a9b7c33",
+              "verdict": "needs_review"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "additionalProperties": false,
+            "properties": {
+              "job_title_eligibility_check": {
+                "$ref": "#/components/schemas/JobTitleEligibilityCheck"
+              }
+            },
+            "required": [
+              "job_title_eligibility_check"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "JobTitleEligibilityCheckResponse",
+        "type": "object"
       },
       "AccountsLoginSyncedWith": {
         "description": "Indicates which email type the account login is synchronized with.",
@@ -11165,7 +11308,8 @@ guaranteed.
                 "integration": {
                   "name": "greenhouse"
                 },
-                "role": "employee"
+                "role": "employee",
+                "sync_to_remote_status": "enabled"
               }
             ],
             "invited_by": {
@@ -11455,7 +11599,8 @@ guaranteed.
                   "integration": {
                     "name": "greenhouse"
                   },
-                  "role": "employee"
+                  "role": "employee",
+                  "sync_to_remote_status": "enabled"
                 }
               ],
               "invited_by": {
@@ -12904,6 +13049,30 @@ guaranteed.
           "status"
         ],
         "title": "Integrations.Scim.ErrorResponse",
+        "type": "object"
+      },
+      "ProjectBudget": {
+        "additionalProperties": false,
+        "description": "A project's budget: amount and its currency.",
+        "example": {
+          "amount": 250000,
+          "currency": "USD"
+        },
+        "nullable": true,
+        "properties": {
+          "amount": {
+            "description": "Budget amount, in cents.",
+            "type": "integer"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          }
+        },
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "title": "ProjectBudget",
         "type": "object"
       },
       "TimeoffDaysParams": {
@@ -17594,7 +17763,8 @@ guaranteed.
           "integration": {
             "name": "greenhouse"
           },
-          "role": "employee"
+          "role": "employee",
+          "sync_to_remote_status": "enabled"
         },
         "properties": {
           "external_user_id": {
@@ -17618,6 +17788,15 @@ guaranteed.
               "employee",
               "employer"
             ],
+            "type": "string"
+          },
+          "sync_to_remote_status": {
+            "description": "Whether the employee should be synced to Remote based on the sync_to_remote flag in the external HRIS",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "nullable": true,
             "type": "string"
           }
         },
@@ -18846,6 +19025,45 @@ guaranteed.
           "currency"
         ],
         "title": "ParamsToCreateEmployeeExpense",
+        "type": "object"
+      },
+      "CreateJobTitleEligibilityCheckParams": {
+        "additionalProperties": false,
+        "example": {
+          "job_title": "Nurse",
+          "role_description": "Provides bedside care on a hospital ward",
+          "role_is_onsite": "yes",
+          "role_requires_license": "yes"
+        },
+        "properties": {
+          "job_title": {
+            "description": "The job title to check. Defaults to the employment's current job title when omitted.",
+            "type": "string"
+          },
+          "role_description": {
+            "description": "A description of the role. Required when the job title alone is inconclusive; the response says so.",
+            "type": "string"
+          },
+          "role_is_onsite": {
+            "description": "Whether the role requires working onsite.",
+            "enum": [
+              "yes",
+              "no",
+              "not_applicable"
+            ],
+            "type": "string"
+          },
+          "role_requires_license": {
+            "description": "Whether the role requires a professional license.",
+            "enum": [
+              "yes",
+              "no",
+              "not_applicable"
+            ],
+            "type": "string"
+          }
+        },
+        "title": "CreateJobTitleEligibilityCheckParams",
         "type": "object"
       },
       "OnboardingTasks": {
@@ -20431,7 +20649,8 @@ guaranteed.
                   "integration": {
                     "name": "greenhouse"
                   },
-                  "role": "employee"
+                  "role": "employee",
+                  "sync_to_remote_status": "enabled"
                 }
               ],
               "invited_by": {
@@ -24036,6 +24255,35 @@ guaranteed.
         "title": "EmployeesProcessed",
         "type": "object"
       },
+      "JobTitleEligibilityCheck": {
+        "additionalProperties": false,
+        "example": {
+          "check_id": "8f2c1a7e-2b64-4f4e-9c1a-5d0f2a9b7c33",
+          "verdict": "needs_review"
+        },
+        "properties": {
+          "check_id": {
+            "description": "The identifier of the recorded check. Send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, so the verdict is reused rather than recalculated. `null` when the job title alone settled the verdict and there is nothing to reuse.",
+            "nullable": true,
+            "type": "string"
+          },
+          "verdict": {
+            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`.",
+            "enum": [
+              "eligible",
+              "not_eligible",
+              "needs_review",
+              "eligible_with_risk_acknowledgement"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict"
+        ],
+        "title": "JobTitleEligibilityCheck",
+        "type": "object"
+      },
       "IdentityCompanyAccessTokenResponse": {
         "description": "Returned when the current token was obtained via the OAuth2 Authorization Code flow and is scoped to a specific company managed by an integration partner. Contains the full context: the integration's credentials, the company being accessed, and the user who authorized access.",
         "example": {
@@ -24353,6 +24601,111 @@ guaranteed.
           }
         },
         "title": "PayItemBulkCreateFailures",
+        "type": "object"
+      },
+      "Project": {
+        "additionalProperties": false,
+        "description": "Company project",
+        "example": {
+          "budget": {
+            "amount": 250000,
+            "currency": "USD"
+          },
+          "code": "WEB-001",
+          "end_date": null,
+          "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+          "lead_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ],
+          "name": "Website redesign",
+          "start_date": "2026-01-01",
+          "status": "active",
+          "team_member_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ]
+        },
+        "properties": {
+          "budget": {
+            "additionalProperties": false,
+            "description": "A project's budget: amount and its currency.",
+            "example": {
+              "amount": 250000,
+              "currency": "USD"
+            },
+            "nullable": true,
+            "properties": {
+              "amount": {
+                "description": "Budget amount, in cents.",
+                "type": "integer"
+              },
+              "currency": {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            },
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "title": "ProjectBudget",
+            "type": "object"
+          },
+          "code": {
+            "description": "Code/identifier of the project.",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Date when the project ends.",
+            "example": "2026-12-31",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "description": "Project identifier.",
+            "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "format": "uuid",
+            "title": "ProjectID",
+            "type": "string"
+          },
+          "lead_ids": {
+            "description": "User IDs of the company admins assigned as the project's leads. These are user IDs, unlike `team_member_ids`, which are employment IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the project.",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Date when the project starts.",
+            "example": "2026-01-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "team_member_ids": {
+            "description": "Employment IDs of the contractors assigned to the project as team members. These are employment IDs, unlike `lead_ids`, which are user IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "code",
+          "status",
+          "team_member_ids",
+          "lead_ids",
+          "budget"
+        ],
+        "title": "Project",
         "type": "object"
       },
       "ContractorSubscriptions.Summary": {
@@ -26063,7 +26416,8 @@ guaranteed.
               "integration": {
                 "name": "greenhouse"
               },
-              "role": "employee"
+              "role": "employee",
+              "sync_to_remote_status": "enabled"
             }
           ],
           "invited_by": {
@@ -29340,67 +29694,6 @@ guaranteed.
         "title": "EmploymentBankAccountDetailsParams",
         "type": "object"
       },
-      "EngagementAgreementDetailsResponse": {
-        "description": "Response for engagement agreement details",
-        "example": {
-          "data": {
-            "schema": {
-              "properties": {
-                "has_business_presence": {
-                  "enum": [
-                    "yes",
-                    "no"
-                  ],
-                  "title": "Do you currently have any business presence in Germany?",
-                  "type": "string"
-                },
-                "has_cba": {
-                  "enum": [
-                    "yes",
-                    "no"
-                  ],
-                  "title": "Are your German employees covered by any collective bargaining agreement (CBA)?",
-                  "type": "string"
-                },
-                "has_similar_roles": {
-                  "enum": [
-                    "yes",
-                    "no"
-                  ],
-                  "title": "Do you currently have team members in similar roles to this hire?",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            },
-            "version": 1
-          }
-        },
-        "properties": {
-          "data": {
-            "additionalProperties": false,
-            "description": "Engagement agreement details response data",
-            "properties": {
-              "schema": {
-                "additionalProperties": true,
-                "description": "Engagement agreement details schema object with variable fields based on country",
-                "type": "object"
-              },
-              "version": {
-                "description": "JSON schema version number",
-                "type": "integer"
-              }
-            },
-            "required": [
-              "version",
-              "schema"
-            ],
-            "type": "object"
-          }
-        },
-        "title": "EngagementAgreementDetailsResponse",
-        "type": "object"
-      },
       "PayslipItem": {
         "description": "A payslip with file, payslip, payroll run, and payroll output metadata.",
         "example": {
@@ -31118,7 +31411,7 @@ guaranteed.
         "properties": {
           "engagement_agreement_details": {
             "additionalProperties": false,
-            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_engagement_agreement_details_country) endpoint\npassing the country code.\n",
+            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_v1_countries_country_code_form) endpoint\npassing the country code and the `engagement_agreement_details` form name.\n",
             "oneOf": [
               {
                 "additionalProperties": false,
@@ -33010,6 +33303,7 @@ guaranteed.
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -33152,6 +33446,7 @@ guaranteed.
               "contract:read": "contract:read",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
+              "project:read": "project:read",
               "document:read": "document:read",
               "sso_configuration:read": "sso_configuration:read"
             },
@@ -40335,6 +40630,130 @@ guaranteed.
         "summary": "Create bulk employment job",
         "tags": [
           "Employment Management"
+        ]
+      }
+    },
+    "/v2/employments/{employment_id}/job-title-eligibility-check": {
+      "post": {
+        "callbacks": {},
+        "deprecated": false,
+        "description": "Checks whether Remote can employ the given job title and role for this employment, and\nreturns the verdict without changing anything.\n\nCall this before submitting contract details. The verdict tells you whether the\nsubmission will succeed, be rejected, need a risk acknowledgement, or place the\nemployment into a human review; and the returned `check_id` lets the submission reuse\nthe verdict instead of recalculating it.\n\nCalling this repeatedly with the same job title and role answers is cheap: the recorded\ncheck is reused. Changing any of them produces a fresh verdict.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "operationId": "post_v2_employments_employment_id_job-title-eligibility-check",
+        "parameters": [
+          {
+            "description": "Employment ID",
+            "example": "93t3j-employment-id-9suej43",
+            "in": "path",
+            "name": "employment_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "employment"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateJobTitleEligibilityCheckParams"
+              }
+            }
+          },
+          "description": "Job title eligibility check params",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobTitleEligibilityCheckResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "CustomerAPIToken": [
+              "https://gateway.remote.com/company.manage",
+              "employment:write",
+              "employments",
+              "all:write"
+            ],
+            "OAuth2AuthorizationCode": [
+              "https://gateway.remote.com/company.manage",
+              "employment:write",
+              "employments",
+              "all:write"
+            ]
+          }
+        ],
+        "summary": "Check job title eligibility",
+        "tags": [
+          "Job Title Eligibility"
         ]
       }
     },

@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 406,
+  "count": 408,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -683,11 +683,6 @@
       "file": "reference/get_v1_countries_country_code_contractor-contract-details.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_countries_country_code_engagement-agreement-details",
-      "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_engagement-agreement-details.md",
-      "file": "reference/get_v1_countries_country_code_engagement-agreement-details.md"
-    },
-    {
       "page": "https://developer.remote.com/reference/get_v1_countries_country_code_form",
       "markdown": "https://developer.remote.com/reference/get_v1_countries_country_code_form.md",
       "file": "reference/get_v1_countries_country_code_form.md"
@@ -1061,6 +1056,16 @@
       "page": "https://developer.remote.com/reference/get_v1_probation-extensions_id",
       "markdown": "https://developer.remote.com/reference/get_v1_probation-extensions_id.md",
       "file": "reference/get_v1_probation-extensions_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_projects",
+      "markdown": "https://developer.remote.com/reference/get_v1_projects.md",
+      "file": "reference/get_v1_projects.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_projects_id",
+      "markdown": "https://developer.remote.com/reference/get_v1_projects_id.md",
+      "file": "reference/get_v1_projects_id.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id",
@@ -1781,6 +1786,11 @@
       "page": "https://developer.remote.com/reference/post_v2_employments_employment_id_engagement-agreement-details",
       "markdown": "https://developer.remote.com/reference/post_v2_employments_employment_id_engagement-agreement-details.md",
       "file": "reference/post_v2_employments_employment_id_engagement-agreement-details.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v2_employments_employment_id_job-title-eligibility-check",
+      "markdown": "https://developer.remote.com/reference/post_v2_employments_employment_id_job-title-eligibility-check.md",
+      "file": "reference/post_v2_employments_employment_id_job-title-eligibility-check.md"
     },
     {
       "page": "https://developer.remote.com/reference/put_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details",
