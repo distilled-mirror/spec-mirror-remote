@@ -1535,6 +1535,70 @@ is delivered asynchronously and its order relative to
         "title": "EmploymentCustomField",
         "type": "object"
       },
+      "PayItemProviderDataParams": {
+        "additionalProperties": false,
+        "example": {
+          "correction_effective_date": "2026-03-15",
+          "hourly_rate": 2550,
+          "hourly_rate_currency_code": "SGD",
+          "pay_rate": 1.5,
+          "shift_code": "DAY",
+          "work_day_duration": 28800
+        },
+        "properties": {
+          "adjustment_effective_date": {
+            "deprecated": true,
+            "description": "**Deprecated — renamed to `correction_effective_date`**, which this value backfills. `correction_effective_date` wins when both are sent.",
+            "format": "date",
+            "type": "string",
+            "x-remote-renamed-to": "correction_effective_date"
+          },
+          "correction_effective_date": {
+            "description": "Set this only on a correction: the original working day being corrected (YYYY-MM-DD). Its presence is what marks the pay item as a correction rather than an original submission.",
+            "format": "date",
+            "type": "string"
+          },
+          "hourly_rate": {
+            "description": "Hourly rate in cents",
+            "type": "integer"
+          },
+          "hourly_rate_currency_code": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "is_deduction": {
+            "deprecated": true,
+            "description": "**Deprecated — accepted and ignored.** Express a deduction as a negative `amount`.",
+            "type": "boolean",
+            "x-remote-ignored": true
+          },
+          "pay_rate": {
+            "description": "Overtime rate multiplier (e.g. 1.5)",
+            "type": "number"
+          },
+          "payout_amount": {
+            "deprecated": true,
+            "description": "**Deprecated — accepted and ignored.** The payout value belongs in the pay item's own `amount`.",
+            "type": "integer",
+            "x-remote-ignored": true
+          },
+          "payout_currency_code": {
+            "deprecated": true,
+            "description": "**Deprecated — accepted and ignored.** The payout currency belongs in the pay item's own `currency`.",
+            "type": "string",
+            "x-remote-ignored": true
+          },
+          "shift_code": {
+            "description": "Shift identifier from partner system",
+            "type": "string"
+          },
+          "work_day_duration": {
+            "description": "Expected work day duration in seconds",
+            "type": "integer"
+          }
+        },
+        "title": "PayItemProviderDataParams",
+        "type": "object"
+      },
       "UpdateEmploymentCustomFieldValueParams": {
         "description": "Schema for updating a custom field value.",
         "example": {
@@ -4362,13 +4426,10 @@ is delivered asynchronously and its order relative to
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
           "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
           "provider_data": {
-            "adjustment_effective_date": "2026-03-15",
+            "correction_effective_date": "2026-03-15",
             "hourly_rate": 2550,
             "hourly_rate_currency_code": "SGD",
-            "is_deduction": false,
             "pay_rate": 1.5,
-            "payout_amount": 1500000,
-            "payout_currency_code": "SGD",
             "shift_code": "DAY",
             "work_day_duration": 28800
           },
@@ -4384,7 +4445,7 @@ is delivered asynchronously and its order relative to
             "type": "string"
           },
           "effective_date": {
-            "description": "Working day date (YYYY-MM-DD)",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
             "format": "date",
             "type": "string"
           },
@@ -9755,12 +9816,12 @@ is delivered asynchronously and its order relative to
                 "rps",
                 "secondary_reports",
                 "direct_reports",
+                "direct_and_indirect_reports",
                 "employment_countries",
                 "employment_departments",
+                "onboarding_reports",
                 "assigned_billing_legal_entities",
-                "employment_company_structure_nodes",
-                "direct_and_indirect_reports",
-                "onboarding_reports"
+                "employment_company_structure_nodes"
               ],
               "example": "all",
               "nullable": false,
@@ -12479,13 +12540,10 @@ is delivered asynchronously and its order relative to
                 "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                 "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                 "provider_data": {
-                  "adjustment_effective_date": "2026-03-15",
+                  "correction_effective_date": "2026-03-15",
                   "hourly_rate": 2550,
                   "hourly_rate_currency_code": "SGD",
-                  "is_deduction": false,
                   "pay_rate": 1.5,
-                  "payout_amount": 1500000,
-                  "payout_currency_code": "SGD",
                   "shift_code": "DAY",
                   "work_day_duration": 28800
                 },
@@ -12596,13 +12654,10 @@ is delivered asynchronously and its order relative to
               "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
               "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
               "provider_data": {
-                "adjustment_effective_date": "2026-03-15",
+                "correction_effective_date": "2026-03-15",
                 "hourly_rate": 2550,
                 "hourly_rate_currency_code": "SGD",
-                "is_deduction": false,
                 "pay_rate": 1.5,
-                "payout_amount": 1500000,
-                "payout_currency_code": "SGD",
                 "shift_code": "DAY",
                 "work_day_duration": 28800
               },
@@ -16371,13 +16426,10 @@ is delivered asynchronously and its order relative to
                   "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
                   "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                   "provider_data": {
-                    "adjustment_effective_date": "2026-03-15",
+                    "correction_effective_date": "2026-03-15",
                     "hourly_rate": 2550,
                     "hourly_rate_currency_code": "SGD",
-                    "is_deduction": false,
                     "pay_rate": 1.5,
-                    "payout_amount": 1500000,
-                    "payout_currency_code": "SGD",
                     "shift_code": "DAY",
                     "work_day_duration": 28800
                   },
@@ -16569,19 +16621,16 @@ is delivered asynchronously and its order relative to
       "PayItemProviderData": {
         "additionalProperties": false,
         "example": {
-          "adjustment_effective_date": "2026-03-15",
+          "correction_effective_date": "2026-03-15",
           "hourly_rate": 2550,
           "hourly_rate_currency_code": "SGD",
-          "is_deduction": false,
           "pay_rate": 1.5,
-          "payout_amount": 1500000,
-          "payout_currency_code": "SGD",
           "shift_code": "DAY",
           "work_day_duration": 28800
         },
         "properties": {
-          "adjustment_effective_date": {
-            "description": "Correction date for a previously submitted day (YYYY-MM-DD)",
+          "correction_effective_date": {
+            "description": "Set this only on a correction: the original working day being corrected (YYYY-MM-DD). Its presence is what marks the pay item as a correction rather than an original submission.",
             "format": "date",
             "type": "string"
           },
@@ -16592,20 +16641,9 @@ is delivered asynchronously and its order relative to
           "hourly_rate_currency_code": {
             "$ref": "#/components/schemas/CurrencyCode"
           },
-          "is_deduction": {
-            "description": "Whether payout_amount should be considered a deduction",
-            "type": "boolean"
-          },
           "pay_rate": {
             "description": "Overtime rate multiplier (e.g. 1.5)",
             "type": "number"
-          },
-          "payout_amount": {
-            "description": "Associated payout or deduction in cents",
-            "type": "integer"
-          },
-          "payout_currency_code": {
-            "$ref": "#/components/schemas/CurrencyCode"
           },
           "shift_code": {
             "description": "Shift identifier from partner system",
@@ -18632,16 +18670,16 @@ is delivered asynchronously and its order relative to
         },
         "properties": {
           "amount": {
-            "description": "Value of the pay item. See PayItemParams.amount for unit details. Must be non-zero; negative values are allowed for corrections.",
+            "description": "Value of the pay item. See PayItemParams.amount for unit details. Must not be zero. Negative values are supported: send a negative `amount` to submit a deduction or to correct an earlier submission downwards — for any pay code, including hours-based ones such as `working_hours`.",
             "type": "integer"
           },
           "effective_date": {
-            "description": "Working day date (YYYY-MM-DD)",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
             "format": "date",
             "type": "string"
           },
           "provider_data": {
-            "$ref": "#/components/schemas/PayItemProviderData"
+            "$ref": "#/components/schemas/PayItemProviderDataParams"
           }
         },
         "title": "UpdatePayItemParams",
@@ -20942,13 +20980,10 @@ is delivered asynchronously and its order relative to
               "effective_date": "2026-03-11",
               "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
               "provider_data": {
-                "adjustment_effective_date": "2026-03-15",
+                "correction_effective_date": "2026-03-15",
                 "hourly_rate": 2550,
                 "hourly_rate_currency_code": "SGD",
-                "is_deduction": false,
                 "pay_rate": 1.5,
-                "payout_amount": 1500000,
-                "payout_currency_code": "SGD",
                 "shift_code": "DAY",
                 "work_day_duration": 28800
               }
@@ -21034,20 +21069,17 @@ is delivered asynchronously and its order relative to
           "effective_date": "2026-03-11",
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
           "provider_data": {
-            "adjustment_effective_date": "2026-03-15",
+            "correction_effective_date": "2026-03-15",
             "hourly_rate": 2550,
             "hourly_rate_currency_code": "SGD",
-            "is_deduction": false,
             "pay_rate": 1.5,
-            "payout_amount": 1500000,
-            "payout_currency_code": "SGD",
             "shift_code": "DAY",
             "work_day_duration": 28800
           }
         },
         "properties": {
           "amount": {
-            "description": "Value of the pay item. Its unit depends on the `type` of the pay code (see GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes): `amount` in cents, `percentage` in basis points, `unit` as a raw count, `hours` as a whole number of hours, `duration` in seconds. Must be non-zero; negative values are allowed for corrections.\n",
+            "description": "Value of the pay item. Its unit depends on the `type` of the pay code (see GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes): `amount` in cents, `percentage` in basis points, `unit` as a raw count, `hours` as a whole number of hours, `duration` in seconds.\n\nMust not be zero.\n\n**Negative values are supported.** A positive `amount` adds value; a negative `amount` takes value away. Send a negative `amount` to submit a deduction, or to correct an earlier submission downwards.\n\nThis applies to every pay code, whatever its unit — including hours-based codes such as `working_hours`. For example:\n\n- `-5000` on an `amount` code (cents) deducts 50.00 from pay.\n- `-3` on an hours-based code such as `working_hours` removes 3 hours reported in error.\n",
             "type": "integer"
           },
           "code": {
@@ -21058,7 +21090,7 @@ is delivered asynchronously and its order relative to
             "$ref": "#/components/schemas/CurrencyCode"
           },
           "effective_date": {
-            "description": "Working day date (YYYY-MM-DD)",
+            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`.",
             "format": "date",
             "type": "string"
           },
@@ -21072,7 +21104,7 @@ is delivered asynchronously and its order relative to
             "type": "string"
           },
           "provider_data": {
-            "$ref": "#/components/schemas/PayItemProviderData"
+            "$ref": "#/components/schemas/PayItemProviderDataParams"
           }
         },
         "required": [
@@ -29924,13 +29956,10 @@ is delivered asynchronously and its order relative to
             "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
             "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
             "provider_data": {
-              "adjustment_effective_date": "2026-03-15",
+              "correction_effective_date": "2026-03-15",
               "hourly_rate": 2550,
               "hourly_rate_currency_code": "SGD",
-              "is_deduction": false,
               "pay_rate": 1.5,
-              "payout_amount": 1500000,
-              "payout_currency_code": "SGD",
               "shift_code": "DAY",
               "work_day_duration": 28800
             },

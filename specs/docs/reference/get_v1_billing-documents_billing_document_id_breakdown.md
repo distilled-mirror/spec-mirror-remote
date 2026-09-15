@@ -4,7 +4,7 @@ updatedAt: 2026-05-27T21:11:47.000Z
 
 Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
-# Get Billing Document Breakdown
+# Get Billing Document Breakdown. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.
 
 Get billing document breakdown
 
@@ -696,7 +696,7 @@ This endpoint accepts any one of the following token types:
             ]
           }
         ],
-        "summary": "Get Billing Document Breakdown",
+        "summary": "Get Billing Document Breakdown. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
         "tags": [
           "Billing Documents"
         ]

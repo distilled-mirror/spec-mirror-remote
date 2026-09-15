@@ -4,7 +4,7 @@ updatedAt: 2026-05-27T21:18:02.000Z
 
 Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
-# List Offboardings (v2)
+# List Offboardings (v2). Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.
 
 Lists offboardings for a company.
 
@@ -881,7 +881,7 @@ This endpoint accepts any one of the following token types:
             ]
           }
         ],
-        "summary": "List Offboardings (v2)",
+        "summary": "List Offboardings (v2). Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
         "tags": [
           "Terminations"
         ]
