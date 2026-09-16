@@ -18,7 +18,7 @@ This endpoint requires the following token type:
 
 | Category | Read only Scope | Write only Scope (read access implicit) |
 |---|---|---|
-| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | - |
+| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | Manage projects (`project:write`) |
 
 # OpenAPI definition
 
@@ -401,6 +401,7 @@ This endpoint requires the following token type:
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -511,6 +512,7 @@ This endpoint requires the following token type:
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -582,7 +584,7 @@ This endpoint requires the following token type:
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | - |",
+        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | Manage projects (`project:write`) |",
         "operationId": "get_v1_projects",
         "parameters": [
           {
@@ -677,6 +679,7 @@ This endpoint requires the following token type:
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "project:read",
+              "project:write",
               "time_and_attendance",
               "all:write",
               "all:read"

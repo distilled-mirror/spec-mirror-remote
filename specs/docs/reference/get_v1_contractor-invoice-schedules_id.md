@@ -521,6 +521,7 @@ This endpoint accepts any one of the following token types:
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -631,6 +632,7 @@ This endpoint accepts any one of the following token types:
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -707,7 +709,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0accdcf6-73c7-4633-91bf-f7727d065b72",
+            "example": "6ab0726a-b52d-41c1-8b7e-a107263430fd",
             "in": "path",
             "name": "id",
             "required": true,

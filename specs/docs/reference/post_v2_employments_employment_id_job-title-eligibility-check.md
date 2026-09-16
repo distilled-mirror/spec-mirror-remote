@@ -210,7 +210,7 @@ This endpoint accepts any one of the following token types:
         },
         "properties": {
           "check_id": {
-            "description": "The identifier of the recorded check. Send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, so the verdict is reused rather than recalculated. `null` when the job title alone settled the verdict and there is nothing to reuse.",
+            "description": "The identifier of the recorded check. When present it is **required**: send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, or the submission is rejected. Run this check again if the job title or any role answer changes, since the identifier only vouches for the answers it was given. `null` when the job title alone settled the verdict and there is nothing to send.",
             "nullable": true,
             "type": "string"
           },
@@ -383,6 +383,7 @@ This endpoint accepts any one of the following token types:
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -493,6 +494,7 @@ This endpoint accepts any one of the following token types:
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -1125,6 +1127,62 @@ This endpoint accepts any one of the following token types:
         "summary": "employment.eor_hiring.proof_of_payment_submitted",
         "tags": [
           "Employments"
+        ]
+      }
+    },
+    "employment.hard_deleted": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when an employment is permanently erased from Remote, and means the\nrecord is physically gone: a subsequent `GET /employments/{id}` returns 404 and the identifier\nmust not be queried again.\n\nAn employment that is hard deleted has often already been soft deleted, which triggered\n`employment.onboarding.cancelled`. You may therefore receive `employment.onboarding.cancelled`\nfirst and this event weeks later.\n\nThis event may be delivered more than once, so it is safe to process repeatedly.\n",
+        "operationId": "employment.hard_deleted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                  "employment_id": "102172fe-4e09-480c-bd70-09cfeb34022a",
+                  "event_type": "employment.hard_deleted",
+                  "hard_deleted_at": "2026-08-24T11:02:31Z"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  },
+                  "hard_deleted_at": {
+                    "description": "The UTC timestamp at which the employment was erased.",
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "employment_id",
+                  "hard_deleted_at",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "employment.hard_deleted",
+        "tags": [
+          "Employment Management"
         ]
       }
     },

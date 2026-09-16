@@ -9812,9 +9812,9 @@ This event is triggered when an employment work email is updated.
                 "direct_and_indirect_reports",
                 "employment_countries",
                 "employment_departments",
+                "employment_company_structure_nodes",
                 "onboarding_reports",
-                "assigned_billing_legal_entities",
-                "employment_company_structure_nodes"
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,
@@ -9912,6 +9912,7 @@ This event is triggered when an employment work email is updated.
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -12879,6 +12880,7 @@ This event is triggered when an employment work email is updated.
               "employment.cor_hiring.proof_of_payment_submitted",
               "employment.eor_hiring.proof_of_payment_accepted",
               "employment.eor_hiring.proof_of_payment_submitted",
+              "employment.hard_deleted",
               "employment.job_title_review.approved",
               "employment.job_title_review.rejected",
               "employment.job_title_review.started",
@@ -17457,6 +17459,62 @@ This event is triggered when an employment work email is updated.
           "will_take_more_pto"
         ],
         "title": "ResignationAfterStartDateRequestParams",
+        "type": "object"
+      },
+      "UpdateProjectParams": {
+        "additionalProperties": false,
+        "description": "Fields to update on a company project. Every field is optional; omitted fields are left\nunchanged.\n\n`lead_ids` and `team_member_ids` are replaced wholesale when present, so send the complete\ndesired list rather than only the additions. Send an empty list to remove everyone. Fetch\nthe project first to read its current membership.\n",
+        "example": {
+          "lead_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ],
+          "name": "Website redesign",
+          "status": "active",
+          "team_member_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ]
+        },
+        "properties": {
+          "description": {
+            "description": "Description of the project.",
+            "nullable": true,
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Date when the project ends.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "lead_ids": {
+            "description": "User IDs of the company admins to assign as the project's leads, replacing the current set. These are user IDs, unlike `team_member_ids`, which are employment IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the project.",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Date when the project starts.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "team_member_ids": {
+            "description": "Employment IDs of the contractors to assign as the project's team members, replacing the current set. These are employment IDs, unlike `lead_ids`, which are user IDs. Each must be an active contractor of the project's company.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          }
+        },
+        "title": "UpdateProjectParams",
         "type": "object"
       },
       "UpdateApprovedTimeoffParams": {
@@ -24291,7 +24349,7 @@ This event is triggered when an employment work email is updated.
         },
         "properties": {
           "check_id": {
-            "description": "The identifier of the recorded check. Send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, so the verdict is reused rather than recalculated. `null` when the job title alone settled the verdict and there is nothing to reuse.",
+            "description": "The identifier of the recorded check. When present it is **required**: send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, or the submission is rejected. Run this check again if the job title or any role answer changes, since the identifier only vouches for the answers it was given. `null` when the job title alone settled the verdict and there is nothing to send.",
             "nullable": true,
             "type": "string"
           },
@@ -25868,6 +25926,7 @@ This event is triggered when an employment work email is updated.
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -29621,6 +29680,7 @@ This event is triggered when an employment work email is updated.
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -33278,6 +33338,7 @@ This event is triggered when an employment work email is updated.
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -33421,6 +33482,7 @@ This event is triggered when an employment work email is updated.
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -38622,7 +38684,7 @@ This event is triggered when an employment work email is updated.
       "put": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Updates employment's contract details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-form) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates employment's contract details.\n\nA job title eligibility check verdict is required before contract details can be\nsubmitted. Run `POST /api/eor/v2/employments/{employment_id}/job-title-eligibility-check`\nfirst and send the `check_id` it returns as `additional_job_title_eligibility_check_slug`.\nA missing verdict, or one recorded against a different job title or role answer, is\nrejected — the check is never evaluated as part of this request.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-form) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "put_v2_employments_employment_id_contract-details",
         "parameters": [
           {
@@ -42382,6 +42444,62 @@ This event is triggered when an employment work email is updated.
         "summary": "employment.eor_hiring.proof_of_payment_submitted",
         "tags": [
           "Employments"
+        ]
+      }
+    },
+    "employment.hard_deleted": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when an employment is permanently erased from Remote, and means the\nrecord is physically gone: a subsequent `GET /employments/{id}` returns 404 and the identifier\nmust not be queried again.\n\nAn employment that is hard deleted has often already been soft deleted, which triggered\n`employment.onboarding.cancelled`. You may therefore receive `employment.onboarding.cancelled`\nfirst and this event weeks later.\n\nThis event may be delivered more than once, so it is safe to process repeatedly.\n",
+        "operationId": "employment.hard_deleted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                  "employment_id": "102172fe-4e09-480c-bd70-09cfeb34022a",
+                  "event_type": "employment.hard_deleted",
+                  "hard_deleted_at": "2026-08-24T11:02:31Z"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  },
+                  "hard_deleted_at": {
+                    "description": "The UTC timestamp at which the employment was erased.",
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "employment_id",
+                  "hard_deleted_at",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "employment.hard_deleted",
+        "tags": [
+          "Employment Management"
         ]
       }
     },

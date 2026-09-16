@@ -9811,9 +9811,9 @@ This event is triggered when a proof of payment is submitted for a contractor of
                 "direct_and_indirect_reports",
                 "employment_countries",
                 "employment_departments",
+                "employment_company_structure_nodes",
                 "onboarding_reports",
-                "assigned_billing_legal_entities",
-                "employment_company_structure_nodes"
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,
@@ -9911,6 +9911,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -12878,6 +12879,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
               "employment.cor_hiring.proof_of_payment_submitted",
               "employment.eor_hiring.proof_of_payment_accepted",
               "employment.eor_hiring.proof_of_payment_submitted",
+              "employment.hard_deleted",
               "employment.job_title_review.approved",
               "employment.job_title_review.rejected",
               "employment.job_title_review.started",
@@ -17456,6 +17458,62 @@ This event is triggered when a proof of payment is submitted for a contractor of
           "will_take_more_pto"
         ],
         "title": "ResignationAfterStartDateRequestParams",
+        "type": "object"
+      },
+      "UpdateProjectParams": {
+        "additionalProperties": false,
+        "description": "Fields to update on a company project. Every field is optional; omitted fields are left\nunchanged.\n\n`lead_ids` and `team_member_ids` are replaced wholesale when present, so send the complete\ndesired list rather than only the additions. Send an empty list to remove everyone. Fetch\nthe project first to read its current membership.\n",
+        "example": {
+          "lead_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ],
+          "name": "Website redesign",
+          "status": "active",
+          "team_member_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ]
+        },
+        "properties": {
+          "description": {
+            "description": "Description of the project.",
+            "nullable": true,
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Date when the project ends.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "lead_ids": {
+            "description": "User IDs of the company admins to assign as the project's leads, replacing the current set. These are user IDs, unlike `team_member_ids`, which are employment IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the project.",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Date when the project starts.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "team_member_ids": {
+            "description": "Employment IDs of the contractors to assign as the project's team members, replacing the current set. These are employment IDs, unlike `lead_ids`, which are user IDs. Each must be an active contractor of the project's company.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          }
+        },
+        "title": "UpdateProjectParams",
         "type": "object"
       },
       "UpdateApprovedTimeoffParams": {
@@ -24290,7 +24348,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
         },
         "properties": {
           "check_id": {
-            "description": "The identifier of the recorded check. Send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, so the verdict is reused rather than recalculated. `null` when the job title alone settled the verdict and there is nothing to reuse.",
+            "description": "The identifier of the recorded check. When present it is **required**: send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, or the submission is rejected. Run this check again if the job title or any role answer changes, since the identifier only vouches for the answers it was given. `null` when the job title alone settled the verdict and there is nothing to send.",
             "nullable": true,
             "type": "string"
           },
@@ -25867,6 +25925,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -29620,6 +29679,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -33277,6 +33337,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -33420,6 +33481,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -33575,7 +33637,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "ac63b2a9-6eb1-4d1a-8a58-acdf922f9600",
+            "example": "75ddda1f-5056-4244-b391-a73b1689f629",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -34006,7 +34068,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0accdcf6-73c7-4633-91bf-f7727d065b72",
+            "example": "6ab0726a-b52d-41c1-8b7e-a107263430fd",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34120,7 +34182,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "efee8e05-576b-4cc7-b468-c7a6c8664f44",
+            "example": "7ec450b4-c6f8-43ae-b9e1-13b7e7e21bf9",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34221,7 +34283,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "358edef6-a3ff-458f-a2d3-4987e1117cfc",
+            "example": "ff4ba68c-1384-4b81-a6fb-1887cef132e1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34334,7 +34396,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "967d49ef-8da0-431c-a0b5-243f3fef783a",
+            "example": "bddca327-7de1-444b-8464-378ba4732523",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -34564,7 +34626,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a2e8590f-2e26-455f-8028-262516791cb4",
+            "example": "4e0f8d35-afeb-4e6b-b6b1-78a749da8d12",
             "in": "path",
             "name": "id",
             "required": true,
@@ -36119,7 +36181,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "b0a8c4c9-226c-4a41-a413-184bf464fb8d",
+            "example": "a92e1895-b99d-4ddc-a2ee-d641004e6897",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -36222,7 +36284,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | - |",
+        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | Manage projects (`project:write`) |",
         "operationId": "get_v1_projects",
         "parameters": [
           {
@@ -36317,6 +36379,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "project:read",
+              "project:write",
               "time_and_attendance",
               "all:write",
               "all:read"
@@ -36333,7 +36396,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Shows a single contractor project by its ID.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | - |",
+        "description": "Shows a single contractor project by its ID.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | Manage projects (`project:write`) |",
         "operationId": "get_v1_projects_id",
         "parameters": [
           {
@@ -36404,6 +36467,7 @@ This event is triggered when a proof of payment is submitted for a contractor of
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "project:read",
+              "project:write",
               "time_and_attendance",
               "all:write",
               "all:read"
@@ -36411,6 +36475,101 @@ This event is triggered when a proof of payment is submitted for a contractor of
           }
         ],
         "summary": "Show a single company project",
+        "tags": [
+          "Projects"
+        ]
+      },
+      "patch": {
+        "callbacks": {},
+        "deprecated": false,
+        "description": "Updates a single contractor project by its ID.\n\nOmitted fields are left unchanged. `lead_ids` and `team_member_ids` are replaced wholesale\nwhen present, so send the complete desired list rather than only the additions, and send an\nempty list to remove everyone. Read the project first to get its current membership.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage projects (`project:write`) |",
+        "operationId": "patch_v1_projects_id",
+        "parameters": [
+          {
+            "description": "Project identifier",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "x-resource-type": "project"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectParams"
+              }
+            }
+          },
+          "description": "Project fields to update",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "OAuth2AuthorizationCode": [
+              "https://gateway.remote.com/company.manage",
+              "project:write",
+              "time_and_attendance",
+              "all:write"
+            ]
+          }
+        ],
+        "summary": "Update a company project",
         "tags": [
           "Projects"
         ]

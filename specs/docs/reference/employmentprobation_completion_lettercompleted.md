@@ -9811,9 +9811,9 @@ This event is triggered when an employment probation completion letter request i
                 "direct_and_indirect_reports",
                 "employment_countries",
                 "employment_departments",
+                "employment_company_structure_nodes",
                 "onboarding_reports",
-                "assigned_billing_legal_entities",
-                "employment_company_structure_nodes"
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,
@@ -9911,6 +9911,7 @@ This event is triggered when an employment probation completion letter request i
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -12878,6 +12879,7 @@ This event is triggered when an employment probation completion letter request i
               "employment.cor_hiring.proof_of_payment_submitted",
               "employment.eor_hiring.proof_of_payment_accepted",
               "employment.eor_hiring.proof_of_payment_submitted",
+              "employment.hard_deleted",
               "employment.job_title_review.approved",
               "employment.job_title_review.rejected",
               "employment.job_title_review.started",
@@ -17456,6 +17458,62 @@ This event is triggered when an employment probation completion letter request i
           "will_take_more_pto"
         ],
         "title": "ResignationAfterStartDateRequestParams",
+        "type": "object"
+      },
+      "UpdateProjectParams": {
+        "additionalProperties": false,
+        "description": "Fields to update on a company project. Every field is optional; omitted fields are left\nunchanged.\n\n`lead_ids` and `team_member_ids` are replaced wholesale when present, so send the complete\ndesired list rather than only the additions. Send an empty list to remove everyone. Fetch\nthe project first to read its current membership.\n",
+        "example": {
+          "lead_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ],
+          "name": "Website redesign",
+          "status": "active",
+          "team_member_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
+          ]
+        },
+        "properties": {
+          "description": {
+            "description": "Description of the project.",
+            "nullable": true,
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Date when the project ends.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "lead_ids": {
+            "description": "User IDs of the company admins to assign as the project's leads, replacing the current set. These are user IDs, unlike `team_member_ids`, which are employment IDs.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the project.",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Date when the project starts.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "team_member_ids": {
+            "description": "Employment IDs of the contractors to assign as the project's team members, replacing the current set. These are employment IDs, unlike `lead_ids`, which are user IDs. Each must be an active contractor of the project's company.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "type": "array"
+          }
+        },
+        "title": "UpdateProjectParams",
         "type": "object"
       },
       "UpdateApprovedTimeoffParams": {
@@ -24290,7 +24348,7 @@ This event is triggered when an employment probation completion letter request i
         },
         "properties": {
           "check_id": {
-            "description": "The identifier of the recorded check. Send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, so the verdict is reused rather than recalculated. `null` when the job title alone settled the verdict and there is nothing to reuse.",
+            "description": "The identifier of the recorded check. When present it is **required**: send it back as `additional_job_title_eligibility_check_slug` when submitting contract details, or the submission is rejected. Run this check again if the job title or any role answer changes, since the identifier only vouches for the answers it was given. `null` when the job title alone settled the verdict and there is nothing to send.",
             "nullable": true,
             "type": "string"
           },
@@ -25867,6 +25925,7 @@ This event is triggered when an employment probation completion letter request i
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -29620,6 +29679,7 @@ This event is triggered when an employment probation completion letter request i
                 "employment.cor_hiring.proof_of_payment_submitted",
                 "employment.eor_hiring.proof_of_payment_accepted",
                 "employment.eor_hiring.proof_of_payment_submitted",
+                "employment.hard_deleted",
                 "employment.job_title_review.approved",
                 "employment.job_title_review.rejected",
                 "employment.job_title_review.started",
@@ -33277,6 +33337,7 @@ This event is triggered when an employment probation completion letter request i
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -33420,6 +33481,7 @@ This event is triggered when an employment probation completion letter request i
               "benefit_offer:read": "benefit_offer:read",
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
+              "project:write": "project:write",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",

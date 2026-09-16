@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 408,
+  "count": 410,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -261,6 +261,11 @@
       "page": "https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_submitted",
       "markdown": "https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_submitted.md",
       "file": "reference/employmenteor_hiringproof_of_payment_submitted.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmenthard_deleted",
+      "markdown": "https://developer.remote.com/reference/employmenthard_deleted.md",
+      "file": "reference/employmenthard_deleted.md"
     },
     {
       "page": "https://developer.remote.com/reference/employmentjob_title_reviewapproved",
@@ -1331,6 +1336,11 @@
       "page": "https://developer.remote.com/reference/patch_v1_pay-items_id",
       "markdown": "https://developer.remote.com/reference/patch_v1_pay-items_id.md",
       "file": "reference/patch_v1_pay-items_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/patch_v1_projects_id",
+      "markdown": "https://developer.remote.com/reference/patch_v1_projects_id.md",
+      "file": "reference/patch_v1_projects_id.md"
     },
     {
       "page": "https://developer.remote.com/reference/patch_v1_sandbox_employments_employment_id",
