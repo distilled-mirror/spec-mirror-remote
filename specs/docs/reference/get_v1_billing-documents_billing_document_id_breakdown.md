@@ -606,7 +606,7 @@ This endpoint accepts any one of the following token types:
             }
           },
           {
-            "description": "Filters the results by the type of the billing breakdown item. Matched exactly against the `type` field of\nthe returned items, so unrecognised values yield an empty list. Card spend is reported as `Card expenses`,\nseparately from payroll-reimbursed `Expenses`.\n",
+            "description": "Filters the results by the type of the billing breakdown item. Matched exactly against the `type` field of\nthe returned items, so unrecognised values yield an empty list. Card spend is reported as `Card expenses`,\nseparately from payroll-reimbursed `Expenses`. Other Compensation is reported as `Other compensation`,\nseparately from `Base salary`.\n",
             "example": "Card expenses",
             "in": "query",
             "name": "type",

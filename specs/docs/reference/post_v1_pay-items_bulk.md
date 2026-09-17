@@ -133,6 +133,7 @@ This endpoint accepts any one of the following token types:
           "code": "overtime",
           "effective_date": "2026-03-11",
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "end_date": null,
           "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
           "provider_data": {
             "correction_effective_date": "2026-03-15",
@@ -154,13 +155,19 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Only for Leave-of-absence pay codes; Leave empty for other pay codes.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -184,6 +191,7 @@ This endpoint accepts any one of the following token types:
           "id",
           "employment_id",
           "effective_date",
+          "end_date",
           "code",
           "amount",
           "provider_data",
@@ -268,6 +276,7 @@ This endpoint accepts any one of the following token types:
                   "code": "overtime",
                   "effective_date": "2026-03-11",
                   "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                  "end_date": null,
                   "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                   "provider_data": {
                     "correction_effective_date": "2026-03-15",
@@ -417,13 +426,19 @@ This endpoint accepts any one of the following token types:
             "$ref": "#/components/schemas/CurrencyCode"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`. On a leave-of-absence pay item this is the first day of the leave period, whose last day goes in `end_date`.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID. Only Global Payroll employments are supported.",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Set this only on leave-of-absence pay codes — parental, sick, maternity, unpaid leave and similar — where the pay item covers a period rather than a single day, and `effective_date` is the first day of that period. Leave it off ordinary time & attendance items such as worked hours, overtime or allowances, which apply to a single day.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "external_import_code": {
@@ -573,6 +588,7 @@ This endpoint accepts any one of the following token types:
             "code": "overtime",
             "effective_date": "2026-03-11",
             "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "end_date": null,
             "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
             "provider_data": {
               "correction_effective_date": "2026-03-15",

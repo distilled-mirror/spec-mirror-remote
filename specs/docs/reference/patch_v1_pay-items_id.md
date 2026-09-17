@@ -131,6 +131,7 @@ This endpoint accepts any one of the following token types:
           "code": "overtime",
           "effective_date": "2026-03-11",
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "end_date": null,
           "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
           "provider_data": {
             "correction_effective_date": "2026-03-15",
@@ -152,13 +153,19 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Only for Leave-of-absence pay codes; Leave empty for other pay codes.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -182,6 +189,7 @@ This endpoint accepts any one of the following token types:
           "id",
           "employment_id",
           "effective_date",
+          "end_date",
           "code",
           "amount",
           "provider_data",
@@ -273,6 +281,7 @@ This endpoint accepts any one of the following token types:
               "code": "overtime",
               "effective_date": "2026-03-11",
               "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "end_date": null,
               "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
               "provider_data": {
                 "correction_effective_date": "2026-03-15",
@@ -346,7 +355,7 @@ This endpoint accepts any one of the following token types:
       },
       "UpdatePayItemParams": {
         "additionalProperties": false,
-        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
+        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date` or `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
         "example": {
           "amount": 7800
         },
@@ -356,8 +365,14 @@ This endpoint accepts any one of the following token types:
             "type": "integer"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Leave-of-absence pay codes only; send `null` to clear it.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "provider_data": {

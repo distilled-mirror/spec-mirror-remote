@@ -552,7 +552,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "a92e1895-b99d-4ddc-a2ee-d641004e6897",
+            "example": "43a484c9-4433-4814-9109-e637203a82d8",
             "in": "path",
             "name": "employment_id",
             "required": true,

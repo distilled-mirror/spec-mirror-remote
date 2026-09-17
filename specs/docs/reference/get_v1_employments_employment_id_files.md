@@ -103,6 +103,7 @@ This endpoint accepts any one of the following token types:
               "safety_training",
               "time_attendance",
               "timeoff",
+              "vehicle_document",
               "work_confirmation",
               "contract",
               "document",

@@ -4416,6 +4416,7 @@ This event is triggered whenever a contract amendment status is updated to done.
           "code": "overtime",
           "effective_date": "2026-03-11",
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "end_date": null,
           "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
           "provider_data": {
             "correction_effective_date": "2026-03-15",
@@ -4437,13 +4438,19 @@ This event is triggered whenever a contract amendment status is updated to done.
             "type": "string"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Only for Leave-of-absence pay codes; Leave empty for other pay codes.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -4467,6 +4474,7 @@ This event is triggered whenever a contract amendment status is updated to done.
           "id",
           "employment_id",
           "effective_date",
+          "end_date",
           "code",
           "amount",
           "provider_data",
@@ -6762,6 +6770,7 @@ This event is triggered whenever a contract amendment status is updated to done.
               "safety_training",
               "time_attendance",
               "timeoff",
+              "vehicle_document",
               "work_confirmation",
               "contract",
               "document",
@@ -12531,6 +12540,7 @@ This event is triggered whenever a contract amendment status is updated to done.
                 "code": "overtime",
                 "effective_date": "2026-03-11",
                 "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "end_date": null,
                 "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                 "provider_data": {
                   "correction_effective_date": "2026-03-15",
@@ -12645,6 +12655,7 @@ This event is triggered whenever a contract amendment status is updated to done.
               "code": "overtime",
               "effective_date": "2026-03-11",
               "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "end_date": null,
               "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
               "provider_data": {
                 "correction_effective_date": "2026-03-15",
@@ -16418,6 +16429,7 @@ This event is triggered whenever a contract amendment status is updated to done.
                   "code": "overtime",
                   "effective_date": "2026-03-11",
                   "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                  "end_date": null,
                   "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                   "provider_data": {
                     "correction_effective_date": "2026-03-15",
@@ -18714,7 +18726,7 @@ This event is triggered whenever a contract amendment status is updated to done.
       },
       "UpdatePayItemParams": {
         "additionalProperties": false,
-        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
+        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date` or `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
         "example": {
           "amount": 7800
         },
@@ -18724,8 +18736,14 @@ This event is triggered whenever a contract amendment status is updated to done.
             "type": "integer"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Leave-of-absence pay codes only; send `null` to clear it.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "provider_data": {
@@ -21140,13 +21158,19 @@ This event is triggered whenever a contract amendment status is updated to done.
             "$ref": "#/components/schemas/CurrencyCode"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`. On a leave-of-absence pay item this is the first day of the leave period, whose last day goes in `end_date`.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID. Only Global Payroll employments are supported.",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Set this only on leave-of-absence pay codes — parental, sick, maternity, unpaid leave and similar — where the pay item covers a period rather than a single day, and `effective_date` is the first day of that period. Leave it off ordinary time & attendance items such as worked hours, overtime or allowances, which apply to a single day.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "external_import_code": {
@@ -24353,12 +24377,13 @@ This event is triggered whenever a contract amendment status is updated to done.
             "type": "string"
           },
           "verdict": {
-            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`.",
+            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`. `not_assessed` means the check did not run for this employment and no verdict was formed, so treat it as unknown rather than as a pass: submitting is not blocked, but nothing has screened the title.",
             "enum": [
               "eligible",
               "not_eligible",
               "needs_review",
-              "eligible_with_risk_acknowledgement"
+              "eligible_with_risk_acknowledgement",
+              "not_assessed"
             ],
             "type": "string"
           }
@@ -30006,6 +30031,7 @@ This event is triggered whenever a contract amendment status is updated to done.
             "code": "overtime",
             "effective_date": "2026-03-11",
             "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "end_date": null,
             "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
             "provider_data": {
               "correction_effective_date": "2026-03-15",

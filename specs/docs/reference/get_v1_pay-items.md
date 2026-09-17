@@ -66,6 +66,7 @@ This endpoint accepts any one of the following token types:
           "code": "overtime",
           "effective_date": "2026-03-11",
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "end_date": null,
           "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
           "provider_data": {
             "correction_effective_date": "2026-03-15",
@@ -87,13 +88,19 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Only for Leave-of-absence pay codes; Leave empty for other pay codes.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -117,6 +124,7 @@ This endpoint accepts any one of the following token types:
           "id",
           "employment_id",
           "effective_date",
+          "end_date",
           "code",
           "amount",
           "provider_data",
@@ -210,6 +218,7 @@ This endpoint accepts any one of the following token types:
                 "code": "overtime",
                 "effective_date": "2026-03-11",
                 "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "end_date": null,
                 "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                 "provider_data": {
                   "correction_effective_date": "2026-03-15",

@@ -4416,6 +4416,7 @@ This event is triggered when a invoice report is created for a employment.
           "code": "overtime",
           "effective_date": "2026-03-11",
           "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "end_date": null,
           "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
           "provider_data": {
             "correction_effective_date": "2026-03-15",
@@ -4437,13 +4438,19 @@ This event is triggered when a invoice report is created for a employment.
             "type": "string"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Only for Leave-of-absence pay codes; Leave empty for other pay codes.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "id": {
@@ -4467,6 +4474,7 @@ This event is triggered when a invoice report is created for a employment.
           "id",
           "employment_id",
           "effective_date",
+          "end_date",
           "code",
           "amount",
           "provider_data",
@@ -6762,6 +6770,7 @@ This event is triggered when a invoice report is created for a employment.
               "safety_training",
               "time_attendance",
               "timeoff",
+              "vehicle_document",
               "work_confirmation",
               "contract",
               "document",
@@ -12531,6 +12540,7 @@ This event is triggered when a invoice report is created for a employment.
                 "code": "overtime",
                 "effective_date": "2026-03-11",
                 "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "end_date": null,
                 "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                 "provider_data": {
                   "correction_effective_date": "2026-03-15",
@@ -12645,6 +12655,7 @@ This event is triggered when a invoice report is created for a employment.
               "code": "overtime",
               "effective_date": "2026-03-11",
               "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "end_date": null,
               "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
               "provider_data": {
                 "correction_effective_date": "2026-03-15",
@@ -16418,6 +16429,7 @@ This event is triggered when a invoice report is created for a employment.
                   "code": "overtime",
                   "effective_date": "2026-03-11",
                   "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                  "end_date": null,
                   "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
                   "provider_data": {
                     "correction_effective_date": "2026-03-15",
@@ -18714,7 +18726,7 @@ This event is triggered when a invoice report is created for a employment.
       },
       "UpdatePayItemParams": {
         "additionalProperties": false,
-        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
+        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date` or `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
         "example": {
           "amount": 7800
         },
@@ -18724,8 +18736,14 @@ This event is triggered when a invoice report is created for a employment.
             "type": "integer"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, or the day a correction was submitted.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Leave-of-absence pay codes only; send `null` to clear it.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "provider_data": {
@@ -21140,13 +21158,19 @@ This event is triggered when a invoice report is created for a employment.
             "$ref": "#/components/schemas/CurrencyCode"
           },
           "effective_date": {
-            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`.",
+            "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`. On a leave-of-absence pay item this is the first day of the leave period, whose last day goes in `end_date`.",
             "format": "date",
             "type": "string"
           },
           "employment_id": {
             "description": "Employment UUID. Only Global Payroll employments are supported.",
             "format": "uuid",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Set this only on leave-of-absence pay codes — parental, sick, maternity, unpaid leave and similar — where the pay item covers a period rather than a single day, and `effective_date` is the first day of that period. Leave it off ordinary time & attendance items such as worked hours, overtime or allowances, which apply to a single day.",
+            "format": "date",
+            "nullable": true,
             "type": "string"
           },
           "external_import_code": {
@@ -24353,12 +24377,13 @@ This event is triggered when a invoice report is created for a employment.
             "type": "string"
           },
           "verdict": {
-            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`.",
+            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`. `not_assessed` means the check did not run for this employment and no verdict was formed, so treat it as unknown rather than as a pass: submitting is not blocked, but nothing has screened the title.",
             "enum": [
               "eligible",
               "not_eligible",
               "needs_review",
-              "eligible_with_risk_acknowledgement"
+              "eligible_with_risk_acknowledgement",
+              "not_assessed"
             ],
             "type": "string"
           }
@@ -30006,6 +30031,7 @@ This event is triggered when a invoice report is created for a employment.
             "code": "overtime",
             "effective_date": "2026-03-11",
             "employment_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "end_date": null,
             "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
             "provider_data": {
               "correction_effective_date": "2026-03-15",
@@ -33637,7 +33663,7 @@ This event is triggered when a invoice report is created for a employment.
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "75ddda1f-5056-4244-b391-a73b1689f629",
+            "example": "3514c413-8c9a-42c6-8b6e-a382cd959dda",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -34068,7 +34094,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "6ab0726a-b52d-41c1-8b7e-a107263430fd",
+            "example": "fffd3b36-b79b-4785-96ce-17a4af6aaf9f",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34182,7 +34208,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "7ec450b4-c6f8-43ae-b9e1-13b7e7e21bf9",
+            "example": "2aad4968-1137-4b16-9580-47543909d0d5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34283,7 +34309,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ff4ba68c-1384-4b81-a6fb-1887cef132e1",
+            "example": "eea080a4-de13-430a-87a0-07196d7f713f",
             "in": "path",
             "name": "id",
             "required": true,
@@ -34396,7 +34422,7 @@ This event is triggered when a invoice report is created for a employment.
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "bddca327-7de1-444b-8464-378ba4732523",
+            "example": "fa2a2ea9-4260-4307-8434-86845e656c7f",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -34626,7 +34652,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4e0f8d35-afeb-4e6b-b6b1-78a749da8d12",
+            "example": "94fdd7fa-3839-4672-9df4-6b7e7cbd16dc",
             "in": "path",
             "name": "id",
             "required": true,
@@ -36181,7 +36207,7 @@ This event is triggered when a invoice report is created for a employment.
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "a92e1895-b99d-4ddc-a2ee-d641004e6897",
+            "example": "43a484c9-4433-4814-9109-e637203a82d8",
             "in": "path",
             "name": "employment_id",
             "required": true,
