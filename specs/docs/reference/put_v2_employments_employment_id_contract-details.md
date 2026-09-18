@@ -310,7 +310,7 @@ This endpoint accepts any one of the following token types:
         },
         "properties": {
           "contract_details": {
-            "description": "Contract information. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint\npassing the country code and `contract_details` as path parameters.\n",
+            "description": "Contract information. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint\npassing the country code and `contract_details` as path parameters.\n\nWhen the job title eligibility check requires an acknowledgement, present Remote's\nresponsibility statement to the employer and obtain their acceptance before sending\n`employer_acknowledges_risk` as `acknowledged`. Sending it asserts that the employer\nwas informed of, and accepted, responsibility for, as applicable, employee safety,\ntraining, health checks, any incidents connected to the employee's work environment,\nand the employee holding the licensing the role requires.\n",
             "type": "object"
           }
         },

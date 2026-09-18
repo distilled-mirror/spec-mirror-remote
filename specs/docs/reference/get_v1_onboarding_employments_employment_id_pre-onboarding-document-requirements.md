@@ -498,7 +498,8 @@ This endpoint accepts any one of the following token types:
         "summary": "List pre-onboarding document requirements for an employment",
         "tags": [
           "Pre-Onboarding Documents"
-        ]
+        ],
+        "x-remote-superseded-by": "GET /onboarding/employments/{employment_id}/pre-onboarding-requirements"
       }
     }
   },

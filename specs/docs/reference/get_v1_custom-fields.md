@@ -526,7 +526,7 @@ This endpoint accepts any one of the following token types:
         "operationId": "get_v1_custom-fields",
         "parameters": [
           {
-            "description": "The company to list definitions for. Send it whenever you know which company you mean. Requests that don't resolve to a company fail with \"Company not found\".",
+            "description": "The company the accessed resource belongs to. Send it whenever you know which one you mean. Requests that don't resolve to a company fail with \"Company not found\".",
             "example": "93t3j-company-id-9suej43",
             "in": "query",
             "name": "company_id",

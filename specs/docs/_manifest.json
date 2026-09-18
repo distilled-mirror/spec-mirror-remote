@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 410,
+  "count": 413,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -1721,6 +1721,21 @@
       "page": "https://developer.remote.com/reference/post_v1_sandbox_employments",
       "markdown": "https://developer.remote.com/reference/post_v1_sandbox_employments.md",
       "file": "reference/post_v1_sandbox_employments.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-eligibility-check",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-eligibility-check.md",
+      "file": "reference/post_v1_sandbox_employments_employment_id_job-title-eligibility-check.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-review_approve",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-review_approve.md",
+      "file": "reference/post_v1_sandbox_employments_employment_id_job-title-review_approve.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-review_reject",
+      "markdown": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-review_reject.md",
+      "file": "reference/post_v1_sandbox_employments_employment_id_job-title-review_reject.md"
     },
     {
       "page": "https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_risk-reserve-proof-of-payments_approve-1",

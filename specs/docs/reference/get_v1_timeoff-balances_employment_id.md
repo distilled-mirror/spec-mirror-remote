@@ -930,7 +930,8 @@ This endpoint accepts any one of the following token types:
         "summary": "Show Time Off Balance",
         "tags": [
           "Time Off Balances"
-        ]
+        ],
+        "x-remote-superseded-by": ""
       }
     }
   },

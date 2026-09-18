@@ -171,7 +171,7 @@ This endpoint accepts any one of the following token types:
         "additionalProperties": false,
         "example": {
           "job_title": "Nurse",
-          "role_description": "Provides bedside care on a hospital ward",
+          "role_description": "Provides bedside care on a hospital ward: monitors and records patient vital signs, administers medication prescribed by the attending physician, dresses wounds, and keeps each patient's care plan up to date.",
           "role_is_onsite": "yes",
           "role_requires_license": "yes"
         },
@@ -181,7 +181,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "role_description": {
-            "description": "A description of the role. Required when the job title alone is inconclusive; the response says so.",
+            "description": "A description of the role. Required when the job title alone is inconclusive; the response says so. The minimum acceptable length is country-dependent: the contract-details schema for the employment's country is the authority, and some countries (the USA among them) require a substantially longer description than others.",
             "type": "string"
           },
           "role_is_onsite": {
@@ -219,7 +219,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "verdict": {
-            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`. `not_assessed` means the check did not run for this employment and no verdict was formed, so treat it as unknown rather than as a pass: submitting is not blocked, but nothing has screened the title.",
+            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`. `not_assessed` means the check did not run for this employment and no verdict was formed, so treat it as unknown rather than as a pass: submitting is not blocked, but nothing has screened the title.\n\nWhen the verdict is `eligible_with_risk_acknowledgement`, present Remote's responsibility statement to the employer and obtain their acceptance before sending `employer_acknowledges_risk`. Sending it asserts that the employer was informed of, and accepted, responsibility for, as applicable, employee safety, training, health checks, any incidents connected to the employee's work environment, and the employee holding the licensing the role requires.",
             "enum": [
               "eligible",
               "not_eligible",

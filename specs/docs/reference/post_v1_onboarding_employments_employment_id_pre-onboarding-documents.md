@@ -575,7 +575,8 @@ This endpoint accepts any one of the following token types:
         "summary": "Find or create a pre-onboarding document for an employment",
         "tags": [
           "Pre-Onboarding Documents"
-        ]
+        ],
+        "x-remote-superseded-by": "POST /onboarding/employments/{employment_id}/pre-onboarding-requirements/{requirement_slug}/documents"
       }
     }
   },

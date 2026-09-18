@@ -607,7 +607,8 @@ This endpoint accepts any one of the following token types:
         "summary": "Download a receipt",
         "tags": [
           "Expenses"
-        ]
+        ],
+        "x-remote-superseded-by": ""
       }
     }
   },

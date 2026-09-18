@@ -1233,6 +1233,16 @@
         "operationId": "get_v1_billing-documents_billing_document_id",
         "parameters": [
           {
+            "description": "The company the accessed resource belongs to. Send it whenever you know which one you mean. Requests that don't resolve to a company fail with \"Company not found\".",
+            "example": "93t3j-company-id-9suej43",
+            "in": "query",
+            "name": "company_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "The billing document's ID",
             "example": "93t3j-billing-doc-id-9suej43",
             "in": "path",
@@ -1315,7 +1325,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Show Billing Document",
+        "summary": "Show Billing Document. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
         "tags": [
           "Billing Documents"
         ]
@@ -1338,7 +1348,7 @@
             }
           },
           {
-            "description": "Filters the results by the type of the billing breakdown item. Matched exactly against the `type` field of\nthe returned items, so unrecognised values yield an empty list. Card spend is reported as `Card expenses`,\nseparately from payroll-reimbursed `Expenses`. Other Compensation is reported as `Other compensation`,\nseparately from `Base salary`.\n",
+            "description": "Filters the results by the type of the billing breakdown item. Matched exactly against the `type` field of\nthe returned items, so unrecognised values yield an empty list. Card spend is reported as `Card expenses`,\nseparately from payroll-reimbursed `Expenses`. Other Compensation is reported as `Other compensation`,\nseparately from `Base salary`. Payslip benefits can be returned as `Payslip benefits` for existing\nbreakdown items, or as `Payslip Benefit Cash` and `Payslip Benefit Non-Cash` for newly generated items.\n",
             "example": "Card expenses",
             "in": "query",
             "name": "type",
@@ -4860,7 +4870,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "3514c413-8c9a-42c6-8b6e-a382cd959dda",
+            "example": "df45e48e-9467-40b3-a10d-974907be571b",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5256,7 +5266,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "fffd3b36-b79b-4785-96ce-17a4af6aaf9f",
+            "example": "0196200e-b15c-453d-b44d-8f8b53cb50f5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5349,7 +5359,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "eea080a4-de13-430a-87a0-07196d7f713f",
+            "example": "981e2c52-65b4-4185-94fb-90a18f079ce7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5433,7 +5443,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "2aad4968-1137-4b16-9580-47543909d0d5",
+            "example": "45d614d0-c5b5-4123-a554-b48890174daf",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5529,7 +5539,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "fa2a2ea9-4260-4307-8434-86845e656c7f",
+            "example": "a3e0a805-5759-4435-9372-dda1a61cd3d5",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5738,7 +5748,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "94fdd7fa-3839-4672-9df4-6b7e7cbd16dc",
+            "example": "c9dc5b65-b670-42ad-b4a5-d5f9c312bbba",
             "in": "path",
             "name": "id",
             "required": true,
@@ -6884,7 +6894,8 @@
         "summary": "Terminate contractor of record employment",
         "tags": [
           "Subscriptions"
-        ]
+        ],
+        "x-remote-superseded-by": "POST /contractors/employments/{employment_id}/cor-termination-requests"
       }
     },
     "/v1/contractors/employments/{employment_id}/timesheets": {
@@ -8118,7 +8129,7 @@
         "operationId": "get_v1_custom-fields",
         "parameters": [
           {
-            "description": "The company to list definitions for. Send it whenever you know which company you mean. Requests that don't resolve to a company fail with \"Company not found\".",
+            "description": "The company the accessed resource belongs to. Send it whenever you know which one you mean. Requests that don't resolve to a company fail with \"Company not found\".",
             "example": "93t3j-company-id-9suej43",
             "in": "query",
             "name": "company_id",
@@ -13323,7 +13334,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "43a484c9-4433-4814-9109-e637203a82d8",
+            "example": "304280ef-4a1a-4616-be4e-ee7e9d43e9f5",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14906,7 +14917,8 @@
         "summary": "Download a receipt",
         "tags": [
           "Expenses"
-        ]
+        ],
+        "x-remote-superseded-by": ""
       }
     },
     "/v1/expenses/{expense_id}/receipts/{receipt_id}": {
@@ -17383,7 +17395,8 @@
         "summary": "List pre-onboarding document requirements for an employment",
         "tags": [
           "Pre-Onboarding Documents"
-        ]
+        ],
+        "x-remote-superseded-by": "GET /onboarding/employments/{employment_id}/pre-onboarding-requirements"
       }
     },
     "/v1/onboarding/employments/{employment_id}/pre-onboarding-documents": {
@@ -17469,7 +17482,8 @@
         "summary": "Find or create a pre-onboarding document for an employment",
         "tags": [
           "Pre-Onboarding Documents"
-        ]
+        ],
+        "x-remote-superseded-by": "POST /onboarding/employments/{employment_id}/pre-onboarding-requirements/{requirement_slug}/documents"
       }
     },
     "/v1/onboarding/employments/{employment_id}/pre-onboarding-documents/{id}": {
@@ -19920,7 +19934,8 @@
         "summary": "Complete onboarding",
         "tags": [
           "Employment Management"
-        ]
+        ],
+        "x-remote-superseded-by": ""
       }
     },
     "/v1/resignations/{offboarding_request_id}": {
@@ -21514,6 +21529,297 @@
         ]
       }
     },
+    "/v1/sandbox/employments/{employment_id}/job-title-eligibility-check": {
+      "post": {
+        "deprecated": false,
+        "description": "Sets the job title eligibility verdict the employment's next contract-details submission\nwill act on, so the flow that verdict drives can be tested without an AI call deciding\nthe outcome.\n\nUse it to reach an outcome on demand: a submission that passes, one rejected as not\neligible, one that must carry `employer_acknowledges_risk`, or one that places the\nemployment into a human review and emits the review webhooks.\n\nThe response is the same as the real [job title eligibility check\nendpoint](#operation/post_create_employment_job_title_eligibility_check). Send the\nreturned `check_id` back as `additional_job_title_eligibility_check_slug` when submitting\ncontract details, exactly as you would in production.\n\n`role_description` must be the one the submission will carry, since the submission\nverifies that the recorded verdict still describes what was sent.\n\nA `not_assessed` verdict means the check does not apply to this employment at all — not a\ndraft, a PEO employment, a country or hiring model that does not screen job titles, or an\nintegration that bypasses the check — and nothing was recorded.\n\nThe stage of the check that screens the job title alone is shared by every company in the\nenvironment, so setting a verdict takes over that job title's screen for all of them.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "operationId": "post_v1_sandbox_employments_employment_id_job-title-eligibility-check",
+        "parameters": [
+          {
+            "description": "Employment ID",
+            "example": "5b44799c-e845-4d5c-9c52-b6e5f7c3d4e1",
+            "in": "path",
+            "name": "employment_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "employment"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetJobTitleEligibilityVerdictParams"
+              }
+            }
+          },
+          "description": "Job title eligibility verdict params",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobTitleEligibilityCheckResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Set job title eligibility verdict",
+        "tags": [
+          "Sandbox"
+        ]
+      }
+    },
+    "/v1/sandbox/employments/{employment_id}/job-title-review/approve": {
+      "post": {
+        "deprecated": false,
+        "description": "Approves the job title review an employment is in, without the intervention of a Remote\nadmin, so the integration can be tested against the decision it will see in production.\n\nThe employment returns to the status it held before it entered review, and an\n`employment.job_title_review.approved` webhook event is emitted.\n\nResponds with 422 when the employment is not in a job title review.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "operationId": "post_v1_sandbox_employments_employment_id_job-title-review_approve",
+        "parameters": [
+          {
+            "description": "Employment ID",
+            "example": "5b44799c-e845-4d5c-9c52-b6e5f7c3d4e1",
+            "in": "path",
+            "name": "employment_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "employment"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobTitleReviewDecisionParams"
+              }
+            }
+          },
+          "description": "Job title review decision params",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobTitleReviewDecisionResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Approve job title review",
+        "tags": [
+          "Sandbox"
+        ]
+      }
+    },
+    "/v1/sandbox/employments/{employment_id}/job-title-review/reject": {
+      "post": {
+        "deprecated": false,
+        "description": "Rejects the job title review an employment is in, without the intervention of a Remote\nadmin, so the integration can be tested against the decision it will see in production.\n\nThe employment is archived, and an `employment.job_title_review.rejected` webhook event is\nemitted.\n\nResponds with 422 when the employment is not in a job title review.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "operationId": "post_v1_sandbox_employments_employment_id_job-title-review_reject",
+        "parameters": [
+          {
+            "description": "Employment ID",
+            "example": "5b44799c-e845-4d5c-9c52-b6e5f7c3d4e1",
+            "in": "path",
+            "name": "employment_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "employment"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobTitleReviewDecisionParams"
+              }
+            }
+          },
+          "description": "Job title review decision params",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobTitleReviewDecisionResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Reject job title review",
+        "tags": [
+          "Sandbox"
+        ]
+      }
+    },
     "/v1/sandbox/employments/{employment_id}/risk-reserve-proof-of-payments/approve": {
       "post": {
         "deprecated": false,
@@ -22638,7 +22944,8 @@
         "summary": "Show Time Off Balance",
         "tags": [
           "Time Off Balances"
-        ]
+        ],
+        "x-remote-superseded-by": ""
       }
     },
     "/v1/timeoff/types": {
@@ -27246,185 +27553,6 @@
         "title": "AccountsMinimalCompanyAdmin",
         "type": "object"
       },
-      "AccountsUser": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/MinimalUser"
-          },
-          {
-            "properties": {
-              "account": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AccountsAccount"
-                  }
-                ],
-                "example": {
-                  "login_email": {
-                    "address": "jane@remote.com",
-                    "confirmed_at": null,
-                    "login_synced": false,
-                    "status": "pending",
-                    "type": "login",
-                    "unconfirmed_address": null
-                  },
-                  "login_synced_with": "work",
-                  "personal_email": {
-                    "address": "jane@remote.com",
-                    "confirmed_at": null,
-                    "login_synced": false,
-                    "status": "pending",
-                    "type": "login",
-                    "unconfirmed_address": null
-                  },
-                  "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-                  "status": "created"
-                },
-                "nullable": true,
-                "title": "MaybeAccountsAccount",
-                "type": "object"
-              },
-              "assigned_roles": {
-                "$ref": "#/components/schemas/AccountsAssignedRoles"
-              },
-              "integration_users": {
-                "items": {
-                  "$ref": "#/components/schemas/AccountUserIntegrationUser"
-                },
-                "type": "array"
-              },
-              "invited_by": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AccountsMinimalCompanyAdmin"
-                  }
-                ],
-                "example": {
-                  "job_title": "HR Manager",
-                  "name": "John Smith",
-                  "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
-                },
-                "nullable": true,
-                "title": "MaybeAccountsMinimalCompanyAdmin",
-                "type": "object"
-              },
-              "job_title": {
-                "nullable": true,
-                "type": "string"
-              },
-              "login_synced_with": {
-                "$ref": "#/components/schemas/AccountsLoginSyncedWith"
-              },
-              "raw_email": {
-                "type": "string"
-              },
-              "role": {
-                "enum": [
-                  "admin",
-                  "employer",
-                  "employee",
-                  "freelancer",
-                  "service_provider",
-                  "candidate"
-                ],
-                "example": "admin",
-                "nullable": false,
-                "type": "string"
-              },
-              "signup_source": {
-                "nullable": true,
-                "type": "string"
-              }
-            },
-            "type": "object"
-          }
-        ],
-        "description": "Someone registered in Remote using a unique email address.",
-        "example": {
-          "account": {
-            "login_email": {
-              "address": "jane@remote.com",
-              "confirmed_at": null,
-              "login_synced": false,
-              "status": "pending",
-              "type": "login",
-              "unconfirmed_address": null
-            },
-            "login_synced_with": "work",
-            "personal_email": {
-              "address": "jane@remote.com",
-              "confirmed_at": null,
-              "login_synced": false,
-              "status": "pending",
-              "type": "login",
-              "unconfirmed_address": null
-            },
-            "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-            "status": "created"
-          },
-          "email": "sauron@remote.com",
-          "integration_users": [
-            {
-              "external_user_id": "123123",
-              "integration": {
-                "name": "greenhouse"
-              },
-              "role": "employee",
-              "sync_to_remote_status": "enabled"
-            }
-          ],
-          "invited_by": {
-            "job_title": "HR Manager",
-            "name": "John Smith",
-            "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
-          },
-          "login_synced_with": "work",
-          "name": "Sauron Figueira",
-          "personal_details": {
-            "birthdate": "2020-02-10",
-            "full_preferred_name": "The Warden Hardin",
-            "given_name": "Salvor",
-            "mobile_number": "9191919191",
-            "nationality": [
-              "Portugal"
-            ],
-            "preferred_name": "The Warden",
-            "preferred_pronouns": "she/her",
-            "recovery_number": "0049123123123",
-            "surname": "Hardin",
-            "title": "ms"
-          },
-          "profile_picture": null,
-          "raw_email": "sauron+one-2b140@remote.com",
-          "role": "employee",
-          "signup_source": null,
-          "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-          "status": "active"
-        },
-        "title": "AccountsUser",
-        "type": "object"
-      },
-      "Action": {
-        "additionalProperties": false,
-        "example": {
-          "externalLink": "https://workday.com/payRun",
-          "label": "Run Payroll"
-        },
-        "properties": {
-          "externalLink": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "label",
-          "externalLink"
-        ],
-        "title": "Action",
-        "type": "object"
-      },
       "ActionError": {
         "properties": {
           "action": {
@@ -27447,27 +27575,6 @@
         ],
         "title": "ActionError",
         "type": "object"
-      },
-      "ActionErrors": {
-        "items": {
-          "$ref": "#/components/schemas/ActionError"
-        },
-        "title": "ActionErrors",
-        "type": "array"
-      },
-      "Actions": {
-        "example": [
-          {
-            "externalLink": "https://workday.com/payRun",
-            "label": "Run Payroll"
-          }
-        ],
-        "items": {
-          "$ref": "#/components/schemas/Action"
-        },
-        "maxItems": 5,
-        "title": "Actions",
-        "type": "array"
       },
       "AdministrativeDetailsParams": {
         "additionalProperties": false,
@@ -27516,29 +27623,6 @@
           "administrative_details"
         ],
         "title": "AdministrativeDetailsParams",
-        "type": "object"
-      },
-      "Amount": {
-        "additionalProperties": false,
-        "example": {
-          "currency": "USD",
-          "value": "1000.321"
-        },
-        "properties": {
-          "currency": {
-            "example": "USD",
-            "type": "string"
-          },
-          "value": {
-            "example": "1000.321",
-            "type": "string"
-          }
-        },
-        "required": [
-          "value",
-          "currency"
-        ],
-        "title": "Amount",
         "type": "object"
       },
       "AmountTaxType": {
@@ -29000,14 +29084,6 @@
         "title": "BenefitTier",
         "type": "object"
       },
-      "BillToLegalEntityID": {
-        "description": "The unique identifier (UUID) of the legal entity that is billed for this employment.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "nullable": true,
-        "title": "BillToLegalEntityID",
-        "type": "string"
-      },
       "BillingDocument": {
         "additionalProperties": false,
         "description": "A billing document (invoice or credit note) issued to a company by Remote for employment management services.",
@@ -29453,66 +29529,6 @@
           "contractor_invoice_schedules"
         ],
         "title": "BulkContractorInvoiceScheduleCreateParams",
-        "type": "object"
-      },
-      "BulkContractorInvoiceScheduleCreateResponse": {
-        "additionalProperties": false,
-        "description": "Response containing the lists of succeeded and failed schedules.",
-        "example": {
-          "data": {
-            "failures": [
-              {
-                "currency": "USD",
-                "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-                "errors": {
-                  "employment_id": [
-                    "not found"
-                  ]
-                },
-                "items": [
-                  {
-                    "amount": 5000,
-                    "description": "Description"
-                  }
-                ],
-                "note": "Contractor payment schedules.",
-                "nr_occurrences": 15,
-                "number": "XYZ0001",
-                "periodicity": "bi_weekly",
-                "start_date": "2024-06-01"
-              }
-            ],
-            "successes": []
-          }
-        },
-        "properties": {
-          "data": {
-            "additionalProperties": false,
-            "properties": {
-              "failures": {
-                "items": {
-                  "$ref": "#/components/schemas/ContractorInvoiceScheduleCreateResponseFailure"
-                },
-                "type": "array"
-              },
-              "successes": {
-                "items": {
-                  "$ref": "#/components/schemas/ContractorInvoiceScheduleCreateResponseSuccess"
-                },
-                "type": "array"
-              }
-            },
-            "required": [
-              "successes",
-              "failures"
-            ],
-            "type": "object"
-          }
-        },
-        "required": [
-          "data"
-        ],
-        "title": "BulkContractorInvoiceScheduleCreateResponse",
         "type": "object"
       },
       "BulkCreatePayItemsParams": {
@@ -30261,33 +30277,6 @@
         ],
         "title": "BulkEmploymentImportJobResponse",
         "type": "object"
-      },
-      "BulkImport.ImportJobStage": {
-        "description": "  The stage of the import job.\n  * `creation` - The import job is in the creation stage, which means the rows are being created.\n  * `column_mapping` - The import job is in the column mapping stage, which means the CSV headers are being mapped to JSON schema fields.\n  * `validation` - The import job is in the validation stage, which means the rows are being validated.\n  * `submission` - The import job is in the submission stage, which means the rows are being submitted.\n",
-        "enum": [
-          "creation",
-          "column_mapping",
-          "validation",
-          "submission"
-        ],
-        "example": "submission",
-        "nullable": false,
-        "title": "BulkImport.ImportJobStage",
-        "type": "string"
-      },
-      "BulkImport.ImportJobStatus": {
-        "description": "  * `draft` - **Deprecated**, the import job data has been uploaded and the job created, but not yet started\n  * `uploaded` - **Deprecated**, replaced by the `draft` status\n  * `in_progress` - Data is actively being imported\n  * `finished` - The import job has finished processing\n  * `failed` - The import job has failed completely, nothing has been imported\n",
-        "enum": [
-          "draft",
-          "uploaded",
-          "in_progress",
-          "finished",
-          "failed"
-        ],
-        "example": "finished",
-        "nullable": false,
-        "title": "BulkImport.ImportJobStatus",
-        "type": "string"
       },
       "CancelTimeoffParams": {
         "description": "Cancel timeoff params",
@@ -32497,13 +32486,6 @@
         ],
         "title": "ContractorInvoice",
         "type": "object"
-      },
-      "ContractorInvoiceID": {
-        "description": "Contractor Invoice identifier.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "title": "ContractorInvoiceID",
-        "type": "string"
       },
       "ContractorInvoiceItem": {
         "additionalProperties": false,
@@ -36325,7 +36307,7 @@
         "additionalProperties": false,
         "example": {
           "job_title": "Nurse",
-          "role_description": "Provides bedside care on a hospital ward",
+          "role_description": "Provides bedside care on a hospital ward: monitors and records patient vital signs, administers medication prescribed by the attending physician, dresses wounds, and keeps each patient's care plan up to date.",
           "role_is_onsite": "yes",
           "role_requires_license": "yes"
         },
@@ -36335,7 +36317,7 @@
             "type": "string"
           },
           "role_description": {
-            "description": "A description of the role. Required when the job title alone is inconclusive; the response says so.",
+            "description": "A description of the role. Required when the job title alone is inconclusive; the response says so. The minimum acceptable length is country-dependent: the contract-details schema for the employment's country is the authority, and some countries (the USA among them) require a substantially longer description than others.",
             "type": "string"
           },
           "role_is_onsite": {
@@ -37151,50 +37133,6 @@
         "title": "CreateTimeoffParams",
         "type": "object"
       },
-      "CreateTimesheetParams": {
-        "additionalProperties": false,
-        "description": "Parameters for creating a new timesheet for an employee. The timesheet will be created in `open` status. Include one or more time tracking entries with clock-in/out times.",
-        "example": {
-          "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-          "end_date": "2021-07-01",
-          "start_date": "2021-07-01",
-          "time_trackings": [
-            {
-              "clock_in": "2021-07-15T18:18:17Z",
-              "clock_out": "2021-07-15T18:18:17Z",
-              "notes": "Some notes",
-              "timezone": "Etc/UTC",
-              "type": "on_call"
-            }
-          ]
-        },
-        "properties": {
-          "employment_id": {
-            "$ref": "#/components/schemas/UuidSlug"
-          },
-          "end_date": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "start_date": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "time_trackings": {
-            "description": "One or more time tracking entries to include in the timesheet.",
-            "items": {
-              "$ref": "#/components/schemas/TimeTrackingParams"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "start_date",
-          "end_date",
-          "time_trackings",
-          "employment_id"
-        ],
-        "title": "CreateTimesheetParams",
-        "type": "object"
-      },
       "CreateWebhookCallbackParams": {
         "additionalProperties": false,
         "description": "Webhook callback creation params. Provide either `subscribed_events` or `subscribe_to_all_events: true` (they are mutually exclusive).",
@@ -37434,125 +37372,6 @@
         "title": "CurrencyWithoutSlug",
         "type": "object"
       },
-      "CustomDate": {
-        "additionalProperties": false,
-        "example": {
-          "label": "Pay Day",
-          "value": "2023-01-01"
-        },
-        "properties": {
-          "label": {
-            "type": "string"
-          },
-          "value": {
-            "$ref": "#/components/schemas/Date"
-          }
-        },
-        "required": [
-          "value",
-          "label"
-        ],
-        "title": "CustomDate",
-        "type": "object"
-      },
-      "CustomField": {
-        "description": "Custom fields support multiple data types (String, Date, DateTime, Number, Currency)",
-        "example": {
-          "label": "test label",
-          "value": "test value"
-        },
-        "oneOf": [
-          {
-            "example": {
-              "dataType": "String",
-              "label": "Example label",
-              "value": "Example string"
-            },
-            "properties": {
-              "dataType": {
-                "enum": [
-                  "String",
-                  "Date",
-                  "DateTime"
-                ],
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "label",
-              "value"
-            ],
-            "type": "object"
-          },
-          {
-            "example": {
-              "dataType": "Number",
-              "label": "Example number",
-              "value": 42
-            },
-            "properties": {
-              "dataType": {
-                "enum": [
-                  "Number"
-                ],
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "label",
-              "value"
-            ],
-            "type": "object"
-          },
-          {
-            "example": {
-              "amount": {
-                "currency": "USD",
-                "value": "1000.321"
-              },
-              "dataType": "Currency",
-              "label": "Example amount"
-            },
-            "properties": {
-              "amount": {
-                "$ref": "#/components/schemas/Amount"
-              },
-              "dataType": {
-                "enum": [
-                  "Currency"
-                ],
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "label",
-              "amount"
-            ],
-            "type": "object"
-          }
-        ],
-        "required": [
-          "label",
-          "value"
-        ],
-        "title": "CustomField",
-        "type": "object"
-      },
       "CustomFieldDataEntryAccess": {
         "description": "Who can enter or edit values for this custom field. Controls which users see the field as editable vs read-only.",
         "enum": [
@@ -37582,115 +37401,6 @@
         "title": "CustomFieldDataType",
         "type": "string"
       },
-      "CustomFieldLinkable": {
-        "example": {
-          "label": "test label",
-          "value": "test value"
-        },
-        "oneOf": [
-          {
-            "example": {
-              "dataType": "String",
-              "label": "Label",
-              "link": "/link",
-              "value": "Example string"
-            },
-            "properties": {
-              "dataType": {
-                "enum": [
-                  "String",
-                  "Date",
-                  "DateTime"
-                ],
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "label",
-              "value"
-            ],
-            "type": "object"
-          },
-          {
-            "example": {
-              "dataType": "Number",
-              "label": "Number Label",
-              "link": "/link",
-              "value": 123
-            },
-            "properties": {
-              "dataType": {
-                "enum": [
-                  "Number"
-                ],
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "value": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "label",
-              "value"
-            ],
-            "type": "object"
-          },
-          {
-            "example": {
-              "amount": {
-                "currency": "USD",
-                "value": "1000.321"
-              },
-              "dataType": "Currency",
-              "label": "Currency Label",
-              "link": "/link"
-            },
-            "properties": {
-              "amount": {
-                "$ref": "#/components/schemas/Amount"
-              },
-              "dataType": {
-                "enum": [
-                  "Currency"
-                ],
-                "type": "string"
-              },
-              "label": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "label",
-              "amount"
-            ],
-            "type": "object"
-          }
-        ],
-        "required": [
-          "label",
-          "value"
-        ],
-        "title": "CustomFieldLinkable",
-        "type": "object"
-      },
       "CustomFieldSimpleDataType": {
         "additionalProperties": false,
         "description": "The datatype of the custom field",
@@ -37717,95 +37427,6 @@
         "example": "everyone",
         "title": "CustomFieldVisibilityScope",
         "type": "string"
-      },
-      "CustomNumberLinkable": {
-        "additionalProperties": false,
-        "example": {
-          "label": "Employees",
-          "link": "/employees/123",
-          "value": 123
-        },
-        "properties": {
-          "label": {
-            "type": "string"
-          },
-          "link": {
-            "type": "string"
-          },
-          "value": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "value",
-          "label"
-        ],
-        "title": "CustomNumberLinkable",
-        "type": "object"
-      },
-      "CustomVariance": {
-        "additionalProperties": false,
-        "example": {
-          "currentPay": {
-            "periodEndDate": "2024-01-01",
-            "periodStartDate": "2023-12-31",
-            "totalAmount": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          },
-          "label": "Bonus",
-          "payDifference": {
-            "amountDifference": {
-              "currency": "USD",
-              "value": "1000.321"
-            },
-            "percentDifference": 12.5,
-            "workerDifference": {
-              "label": "John Doe",
-              "link": "/employees/123"
-            }
-          },
-          "payYoy": {
-            "periodEndDate": "2024-01-01",
-            "periodStartDate": "2023-12-31",
-            "totalAmount": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          },
-          "previousPay": {
-            "periodEndDate": "2024-01-01",
-            "periodStartDate": "2023-12-31",
-            "totalAmount": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          }
-        },
-        "properties": {
-          "currentPay": {
-            "$ref": "#/components/schemas/PayValue"
-          },
-          "label": {
-            "type": "string"
-          },
-          "payDifference": {
-            "$ref": "#/components/schemas/PayDifference"
-          },
-          "payYoy": {
-            "$ref": "#/components/schemas/PayValue"
-          },
-          "previousPay": {
-            "$ref": "#/components/schemas/PayValue"
-          }
-        },
-        "required": [
-          "currentPay",
-          "label"
-        ],
-        "title": "CustomVariance",
-        "type": "object"
       },
       "Cycle": {
         "example": {
@@ -38013,14 +37634,6 @@
         ],
         "title": "DeleteRecurringIncentiveResponse",
         "type": "object"
-      },
-      "DepartmentID": {
-        "description": "Unique ID of related department, if any. Otherwise, null.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "nullable": true,
-        "title": "DepartmentID",
-        "type": "string"
       },
       "DirectOffboarding": {
         "additionalProperties": false,
@@ -39064,48 +38677,6 @@
         "title": "EmployeeStats",
         "type": "object"
       },
-      "EmployeesProcessed": {
-        "additionalProperties": false,
-        "example": {
-          "employeesCalculated": {
-            "label": "Employees",
-            "link": "/employees/123",
-            "value": 123
-          },
-          "employeesInPayGroup": {
-            "label": "Employees",
-            "link": "/employees/123",
-            "value": 123
-          },
-          "fields": [
-            {
-              "label": "test label",
-              "value": "test value"
-            }
-          ]
-        },
-        "properties": {
-          "employeesCalculated": {
-            "$ref": "#/components/schemas/CustomNumberLinkable"
-          },
-          "employeesInPayGroup": {
-            "$ref": "#/components/schemas/CustomNumberLinkable"
-          },
-          "fields": {
-            "items": {
-              "$ref": "#/components/schemas/CustomFieldLinkable"
-            },
-            "maxItems": 4,
-            "type": "array"
-          }
-        },
-        "required": [
-          "employeesInPayGroup",
-          "employeesCalculated"
-        ],
-        "title": "EmployeesProcessed",
-        "type": "object"
-      },
       "Employment": {
         "description": "Complete information of an employment, including all onboarding task statuses, country-specific form data (address, contract, administrative, etc.), and contractor-specific settings where applicable.",
         "example": {
@@ -39887,7 +39458,7 @@
         },
         "properties": {
           "contract_details": {
-            "description": "Contract information. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint\npassing the country code and `contract_details` as path parameters.\n",
+            "description": "Contract information. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint\npassing the country code and `contract_details` as path parameters.\n\nWhen the job title eligibility check requires an acknowledgement, present Remote's\nresponsibility statement to the employer and obtain their acceptance before sending\n`employer_acknowledges_risk` as `acknowledged`. Sending it asserts that the employer\nwas informed of, and accepted, responsibility for, as applicable, employee safety,\ntraining, health checks, any incidents connected to the employee's work environment,\nand the employee holding the licensing the role requires.\n",
             "type": "object"
           }
         },
@@ -40846,8 +40417,10 @@
           "type": {
             "description": "The broad category of the file. Contractor Services Agreements (CSAs) are reported here with type \"contract\" — see the /contract-documents endpoint for contract-document-specific types.",
             "enum": [
+              "annual_leave",
               "background_check",
               "bank_account_holder_name",
+              "bereavement_leave",
               "contractor_invoice",
               "direct_offboarding",
               "document_scan",
@@ -40859,14 +40432,20 @@
               "id",
               "job",
               "leave_of_absence",
+              "marriage_leave",
+              "maternity_leave",
               "occupational_risk",
               "offboarding",
               "other",
+              "parental_leave",
+              "paternity_leave",
               "performance_review",
               "personal",
               "safety_training",
+              "sick_leave",
               "time_attendance",
               "timeoff",
+              "unpaid_leave",
               "vehicle_document",
               "work_confirmation",
               "contract",
@@ -40985,13 +40564,6 @@
         },
         "title": "EmploymentFullParams",
         "type": "object"
-      },
-      "EmploymentID": {
-        "description": "Employment identifier associated with the contractor invoice.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "title": "EmploymentID",
-        "type": "string"
       },
       "EmploymentImage": {
         "additionalProperties": false,
@@ -41845,156 +41417,6 @@
         "title": "EmploymentsBulkResponse",
         "type": "object"
       },
-      "EngagedByLegalEntityID": {
-        "description": "The unique identifier (UUID) of the legal entity that engaged this employment.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "nullable": true,
-        "title": "EngagedByLegalEntityID",
-        "type": "string"
-      },
-      "EngagementAgreementDetailsDEU": {
-        "additionalProperties": false,
-        "properties": {
-          "allowances_details": {
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "available_pto": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "break_time_per_day": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "business_expenses": {
-            "nullable": true,
-            "type": "string"
-          },
-          "cba": {
-            "nullable": true,
-            "type": "string"
-          },
-          "cba_document": {
-            "items": {
-              "$ref": "#/components/schemas/EngagementAgreementDetailsFile"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "covenants": {
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "has_allowances": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_bonus": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_business_expenses": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_business_presence": {
-            "type": "string"
-          },
-          "has_cba": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_commissions": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_covenants": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_illness_remuneration": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_overtime_compensation": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_pension_scheme": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_signing_bonus": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_similar_roles": {
-            "type": "string"
-          },
-          "has_similar_work_conditions": {
-            "nullable": true,
-            "type": "string"
-          },
-          "illness_remuneration_details": {
-            "nullable": true,
-            "type": "string"
-          },
-          "max_annual_gross_salary": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "min_annual_gross_salary": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "overtime_compensation_begins": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "overtime_compensation_type": {
-            "nullable": true,
-            "type": "string"
-          },
-          "overtime_pay_percentage": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "pension_scheme": {
-            "nullable": true,
-            "type": "string"
-          },
-          "similar_roles": {
-            "nullable": true,
-            "type": "string"
-          },
-          "similar_work_conditions_details": {
-            "nullable": true,
-            "type": "string"
-          },
-          "work_hours_per_week": {
-            "format": "double",
-            "nullable": true,
-            "type": "number"
-          },
-          "working_days": {
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          }
-        },
-        "title": "EngagementAgreementDetailsDEU",
-        "type": "object"
-      },
       "EngagementAgreementDetailsFile": {
         "description": "A file attached to the engagement agreement details.",
         "example": {
@@ -42053,149 +41475,6 @@
           "name"
         ],
         "title": "EngagementAgreementDetailsFileParams",
-        "type": "object"
-      },
-      "EngagementAgreementDetailsParamsDEU": {
-        "additionalProperties": false,
-        "properties": {
-          "allowances_details": {
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "available_pto": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "break_time_per_day": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "business_expenses": {
-            "nullable": true,
-            "type": "string"
-          },
-          "cba": {
-            "nullable": true,
-            "type": "string"
-          },
-          "cba_document": {
-            "items": {
-              "$ref": "#/components/schemas/EngagementAgreementDetailsFileParams"
-            },
-            "maxItems": 1,
-            "nullable": true,
-            "type": "array"
-          },
-          "covenants": {
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "has_allowances": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_bonus": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_business_expenses": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_business_presence": {
-            "type": "string"
-          },
-          "has_cba": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_commissions": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_covenants": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_illness_remuneration": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_overtime_compensation": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_pension_scheme": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_signing_bonus": {
-            "nullable": true,
-            "type": "string"
-          },
-          "has_similar_roles": {
-            "type": "string"
-          },
-          "has_similar_work_conditions": {
-            "nullable": true,
-            "type": "string"
-          },
-          "illness_remuneration_details": {
-            "nullable": true,
-            "type": "string"
-          },
-          "max_annual_gross_salary": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "min_annual_gross_salary": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "overtime_compensation_begins": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "overtime_compensation_type": {
-            "nullable": true,
-            "type": "string"
-          },
-          "overtime_pay_percentage": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "pension_scheme": {
-            "nullable": true,
-            "type": "string"
-          },
-          "similar_roles": {
-            "nullable": true,
-            "type": "string"
-          },
-          "similar_work_conditions_details": {
-            "nullable": true,
-            "type": "string"
-          },
-          "work_hours_per_week": {
-            "format": "double",
-            "nullable": true,
-            "type": "number"
-          },
-          "working_days": {
-            "items": {
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          }
-        },
-        "title": "EngagementAgreementDetailsParamsDEU",
         "type": "object"
       },
       "ErrorResponse": {
@@ -43318,130 +42597,6 @@
         "title": "ImportDataRow",
         "type": "object"
       },
-      "ImportJobColumnMapping": {
-        "additionalProperties": false,
-        "description": "The column mapping for the import job. For times when imported data columns do not match the schema fields and\nneed to be manually mapped to the correct schema fields.\n",
-        "example": {
-          "mapping": {
-            "basic_info.age": {
-              "index": 1,
-              "name": "years_old",
-              "sample_data": "25"
-            },
-            "basic_info.name": {
-              "index": 0,
-              "name": "full_name",
-              "sample_data": "Aaron Carter"
-            }
-          },
-          "source_columns": [
-            {
-              "index": 0,
-              "name": "full_name",
-              "sample_data": "Aaron Carter"
-            },
-            {
-              "index": 1,
-              "name": "years_old",
-              "sample_data": "25"
-            }
-          ],
-          "unmapped_column_count": 1,
-          "unmapped_required_field_count": 1
-        },
-        "nullable": true,
-        "properties": {
-          "auto_mapped_columns": {
-            "description": "The column names that have been automatically mapped by Tiger (rawr!) and maybe also by AI.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "mapping": {
-            "description": "The map of schema fields paths to data columns",
-            "type": "object"
-          },
-          "source_columns": {
-            "description": "The data columns to map to",
-            "items": {
-              "additionalProperties": false,
-              "example": {
-                "index": 0,
-                "name": "full_name",
-                "sample_data": "Aaron Carter"
-              },
-              "properties": {
-                "index": {
-                  "description": "The index of the data column in the file",
-                  "type": "integer"
-                },
-                "name": {
-                  "description": "The name of the data column",
-                  "type": "string"
-                },
-                "sample_data": {
-                  "description": "A sample data value from the data column",
-                  "nullable": true,
-                  "type": "string"
-                }
-              },
-              "required": [
-                "name",
-                "index"
-              ],
-              "title": "ImportJobDataColumn",
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "unmapped_column_count": {
-            "description": "The number of columns that have not been mapped",
-            "type": "integer"
-          },
-          "unmapped_required_field_count": {
-            "description": "The number of required schema field paths that have not been mapped",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "mapping",
-          "source_columns",
-          "unmapped_column_count",
-          "unmapped_required_field_count"
-        ],
-        "title": "ImportJobColumnMapping",
-        "type": "object"
-      },
-      "ImportJobDataColumn": {
-        "additionalProperties": false,
-        "example": {
-          "index": 0,
-          "name": "full_name",
-          "sample_data": "Aaron Carter"
-        },
-        "properties": {
-          "index": {
-            "description": "The index of the data column in the file",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The name of the data column",
-            "type": "string"
-          },
-          "sample_data": {
-            "description": "A sample data value from the data column",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "index"
-        ],
-        "title": "ImportJobDataColumn",
-        "type": "object"
-      },
       "ImportJobRow": {
         "additionalProperties": false,
         "example": {
@@ -43685,353 +42840,6 @@
           "messages"
         ],
         "title": "ImportJobRowError",
-        "type": "object"
-      },
-      "ImportJobRows": {
-        "additionalProperties": false,
-        "example": {
-          "failures": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ],
-          "imported": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ],
-          "pending": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ],
-          "retryable": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ],
-          "skipped": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ],
-          "successes": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ],
-          "unprocessable": [
-            {
-              "data": {
-                "foo": "bar",
-                "number": 1
-              },
-              "errors": {
-                "email": [
-                  "is invalid"
-                ]
-              },
-              "metadata": {
-                "employment_slug": "abc123-slug"
-              },
-              "row_error_details": {
-                "ambiguous": [
-                  {
-                    "amount": 25000,
-                    "created_by": {
-                      "name": "Bertrand Russell",
-                      "slug": "user-b"
-                    },
-                    "effective_date": "2022-01-01",
-                    "employee_identifier": "gp_employee@example.com",
-                    "end_date": null,
-                    "inserted_at": "2026-04-24T10:00:00Z",
-                    "occurrence": "once",
-                    "pay_item": "2060 Shift Allw Morning",
-                    "slug": "epe-1"
-                  }
-                ]
-              },
-              "row_errors": {
-                "ambiguous": [
-                  "Multiple pay items match."
-                ]
-              },
-              "row_number": 1,
-              "submission_errors": []
-            }
-          ]
-        },
-        "properties": {
-          "failures": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          },
-          "imported": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          },
-          "pending": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          },
-          "retryable": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          },
-          "skipped": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          },
-          "successes": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          },
-          "unprocessable": {
-            "items": {
-              "$ref": "#/components/schemas/ImportJobRow"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "failures",
-          "unprocessable",
-          "successes",
-          "imported",
-          "pending",
-          "skipped",
-          "retryable"
-        ],
-        "title": "ImportJobRows",
         "type": "object"
       },
       "ImportJobRowsResponse": {
@@ -45109,35 +43917,6 @@
         "title": "ImportJobRowsResponse",
         "type": "object"
       },
-      "ImportantDates": {
-        "additionalProperties": false,
-        "example": {
-          "fields": [
-            {
-              "label": "test label",
-              "value": "test value"
-            }
-          ],
-          "primaryDate": {
-            "label": "Pay Day",
-            "value": "2023-01-01"
-          }
-        },
-        "properties": {
-          "fields": {
-            "items": {
-              "$ref": "#/components/schemas/CustomField"
-            },
-            "maxItems": 6,
-            "type": "array"
-          },
-          "primaryDate": {
-            "$ref": "#/components/schemas/CustomDate"
-          }
-        },
-        "title": "ImportantDates",
-        "type": "object"
-      },
       "Incentive": {
         "description": "An incentive (bonus, commission, or other additional payment) for an employee. Incentives are paid out through payroll on the next applicable cycle after the effective date.",
         "example": {
@@ -45960,65 +44739,6 @@
         "title": "InternalServerErrorResponse",
         "type": "object"
       },
-      "JSONSchema": {
-        "description": "JSON Schema",
-        "example": {
-          "schema": {
-            "properties": {
-              "ssn": {
-                "pattern": "^[0-9]{3}-[0-9]{2}-(?!0{4})[0-9]{4}$",
-                "title": "Social security number",
-                "type": "string",
-                "x-jsf-presentation": {
-                  "inputType": "text",
-                  "mask": "___-__-____",
-                  "maskPlaceholder": "AAA-GG-SSSS",
-                  "maskSecret": 4
-                }
-              }
-            },
-            "required": [
-              "ssn"
-            ],
-            "type": "object",
-            "x-jsf-order": [
-              "ssn"
-            ]
-          },
-          "version": 7
-        },
-        "properties": {
-          "schema": {
-            "properties": {
-              "properties": {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              "required": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "x-jsf-order": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "required": [
-              "properties"
-            ],
-            "type": "object"
-          },
-          "version": {
-            "type": "integer"
-          }
-        },
-        "title": "JSONSchema",
-        "type": "object"
-      },
       "JSONSchemaResponse": {
         "description": "JSON Schema Response",
         "example": {
@@ -46258,7 +44978,7 @@
             "type": "string"
           },
           "verdict": {
-            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`. `not_assessed` means the check did not run for this employment and no verdict was formed, so treat it as unknown rather than as a pass: submitting is not blocked, but nothing has screened the title.",
+            "description": "The eligibility verdict for the submitted job title and role. `eligible` means contract details can be submitted as normal. `not_eligible` means Remote cannot employ this role: the title has to change. `needs_review` means submitting will place the employment in a human review before the employee can be invited. `eligible_with_risk_acknowledgement` means the submission must carry `employer_acknowledges_risk` set to `acknowledged`. `not_assessed` means the check did not run for this employment and no verdict was formed, so treat it as unknown rather than as a pass: submitting is not blocked, but nothing has screened the title.\n\nWhen the verdict is `eligible_with_risk_acknowledgement`, present Remote's responsibility statement to the employer and obtain their acceptance before sending `employer_acknowledges_risk`. Sending it asserts that the employer was informed of, and accepted, responsibility for, as applicable, employee safety, training, health checks, any incidents connected to the employee's work environment, and the employee holding the licensing the role requires.",
             "enum": [
               "eligible",
               "not_eligible",
@@ -46303,6 +45023,59 @@
           "data"
         ],
         "title": "JobTitleEligibilityCheckResponse",
+        "type": "object"
+      },
+      "JobTitleReviewDecisionParams": {
+        "additionalProperties": false,
+        "example": {
+          "notes": "Checked the role against the local restrictions."
+        },
+        "properties": {
+          "notes": {
+            "description": "The reviewer's notes, recorded on the employment as a Remote admin's would be.",
+            "type": "string"
+          }
+        },
+        "title": "JobTitleReviewDecisionParams",
+        "type": "object"
+      },
+      "JobTitleReviewDecisionResponse": {
+        "additionalProperties": false,
+        "example": {
+          "data": {
+            "job_title_review": {
+              "employment_status": "created"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "additionalProperties": false,
+            "properties": {
+              "job_title_review": {
+                "additionalProperties": false,
+                "properties": {
+                  "employment_status": {
+                    "description": "The employment's status after the decision. An approval restores the status the employment held before it entered review.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "employment_status"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "job_title_review"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "JobTitleReviewDecisionResponse",
         "type": "object"
       },
       "JobTitleScreening": {
@@ -49302,41 +48075,6 @@
         "title": "ListWorkAuthorizationRequestsResponse",
         "type": "object"
       },
-      "LoginEmailSignals": {
-        "description": "Per-row review-step signals for login email selection, present only when the feature is enabled. `sso_enforced` reflects whether SSO login is enforced for the row's category. `personal` and `work` report, for each provided email, whether it is already registered on another account.",
-        "example": {
-          "personal": {
-            "registered": false
-          },
-          "sso_enforced": false,
-          "work": {
-            "registered": true
-          }
-        },
-        "properties": {
-          "personal": {
-            "properties": {
-              "registered": {
-                "type": "boolean"
-              }
-            },
-            "type": "object"
-          },
-          "sso_enforced": {
-            "type": "boolean"
-          },
-          "work": {
-            "properties": {
-              "registered": {
-                "type": "boolean"
-              }
-            },
-            "type": "object"
-          }
-        },
-        "title": "LoginEmailSignals",
-        "type": "object"
-      },
       "MagicLinkParams": {
         "additionalProperties": false,
         "description": "Magic link params",
@@ -49429,189 +48167,6 @@
           "operation"
         ],
         "title": "ManageContractorPlusSubscriptionOperationsParams",
-        "type": "object"
-      },
-      "MaybeAccountsAccount": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AccountsAccount"
-          }
-        ],
-        "example": {
-          "login_email": {
-            "address": "jane@remote.com",
-            "confirmed_at": null,
-            "login_synced": false,
-            "status": "pending",
-            "type": "login",
-            "unconfirmed_address": null
-          },
-          "login_synced_with": "work",
-          "personal_email": {
-            "address": "jane@remote.com",
-            "confirmed_at": null,
-            "login_synced": false,
-            "status": "pending",
-            "type": "login",
-            "unconfirmed_address": null
-          },
-          "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-          "status": "created"
-        },
-        "nullable": true,
-        "title": "MaybeAccountsAccount",
-        "type": "object"
-      },
-      "MaybeAccountsLoginSyncedWith": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AccountsLoginSyncedWith"
-          }
-        ],
-        "example": "none",
-        "nullable": true,
-        "title": "MaybeAccountsLoginSyncedWith",
-        "type": "string"
-      },
-      "MaybeAccountsMinimalCompanyAdmin": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AccountsMinimalCompanyAdmin"
-          }
-        ],
-        "example": {
-          "job_title": "HR Manager",
-          "name": "John Smith",
-          "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
-        },
-        "nullable": true,
-        "title": "MaybeAccountsMinimalCompanyAdmin",
-        "type": "object"
-      },
-      "MaybeBenefitRenewalRequests.MinimalBenefitRenewalResponse": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BenefitRenewalRequests.MinimalBenefitRenewalResponse"
-          }
-        ],
-        "example": {
-          "benefit_tier": {
-            "description": "A tier for testing purposes",
-            "display_cost": "~$100",
-            "id": "163d8f6c-2440-4f45-918b-d095f9e0ef79",
-            "name": "Premium"
-          },
-          "updated_at": "2021-07-01T00:00:00Z"
-        },
-        "nullable": true,
-        "title": "MaybeBenefitRenewalRequests.MinimalBenefitRenewalResponse",
-        "type": "object"
-      },
-      "MaybeBenefitTier": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BenefitTier"
-          }
-        ],
-        "example": {
-          "description": "This is the premium tier for 2023 that includes medical, dental and vision benefits.",
-          "id": "66297cfd-cf60-4cf4-a70f-ac2561d92b04",
-          "name": "Premium 2023 (Medical, Dental and Vision)",
-          "providers": [
-            {
-              "id": "88297cfd-cf60-4cf4-a70f-ac2861d92b87",
-              "name": "Health Provider"
-            }
-          ]
-        },
-        "nullable": true,
-        "title": "MaybeBenefitTier",
-        "type": "object"
-      },
-      "MaybeCurrencyDefinition": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CurrencyDefinition"
-          }
-        ],
-        "example": {
-          "code": "CZK",
-          "name": "Czech Koruna",
-          "symbol": "Kč"
-        },
-        "nullable": true,
-        "title": "MaybeCurrencyDefinition",
-        "type": "object"
-      },
-      "MaybeEmail": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Email"
-          }
-        ],
-        "example": {
-          "address": "jane@remote.com",
-          "confirmed_at": null,
-          "login_synced": false,
-          "status": "pending",
-          "type": "login",
-          "unconfirmed_address": null
-        },
-        "nullable": true,
-        "title": "MaybeEmail",
-        "type": "object"
-      },
-      "MaybePersonalDetails": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PersonalDetails"
-          }
-        ],
-        "example": {
-          "birthdate": "2020-02-10",
-          "full_preferred_name": "The Warden Hardin",
-          "given_name": "Salvor",
-          "mobile_number": "9191919191",
-          "nationality": [
-            "Portugal"
-          ],
-          "preferred_name": "The Warden",
-          "preferred_pronouns": "she/her",
-          "recovery_number": "0049123123123",
-          "surname": "Hardin",
-          "title": "ms"
-        },
-        "nullable": true,
-        "title": "MaybePersonalDetails",
-        "type": "object"
-      },
-      "MaybeUnified.Employment.BenefitTier": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Unified.Employment.BenefitTier"
-          }
-        ],
-        "example": {
-          "display_cost": "$1337 + pension",
-          "name": "Benefit Tier 1",
-          "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
-        },
-        "nullable": true,
-        "title": "MaybeUnified.Employment.BenefitTier",
-        "type": "object"
-      },
-      "MaybeUnified.MinimalBenefitGroup": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Unified.MinimalBenefitGroup"
-          }
-        ],
-        "example": {
-          "name": "Benefit Group",
-          "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5"
-        },
-        "nullable": true,
-        "title": "MaybeUnified.MinimalBenefitGroup",
         "type": "object"
       },
       "MessageResponse": {
@@ -50840,13 +49395,6 @@
         "title": "OnboardingTasks",
         "type": "object"
       },
-      "OptionValue": {
-        "description": "Selected option value. For single select data.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "title": "OptionValue",
-        "type": "string"
-      },
       "ParameterError": {
         "example": {
           "code": "invalid_param",
@@ -50874,13 +49422,6 @@
         ],
         "title": "ParameterError",
         "type": "object"
-      },
-      "ParameterErrors": {
-        "items": {
-          "$ref": "#/components/schemas/ParameterError"
-        },
-        "title": "ParameterErrors",
-        "type": "array"
       },
       "ParamsToCreateEmployeeExpense": {
         "description": "  Params for creating an expense as the authenticated employee.\n\n  The employment is implied by the access token, so `employment_id` is not accepted.\n  `reviewer_id` and `reviewed_at` are also omitted — they only apply to manager-created expenses.\n\n  Category selection mirrors the company endpoint: use either `category` (legacy enum, deprecated but supported)\n  or `expense_category_slug` (recommended). When both are provided, `expense_category_slug` wins.\n",
@@ -51143,252 +49684,6 @@
           "category"
         ],
         "title": "PayCode",
-        "type": "object"
-      },
-      "PayDetailDataResponse": {
-        "additionalProperties": false,
-        "example": {
-          "employeesProcessed": {
-            "employeesCalculated": {
-              "label": "Employees",
-              "link": "/employees/123",
-              "value": 123
-            },
-            "employeesInPayGroup": {
-              "label": "Employees",
-              "link": "/employees/123",
-              "value": 123
-            },
-            "fields": [
-              {
-                "label": "test label",
-                "value": "test value"
-              }
-            ]
-          },
-          "importantDates": {
-            "fields": [
-              {
-                "label": "test label",
-                "value": "test value"
-              }
-            ],
-            "primaryDate": {
-              "label": "Pay Day",
-              "value": "2023-01-01"
-            }
-          },
-          "payment": {
-            "bankValueNumber": {
-              "currency": "USD",
-              "value": "1000.321"
-            },
-            "fields": [
-              {
-                "label": "test label",
-                "value": "test value"
-              }
-            ],
-            "payrollFundedDate": "2023-02-01"
-          },
-          "totalPay": {
-            "fields": [
-              {
-                "label": "test label",
-                "value": "test value"
-              }
-            ],
-            "totalGross": {
-              "currency": "USD",
-              "value": "1000.321"
-            },
-            "totalNet": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          }
-        },
-        "properties": {
-          "employeesProcessed": {
-            "$ref": "#/components/schemas/EmployeesProcessed"
-          },
-          "importantDates": {
-            "$ref": "#/components/schemas/ImportantDates"
-          },
-          "payment": {
-            "$ref": "#/components/schemas/Payment"
-          },
-          "totalPay": {
-            "$ref": "#/components/schemas/TotalPay"
-          }
-        },
-        "required": [
-          "importantDates",
-          "employeesProcessed",
-          "totalPay",
-          "payment"
-        ],
-        "title": "PayDetailDataResponse",
-        "type": "object"
-      },
-      "PayDetailResponse": {
-        "additionalProperties": false,
-        "example": {
-          "actions": [
-            {
-              "externalLink": "https://workday.com/payRun",
-              "label": "Run Payroll"
-            }
-          ],
-          "periodProperties": {
-            "nextPeriodEndDate": "2023-02-28",
-            "paymentDate": "2023-02-01",
-            "periodEndDate": "2023-01-31",
-            "periodStartDate": "2023-01-01",
-            "priorPeriodEndDate": "2022-12-31"
-          },
-          "runCycles": [
-            {
-              "id": "Bonus",
-              "label": "Bonus"
-            }
-          ]
-        },
-        "properties": {
-          "actions": {
-            "$ref": "#/components/schemas/Actions"
-          },
-          "periodProperties": {
-            "$ref": "#/components/schemas/PeriodProperties"
-          },
-          "runCycles": {
-            "$ref": "#/components/schemas/ReferencedItems"
-          }
-        },
-        "title": "PayDetailResponse",
-        "type": "object"
-      },
-      "PayDifference": {
-        "additionalProperties": false,
-        "example": {
-          "amountDifference": {
-            "currency": "USD",
-            "value": "1000.321"
-          },
-          "percentDifference": 12.5,
-          "workerDifference": {
-            "label": "John Doe",
-            "link": "/employees/123"
-          }
-        },
-        "properties": {
-          "amountDifference": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "percentDifference": {
-            "type": "number"
-          },
-          "workerDifference": {
-            "properties": {
-              "label": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "label"
-            ],
-            "type": "object"
-          }
-        },
-        "required": [
-          "percentDifference",
-          "amountDifference"
-        ],
-        "title": "PayDifference",
-        "type": "object"
-      },
-      "PayGroup": {
-        "additionalProperties": false,
-        "example": {
-          "actions": [
-            {
-              "externalLink": "https://workday.com/payRun",
-              "label": "Run Payroll"
-            }
-          ],
-          "country": "US",
-          "offCycleCount": 0,
-          "payGroupExternalId": "US_Monthly",
-          "payGroupName": "US Monthly Payroll",
-          "payGroupReferences": [
-            "ref1",
-            "ref2"
-          ],
-          "paymentDate": "2023-02-01",
-          "periodEndDate": "2023-01-31",
-          "periodStartDate": "2023-01-01",
-          "runType": {
-            "id": "Bonus",
-            "label": "Bonus"
-          },
-          "status": {
-            "label": "Completed",
-            "state": "Complete"
-          }
-        },
-        "properties": {
-          "actions": {
-            "$ref": "#/components/schemas/Actions"
-          },
-          "country": {
-            "description": "Country codes (ISO 3166 alpha-2)",
-            "type": "string"
-          },
-          "offCycleCount": {
-            "description": "Count of off-cycle runs",
-            "type": "number"
-          },
-          "payGroupExternalId": {
-            "description": "The external id for the pay group",
-            "type": "string"
-          },
-          "payGroupName": {
-            "description": "The pay group name in the vendor system",
-            "type": "string"
-          },
-          "payGroupReferences": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "paymentDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "periodEndDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "periodStartDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "runType": {
-            "$ref": "#/components/schemas/ReferencedItem"
-          },
-          "status": {
-            "$ref": "#/components/schemas/Status"
-          }
-        },
-        "required": [
-          "payGroupExternalId",
-          "payGroupName",
-          "periodStartDate",
-          "periodEndDate",
-          "paymentDate"
-        ],
-        "title": "PayGroup",
         "type": "object"
       },
       "PayItem": {
@@ -51730,336 +50025,6 @@
           "data"
         ],
         "title": "PayItemResponse",
-        "type": "object"
-      },
-      "PayProcessingFeature": {
-        "additionalProperties": false,
-        "example": {
-          "detailsDataPath": "/payDetailData",
-          "detailsPath": "/payDetail",
-          "progressPath": "/payProgress",
-          "summaryPath": "/paySummary",
-          "varianceAnalysisPath": "/payVariance"
-        },
-        "properties": {
-          "detailsDataPath": {
-            "description": "API for details additional data sections",
-            "type": "string"
-          },
-          "detailsPath": {
-            "description": "API for the main details page",
-            "type": "string"
-          },
-          "progressPath": {
-            "description": "API for the progress section",
-            "type": "string"
-          },
-          "summaryPath": {
-            "description": "API for the summary section",
-            "type": "string"
-          },
-          "varianceAnalysisPath": {
-            "description": "API for variance analysis section",
-            "type": "string"
-          }
-        },
-        "required": [
-          "summaryPath"
-        ],
-        "title": "PayProcessingFeature",
-        "type": "object"
-      },
-      "PayProcessingFeatureResponse": {
-        "additionalProperties": false,
-        "example": {
-          "endpoints": {
-            "detailsDataPath": "/payDetailData",
-            "detailsPath": "/payDetail",
-            "progressPath": "/payProgress",
-            "summaryPath": "/paySummary",
-            "varianceAnalysisPath": "/payVariance"
-          }
-        },
-        "properties": {
-          "endpoints": {
-            "$ref": "#/components/schemas/PayProcessingFeature"
-          }
-        },
-        "required": [
-          "endpoints"
-        ],
-        "title": "PayProcessingFeatureResponse",
-        "type": "object"
-      },
-      "PayProgressResponse": {
-        "additionalProperties": false,
-        "example": {
-          "stages": [
-            {
-              "completionDate": "2023-01-02",
-              "dueDate": "2023-01-05",
-              "label": "Validation",
-              "state": "In Progress"
-            }
-          ]
-        },
-        "properties": {
-          "stages": {
-            "items": {
-              "$ref": "#/components/schemas/Stage"
-            },
-            "maxItems": 7,
-            "type": "array"
-          }
-        },
-        "title": "PayProgressResponse",
-        "type": "object"
-      },
-      "PaySummaryResponse": {
-        "additionalProperties": false,
-        "example": {
-          "payGroups": [
-            {
-              "actions": [
-                {
-                  "externalLink": "https://workday.com/payRun",
-                  "label": "Run Payroll"
-                }
-              ],
-              "country": "US",
-              "offCycleCount": 0,
-              "payGroupExternalId": "US_Monthly",
-              "payGroupName": "US Monthly Payroll",
-              "payGroupReferences": [
-                "ref1",
-                "ref2"
-              ],
-              "paymentDate": "2023-02-01",
-              "periodEndDate": "2023-01-31",
-              "periodStartDate": "2023-01-01",
-              "runType": {
-                "id": "Bonus",
-                "label": "Bonus"
-              },
-              "status": {
-                "label": "Completed",
-                "state": "Complete"
-              }
-            }
-          ]
-        },
-        "properties": {
-          "payGroups": {
-            "items": {
-              "$ref": "#/components/schemas/PayGroup"
-            },
-            "type": "array"
-          }
-        },
-        "title": "PaySummaryResponse",
-        "type": "object"
-      },
-      "PayValue": {
-        "example": {
-          "periodEndDate": "2024-01-01",
-          "periodStartDate": "2023-12-31",
-          "totalAmount": {
-            "currency": "USD",
-            "value": "1000.321"
-          }
-        },
-        "properties": {
-          "periodEndDate": {
-            "example": "2023-12-31",
-            "format": "date",
-            "type": "string"
-          },
-          "periodStartDate": {
-            "example": "2023-12-31",
-            "format": "date",
-            "type": "string"
-          },
-          "totalAmount": {
-            "$ref": "#/components/schemas/Amount"
-          }
-        },
-        "required": [
-          "periodStartDate",
-          "periodEndDate",
-          "totalAmount"
-        ],
-        "title": "PayValue",
-        "type": "object"
-      },
-      "PayVarianceResponse": {
-        "additionalProperties": false,
-        "example": {
-          "additionalVariances": [
-            {
-              "currentPay": {
-                "periodEndDate": "2024-01-01",
-                "periodStartDate": "2023-12-31",
-                "totalAmount": {
-                  "currency": "USD",
-                  "value": "1000.321"
-                }
-              },
-              "label": "Bonus",
-              "payDifference": {
-                "amountDifference": {
-                  "currency": "USD",
-                  "value": "1000.321"
-                },
-                "percentDifference": 12.5,
-                "workerDifference": {
-                  "label": "John Doe",
-                  "link": "/employees/123"
-                }
-              },
-              "payYoy": {
-                "periodEndDate": "2024-01-01",
-                "periodStartDate": "2023-12-31",
-                "totalAmount": {
-                  "currency": "USD",
-                  "value": "1000.321"
-                }
-              },
-              "previousPay": {
-                "periodEndDate": "2024-01-01",
-                "periodStartDate": "2023-12-31",
-                "totalAmount": {
-                  "currency": "USD",
-                  "value": "1000.321"
-                }
-              }
-            }
-          ],
-          "grossVariance": {
-            "currentPay": {
-              "periodEndDate": "2024-01-01",
-              "periodStartDate": "2023-12-31",
-              "totalAmount": {
-                "currency": "USD",
-                "value": "1000.321"
-              }
-            },
-            "payDifference": {
-              "amountDifference": {
-                "currency": "USD",
-                "value": "1000.321"
-              },
-              "percentDifference": 12.5,
-              "workerDifference": {
-                "label": "John Doe",
-                "link": "/employees/123"
-              }
-            },
-            "payYoy": {
-              "periodEndDate": "2024-01-01",
-              "periodStartDate": "2023-12-31",
-              "totalAmount": {
-                "currency": "USD",
-                "value": "1000.321"
-              }
-            },
-            "previousPay": {
-              "periodEndDate": "2024-01-01",
-              "periodStartDate": "2023-12-31",
-              "totalAmount": {
-                "currency": "USD",
-                "value": "1000.321"
-              }
-            }
-          },
-          "netVariance": {
-            "currentPay": {
-              "periodEndDate": "2024-01-01",
-              "periodStartDate": "2023-12-31",
-              "totalAmount": {
-                "currency": "USD",
-                "value": "1000.321"
-              }
-            },
-            "payDifference": {
-              "amountDifference": {
-                "currency": "USD",
-                "value": "1000.321"
-              },
-              "percentDifference": 12.5,
-              "workerDifference": {
-                "label": "John Doe",
-                "link": "/employees/123"
-              }
-            },
-            "payYoy": {
-              "periodEndDate": "2024-01-01",
-              "periodStartDate": "2023-12-31",
-              "totalAmount": {
-                "currency": "USD",
-                "value": "1000.321"
-              }
-            },
-            "previousPay": {
-              "periodEndDate": "2024-01-01",
-              "periodStartDate": "2023-12-31",
-              "totalAmount": {
-                "currency": "USD",
-                "value": "1000.321"
-              }
-            }
-          }
-        },
-        "properties": {
-          "additionalVariances": {
-            "items": {
-              "$ref": "#/components/schemas/CustomVariance"
-            },
-            "type": "array"
-          },
-          "grossVariance": {
-            "$ref": "#/components/schemas/Variance"
-          },
-          "netVariance": {
-            "$ref": "#/components/schemas/Variance"
-          }
-        },
-        "title": "PayVarianceResponse",
-        "type": "object"
-      },
-      "Payment": {
-        "additionalProperties": false,
-        "example": {
-          "bankValueNumber": {
-            "currency": "USD",
-            "value": "1000.321"
-          },
-          "fields": [
-            {
-              "label": "test label",
-              "value": "test value"
-            }
-          ],
-          "payrollFundedDate": "2023-02-01"
-        },
-        "properties": {
-          "bankValueNumber": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "fields": {
-            "items": {
-              "$ref": "#/components/schemas/CustomField"
-            },
-            "maxItems": 6,
-            "type": "array"
-          },
-          "payrollFundedDate": {
-            "$ref": "#/components/schemas/Date"
-          }
-        },
-        "required": [
-          "payrollFundedDate"
-        ],
-        "title": "Payment",
         "type": "object"
       },
       "PayrollCalendar": {
@@ -52966,40 +50931,6 @@
           "has_employee_payroll_overviews"
         ],
         "title": "PayslipItem",
-        "type": "object"
-      },
-      "PeriodProperties": {
-        "additionalProperties": false,
-        "example": {
-          "nextPeriodEndDate": "2023-02-28",
-          "paymentDate": "2023-02-01",
-          "periodEndDate": "2023-01-31",
-          "periodStartDate": "2023-01-01",
-          "priorPeriodEndDate": "2022-12-31"
-        },
-        "properties": {
-          "nextPeriodEndDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "paymentDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "periodEndDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "periodStartDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "priorPeriodEndDate": {
-            "$ref": "#/components/schemas/Date"
-          }
-        },
-        "required": [
-          "periodStartDate",
-          "periodEndDate",
-          "paymentDate"
-        ],
-        "title": "PeriodProperties",
         "type": "object"
       },
       "PersonalDetails": {
@@ -53969,37 +51900,6 @@
         "title": "Project",
         "type": "object"
       },
-      "ProjectBudget": {
-        "additionalProperties": false,
-        "description": "A project's budget: amount and its currency.",
-        "example": {
-          "amount": 250000,
-          "currency": "USD"
-        },
-        "nullable": true,
-        "properties": {
-          "amount": {
-            "description": "Budget amount, in cents.",
-            "type": "integer"
-          },
-          "currency": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          }
-        },
-        "required": [
-          "amount",
-          "currency"
-        ],
-        "title": "ProjectBudget",
-        "type": "object"
-      },
-      "ProjectID": {
-        "description": "Project identifier.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "title": "ProjectID",
-        "type": "string"
-      },
       "ProjectResponse": {
         "description": "Response schema for a single company project.",
         "example": {
@@ -54195,44 +52095,6 @@
         },
         "title": "RecurringIncentiveResponse",
         "type": "object"
-      },
-      "ReferencedItem": {
-        "additionalProperties": false,
-        "example": {
-          "id": "Bonus",
-          "label": "Bonus"
-        },
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "title": "ReferencedItem",
-        "type": "object"
-      },
-      "ReferencedItems": {
-        "description": "Referenced Items will be listed in the same order they are provided",
-        "example": [
-          {
-            "id": "Bonus",
-            "label": "Bonus"
-          },
-          {
-            "id": "Bonus",
-            "label": "Bonus"
-          }
-        ],
-        "items": {
-          "$ref": "#/components/schemas/ReferencedItem"
-        },
-        "title": "ReferencedItems",
-        "type": "array"
       },
       "RefreshTokenParams": {
         "example": {
@@ -55380,13 +53242,6 @@
         "title": "SandboxCreateContractorRateParams",
         "type": "object"
       },
-      "ScheduleID": {
-        "description": "Schedule identifier.",
-        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
-        "format": "uuid",
-        "title": "ScheduleID",
-        "type": "string"
-      },
       "SendBackTimesheetParams": {
         "additionalProperties": false,
         "description": "Parameters for sending a submitted timesheet back to the employee for revision. The timesheet status will change to `in_calibration` and the employee will be notified.",
@@ -55470,31 +53325,44 @@
         "title": "SentBackTimesheetResponse",
         "type": "object"
       },
+      "SetJobTitleEligibilityVerdictParams": {
+        "additionalProperties": false,
+        "example": {
+          "role_description": "Provides bedside care on a hospital ward",
+          "verdict": "needs_review"
+        },
+        "properties": {
+          "job_title": {
+            "description": "The job title to record the verdict against. Defaults to the employment's current one.",
+            "type": "string"
+          },
+          "role_description": {
+            "description": "The role description the submission will carry. A submission carrying a different one is rejected, because the recorded verdict no longer describes what was sent.",
+            "type": "string"
+          },
+          "verdict": {
+            "description": "The verdict the employment's next contract-details submission should act on.",
+            "enum": [
+              "eligible",
+              "not_eligible",
+              "needs_review",
+              "eligible_with_risk_acknowledgement"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict",
+          "role_description"
+        ],
+        "title": "SetJobTitleEligibilityVerdictParams",
+        "type": "object"
+      },
       "ShortId": {
         "description": "Unique short identifier for the employment, automatically generated and visible in select areas of the Remote platform. Not intended as a replacement for the employment `id` field.",
         "example": "WN1IZT",
         "title": "ShortId",
         "type": "string"
-      },
-      "ShowLegalEntityAdministrativeDetailsResponse": {
-        "additionalProperties": false,
-        "description": "Country specific json schema driven administrative details for legal entities",
-        "example": {
-          "data": {
-            "legal_entity_state": "new",
-            "trade_sector": "test sector"
-          }
-        },
-        "properties": {
-          "data": {
-            "type": "object"
-          }
-        },
-        "required": [
-          "data"
-        ],
-        "title": "ShowLegalEntityAdministrativeDetailsResponse",
-        "type": "object"
       },
       "ShowPreOnboardingDocumentResponse": {
         "additionalProperties": false,
@@ -55710,69 +53578,6 @@
         "nullable": false,
         "title": "Slug",
         "type": "string"
-      },
-      "Stage": {
-        "additionalProperties": false,
-        "example": {
-          "completionDate": "2023-01-02",
-          "dueDate": "2023-01-05",
-          "label": "Validation",
-          "state": "In Progress"
-        },
-        "properties": {
-          "completionDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "dueDate": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "label": {
-            "type": "string"
-          },
-          "state": {
-            "enum": [
-              "In Progress",
-              "Not Yet Started",
-              "Error",
-              "Complete",
-              "Warning"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "state",
-          "label"
-        ],
-        "title": "Stage",
-        "type": "object"
-      },
-      "Status": {
-        "additionalProperties": false,
-        "example": {
-          "label": "Completed",
-          "state": "Complete"
-        },
-        "properties": {
-          "label": {
-            "type": "string"
-          },
-          "state": {
-            "enum": [
-              "In Progress",
-              "Not Yet Started",
-              "Error",
-              "Complete",
-              "Warning"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "label"
-        ],
-        "title": "Status",
-        "type": "object"
       },
       "Step": {
         "additionalProperties": false,
@@ -56010,16 +53815,6 @@
         },
         "title": "TaskDescription",
         "type": "object"
-      },
-      "TaskStatus": {
-        "description": "The status of the task",
-        "enum": [
-          "completed",
-          "pending"
-        ],
-        "example": "completed",
-        "title": "TaskStatus",
-        "type": "string"
       },
       "TerminationDetailsParams": {
         "example": {
@@ -56547,52 +54342,6 @@
           "time_breakdown"
         ],
         "title": "TimeTracking",
-        "type": "object"
-      },
-      "TimeTrackingParams": {
-        "additionalProperties": false,
-        "description": "Parameters for creating a time tracking entry within a timesheet. Provide the time range and type of work; hour breakdowns are calculated automatically from the clock-in/out times.",
-        "example": {
-          "clock_in": "2021-07-15T18:18:17Z",
-          "clock_out": "2021-07-15T18:18:17Z",
-          "notes": "Some notes",
-          "timezone": "Etc/UTC",
-          "type": "on_call"
-        },
-        "properties": {
-          "clock_in": {
-            "$ref": "#/components/schemas/DateTimeIso8601"
-          },
-          "clock_out": {
-            "$ref": "#/components/schemas/DateTimeIso8601"
-          },
-          "notes": {
-            "description": "Optional free-text notes about this time entry, such as project or task details.",
-            "nullable": true,
-            "type": "string"
-          },
-          "timezone": {
-            "$ref": "#/components/schemas/Timezone"
-          },
-          "type": {
-            "description": "The category of time being tracked (e.g., regular hours, overtime, on-call).",
-            "enum": [
-              "regular_hours",
-              "overtime",
-              "on_call",
-              "break",
-              "unpaid_break"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "type",
-          "timezone",
-          "clock_in",
-          "clock_out"
-        ],
-        "title": "TimeTrackingParams",
         "type": "object"
       },
       "Timeoff": {
@@ -57624,46 +55373,6 @@
         "title": "TooManyRequestsResponse",
         "type": "object"
       },
-      "TotalPay": {
-        "additionalProperties": false,
-        "example": {
-          "fields": [
-            {
-              "label": "test label",
-              "value": "test value"
-            }
-          ],
-          "totalGross": {
-            "currency": "USD",
-            "value": "1000.321"
-          },
-          "totalNet": {
-            "currency": "USD",
-            "value": "1000.321"
-          }
-        },
-        "properties": {
-          "fields": {
-            "items": {
-              "$ref": "#/components/schemas/CustomField"
-            },
-            "maxItems": 4,
-            "type": "array"
-          },
-          "totalGross": {
-            "$ref": "#/components/schemas/Amount"
-          },
-          "totalNet": {
-            "$ref": "#/components/schemas/Amount"
-          }
-        },
-        "required": [
-          "totalNet",
-          "totalGross"
-        ],
-        "title": "TotalPay",
-        "type": "object"
-      },
       "TravelLetterRequest": {
         "additionalProperties": false,
         "description": "A travel letter request submitted by an employee who needs a formal letter from their employer to support a visa or travel application. The request goes through a two-stage approval: first by the employer manager, then by Remote.",
@@ -58018,12 +55727,6 @@
         ],
         "title": "TypeOfDayBreakdown",
         "type": "object"
-      },
-      "URL": {
-        "format": "uri",
-        "nullable": true,
-        "title": "URL",
-        "type": "string"
       },
       "UnauthorizedResponse": {
         "description": "Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.",
@@ -59572,64 +57275,6 @@
           "errors"
         ],
         "title": "ValidationError",
-        "type": "object"
-      },
-      "Variance": {
-        "example": {
-          "currentPay": {
-            "periodEndDate": "2024-01-01",
-            "periodStartDate": "2023-12-31",
-            "totalAmount": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          },
-          "payDifference": {
-            "amountDifference": {
-              "currency": "USD",
-              "value": "1000.321"
-            },
-            "percentDifference": 12.5,
-            "workerDifference": {
-              "label": "John Doe",
-              "link": "/employees/123"
-            }
-          },
-          "payYoy": {
-            "periodEndDate": "2024-01-01",
-            "periodStartDate": "2023-12-31",
-            "totalAmount": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          },
-          "previousPay": {
-            "periodEndDate": "2024-01-01",
-            "periodStartDate": "2023-12-31",
-            "totalAmount": {
-              "currency": "USD",
-              "value": "1000.321"
-            }
-          }
-        },
-        "properties": {
-          "currentPay": {
-            "$ref": "#/components/schemas/PayValue"
-          },
-          "payDifference": {
-            "$ref": "#/components/schemas/PayDifference"
-          },
-          "payYoy": {
-            "$ref": "#/components/schemas/PayValue"
-          },
-          "previousPay": {
-            "$ref": "#/components/schemas/PayValue"
-          }
-        },
-        "required": [
-          "currentPay"
-        ],
-        "title": "Variance",
         "type": "object"
       },
       "WebhookCallback": {

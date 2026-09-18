@@ -4,7 +4,7 @@ updatedAt: 2026-05-27T21:11:47.000Z
 
 Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
-# Show Billing Document
+# Show Billing Document. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.
 
 Shows a billing document details.
 
@@ -630,6 +630,16 @@ This endpoint accepts any one of the following token types:
             }
           },
           {
+            "description": "The company the accessed resource belongs to. Send it whenever you know which one you mean. Requests that don't resolve to a company fail with \"Company not found\".",
+            "example": "93t3j-company-id-9suej43",
+            "in": "query",
+            "name": "company_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "The billing document's ID",
             "example": "93t3j-billing-doc-id-9suej43",
             "in": "path",
@@ -732,7 +742,7 @@ This endpoint accepts any one of the following token types:
             ]
           }
         ],
-        "summary": "Show Billing Document",
+        "summary": "Show Billing Document. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
         "tags": [
           "Billing Documents"
         ]

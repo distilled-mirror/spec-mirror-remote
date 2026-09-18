@@ -541,7 +541,8 @@ This endpoint accepts any one of the following token types:
         "summary": "Terminate contractor of record employment",
         "tags": [
           "Subscriptions"
-        ]
+        ],
+        "x-remote-superseded-by": "POST /contractors/employments/{employment_id}/cor-termination-requests"
       }
     }
   },
