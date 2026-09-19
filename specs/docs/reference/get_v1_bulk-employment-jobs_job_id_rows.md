@@ -222,6 +222,11 @@ This endpoint accepts any one of the following token types:
           "row_number": {
             "type": "integer"
           },
+          "schema_variant_id": {
+            "description": "The id of the schema variant this row's fields follow, a key of `row_schema_variants` on the job-scoped json-schema response. `null` when the row uses the job-level schema. Only present for job types with per-row schema variants.",
+            "nullable": true,
+            "type": "string"
+          },
           "status": {
             "enum": [
               "successful",

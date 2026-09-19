@@ -407,6 +407,7 @@ This endpoint accepts any one of the following token types:
               "one_off",
               "pro_forma",
               "tax_documents",
+              "year_end_reports",
               "expenses",
               "parallel"
             ],

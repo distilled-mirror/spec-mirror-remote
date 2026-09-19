@@ -4870,7 +4870,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "df45e48e-9467-40b3-a10d-974907be571b",
+            "example": "ebc71726-5776-45b7-9b33-0ddbb3d35bc9",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5266,7 +5266,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0196200e-b15c-453d-b44d-8f8b53cb50f5",
+            "example": "aa71b5ce-e47e-4eed-ad02-208e43e5d8dd",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5359,7 +5359,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "981e2c52-65b4-4185-94fb-90a18f079ce7",
+            "example": "467eec40-1b4a-4c96-82d3-4f58672a1b99",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5443,7 +5443,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "45d614d0-c5b5-4123-a554-b48890174daf",
+            "example": "c410a8dc-2bb9-458a-850f-4db2d75473a4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5539,7 +5539,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "a3e0a805-5759-4435-9372-dda1a61cd3d5",
+            "example": "69d3bf44-b574-4b4b-a7d8-d2cc92e82162",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5748,7 +5748,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c9dc5b65-b670-42ad-b4a5-d5f9c312bbba",
+            "example": "1b002493-9fda-442c-b717-1fc65affd385",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13334,7 +13334,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "304280ef-4a1a-4616-be4e-ee7e9d43e9f5",
+            "example": "6874f076-b023-4c9b-954d-c3ca96a7564d",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -42783,6 +42783,11 @@
           "row_number": {
             "type": "integer"
           },
+          "schema_variant_id": {
+            "description": "The id of the schema variant this row's fields follow, a key of `row_schema_variants` on the job-scoped json-schema response. `null` when the row uses the job-level schema. Only present for job types with per-row schema variants.",
+            "nullable": true,
+            "type": "string"
+          },
           "status": {
             "enum": [
               "successful",
@@ -48557,6 +48562,7 @@
               "one_off",
               "pro_forma",
               "tax_documents",
+              "year_end_reports",
               "expenses",
               "parallel"
             ],
@@ -50534,6 +50540,7 @@
               "one_off",
               "pro_forma",
               "tax_documents",
+              "year_end_reports",
               "expenses",
               "parallel"
             ],
