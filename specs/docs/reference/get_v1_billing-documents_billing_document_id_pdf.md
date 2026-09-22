@@ -530,7 +530,16 @@ This endpoint accepts any one of the following token types:
                       "reconciliation_invoice",
                       "supplemental_service_credit_note",
                       "prefunding_credit_note",
-                      "reconciliation_credit_note"
+                      "reconciliation_credit_note",
+                      "credit_note",
+                      "eor_reserve_credit_note",
+                      "contractor_management_invoice",
+                      "cor_service_invoice",
+                      "eor_reserve_invoice",
+                      "payroll_service_invoice",
+                      "remote_plan_invoice",
+                      "peo_payroll_invoice",
+                      "peo_service_invoice"
                     ],
                     "type": "string"
                   },

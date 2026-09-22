@@ -4870,7 +4870,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "a4fe759d-2373-4c5e-be01-9343eeff2481",
+            "example": "d0b3ff64-1a2f-4cbc-bfa4-e34bf9999438",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5266,7 +5266,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e1c68ca1-e78e-4849-9789-60b2e50945fc",
+            "example": "674df131-1949-4afc-904d-ff9abbc8c1b1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5359,7 +5359,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "740cd3f3-b4a4-4321-8b51-d7845bbefee0",
+            "example": "06419e38-25b4-4743-b0ec-2011e0d0e481",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5443,7 +5443,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "decb895d-eb68-42ba-8482-4c002f9f23ce",
+            "example": "df8f264f-e8e9-49ab-b30d-189b56343a1e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5539,7 +5539,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "eeccf888-b059-409c-a1c9-1fbbad51589d",
+            "example": "326d02d2-3595-4ab8-942e-dc7bfb1be3bf",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5748,7 +5748,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0eb4b98f-a47b-4cba-8c4c-4ea1de641258",
+            "example": "e4d6af0f-0ca1-43e6-9ffe-5cb99951c971",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13334,7 +13334,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "72c6a4af-f6fd-45dd-b082-dcfdc2459019",
+            "example": "6cc6bd5f-5ad4-40c4-9918-094b2eb11f26",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -29434,7 +29434,16 @@
                         "reconciliation_invoice",
                         "prefunding_invoice",
                         "supplemental_service_invoice",
-                        "reconciliation_credit_note"
+                        "reconciliation_credit_note",
+                        "peo_payroll_invoice",
+                        "contractor_management_invoice",
+                        "remote_plan_invoice",
+                        "credit_note",
+                        "eor_reserve_invoice",
+                        "eor_reserve_credit_note",
+                        "peo_service_invoice",
+                        "payroll_service_invoice",
+                        "cor_service_invoice"
                       ],
                       "type": "string"
                     },
@@ -57536,7 +57545,16 @@
               "reconciliation_invoice",
               "supplemental_service_credit_note",
               "prefunding_credit_note",
-              "reconciliation_credit_note"
+              "reconciliation_credit_note",
+              "credit_note",
+              "eor_reserve_credit_note",
+              "contractor_management_invoice",
+              "cor_service_invoice",
+              "eor_reserve_invoice",
+              "payroll_service_invoice",
+              "remote_plan_invoice",
+              "peo_payroll_invoice",
+              "peo_service_invoice"
             ],
             "type": "string"
           },
