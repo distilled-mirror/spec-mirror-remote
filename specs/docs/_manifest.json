@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 413,
+  "count": 414,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -51,6 +51,11 @@
       "page": "https://developer.remote.com/reference/companyeor_hiringverification_completed-1",
       "markdown": "https://developer.remote.com/reference/companyeor_hiringverification_completed-1.md",
       "file": "reference/companyeor_hiringverification_completed-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/companyhard_deleted",
+      "markdown": "https://developer.remote.com/reference/companyhard_deleted.md",
+      "file": "reference/companyhard_deleted.md"
     },
     {
       "page": "https://developer.remote.com/reference/companymanager_created-1",

@@ -4870,7 +4870,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "d0b3ff64-1a2f-4cbc-bfa4-e34bf9999438",
+            "example": "f56702ee-eff1-46ec-9151-9c23a268b090",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5266,7 +5266,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "674df131-1949-4afc-904d-ff9abbc8c1b1",
+            "example": "cdb1dc1c-2e39-4206-afed-179994a731f3",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5359,7 +5359,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "06419e38-25b4-4743-b0ec-2011e0d0e481",
+            "example": "99a5c9ac-91cd-4c19-942b-8752b582bd81",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5443,7 +5443,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "df8f264f-e8e9-49ab-b30d-189b56343a1e",
+            "example": "f13ec231-3330-47f3-b970-00eaf37016a4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5539,7 +5539,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "326d02d2-3595-4ab8-942e-dc7bfb1be3bf",
+            "example": "1e5c1151-75ca-407e-a935-739c960580bf",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5748,7 +5748,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e4d6af0f-0ca1-43e6-9ffe-5cb99951c971",
+            "example": "790d4c5e-a996-4e2c-9f21-b6c4c2c34cf2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13334,7 +13334,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "6cc6bd5f-5ad4-40c4-9918-094b2eb11f26",
+            "example": "cc540c04-7e24-4ced-aee9-d77b7a317c7f",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -27477,12 +27477,12 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
                 "employment_countries",
+                "assigned_billing_legal_entities",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "onboarding_reports"
               ],
               "example": "all",
               "nullable": false,
@@ -37168,6 +37168,7 @@
                 "company.manager_updated",
                 "company.owner_changed",
                 "company.archived",
+                "company.hard_deleted",
                 "company.eor_hiring.additional_information_required",
                 "company.eor_hiring.reserve_payment_requested",
                 "company.eor_hiring.no_reserve_payment_requested",
@@ -56709,6 +56710,7 @@
                 "company.manager_updated",
                 "company.owner_changed",
                 "company.archived",
+                "company.hard_deleted",
                 "company.eor_hiring.additional_information_required",
                 "company.eor_hiring.reserve_payment_requested",
                 "company.eor_hiring.no_reserve_payment_requested",
@@ -57328,6 +57330,7 @@
                 "company.manager_updated",
                 "company.owner_changed",
                 "company.archived",
+                "company.hard_deleted",
                 "company.eor_hiring.additional_information_required",
                 "company.eor_hiring.reserve_payment_requested",
                 "company.eor_hiring.no_reserve_payment_requested",
@@ -57593,6 +57596,7 @@
               "company.manager_updated",
               "company.owner_changed",
               "company.archived",
+              "company.hard_deleted",
               "company.eor_hiring.additional_information_required",
               "company.eor_hiring.reserve_payment_requested",
               "company.eor_hiring.no_reserve_payment_requested",

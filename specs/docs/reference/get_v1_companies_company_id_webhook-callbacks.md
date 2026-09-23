@@ -103,6 +103,7 @@ This endpoint accepts any one of the following token types:
                 "company.manager_updated",
                 "company.owner_changed",
                 "company.archived",
+                "company.hard_deleted",
                 "company.eor_hiring.additional_information_required",
                 "company.eor_hiring.reserve_payment_requested",
                 "company.eor_hiring.no_reserve_payment_requested",

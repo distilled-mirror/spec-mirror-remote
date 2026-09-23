@@ -183,12 +183,12 @@ This endpoint accepts any one of the following token types:
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
                 "employment_countries",
+                "assigned_billing_legal_entities",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "onboarding_reports"
               ],
               "example": "all",
               "nullable": false,

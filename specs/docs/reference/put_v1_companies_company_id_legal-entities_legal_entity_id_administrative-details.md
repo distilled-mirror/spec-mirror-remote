@@ -953,6 +953,56 @@ This endpoint accepts any one of the following token types:
         ]
       }
     },
+    "company.hard_deleted": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when a company is permanently erased from Remote, and means the\nrecord is physically gone: a subsequent `GET /companies/{id}` returns 404 and the identifier\nmust not be queried again.\n\nEvery employment belonging to the company is erased in the same operation, so you may receive\nan `employment.hard_deleted` event for each of them alongside this one. Their identifiers are\nalso permanently gone.\n\nThis event is delivered to integration-level callbacks — a single URL registered for all of\nyour companies. A callback registered against the deleted company itself is erased with it and\nwill not receive this event.\n\nThis event may be delivered more than once, so it is safe to process repeatedly.\n",
+        "operationId": "company.hard_deleted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                  "event_type": "company.hard_deleted",
+                  "hard_deleted_at": "2026-08-24T11:02:31Z"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  },
+                  "hard_deleted_at": {
+                    "description": "The UTC timestamp at which the company was erased.",
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "hard_deleted_at",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "company.hard_deleted",
+        "tags": [
+          "Company Management"
+        ]
+      }
+    },
     "company.manager_created": {
       "post": {
         "deprecated": false,
