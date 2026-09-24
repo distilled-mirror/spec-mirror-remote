@@ -1153,6 +1153,33 @@
             }
           },
           {
+            "description": "Filters the results by the type of the billing document. Matches the response's `billing_document_type` field.",
+            "example": "reconciliation_invoice",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "enum": [
+                "reconciliation_credit_note",
+                "credit_note",
+                "prefunding_credit_note",
+                "eor_reserve_credit_note",
+                "supplemental_service_credit_note",
+                "reconciliation_invoice",
+                "contractor_management_invoice",
+                "cor_service_invoice",
+                "eor_reserve_invoice",
+                "prefunding_invoice",
+                "supplemental_service_invoice",
+                "payroll_service_invoice",
+                "remote_plan_invoice",
+                "peo_payroll_invoice",
+                "peo_service_invoice"
+              ],
+              "type": "string"
+            }
+          },
+          {
             "description": "Starts fetching records after the given page",
             "example": 1,
             "in": "query",
@@ -4870,7 +4897,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "f56702ee-eff1-46ec-9151-9c23a268b090",
+            "example": "f53b4832-5964-475b-8fb9-9ce45fcf63f4",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5266,7 +5293,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "cdb1dc1c-2e39-4206-afed-179994a731f3",
+            "example": "f426946b-e13e-42ae-ad34-bb6492360447",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5359,7 +5386,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "99a5c9ac-91cd-4c19-942b-8752b582bd81",
+            "example": "87f49582-eb67-41d3-9297-6da5e8785408",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5443,7 +5470,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "f13ec231-3330-47f3-b970-00eaf37016a4",
+            "example": "23053300-a2b3-483d-b527-70c5840f3c5e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5539,7 +5566,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "1e5c1151-75ca-407e-a935-739c960580bf",
+            "example": "d4770039-9f86-47d9-ab63-35cd84fa8de5",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5748,7 +5775,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "790d4c5e-a996-4e2c-9f21-b6c4c2c34cf2",
+            "example": "5eae933b-2fd4-4791-9e27-6b63879e5a31",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13334,7 +13361,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "cc540c04-7e24-4ced-aee9-d77b7a317c7f",
+            "example": "110949d5-d48e-4156-a93e-88ff1861577b",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -29431,19 +29458,21 @@
                     },
                     "billing_document_type": {
                       "enum": [
+                        "reconciliation_credit_note",
+                        "credit_note",
+                        "prefunding_credit_note",
+                        "eor_reserve_credit_note",
+                        "supplemental_service_credit_note",
                         "reconciliation_invoice",
+                        "contractor_management_invoice",
+                        "cor_service_invoice",
+                        "eor_reserve_invoice",
                         "prefunding_invoice",
                         "supplemental_service_invoice",
-                        "reconciliation_credit_note",
-                        "peo_payroll_invoice",
-                        "contractor_management_invoice",
-                        "remote_plan_invoice",
-                        "credit_note",
-                        "eor_reserve_invoice",
-                        "eor_reserve_credit_note",
-                        "peo_service_invoice",
                         "payroll_service_invoice",
-                        "cor_service_invoice"
+                        "remote_plan_invoice",
+                        "peo_payroll_invoice",
+                        "peo_service_invoice"
                       ],
                       "type": "string"
                     },
@@ -32332,6 +32361,14 @@
           "number": "ABC123",
           "paid_out_at": "2024-06-05T12:00:00Z",
           "pay_out_method": "swift_our",
+          "payment": {
+            "amount_due": 350000,
+            "billing_document_id": null,
+            "currency": "USD",
+            "due_date": "2024-06-15",
+            "reference": "TR0000000042",
+            "status": "awaiting_payment"
+          },
           "processing_fee": 500,
           "processing_fee_currency": "USD",
           "processing_fee_payer": "company",
@@ -32432,6 +32469,9 @@
             ],
             "nullable": true,
             "type": "string"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/ContractorInvoicePayment"
           },
           "processing_fee": {
             "description": "SWIFT fee amount in cents. Only present when pay_out_method is swift or swift_our.",
@@ -32537,6 +32577,68 @@
         "title": "ContractorInvoiceItemType",
         "type": "string"
       },
+      "ContractorInvoicePayment": {
+        "additionalProperties": false,
+        "description": "The payment that settles this invoice, or `null` while no payment does. `reference` is what the company writes on the wire: for Contractor Management it is the transaction receipt (TR) number shown in Remote under Contractor Payments then Transactions; for Contractor of Record it is the Remote invoice number. The reference changes when a payment is reset and re-initiated, so read it before every wire. `amount_due` is the total of the payment this invoice belongs to, shared by every invoice in it: group invoices by `reference` and pay each reference once. `status: awaiting_payment` means Remote has not received the funds, not that a bank transfer is expected - the invoice's pay-in details are the only authority on whether and where to wire. `status: blocked` means the company must not wire: the payment is on a compliance hold.",
+        "example": {
+          "amount_due": 350000,
+          "billing_document_id": null,
+          "currency": "USD",
+          "due_date": "2024-06-15",
+          "reference": "TR0000000042",
+          "status": "awaiting_payment"
+        },
+        "nullable": true,
+        "properties": {
+          "amount_due": {
+            "description": "Total amount of the payment in cents, shared by every invoice in it.",
+            "example": 350000,
+            "type": "integer"
+          },
+          "billing_document_id": {
+            "description": "The billing document's public id. Set only for Contractor-of-Record invoices, null otherwise.",
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "due_date": {
+            "$ref": "#/components/schemas/NullableDate"
+          },
+          "reference": {
+            "description": "The reference to quote when paying: the transaction receipt number, or the Remote invoice number for Contractor of Record.",
+            "example": "TR0000000042",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ContractorInvoicePaymentStatus"
+          }
+        },
+        "required": [
+          "reference",
+          "amount_due",
+          "currency",
+          "due_date",
+          "status",
+          "billing_document_id"
+        ],
+        "title": "ContractorInvoicePayment",
+        "type": "object"
+      },
+      "ContractorInvoicePaymentStatus": {
+        "description": "Where the payment stands: `awaiting_payment` means Remote has not received the funds and the payment is still expected, `processing` that a direct debit or card collection is in flight, and `paid` that Remote has received the funds. `blocked` means the payment is on a compliance hold: the reference stays valid, but do not wire while the hold lasts - the payment returns to `awaiting_payment` once Remote lifts it.",
+        "enum": [
+          "awaiting_payment",
+          "blocked",
+          "processing",
+          "paid"
+        ],
+        "example": "awaiting_payment",
+        "title": "ContractorInvoicePaymentStatus",
+        "type": "string"
+      },
       "ContractorInvoicePreviewResponse": {
         "additionalProperties": false,
         "description": "Returns a base64 encoded Contractor Invoice preview document.",
@@ -32607,6 +32709,14 @@
               "number": "ABC123",
               "paid_out_at": "2024-06-05T12:00:00Z",
               "pay_out_method": "swift_our",
+              "payment": {
+                "amount_due": 350000,
+                "billing_document_id": null,
+                "currency": "USD",
+                "due_date": "2024-06-15",
+                "reference": "TR0000000042",
+                "status": "awaiting_payment"
+              },
               "processing_fee": 500,
               "processing_fee_currency": "USD",
               "processing_fee_payer": "company",
@@ -43493,6 +43603,61 @@
               "total_pages": 2
             },
             "properties": {
+              "aggregates": {
+                "additionalProperties": true,
+                "description": "Import-type-specific aggregates computed over the complete import job",
+                "properties": {
+                  "team_member_counts": {
+                    "additionalProperties": false,
+                    "description": "Distinct team members across the complete import job, counted once even when they are split across several table records. `needs_changes` and `ready_to_submit` are mutually exclusive; `successfully_assigned` and `failed_to_assign` are subsets of `ready_to_submit`. The counts describe the job as of `job_stage`: the same rows count as needing changes before submission and as failed to assign afterwards.",
+                    "properties": {
+                      "failed_to_assign": {
+                        "description": "Team members with at least one row that failed to be assigned",
+                        "type": "integer"
+                      },
+                      "job_stage": {
+                        "description": "  The stage of the import job.\n  * `creation` - The import job is in the creation stage, which means the rows are being created.\n  * `column_mapping` - The import job is in the column mapping stage, which means the CSV headers are being mapped to JSON schema fields.\n  * `validation` - The import job is in the validation stage, which means the rows are being validated.\n  * `submission` - The import job is in the submission stage, which means the rows are being submitted.\n",
+                        "enum": [
+                          "creation",
+                          "column_mapping",
+                          "validation",
+                          "submission"
+                        ],
+                        "example": "submission",
+                        "nullable": false,
+                        "title": "BulkImport.ImportJobStage",
+                        "type": "string"
+                      },
+                      "needs_changes": {
+                        "description": "Team members with at least one row that needs changes before the job can be submitted",
+                        "type": "integer"
+                      },
+                      "ready_to_submit": {
+                        "description": "Team members with nothing blocking submission, and at least one row to submit",
+                        "type": "integer"
+                      },
+                      "successfully_assigned": {
+                        "description": "Team members whose rows have all been assigned, with no failures",
+                        "type": "integer"
+                      },
+                      "total": {
+                        "description": "Distinct team members in the job. Rows with no employee are counted as one unidentified team member",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "total",
+                      "ready_to_submit",
+                      "needs_changes",
+                      "successfully_assigned",
+                      "failed_to_assign",
+                      "job_stage"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
               "counts_by_column": {
                 "additionalProperties": {
                   "additionalProperties": false,
@@ -46070,6 +46235,14 @@
               "number": "ABC123",
               "paid_out_at": "2024-06-05T12:00:00Z",
               "pay_out_method": "swift_our",
+              "payment": {
+                "amount_due": 350000,
+                "billing_document_id": null,
+                "currency": "USD",
+                "due_date": "2024-06-15",
+                "reference": "TR0000000042",
+                "status": "awaiting_payment"
+              },
               "processing_fee": 500,
               "processing_fee_currency": "USD",
               "processing_fee_payer": "company",

@@ -122,6 +122,14 @@ This endpoint accepts any one of the following token types:
               "number": "ABC123",
               "paid_out_at": "2024-06-05T12:00:00Z",
               "pay_out_method": "swift_our",
+              "payment": {
+                "amount_due": 350000,
+                "billing_document_id": null,
+                "currency": "USD",
+                "due_date": "2024-06-15",
+                "reference": "TR0000000042",
+                "status": "awaiting_payment"
+              },
               "processing_fee": 500,
               "processing_fee_currency": "USD",
               "processing_fee_payer": "company",
@@ -191,6 +199,56 @@ This endpoint accepts any one of the following token types:
           "type"
         ],
         "title": "ContractorInvoiceItem",
+        "type": "object"
+      },
+      "ContractorInvoicePayment": {
+        "additionalProperties": false,
+        "description": "The payment that settles this invoice, or `null` while no payment does. `reference` is what the company writes on the wire: for Contractor Management it is the transaction receipt (TR) number shown in Remote under Contractor Payments then Transactions; for Contractor of Record it is the Remote invoice number. The reference changes when a payment is reset and re-initiated, so read it before every wire. `amount_due` is the total of the payment this invoice belongs to, shared by every invoice in it: group invoices by `reference` and pay each reference once. `status: awaiting_payment` means Remote has not received the funds, not that a bank transfer is expected - the invoice's pay-in details are the only authority on whether and where to wire. `status: blocked` means the company must not wire: the payment is on a compliance hold.",
+        "example": {
+          "amount_due": 350000,
+          "billing_document_id": null,
+          "currency": "USD",
+          "due_date": "2024-06-15",
+          "reference": "TR0000000042",
+          "status": "awaiting_payment"
+        },
+        "nullable": true,
+        "properties": {
+          "amount_due": {
+            "description": "Total amount of the payment in cents, shared by every invoice in it.",
+            "example": 350000,
+            "type": "integer"
+          },
+          "billing_document_id": {
+            "description": "The billing document's public id. Set only for Contractor-of-Record invoices, null otherwise.",
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "due_date": {
+            "$ref": "#/components/schemas/NullableDate"
+          },
+          "reference": {
+            "description": "The reference to quote when paying: the transaction receipt number, or the Remote invoice number for Contractor of Record.",
+            "example": "TR0000000042",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ContractorInvoicePaymentStatus"
+          }
+        },
+        "required": [
+          "reference",
+          "amount_due",
+          "currency",
+          "due_date",
+          "status",
+          "billing_document_id"
+        ],
+        "title": "ContractorInvoicePayment",
         "type": "object"
       },
       "NotFoundResponse": {
@@ -267,11 +325,31 @@ This endpoint accepts any one of the following token types:
         "title": "UnprocessableEntityResponse",
         "type": "object"
       },
+      "ContractorInvoicePaymentStatus": {
+        "description": "Where the payment stands: `awaiting_payment` means Remote has not received the funds and the payment is still expected, `processing` that a direct debit or card collection is in flight, and `paid` that Remote has received the funds. `blocked` means the payment is on a compliance hold: the reference stays valid, but do not wire while the hold lasts - the payment returns to `awaiting_payment` once Remote lifts it.",
+        "enum": [
+          "awaiting_payment",
+          "blocked",
+          "processing",
+          "paid"
+        ],
+        "example": "awaiting_payment",
+        "title": "ContractorInvoicePaymentStatus",
+        "type": "string"
+      },
       "UuidSlug": {
         "description": "Identifier of the employment being terminated.",
         "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
         "format": "uuid",
         "title": "UuidSlug",
+        "type": "string"
+      },
+      "NullableDate": {
+        "description": "Optional UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format",
+        "example": "2021-07-01",
+        "format": "date",
+        "nullable": true,
+        "title": "NullableDate",
         "type": "string"
       },
       "UnauthorizedResponse": {
@@ -366,6 +444,14 @@ This endpoint accepts any one of the following token types:
           "number": "ABC123",
           "paid_out_at": "2024-06-05T12:00:00Z",
           "pay_out_method": "swift_our",
+          "payment": {
+            "amount_due": 350000,
+            "billing_document_id": null,
+            "currency": "USD",
+            "due_date": "2024-06-15",
+            "reference": "TR0000000042",
+            "status": "awaiting_payment"
+          },
           "processing_fee": 500,
           "processing_fee_currency": "USD",
           "processing_fee_payer": "company",
@@ -466,6 +552,9 @@ This endpoint accepts any one of the following token types:
             ],
             "nullable": true,
             "type": "string"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/ContractorInvoicePayment"
           },
           "processing_fee": {
             "description": "SWIFT fee amount in cents. Only present when pay_out_method is swift or swift_our.",
@@ -762,7 +851,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "1e5c1151-75ca-407e-a935-739c960580bf",
+            "example": "d4770039-9f86-47d9-ab63-35cd84fa8de5",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,

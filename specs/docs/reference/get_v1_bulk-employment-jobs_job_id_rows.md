@@ -937,6 +937,61 @@ This endpoint accepts any one of the following token types:
               "total_pages": 2
             },
             "properties": {
+              "aggregates": {
+                "additionalProperties": true,
+                "description": "Import-type-specific aggregates computed over the complete import job",
+                "properties": {
+                  "team_member_counts": {
+                    "additionalProperties": false,
+                    "description": "Distinct team members across the complete import job, counted once even when they are split across several table records. `needs_changes` and `ready_to_submit` are mutually exclusive; `successfully_assigned` and `failed_to_assign` are subsets of `ready_to_submit`. The counts describe the job as of `job_stage`: the same rows count as needing changes before submission and as failed to assign afterwards.",
+                    "properties": {
+                      "failed_to_assign": {
+                        "description": "Team members with at least one row that failed to be assigned",
+                        "type": "integer"
+                      },
+                      "job_stage": {
+                        "description": "  The stage of the import job.\n  * `creation` - The import job is in the creation stage, which means the rows are being created.\n  * `column_mapping` - The import job is in the column mapping stage, which means the CSV headers are being mapped to JSON schema fields.\n  * `validation` - The import job is in the validation stage, which means the rows are being validated.\n  * `submission` - The import job is in the submission stage, which means the rows are being submitted.\n",
+                        "enum": [
+                          "creation",
+                          "column_mapping",
+                          "validation",
+                          "submission"
+                        ],
+                        "example": "submission",
+                        "nullable": false,
+                        "title": "BulkImport.ImportJobStage",
+                        "type": "string"
+                      },
+                      "needs_changes": {
+                        "description": "Team members with at least one row that needs changes before the job can be submitted",
+                        "type": "integer"
+                      },
+                      "ready_to_submit": {
+                        "description": "Team members with nothing blocking submission, and at least one row to submit",
+                        "type": "integer"
+                      },
+                      "successfully_assigned": {
+                        "description": "Team members whose rows have all been assigned, with no failures",
+                        "type": "integer"
+                      },
+                      "total": {
+                        "description": "Distinct team members in the job. Rows with no employee are counted as one unidentified team member",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "total",
+                      "ready_to_submit",
+                      "needs_changes",
+                      "successfully_assigned",
+                      "failed_to_assign",
+                      "job_stage"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
               "counts_by_column": {
                 "additionalProperties": {
                   "additionalProperties": false,

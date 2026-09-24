@@ -158,19 +158,21 @@ This endpoint accepts any one of the following token types:
                     },
                     "billing_document_type": {
                       "enum": [
+                        "reconciliation_credit_note",
+                        "credit_note",
+                        "prefunding_credit_note",
+                        "eor_reserve_credit_note",
+                        "supplemental_service_credit_note",
                         "reconciliation_invoice",
+                        "contractor_management_invoice",
+                        "cor_service_invoice",
+                        "eor_reserve_invoice",
                         "prefunding_invoice",
                         "supplemental_service_invoice",
-                        "reconciliation_credit_note",
-                        "peo_payroll_invoice",
-                        "contractor_management_invoice",
-                        "remote_plan_invoice",
-                        "credit_note",
-                        "eor_reserve_invoice",
-                        "eor_reserve_credit_note",
-                        "peo_service_invoice",
                         "payroll_service_invoice",
-                        "cor_service_invoice"
+                        "remote_plan_invoice",
+                        "peo_payroll_invoice",
+                        "peo_service_invoice"
                       ],
                       "type": "string"
                     },
@@ -495,6 +497,33 @@ This endpoint accepts any one of the following token types:
             "name": "period",
             "required": false,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filters the results by the type of the billing document. Matches the response's `billing_document_type` field.",
+            "example": "reconciliation_invoice",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "enum": [
+                "reconciliation_credit_note",
+                "credit_note",
+                "prefunding_credit_note",
+                "eor_reserve_credit_note",
+                "supplemental_service_credit_note",
+                "reconciliation_invoice",
+                "contractor_management_invoice",
+                "cor_service_invoice",
+                "eor_reserve_invoice",
+                "prefunding_invoice",
+                "supplemental_service_invoice",
+                "payroll_service_invoice",
+                "remote_plan_invoice",
+                "peo_payroll_invoice",
+                "peo_service_invoice"
+              ],
               "type": "string"
             }
           },
