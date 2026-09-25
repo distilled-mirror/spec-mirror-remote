@@ -4897,7 +4897,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "f53b4832-5964-475b-8fb9-9ce45fcf63f4",
+            "example": "b5a9933f-82a3-4dfc-9d9d-f1c72e6246f7",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5293,7 +5293,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "f426946b-e13e-42ae-ad34-bb6492360447",
+            "example": "93c90b26-728f-4a53-9746-b742e5ae88e6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5386,7 +5386,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "87f49582-eb67-41d3-9297-6da5e8785408",
+            "example": "a06eeeda-6cc2-4aea-b703-94417852d71e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5470,7 +5470,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "23053300-a2b3-483d-b527-70c5840f3c5e",
+            "example": "704f55fe-850d-454d-be44-f807166aac37",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5566,7 +5566,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "d4770039-9f86-47d9-ab63-35cd84fa8de5",
+            "example": "c3e4ebaf-7e98-4b72-b401-12ea2d1468d4",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5775,7 +5775,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "5eae933b-2fd4-4791-9e27-6b63879e5a31",
+            "example": "7ec8ed26-6a6d-4f46-85b2-dd2d4aaba9d3",
             "in": "path",
             "name": "id",
             "required": true,
@@ -12603,6 +12603,15 @@
               "type": "string"
             },
             "x-resource-type": "employment"
+          },
+          {
+            "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
+            "in": "query",
+            "name": "group_tax_servicing_countries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "requestBody": {
@@ -13361,7 +13370,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "110949d5-d48e-4156-a93e-88ff1861577b",
+            "example": "937a2da2-e37b-41f6-94eb-5292acdc9a4d",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -25825,6 +25834,15 @@
                 }
               ]
             }
+          },
+          {
+            "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
+            "in": "query",
+            "name": "group_tax_servicing_countries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -25932,6 +25950,15 @@
                   "type": "string"
                 }
               ]
+            }
+          },
+          {
+            "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
+            "in": "query",
+            "name": "group_tax_servicing_countries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
@@ -27504,12 +27531,12 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "employment_countries",
-                "assigned_billing_legal_entities",
                 "direct_and_indirect_reports",
+                "employment_countries",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports"
+                "onboarding_reports",
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,

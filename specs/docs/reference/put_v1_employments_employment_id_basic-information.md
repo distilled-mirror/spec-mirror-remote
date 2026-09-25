@@ -1430,6 +1430,15 @@ This endpoint accepts any one of the following token types:
               "type": "string"
             },
             "x-resource-type": "employment"
+          },
+          {
+            "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
+            "in": "query",
+            "name": "group_tax_servicing_countries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "requestBody": {
