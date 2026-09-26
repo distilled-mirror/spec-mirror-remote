@@ -726,6 +726,61 @@ This endpoint accepts any one of the following token types:
         ]
       }
     },
+    "contractor_invoice.funds_returned": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when the payout of a contractor invoice is returned — the funds were sent but the\ncontractor's bank rejected them, for example because of incorrect bank details. It is sent once per invoice:\nif a retry fails or is returned again, the event is not sent again.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.funds_returned",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.funds_returned"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "contractor_invoice_id",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "contractor_invoice.funds_returned",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
     "contractor_invoice.issued": {
       "post": {
         "deprecated": false,
@@ -831,6 +886,61 @@ This endpoint accepts any one of the following token types:
         },
         "security": [],
         "summary": "contractor_invoice.paid_out",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "contractor_invoice.pay_out_failed": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when the payout of a contractor invoice fails — the funds could not be sent to the\ncontractor, for example because of an issue with the contractor's bank details. It is sent once per invoice:\nif a retry fails again, the event is not sent again.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.pay_out_failed",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.pay_out_failed"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "contractor_invoice_id",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "contractor_invoice.pay_out_failed",
         "tags": [
           "Invoices"
         ]

@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 414,
+  "count": 416,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -123,6 +123,11 @@
       "file": "reference/contractor_invoiceemployer_paid.md"
     },
     {
+      "page": "https://developer.remote.com/reference/contractor_invoicefunds_returned",
+      "markdown": "https://developer.remote.com/reference/contractor_invoicefunds_returned.md",
+      "file": "reference/contractor_invoicefunds_returned.md"
+    },
+    {
       "page": "https://developer.remote.com/reference/contractor_invoiceissued",
       "markdown": "https://developer.remote.com/reference/contractor_invoiceissued.md",
       "file": "reference/contractor_invoiceissued.md"
@@ -131,6 +136,11 @@
       "page": "https://developer.remote.com/reference/contractor_invoicepaid_out",
       "markdown": "https://developer.remote.com/reference/contractor_invoicepaid_out.md",
       "file": "reference/contractor_invoicepaid_out.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/contractor_invoicepay_out_failed",
+      "markdown": "https://developer.remote.com/reference/contractor_invoicepay_out_failed.md",
+      "file": "reference/contractor_invoicepay_out_failed.md"
     },
     {
       "page": "https://developer.remote.com/reference/contractor_invoicepayment_initiated",

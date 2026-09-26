@@ -115,6 +115,7 @@ This endpoint accepts any one of the following token types:
               "work_confirmation",
               "contract",
               "document",
+              "portugal_training_certificate",
               "tax_document",
               "termination_reason_file",
               "timesheet",

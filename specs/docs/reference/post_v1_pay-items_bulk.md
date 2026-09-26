@@ -94,6 +94,29 @@ This endpoint accepts any one of the following token types:
         "title": "PayItemProviderDataParams",
         "type": "object"
       },
+      "PayItemBulkCreateFailureDetail": {
+        "additionalProperties": false,
+        "example": {
+          "code": "effective_date_after_termination_date",
+          "message": "Effective date must be on or before Mar 1, 2026 — the employee's termination date."
+        },
+        "properties": {
+          "code": {
+            "description": "Stable, machine-parseable failure reason.",
+            "type": "string"
+          },
+          "message": {
+            "description": "Human-readable detail for the failure reason.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "PayItemBulkCreateFailureDetail",
+        "type": "object"
+      },
       "CurrencyCode": {
         "description": "Currency code of the SWIFT fee. Only present when processing_fee is set.",
         "example": "BRL",
@@ -465,13 +488,24 @@ This endpoint accepts any one of the following token types:
         },
         "properties": {
           "error": {
-            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, and `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element.",
+            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date.",
             "oneOf": [
               {
                 "type": "string"
               },
               {
-                "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                "$ref": "#/components/schemas/PayItemBulkCreateFailureDetail"
+              },
+              {
+                "properties": {
+                  "errors": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "errors"
+                ],
+                "type": "object"
               }
             ]
           },

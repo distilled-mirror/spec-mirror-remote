@@ -4897,7 +4897,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "b5a9933f-82a3-4dfc-9d9d-f1c72e6246f7",
+            "example": "c01f7210-75ab-47f4-b5c7-c742e815e4ba",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5293,7 +5293,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "93c90b26-728f-4a53-9746-b742e5ae88e6",
+            "example": "8f231d6d-3996-42f7-a25f-dcbccecdba26",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5386,7 +5386,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a06eeeda-6cc2-4aea-b703-94417852d71e",
+            "example": "397ecdcc-a9ba-451c-bd06-08a6f221f1b2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5470,7 +5470,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "704f55fe-850d-454d-be44-f807166aac37",
+            "example": "333d4c74-bef0-486e-bf30-3c00db033f3b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5566,7 +5566,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "c3e4ebaf-7e98-4b72-b401-12ea2d1468d4",
+            "example": "beffc2cc-4649-4573-ac81-da52f4a54f9e",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5775,7 +5775,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "7ec8ed26-6a6d-4f46-85b2-dd2d4aaba9d3",
+            "example": "ad8e85d1-fb59-4515-917e-944be45a92ad",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13370,7 +13370,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "937a2da2-e37b-41f6-94eb-5292acdc9a4d",
+            "example": "1a3c4dbd-ebe4-4e00-9de5-3e82797469bb",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -37321,8 +37321,10 @@
                 "contract.termination_date_reached",
                 "contract_document.status.changed",
                 "contractor_invoice.employer_paid",
+                "contractor_invoice.funds_returned",
                 "contractor_invoice.issued",
                 "contractor_invoice.paid_out",
+                "contractor_invoice.pay_out_failed",
                 "contractor_invoice.payment_initiated",
                 "custom_field.value_updated",
                 "employment.benefits.selected",
@@ -40597,6 +40599,7 @@
               "work_confirmation",
               "contract",
               "document",
+              "portugal_training_certificate",
               "tax_document",
               "termination_reason_file",
               "timesheet",
@@ -49976,6 +49979,29 @@
         "title": "PayItem",
         "type": "object"
       },
+      "PayItemBulkCreateFailureDetail": {
+        "additionalProperties": false,
+        "example": {
+          "code": "effective_date_after_termination_date",
+          "message": "Effective date must be on or before Mar 1, 2026 — the employee's termination date."
+        },
+        "properties": {
+          "code": {
+            "description": "Stable, machine-parseable failure reason.",
+            "type": "string"
+          },
+          "message": {
+            "description": "Human-readable detail for the failure reason.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "PayItemBulkCreateFailureDetail",
+        "type": "object"
+      },
       "PayItemBulkCreateFailures": {
         "additionalProperties": false,
         "example": {
@@ -49984,13 +50010,24 @@
         },
         "properties": {
           "error": {
-            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, and `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element.",
+            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date.",
             "oneOf": [
               {
                 "type": "string"
               },
               {
-                "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                "$ref": "#/components/schemas/PayItemBulkCreateFailureDetail"
+              },
+              {
+                "properties": {
+                  "errors": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "errors"
+                ],
+                "type": "object"
               }
             ]
           },
@@ -56926,8 +56963,10 @@
                 "contract.termination_date_reached",
                 "contract_document.status.changed",
                 "contractor_invoice.employer_paid",
+                "contractor_invoice.funds_returned",
                 "contractor_invoice.issued",
                 "contractor_invoice.paid_out",
+                "contractor_invoice.pay_out_failed",
                 "contractor_invoice.payment_initiated",
                 "custom_field.value_updated",
                 "employment.benefits.selected",
@@ -57546,8 +57585,10 @@
                 "contract.termination_date_reached",
                 "contract_document.status.changed",
                 "contractor_invoice.employer_paid",
+                "contractor_invoice.funds_returned",
                 "contractor_invoice.issued",
                 "contractor_invoice.paid_out",
+                "contractor_invoice.pay_out_failed",
                 "contractor_invoice.payment_initiated",
                 "custom_field.value_updated",
                 "employment.benefits.selected",
@@ -57812,8 +57853,10 @@
               "contract.termination_date_reached",
               "contract_document.status.changed",
               "contractor_invoice.employer_paid",
+              "contractor_invoice.funds_returned",
               "contractor_invoice.issued",
               "contractor_invoice.paid_out",
+              "contractor_invoice.pay_out_failed",
               "contractor_invoice.payment_initiated",
               "custom_field.value_updated",
               "employment.benefits.selected",
