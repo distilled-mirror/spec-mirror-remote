@@ -2,41 +2,49 @@
 
 > The Remote API empowers our customers and partners to easily consolidate and share global employee data across platforms
 
-Append .md to any documentation page URL to get its markdown version.
-
-## Guides
+## Guides: Get Started
 - [Getting Started with Remote](https://developer.remote.com/docs/getting-started-with-remote.md): Start here to pick the right entry point into the Remote API — sync data, subscribe to events, or embed Remote in your product — then get sandbox access and make your first call.
 - [Sandbox Quickstart](https://developer.remote.com/docs/sandbox-quickstart.md)
 - [Your First API Call](https://developer.remote.com/docs/your-first-api-call.md): Make your first authenticated request to the Remote API and get real data back.
 - [Introduction to the Remote CLI](https://developer.remote.com/docs/introduction-to-the-remote-cli.md)
 - [Remote CLI Quick Start](https://developer.remote.com/docs/remote-cli-quick-start.md)
 - [Changelogs](https://developer.remote.com/docs/changelogs.md): Remote API has a broad ecosystem to support partner integration. You can find where to locate changelogs and improvements for each component in the table below.
+
+## Guides: Integration Essentials
 - [Authentication](https://developer.remote.com/docs/authentication.md): Every Remote API request uses a bearer token. This page shows which token to get and how to send it.
 - [Introduction to Webhooks](https://developer.remote.com/docs/introduction-to-webhooks.md)
 - [Subscribing to Webhooks](https://developer.remote.com/docs/subscribing-to-webhooks.md)
 - [Receiving Webhooks](https://developer.remote.com/docs/receiving-webhooks.md)
 - [Verifying Webhooks](https://developer.remote.com/docs/verifying-webhooks.md)
 - [Available Webhooks](https://developer.remote.com/docs/available-webhooks.md)
+
+## Guides: Build with AI
 - [Introduction to Build with AI](https://developer.remote.com/docs/introduction-to-build-with-ai.md)
 - [Remote Agent Skills](https://developer.remote.com/docs/remote-agent-skills.md)
 - [Introduction to Remote MCP](https://developer.remote.com/docs/introduction-to-remote-mcp.md): Learn what Remote.com MCP is, how it authenticates, which OAuth scopes it requires, and which clients it supports.
 - [Remote MCP Quick Start](https://developer.remote.com/docs/quick-start-guide-2.md)
 - [Build Integrations with AI](https://developer.remote.com/docs/build-integrations-with-ai.md)
 - [Build Integrations Quick Start](https://developer.remote.com/docs/build-with-ai-quick-start.md)
+
+## Guides: Sync your workforce
 - [Sync your workforce data efficiently](https://developer.remote.com/docs/sync-workforce-data.md): Keep your systems in sync with Remote's workforce state the efficient way: load the full list once, then let webhooks push you the changes. Do not poll one employee at a time.
 - [Creating Employees with Remote API](https://developer.remote.com/docs/creating-employees-with-remote-api.md)
-- [Prerequisites](https://developer.remote.com/docs/prerequisites.md)
-- [Create Employment](https://developer.remote.com/docs/create-new-employment.md)
-- [Employment Status](https://developer.remote.com/docs/employment-statuses.md)
-- [User Status](https://developer.remote.com/docs/user-status.md)
-- [Contract Status](https://developer.remote.com/docs/contract-status.md)
-- [Employment Lifecycle Stages](https://developer.remote.com/docs/employment-lifecycle-stages.md)
-- [Update and Invite Employment](https://developer.remote.com/docs/update-and-invite-employment.md)
-- [Cancel Onboarding](https://developer.remote.com/docs/cancel-onboarding.md)
+  - [Prerequisites](https://developer.remote.com/docs/prerequisites.md)
+  - [Create Employment](https://developer.remote.com/docs/create-new-employment.md)
+    - [Employment Status](https://developer.remote.com/docs/employment-statuses.md)
+    - [User Status](https://developer.remote.com/docs/user-status.md)
+    - [Contract Status](https://developer.remote.com/docs/contract-status.md)
+    - [Employment Lifecycle Stages](https://developer.remote.com/docs/employment-lifecycle-stages.md)
+  - [Update and Invite Employment](https://developer.remote.com/docs/update-and-invite-employment.md)
+  - [Cancel Onboarding](https://developer.remote.com/docs/cancel-onboarding.md)
 - [Identity Verification](https://developer.remote.com/docs/identity-verification.md)
 - [Offboarding an Employee](https://developer.remote.com/docs/offboarding-an-employee.md)
+
+## Guides: Working with SDK
 - [Introduction to Remote SDKs](https://developer.remote.com/docs/introduction-to-remote-sdks.md): 🚀 Accelerate Your Integration: How the Remote Flows SDK simplifies your development
 - [Remote Flows SDK](https://developer.remote.com/docs/remote-flows-sdk.md)
+
+## Guides: Working with Remote API
 - [Environment Setup](https://developer.remote.com/docs/environment-setup.md)
 - [How JSON Schemas Work](https://developer.remote.com/docs/how-json-schemas-work.md)
 - [Date and Time Format](https://developer.remote.com/docs/date-and-time-format.md)
@@ -46,41 +54,57 @@ Append .md to any documentation page URL to get its markdown version.
 - [Magic Links for Passwordless Login](https://developer.remote.com/docs/magic-links-for-passwordless-login.md)
 - [SSO Configuration](https://developer.remote.com/docs/sso-configuration.md)
 - [Scopes](https://developer.remote.com/docs/scopes.md): Control exactly what your integration can read and write on a company's behalf.
+
+## Guides: Embed in your product
 - [Partner with Remote](https://developer.remote.com/docs/getting-started-for-partners.md)
 - [Robust JSON Schemas for Partners](https://developer.remote.com/docs/empowering-our-partners-with-robust-json-schemas.md)
 - [Rate Limit Policy](https://developer.remote.com/docs/rate-limit-for-partner.md)
 - [Authorization for Partners](https://developer.remote.com/docs/authentication-for-partners.md)
-- [Authorization Code Flow](https://developer.remote.com/docs/authorization-code-flow.md): Let an existing Remote company grant your integration permission to manage their data on their behalf.
-- [Create a company with partner credentials](https://developer.remote.com/docs/getting-company-consent.md): Eligible partners can create a Remote company and receive access tokens for it in a single request.
-- [Refresh Token Flow](https://developer.remote.com/docs/refresh-token-flow.md)
-- [Client Credentials Flow for Partners](https://developer.remote.com/docs/client-credentials-flow-for-partners.md)
-- [Authorization Method — OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion.md)
+  - [Authorization Code Flow](https://developer.remote.com/docs/authorization-code-flow.md): Let an existing Remote company grant your integration permission to manage their data on their behalf.
+  - [Create a company with partner credentials](https://developer.remote.com/docs/getting-company-consent.md): Eligible partners can create a Remote company and receive access tokens for it in a single request.
+  - [Refresh Token Flow](https://developer.remote.com/docs/refresh-token-flow.md)
+  - [Client Credentials Flow for Partners](https://developer.remote.com/docs/client-credentials-flow-for-partners.md)
+  - [Authorization Method — OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion.md)
 - [Build with Merge](https://developer.remote.com/docs/build-with-merge.md): Build a data sync integration with Remote via Merge
 - [Employment Cost Estimation](https://developer.remote.com/docs/employment-cost-estimation.md)
+
+## Guides: For Customers
 - [Quick Start Guide for Customers](https://developer.remote.com/docs/quick-start-guide.md)
 - [Obtaining access token](https://developer.remote.com/docs/authorization-for-customers.md)
 - [Use Case and Examples](https://developer.remote.com/docs/use-case-and-examples.md)
 - [Rate Limit Policy](https://developer.remote.com/docs/rate-limit.md)
+
+## Guides: Country Management
 - [Working with Countries API](https://developer.remote.com/docs/working-with-countries.md)
+
+## Guides: Company Creation
 - [Company creation, activation & Hiring Eligibility](https://developer.remote.com/docs/temporary-company-creation.md): This section outlines key processes on the Remote platform: creating, activating a company and ensuring compliance with EOR (Employer of Record) hiring eligibility.
-- [Company creation](https://developer.remote.com/docs/creating-a-company.md): In this guide, you will learn how to   - Request authorization from companies that you would like to manage on their behalf. - Create your first company and obtain a company-scoped access token at…
-- [EOR Hiring Eligibility](https://developer.remote.com/docs/eor-hiring-eligibility.md): This page describes the different signals we provide in the form of Webhooks to add visibility to the EOR hiring eligibility checks related to a company creation and employee onboarding.
-- [Company statuses](https://developer.remote.com/docs/company-statuses.md): This page explains the process for activating a company, including required address details and possible events
+  - [Company creation](https://developer.remote.com/docs/creating-a-company.md): In this guide, you will learn how to   - Request authorization from companies that you would like to manage on their behalf. - Create your first company and obtain a company-scoped access token at…
+  - [EOR Hiring Eligibility](https://developer.remote.com/docs/eor-hiring-eligibility.md): This page describes the different signals we provide in the form of Webhooks to add visibility to the EOR hiring eligibility checks related to a company creation and employee onboarding.
+  - [Company statuses](https://developer.remote.com/docs/company-statuses.md): This page explains the process for activating a company, including required address details and possible events
+
+## Guides: Employment Payments
 - [One-Time Bonus and Recurring Incentives](https://developer.remote.com/docs/working-with-incentives.md)
 - [Working with Expenses](https://developer.remote.com/docs/working-with-expenses.md)
+
+## Guides: Payroll
 - [List Payroll Calendar](https://developer.remote.com/docs/list-payroll-calendar.md)
-- [List Company Payroll Calendar](https://developer.remote.com/docs/list-company-payroll-calendar.md)
-- [List EOR Payroll Calendar](https://developer.remote.com/docs/list-eor-payroll-calendar.md)
+  - [List Company Payroll Calendar](https://developer.remote.com/docs/list-company-payroll-calendar.md)
+  - [List EOR Payroll Calendar](https://developer.remote.com/docs/list-eor-payroll-calendar.md)
+
+## Guides: Financial Reporting
 - [Pull your EOR cost breakdown for reconciliation](https://developer.remote.com/docs/pull-eor-cost-breakdown.md): Reconcile Remote EOR costs in your own accounting system — match what you pre-funded against what you actually paid, per employee, and book it to your GL.
 - [Pull your PEO cost breakdown for reconciliation](https://developer.remote.com/docs/pull-peo-cost-breakdown.md): Bring Remote US PEO costs into your accounting system, per employee. PEO bills on actuals — a payroll invoice each pay run, plus a monthly service invoice.
 - [Pull contractor invoices for AP](https://developer.remote.com/docs/pull-contractor-invoices-for-ap.md): Bring Remote contractor invoices into your accounts-payable workflow — contractors are paid via invoices, not payroll, so they're a separate, simpler pull.
 - [Pull GL & payroll reports (Global Payroll)](https://developer.remote.com/docs/pull-gl-and-payroll-reports.md): Get Remote's balanced, account-mapped Global Payroll General Ledger out of Remote via the live Remote API — request, poll, and download after any completed payroll run, or interactively via the…
+
+## Guides: HRIS
 - [Working with Time Off](https://developer.remote.com/docs/working-with-time-off.md)
-- [Leave Policies](https://developer.remote.com/docs/leave-policies-summary.md)
+  - [Leave Policies](https://developer.remote.com/docs/leave-policies-summary.md)
 - [Working with Timesheets](https://developer.remote.com/docs/working-with-timesheets.md)
 - [Benefits Renewal](https://developer.remote.com/docs/benefits-renewal.md)
 
-## API Reference
+## API Reference: Getting Started
 - [Welcome to Remote API](https://developer.remote.com/reference/welcome-to-remote-api.md)
 - [Token](https://developer.remote.com/reference/post_auth_oauth2_token.md): Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows  ## Authentication  This endpoint requires the following token type:  - **Basic…
 - [List countries](https://developer.remote.com/reference/get_v1_countries.md): Returns the countries supported by Remote API, alphabetically ordered. The supported list accounts for creating employment with basic information and it does not imply fully onboarding employment via…
@@ -89,6 +113,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Show legal entity administrative details form schema](https://developer.remote.com/reference/get_v1_countries_country_code_legal_entity_forms_form.md): Returns the json schema of a supported form. Possible form names are: ``` - administrative_details ```  Most forms require a company access token, as they are dependent on certain properties of…
 - [Show form schema](https://developer.remote.com/reference/get_v1_countries_country_code_form.md): Returns the json schema of a supported form. Possible form names are: ``` - address_details  - administrative_details  - bank_account_details  - employment_basic_information  -…
 - [Get token identity](https://developer.remote.com/reference/get_v1_identity_current.md): Shows information about the entities that can be controlled by the current auth token.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access…
+
+## API Reference: Employee Actions
 - [Get employee token identity](https://developer.remote.com/reference/get_v1_employee_current.md): Returns user and company information for the authenticated employee.  ## Authentication  This endpoint requires the following token type:  - **Employee-scoped access token** (`OAuth2Assertion`) —…
 - [List expense categories for the authenticated employee](https://developer.remote.com/reference/get_v1_employee_expense-categories.md): Returns the flat list of expense categories applicable to the current employee. Only active categories are returned, filtered by the employee's country / legal-entity visibility rules. Leaf nodes…
 - [List expenses for the authenticated employee](https://developer.remote.com/reference/get_v1_employee_expenses.md): Returns a paginated list of expenses belonging to the current employee.  ## Authentication  This endpoint requires the following token type:  - **Employee-scoped access token** (`OAuth2Assertion`) —…
@@ -98,6 +124,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [List approved payslip files for the authenticated employee](https://developer.remote.com/reference/get_v1_employee_payslips.md): Returns a paginated list of payslip files belonging to the current employee.  ## Authentication  This endpoint requires the following token type:  - **Employee-scoped access token**…
 - [Show personal information for the authenticated employee](https://developer.remote.com/reference/get_v1_employee_personal-information.md): Returns personal information for the authenticated employee.  ## Authentication  This endpoint requires the following token type:  - **Employee-scoped access token** (`OAuth2Assertion`) — obtained…
 - [List timesheets for the authenticated employee](https://developer.remote.com/reference/get_v1_employee_timesheets.md): Returns a paginated list of timesheets for the authenticated employee.  ## Authentication  This endpoint requires the following token type:  - **Employee-scoped access token** (`OAuth2Assertion`) —…
+
+## API Reference: Benefits
 - [benefit_renewal_request.created](https://developer.remote.com/reference/benefit_renewal_requestcreated.md): This event is triggered when a Benefit Renewal Request is created.
 - [List Benefit Offers By Employment](https://developer.remote.com/reference/get_v1_benefit-offers.md): List benefit offers by employment.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
 - [List Benefit Offers](https://developer.remote.com/reference/get_v1_benefit-offers_country-summaries.md): List benefit offers for each country.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
@@ -108,11 +136,15 @@ Append .md to any documentation page URL to get its markdown version.
 - [Show Benefit Renewal Request](https://developer.remote.com/reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id.md): Show Benefit Renewal Request details.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
 - [Updates a Benefit Renewal Request Response](https://developer.remote.com/reference/post_v1_benefit-renewal-requests_benefit_renewal_request_id.md): Updates a Benefit Renewal Request with the given response.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token**…
 - [Show benefit renewal request schema](https://developer.remote.com/reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id_schema.md): Returns the json schema of the `benefit_renewal_request` form for a specific request. This endpoint requires a company access token, as forms are dependent on certain properties of companies and…
+
+## API Reference: Billing
 - [billing_document.issued](https://developer.remote.com/reference/billing_documentissued-1.md): This event is triggered when a new billing document is issued to the company.
 - [List Billing Documents](https://developer.remote.com/reference/get_v1_billing-documents.md): List billing documents for a company  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
 - [Show Billing Document. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.](https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id.md): Shows a billing document details.  Please contact api-support@remote.com to request access to this endpoint.  ## Authentication  This endpoint accepts any one of the following token types:  -…
 - [Get Billing Document Breakdown. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.](https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown.md): Get billing document breakdown  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the…
 - [Download a billing document PDF](https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf.md): Downloads a billing document PDF  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the…
+
+## API Reference: Integrations
 - [Receive an ADP Marketplace subscription-cancel event](https://developer.remote.com/reference/get_v1_adp_subscription-cancellations.md): Called by ADP Marketplace when a customer cancels their subscription.  ## Authentication  This endpoint requires the following token type:  - **Client credentials access token**…
 - [Receive an ADP Marketplace subscription-change event](https://developer.remote.com/reference/get_v1_adp_subscription-changes.md): Called by ADP Marketplace when a customer changes their subscription (e.g. edition or user count).  ## Authentication  This endpoint requires the following token type:  - **Client credentials access…
 - [Receive an ADP Marketplace subscription-order event](https://developer.remote.com/reference/get_v1_adp_subscription-orders.md): Called by ADP Marketplace when a customer subscribes to Remote's listing.  ## Authentication  This endpoint requires the following token type:  - **Client credentials access token**…
@@ -139,6 +171,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Get user by ID via SCIM v2.0](https://developer.remote.com/reference/get_v1_scim_v2_users_id.md): Retrieves a single user for the authenticated company by user ID  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token**…
 - [List Webhook Events](https://developer.remote.com/reference/get_v1_webhook-events.md): List all webhook events  ## Authentication  This endpoint requires the following token type:  - **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client…
 - [Replay Webhook Events](https://developer.remote.com/reference/post_v1_webhook-events_replay.md): Replay webhook events  ## Authentication  This endpoint requires the following token type:  - **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials…
+
+## API Reference: Companies
 - [company.activated](https://developer.remote.com/reference/companyactivated-1.md): This event is triggered when a company is activated.
 - [company.archived](https://developer.remote.com/reference/companyarchived-1.md): This event is triggered when a company is archived.
 - [company.eor_hiring.additional_information_required](https://developer.remote.com/reference/companyeor_hiringadditional_information_required-1.md): This event is triggered when additional information is required for the EOR hiring process.
@@ -176,6 +210,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Update a Company Manager's billing contact assignment](https://developer.remote.com/reference/patch_v1_company-managers_user_id.md): Assigns or unassigns a Company Manager as the billing contact (primary or additional) for one or more legal entities.  ## Authentication  This endpoint accepts any one of the following token types:…
 - [employment_company_structure_node.updated](https://developer.remote.com/reference/employment_company_structure_nodeupdated-1.md): This event is triggered when an employment company structure node is updated.
 - [List company structure nodes](https://developer.remote.com/reference/get_v1_employments_employment_id_company-structure-nodes.md): Shows all the company structure nodes of an employment.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`)…
+
+## API Reference: Contractors
 - [employment.contractor_management_plan.updated](https://developer.remote.com/reference/employmentcontractor_management_planupdated-1.md): This event is triggered when a contractor's plan changes between Contractor Management (CM) and Contractor Management Plus (CM+).  The payload is stateless. Use the employment endpoint to retrieve…
 - [employment.contractor_of_record_termination.cancelled](https://developer.remote.com/reference/employmentcontractor_of_record_terminationcancelled-1.md): This event is triggered when a contractor of record termination request is cancelled.  The payload is stateless. Use the termination request ID and employment ID to retrieve the current details.
 - [List Contractor Invoice Schedules](https://developer.remote.com/reference/get_v1_contractor-invoice-schedules.md): Lists Contractor Invoice Schedule records.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained…
@@ -213,6 +249,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [employment.cor_hiring.invoice_created](https://developer.remote.com/reference/employmentcor_hiringinvoice_created-1.md): This event is triggered when a invoice report is created for a employment.
 - [employment.cor_hiring.proof_of_payment_accepted](https://developer.remote.com/reference/employmentcor_hiringproof_of_payment_accepted-1.md): This event is triggered when a proof of payment is accepted for a contractor of record employment.
 - [employment.cor_hiring.proof_of_payment_submitted](https://developer.remote.com/reference/employmentcor_hiringproof_of_payment_submitted-1.md): This event is triggered when a proof of payment is submitted for a contractor of record employment.
+
+## API Reference: Contracts
 - [contract_amendment.canceled](https://developer.remote.com/reference/contract_amendmentcanceled.md): This event is triggered whenever a contract amendment request status is updated to canceled.
 - [contract_amendment.deleted](https://developer.remote.com/reference/contract_amendmentdeleted.md): This event is triggered whenever a contract amendment request status is updated to deleted.
 - [contract_amendment.done](https://developer.remote.com/reference/contract_amendmentdone.md): This event is triggered whenever a contract amendment status is updated to done.
@@ -243,6 +281,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Show Probation Extension](https://developer.remote.com/reference/get_v1_probation-extensions_id.md): Shows a Probation Extension Request.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
 - [contract_document.status.changed](https://developer.remote.com/reference/contract_documentstatuschanged-1.md): This webhook is triggered whenever a contract document's status changes, including initial creation.
 - [employment.probation.period_ending_reminder_sent](https://developer.remote.com/reference/employmentprobationperiod_ending_reminder_sent.md): This event is triggered when an employee probation period is nearing it's end, it is triggered 30 days and 7 days before the probation period ends.
+
+## API Reference: Employments
 - [employment.employment_agreement.available](https://developer.remote.com/reference/employmentemployment_agreementavailable.md): This event is triggered when an employment agreement is available for a user
 - [employment.eor_hiring.invoice_created](https://developer.remote.com/reference/employmenteor_hiringinvoice_created.md): This event is triggered when a invoice report is created for a employment.
 - [employment.eor_hiring.proof_of_payment_accepted](https://developer.remote.com/reference/employmenteor_hiringproof_of_payment_accepted.md): This event is triggered when a proof of payment is accepted.
@@ -339,6 +379,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Submit employee state taxes](https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction.md): Submits the authenticated employee's US state tax withholding answers for a single jurisdiction (e.g. `NY`).  Available for US Global Payroll employees once they reach the post-enrollment state, at…
 - [Update administrative details](https://developer.remote.com/reference/put_v2_employments_employment_id_administrative-details.md): Updates employment's administrative details.  This endpoint requires and returns country-specific data. The exact required and returned fields will vary depending on which country the employment is…
 - [Upload employee file](https://developer.remote.com/reference/post_v1_employee_documents.md): Uploads a file owned by the authenticated employee, for example identity documents or tax forms.  ## Authentication  This endpoint requires the following token type:  - **Employee-scoped access…
+
+## API Reference: Offboarding
 - [List Direct Offboardings](https://developer.remote.com/reference/get_v1_direct-offboardings.md): Lists offboardings for global payroll employments, optionally filtered by employment ID.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access…
 - [offboarding.completed](https://developer.remote.com/reference/offboardingcompleted.md): This event is triggered when an offboarding request is completed.
 - [offboarding.deleted](https://developer.remote.com/reference/offboardingdeleted-1.md): This event is triggered whenever an offboarding request is deleted.
@@ -375,6 +417,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Update work authorization request](https://developer.remote.com/reference/patch_v1_work-authorization-requests_id-2.md): Updates a work authorization request.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
 - [Update work authorization request](https://developer.remote.com/reference/patch_v1_work-authorization-requests_id.md): Updates a work authorization request.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through…
 - [contract.termination_date_reached](https://developer.remote.com/reference/contracttermination_date_reached.md): This event is triggered when a contract reaches its termination date.
+
+## API Reference: Partner Configuration
 - [Create a new token for a company](https://developer.remote.com/reference/post_v1_companies_company_id_create-token.md): Creates new tokens for a given company  ## Authentication  This endpoint requires the following token type:  - **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the…
 - [company.pricing_plan.updated](https://developer.remote.com/reference/companypricing_planupdated-1.md): This event is triggered when a company pricing plan is updated.
 - [List pricing plans](https://developer.remote.com/reference/get_v1_companies_company_id_pricing-plans.md): List all pricing plans for a company. Currently the endpoint only returns the pricing plans for the EOR monthly product and the contractor products (Standard, Plus and COR).  ## Authentication  This…
@@ -388,7 +432,9 @@ Append .md to any documentation page URL to get its markdown version.
 - [Show the current SSO Configuration](https://developer.remote.com/reference/get_v1_sso-configuration.md): Shows the current SSO Configuration for the company.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) —…
 - [Create the SSO Configuration](https://developer.remote.com/reference/post_v1_sso-configuration.md): Creates the SSO Configuration for the company.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) —…
 - [Show the SSO Configuration Details](https://developer.remote.com/reference/get_v1_sso-configuration_details.md): Shows the SSO Configuration details for the company.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) —…
-- [List Pay Items](https://developer.remote.com/reference/get_v1_pay-items.md): Lists pay items for a company with optional filtering by employment, date range, and pagination.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped…
+
+## API Reference: Pay & Compensation
+- [List Pay Items](https://developer.remote.com/reference/get_v1_pay-items.md): Lists pay items for a company with optional filtering by employment, legal entity, date range, and pagination.  ## Authentication  This endpoint accepts any one of the following token types:  -…
 - [List Pay Codes](https://developer.remote.com/reference/get_v1_companies_company_id_legal-entities_legal_entity_id_pay-codes.md): Lists pay codes available for a legal entity. Pay codes represent the allowed pay element types that can be submitted via `POST /v1/pay-items/bulk`.  ## Authentication  This endpoint accepts any one…
 - [Bulk Create Pay Items](https://developer.remote.com/reference/post_v1_pay-items_bulk.md): Bulk creates pay items for employments. Supports up to 500 items per request. Each item must supply exactly one of `code` or `external_import_code` to identify the pay element. Integration-specific…
 - [Delete a Pay Item](https://developer.remote.com/reference/delete_v1_pay-items_id.md): Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in…
@@ -441,6 +487,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [payslip.released](https://developer.remote.com/reference/payslipreleased.md): This event is triggered when a payslip is ready and available for an employee.
 - [List payslips](https://developer.remote.com/reference/get_v1_payslips.md): Lists all payslips belonging to a company. Can also filter for a single employment belonging to that company.  ## Authentication  This endpoint accepts any one of the following token types:  -…
 - [Download payslip in the PDF format](https://developer.remote.com/reference/get_v1_payslips_payslip_id_pdf.md): Given a Payslip ID, downloads a payslip. It is important to note that each country has a different payslip format and they are not authored by Remote.  ## Authentication  This endpoint accepts any…
+
+## API Reference: Testing & Sandbox
 - [Creates a Benefit Renewal Request](https://developer.remote.com/reference/post_v1_sandbox_benefit-renewal-requests.md): Creates a Benefit Renewal Request for a specific Benefit Group. This endpoint is only available in Sandbox, otherwise it will respond with a 404.  ## Authentication  This endpoint accepts any one of…
 - [Pass KYB](https://developer.remote.com/reference/post_v1_sandbox_companies_company_id_bypass-eligibility-checks.md): Pass KYB and credit risk for a company without the intervention of a Remote admin.  This endpoint is only available in Sandbox, otherwise it will respond with a 404.  ## Authentication  This endpoint…
 - [Reassign default legal entity](https://developer.remote.com/reference/put_v1_sandbox_companies_company_id_default-legal-entity_legal_entity_id.md): Set a different legal entity as the company's default entity.  The default entity is used when creating new employments without an explicit entity. This endpoint is only available in Sandbox,…
@@ -461,6 +509,8 @@ Append .md to any documentation page URL to get its markdown version.
 - [Reject job title review](https://developer.remote.com/reference/post_v1_sandbox_employments_employment_id_job-title-review_reject.md): Rejects the job title review an employment is in, without the intervention of a Remote admin, so the integration can be tested against the decision it will see in production.  The employment is…
 - [Report SDK errors](https://developer.remote.com/reference/post_v1_sdk_telemetry-errors.md): Receives error telemetry from the frontend SDK. Errors are logged to observability backend for monitoring and debugging.  ## Authentication  This endpoint accepts any one of the following token…
 - [Get a mock JSON Schema](https://developer.remote.com/reference/get_v1_test-schema.md): Get a mock JSON Schema for testing purposes  ## Authentication  This endpoint requires the following token type:  - **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through…
+
+## API Reference: Time & Attendance
 - [timesheet.submitted](https://developer.remote.com/reference/timesheetsubmitted.md): This event is triggered when a timesheet is submitted by an employee
 - [List timesheets](https://developer.remote.com/reference/get_v1_timesheets.md): Lists all timesheets.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the…
 - [Show timesheet](https://developer.remote.com/reference/get_v1_timesheets_id.md): Shows a timesheet by its ID.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the…

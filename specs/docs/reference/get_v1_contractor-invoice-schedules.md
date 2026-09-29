@@ -1,8 +1,8 @@
 ---
 updatedAt: 2026-05-27T21:24:38.000Z
+agentTools:
+  projectIndex: https://developer.remote.com/llms.txt
 ---
-
-Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
 # List Contractor Invoice Schedules
 
@@ -627,7 +627,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "c01f7210-75ab-47f4-b5c7-c742e815e4ba",
+            "example": "b3c23d4c-9468-4f53-814d-60cc8e9a4c09",
             "in": "query",
             "name": "employment_id",
             "required": false,

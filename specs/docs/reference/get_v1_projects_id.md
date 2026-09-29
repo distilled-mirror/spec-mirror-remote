@@ -1,8 +1,8 @@
 ---
 updatedAt: 2026-09-11T12:56:46.000Z
+agentTools:
+  projectIndex: https://developer.remote.com/llms.txt
 ---
-
-Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
 # Show a single company project
 

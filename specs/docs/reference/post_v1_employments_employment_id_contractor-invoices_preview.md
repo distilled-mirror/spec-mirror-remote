@@ -1,8 +1,8 @@
 ---
 updatedAt: 2026-08-28T15:41:28.000Z
+agentTools:
+  projectIndex: https://developer.remote.com/llms.txt
 ---
-
-Fetch the complete documentation index at: https://developer.remote.com/llms.txt. Use this file to discover all available pages before exploring further. Append .md to any documentation page URL to get its markdown version.
 
 # Preview a Contractor Invoice
 
@@ -552,7 +552,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "1a3c4dbd-ebe4-4e00-9de5-3e82797469bb",
+            "example": "1104bfc5-7407-4de5-9f83-fe0c06e1a2d8",
             "in": "path",
             "name": "employment_id",
             "required": true,
