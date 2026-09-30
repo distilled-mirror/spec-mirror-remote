@@ -4897,7 +4897,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "b3c23d4c-9468-4f53-814d-60cc8e9a4c09",
+            "example": "f29b2f46-9738-4361-b25c-c8ace3e60ee2",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5293,7 +5293,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "427c83d0-2ed4-4f93-a31d-57e582e0e9b9",
+            "example": "392623c0-b8de-4704-9d17-7e812dd131cc",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5386,7 +5386,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "281a7380-0c4c-4905-9aa5-7e74c985b69c",
+            "example": "d34c7da8-cb29-4dda-a89b-c65e97589add",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5470,7 +5470,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a504951d-e4f1-487c-b546-e5371a80ced9",
+            "example": "5747f4af-c90f-41fe-94db-e687d947b685",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5566,7 +5566,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "09de15ad-4ce9-4b5a-8761-a4810acf9895",
+            "example": "e21aea54-0f42-4172-b30e-d6abec5a80d9",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5775,7 +5775,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "1b4e41c6-7b69-478e-b2ef-746674b30087",
+            "example": "183c446f-0752-4293-8b11-a718f0333175",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13370,7 +13370,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "1104bfc5-7407-4de5-9f83-fe0c06e1a2d8",
+            "example": "f5743d91-6c1e-47b5-bd13-74bb07d9e32a",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -19734,6 +19734,68 @@
           }
         },
         "summary": "List company projects",
+        "tags": [
+          "Projects"
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Creates a new contractor project for your company.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage projects (`project:write`) |",
+        "operationId": "post_v1_projects",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectParams"
+              }
+            }
+          },
+          "description": "Project fields to create",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectResponse"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Create a company project",
         "tags": [
           "Projects"
         ]
@@ -36981,6 +37043,52 @@
         "title": "CreateProbationExtensionParams",
         "type": "object"
       },
+      "CreateProjectParams": {
+        "additionalProperties": false,
+        "description": "Fields to create a new company project.",
+        "example": {
+          "code": "WEB-001",
+          "description": "Redesign the company website",
+          "name": "Website redesign",
+          "start_date": "2026-01-01"
+        },
+        "properties": {
+          "code": {
+            "description": "Code/identifier of the project. Must be unique within the company.",
+            "maxLength": 20,
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the project.",
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Date when the project ends.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the project.",
+            "maxLength": 255,
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Date when the project starts.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "code"
+        ],
+        "title": "CreateProjectParams",
+        "type": "object"
+      },
       "CreateRecurringIncentiveParams": {
         "allOf": [
           {
@@ -47625,6 +47733,7 @@
                 "currency": "USD"
               },
               "code": "WEB-001",
+              "description": "Redesign the company website",
               "end_date": null,
               "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "lead_ids": [
@@ -50950,7 +51059,7 @@
             "type": "string"
           },
           "expected_payout_date": {
-            "$ref": "#/components/schemas/Date"
+            "$ref": "#/components/schemas/NullableDate"
           },
           "id": {
             "description": "The unique identifier (UUID) of the payslip.",
@@ -52067,6 +52176,7 @@
             "currency": "USD"
           },
           "code": "WEB-001",
+          "description": "Redesign the company website",
           "end_date": null,
           "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "lead_ids": [
@@ -52106,6 +52216,11 @@
           },
           "code": {
             "description": "Code/identifier of the project.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the project.",
+            "nullable": true,
             "type": "string"
           },
           "end_date": {
@@ -52173,6 +52288,7 @@
                 "currency": "USD"
               },
               "code": "WEB-001",
+              "description": "Redesign the company website",
               "end_date": null,
               "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "lead_ids": [
@@ -56801,6 +56917,7 @@
         "properties": {
           "description": {
             "description": "Description of the project.",
+            "maxLength": 255,
             "nullable": true,
             "type": "string"
           },
@@ -56819,6 +56936,7 @@
           },
           "name": {
             "description": "Name of the project.",
+            "maxLength": 255,
             "type": "string"
           },
           "start_date": {

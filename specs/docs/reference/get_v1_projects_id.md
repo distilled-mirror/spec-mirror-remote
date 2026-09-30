@@ -79,6 +79,7 @@ This endpoint requires the following token type:
                 "currency": "USD"
               },
               "code": "WEB-001",
+              "description": "Redesign the company website",
               "end_date": null,
               "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "lead_ids": [
@@ -199,6 +200,7 @@ This endpoint requires the following token type:
             "currency": "USD"
           },
           "code": "WEB-001",
+          "description": "Redesign the company website",
           "end_date": null,
           "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "lead_ids": [
@@ -238,6 +240,11 @@ This endpoint requires the following token type:
           },
           "code": {
             "description": "Code/identifier of the project.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the project.",
+            "nullable": true,
             "type": "string"
           },
           "end_date": {

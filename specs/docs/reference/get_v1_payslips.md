@@ -141,7 +141,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "expected_payout_date": {
-            "$ref": "#/components/schemas/Date"
+            "$ref": "#/components/schemas/NullableDate"
           },
           "id": {
             "description": "The unique identifier (UUID) of the payslip.",
@@ -270,6 +270,14 @@ This endpoint accepts any one of the following token types:
         "title": "ListPayslipsResponse",
         "type": "object"
       },
+      "NullableDate": {
+        "description": "Optional UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format",
+        "example": "2021-07-01",
+        "format": "date",
+        "nullable": true,
+        "title": "NullableDate",
+        "type": "string"
+      },
       "UnauthorizedResponse": {
         "description": "Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.",
         "example": {
@@ -286,13 +294,6 @@ This endpoint accepts any one of the following token types:
         ],
         "title": "UnauthorizedResponse",
         "type": "object"
-      },
-      "Date": {
-        "description": "UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format",
-        "example": "2021-07-01",
-        "format": "date",
-        "title": "Date",
-        "type": "string"
       },
       "ParameterError": {
         "example": {
