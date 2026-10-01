@@ -56,7 +56,7 @@ This endpoint accepts any one of the following token types:
             "description": "Identifier of the employment being terminated.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "format": "uuid",
-            "title": "UuidSlug",
+            "title": "CorTerminationEmploymentID",
             "type": "string"
           },
           "executed_at": {
@@ -69,7 +69,7 @@ This endpoint accepts any one of the following token types:
             "description": "Unique identifier of the termination request.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "format": "uuid",
-            "title": "UuidSlug",
+            "title": "CorTerminationRequestID",
             "type": "string"
           },
           "initiated_at": {
@@ -246,6 +246,7 @@ This endpoint accepts any one of the following token types:
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
@@ -357,6 +358,7 @@ This endpoint accepts any one of the following token types:
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",

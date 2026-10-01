@@ -18,7 +18,7 @@ This endpoint requires the following token type:
 
 | Category | Read only Scope | Write only Scope (read access implicit) |
 |---|---|---|
-| Manage timeoffs (`time_and_attendance`) | - | Manage projects (`project:write`) |
+| Manage projects (`projects`) | - | Manage projects (`project:write`) |
 
 # OpenAPI definition
 
@@ -216,7 +216,7 @@ This endpoint requires the following token type:
         "type": "object"
       },
       "UuidSlug": {
-        "description": "Identifier of the employment being terminated.",
+        "description": "A unique identifier in UUID v4 format.",
         "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
         "format": "uuid",
         "title": "UuidSlug",
@@ -473,6 +473,7 @@ This endpoint requires the following token type:
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
@@ -584,6 +585,7 @@ This endpoint requires the following token type:
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
@@ -607,7 +609,7 @@ This endpoint requires the following token type:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Creates a new contractor project for your company.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage projects (`project:write`) |",
+        "description": "Creates a new contractor project for your company.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage projects (`projects`) | - | Manage projects (`project:write`) |",
         "operationId": "post_v1_projects",
         "parameters": [],
         "requestBody": {
@@ -668,7 +670,7 @@ This endpoint requires the following token type:
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "project:write",
-              "time_and_attendance",
+              "projects",
               "all:write"
             ]
           }

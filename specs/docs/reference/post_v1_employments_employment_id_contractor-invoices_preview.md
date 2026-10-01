@@ -136,7 +136,7 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "UuidSlug": {
-        "description": "Identifier of the employment being terminated.",
+        "description": "A unique identifier in UUID v4 format.",
         "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
         "format": "uuid",
         "title": "UuidSlug",
@@ -413,6 +413,7 @@ This endpoint accepts any one of the following token types:
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
@@ -524,6 +525,7 @@ This endpoint accepts any one of the following token types:
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
@@ -552,7 +554,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "f5743d91-6c1e-47b5-bd13-74bb07d9e32a",
+            "example": "cd378d7d-114b-4eb9-914b-2ea9161737d2",
             "in": "path",
             "name": "employment_id",
             "required": true,

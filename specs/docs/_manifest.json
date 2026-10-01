@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 417,
+  "count": 418,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -1076,6 +1076,11 @@
       "page": "https://developer.remote.com/reference/get_v1_probation-extensions_id",
       "markdown": "https://developer.remote.com/reference/get_v1_probation-extensions_id.md",
       "file": "reference/get_v1_probation-extensions_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_project-eligible-leads",
+      "markdown": "https://developer.remote.com/reference/get_v1_project-eligible-leads.md",
+      "file": "reference/get_v1_project-eligible-leads.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_projects",

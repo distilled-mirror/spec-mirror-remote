@@ -4897,7 +4897,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "f29b2f46-9738-4361-b25c-c8ace3e60ee2",
+            "example": "210335fe-86c3-4cee-acbd-a849f4f898b4",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5293,7 +5293,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "392623c0-b8de-4704-9d17-7e812dd131cc",
+            "example": "2e062a58-5d00-480a-8ca0-52f17799cb2a",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5386,7 +5386,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "d34c7da8-cb29-4dda-a89b-c65e97589add",
+            "example": "06986204-7a4f-4cc2-ab8c-49f624dbeff1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5470,7 +5470,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "5747f4af-c90f-41fe-94db-e687d947b685",
+            "example": "044da5d0-fa51-4a0e-902d-43120de82992",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5566,7 +5566,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "e21aea54-0f42-4172-b30e-d6abec5a80d9",
+            "example": "bb20ecbc-36f8-4217-8453-50669ea586ec",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5775,7 +5775,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "183c446f-0752-4293-8b11-a718f0333175",
+            "example": "c3b1d8be-60e5-4780-8f91-8eda796b14de",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13370,7 +13370,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "f5743d91-6c1e-47b5-bd13-74bb07d9e32a",
+            "example": "cd378d7d-114b-4eb9-914b-2ea9161737d2",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -19640,10 +19640,63 @@
         ]
       }
     },
+    "/v1/project-eligible-leads": {
+      "get": {
+        "deprecated": false,
+        "description": "Lists the users eligible to be assigned as a lead for a company's projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage projects (`projects`) | View projects (`project:read`) | Manage projects (`project:write`) |",
+        "operationId": "get_v1_project-eligible-leads",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEligibleLeadsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "List eligible project leads",
+        "tags": [
+          "Projects"
+        ]
+      }
+    },
     "/v1/projects": {
       "get": {
         "deprecated": false,
-        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | Manage projects (`project:write`) |",
+        "description": "Lists a company's contractor projects.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage projects (`projects`) | View projects (`project:read`) | Manage projects (`project:write`) |",
         "operationId": "get_v1_projects",
         "parameters": [
           {
@@ -19740,7 +19793,7 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Creates a new contractor project for your company.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage projects (`project:write`) |",
+        "description": "Creates a new contractor project for your company.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage projects (`projects`) | - | Manage projects (`project:write`) |",
         "operationId": "post_v1_projects",
         "requestBody": {
           "content": {
@@ -19804,7 +19857,7 @@
     "/v1/projects/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Shows a single contractor project by its ID.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View projects (`project:read`) | Manage projects (`project:write`) |",
+        "description": "Shows a single contractor project by its ID.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage projects (`projects`) | View projects (`project:read`) | Manage projects (`project:write`) |",
         "operationId": "get_v1_projects_id",
         "parameters": [
           {
@@ -19877,7 +19930,7 @@
       },
       "patch": {
         "deprecated": false,
-        "description": "Updates a single contractor project by its ID.\n\nOmitted fields are left unchanged. `lead_ids` and `team_member_ids` are replaced wholesale\nwhen present, so send the complete desired list rather than only the additions, and send an\nempty list to remove everyone. Read the project first to get its current membership.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage projects (`project:write`) |",
+        "description": "Updates a single contractor project by its ID.\n\nOmitted fields are left unchanged. `lead_ids` and `team_member_ids` are replaced wholesale\nwhen present, so send the complete desired list rather than only the additions, and send an\nempty list to remove everyone. Read the project first to get its current membership.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage projects (`projects`) | - | Manage projects (`project:write`) |",
         "operationId": "patch_v1_projects_id",
         "parameters": [
           {
@@ -33493,7 +33546,7 @@
             "description": "Unique identifier of the rate.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "format": "uuid",
-            "title": "UuidSlug",
+            "title": "ContractorRateID",
             "type": "string"
           },
           "pay_frequency": {
@@ -34175,7 +34228,7 @@
             "description": "Identifier of the employment being terminated.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "format": "uuid",
-            "title": "UuidSlug",
+            "title": "CorTerminationEmploymentID",
             "type": "string"
           },
           "executed_at": {
@@ -34188,7 +34241,7 @@
             "description": "Unique identifier of the termination request.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "format": "uuid",
-            "title": "UuidSlug",
+            "title": "CorTerminationRequestID",
             "type": "string"
           },
           "initiated_at": {
@@ -34249,7 +34302,7 @@
                 "description": "Unique identifier of the termination request.",
                 "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
                 "format": "uuid",
-                "title": "UuidSlug",
+                "title": "CorTerminationRequestCreatedID",
                 "type": "string"
               },
               "status": {
@@ -35512,7 +35565,7 @@
             "description": "Unique identifier of the cost center allocation.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "format": "uuid",
-            "title": "UuidSlug",
+            "title": "CostCenterAllocationID",
             "type": "string"
           },
           "percentage": {
@@ -38434,6 +38487,33 @@
           "data"
         ],
         "title": "EligibilityQuestionnaireResponse",
+        "type": "object"
+      },
+      "EligibleLead": {
+        "additionalProperties": false,
+        "description": "A user eligible to be assigned as a project lead",
+        "example": {
+          "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+          "name": "Jane Doe"
+        },
+        "properties": {
+          "id": {
+            "description": "User identifier.",
+            "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "format": "uuid",
+            "title": "EligibleLeadID",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the user.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "EligibleLead",
         "type": "object"
       },
       "Email": {
@@ -46610,6 +46690,31 @@
         "title": "ListDocumentsResponse",
         "type": "object"
       },
+      "ListEligibleLeadsResponse": {
+        "additionalProperties": false,
+        "description": "List of users eligible to be assigned as project leads.",
+        "example": {
+          "data": [
+            {
+              "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+              "name": "Jane Doe"
+            }
+          ]
+        },
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/EligibleLead"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "ListEligibleLeadsResponse",
+        "type": "object"
+      },
       "ListEmployeePayslipsResponse": {
         "description": "Response schema listing many payslips",
         "example": {
@@ -53170,8 +53275,8 @@
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
-                  "parameter_required_missing",
                   "parameter_one_of_required_missing",
+                  "parameter_required_missing",
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",
@@ -57258,7 +57363,7 @@
         "type": "string"
       },
       "UuidSlug": {
-        "description": "Identifier of the employment being terminated.",
+        "description": "A unique identifier in UUID v4 format.",
         "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
         "format": "uuid",
         "title": "UuidSlug",
@@ -58458,6 +58563,7 @@
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
@@ -58602,6 +58708,7 @@
               "incentive:write": "incentive:write",
               "employment:read": "employment:read",
               "contract:read": "contract:read",
+              "projects": "projects",
               "company_manager:write": "company_manager:write",
               "travel_letter:read": "travel_letter:read",
               "project:read": "project:read",
