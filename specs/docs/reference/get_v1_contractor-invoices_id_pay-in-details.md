@@ -1,12 +1,29 @@
 ---
-updatedAt: 2026-05-27T21:28:48.000Z
+updatedAt: 2026-10-01T08:53:12.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
 
-# List Company Payroll Runs
+# Show Contractor Invoice pay-in details
 
-Lists all payroll runs for a company
+Shows how the payment that collects a Contractor Invoice is paid in, and where to send it.
+
+`bank_accounts` carries Remote's receiving accounts while `status` is `awaiting_payment`.
+It is null once the funds are in flight or received, while the payment sits on a compliance
+hold (`blocked`) or is partly paid (`partially_paid`, where `amount_due` overstates what
+remains and Remote follows up with the balance directly), and whenever Remote has no
+account to publish.
+
+`pay_in_method` says whether a transfer is yours to send at all: Remote collects
+`direct_debit`, `card` and `prefunding_credit` payments itself, and a transfer would pay the
+same invoices twice. That holds after a failed or disputed collection too: the payment reads
+`awaiting_payment` with its method unchanged until the company retries it in Remote, so a
+failed debit is not an invitation to wire, even when accounts are present. Accounts can
+differ from one payment to the next, so read them before every transfer rather than storing
+them.
+
+The endpoint answers 404 only while no payment stands behind the invoice. A passing
+database fault surfaces as a 504 or a 500; retry either.
 
 ## Authentication
 
@@ -19,7 +36,7 @@ This endpoint accepts any one of the following token types:
 
 | Category | Read only Scope | Write only Scope (read access implicit) |
 |---|---|---|
-| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |
+| View pay-in bank details (`pay_in_details`) | View pay-in details (`pay_in_details:read`) | - |
 
 # OpenAPI definition
 
@@ -59,113 +76,85 @@ This endpoint accepts any one of the following token types:
         "title": "ActionError",
         "type": "object"
       },
-      "Country": {
-        "description": "A supported country on Remote",
+      "ContractorInvoicePayInDetailsResponse": {
+        "additionalProperties": false,
+        "description": "Response schema to show the pay-in details of a Contractor Invoice",
         "example": {
-          "alpha_2_code": "PT",
-          "code": "PRT",
-          "contractor_products_available": [
-            "standard",
-            "plus",
-            "cor"
-          ],
-          "country_subdivisions": [
-            {
-              "code": "PT-06",
-              "name": "Coimbra",
-              "subdivision_type": "District"
-            },
-            {
-              "code": "PT-11",
-              "name": "Lisboa",
-              "subdivision_type": "District"
+          "data": {
+            "pay_in_details": {
+              "amount_due": 350000,
+              "bank_accounts": [
+                {
+                  "account_holder": "Remote Technology Services, Inc",
+                  "account_number": "70123456789",
+                  "ach_routing_number": "021000089",
+                  "address": {
+                    "city": "New York",
+                    "country": "United States",
+                    "name": "Community Federal Savings Bank",
+                    "postal_code": "10013",
+                    "state": "NY",
+                    "street": "388 Greenwich Street"
+                  },
+                  "bank_code": null,
+                  "bank_name": "Citibank N.A.",
+                  "branch_code": null,
+                  "branch_name": null,
+                  "bsb_code": null,
+                  "charge": "OUR",
+                  "clearing_code": null,
+                  "cnaps_code": null,
+                  "iban": null,
+                  "ifsc": null,
+                  "institution_number": null,
+                  "intermediary_bank_code": null,
+                  "sort_code": null,
+                  "swift": "CITIUS33",
+                  "transit_number": null,
+                  "wire_routing_number": "021000089"
+                }
+              ],
+              "currency": "USD",
+              "due_date": "2024-06-15",
+              "pay_in_method": "bank_transfer",
+              "reference": "TR0000000042",
+              "status": "awaiting_payment"
             }
-          ],
-          "employment_agreement_preview_available": true,
-          "eor_onboarding": true,
-          "locked_benefits": "after_first_hire",
-          "name": "Portugal",
-          "region": "Europe",
-          "subregion": "Southern Europe",
-          "supported_json_schemas": [
-            "additional_documents",
-            "address_details",
-            "administrative_details",
-            "employment-basic-information",
-            "bank_account_details",
-            "contract_details",
-            "emergency_contact"
-          ]
+          }
         },
         "properties": {
-          "alpha_2_code": {
-            "description": "The ISO 3166-1 alpha-2 country code (e.g., \"PT\").",
-            "type": "string"
-          },
-          "code": {
-            "description": "The ISO 3166-1 alpha-3 country code (e.g., \"PRT\"). This is the primary code used across the Remote API.",
-            "type": "string"
-          },
-          "contractor_products_available": {
-            "description": "Contractor product names available for this country",
-            "items": {
-              "enum": [
-                "standard",
-                "plus",
-                "cor"
-              ],
-              "type": "string"
+          "data": {
+            "additionalProperties": false,
+            "properties": {
+              "pay_in_details": {
+                "$ref": "#/components/schemas/ContractorInvoicePayInDetails"
+              }
             },
-            "type": "array"
-          },
-          "country_subdivisions": {
-            "description": "Administrative subdivisions of the country (e.g., states, provinces, districts). Null if the country has no subdivisions relevant to Remote's services.",
-            "items": {
-              "$ref": "#/components/schemas/CountrySubdivision"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "employment_agreement_preview_available": {
-            "description": "Whether an Employment Agreement preview is available for this country.",
-            "type": "boolean"
-          },
-          "eor_onboarding": {
-            "description": "Whether EOR (Employer of Record) onboarding is available in this country.",
-            "type": "boolean"
-          },
-          "locked_benefits": {
-            "description": "When benefit plan selections become locked for this country (e.g., \"after_first_hire\" means benefits cannot be changed after the first employee is hired).",
-            "type": "string"
-          },
-          "name": {
-            "description": "The country's full English name.",
-            "type": "string"
-          },
-          "region": {
-            "description": "The geographic region the country belongs to (e.g., \"Europe\", \"Asia\", \"Americas\").",
-            "type": "string"
-          },
-          "subregion": {
-            "description": "The geographic subregion (e.g., \"Southern Europe\", \"Southeast Asia\"). Null for some countries.",
-            "nullable": true,
-            "type": "string"
-          },
-          "supported_json_schemas": {
-            "description": "The list of JSON schema form names available for this country (e.g., \"address_details\", \"contract_details\"). Use these with the Show form schema endpoint to get country-specific field requirements.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
+            "required": [
+              "pay_in_details"
+            ],
+            "type": "object"
           }
         },
         "required": [
-          "alpha_2_code",
-          "code",
-          "name"
+          "data"
         ],
-        "title": "Country",
+        "title": "ContractorInvoicePayInDetailsResponse",
         "type": "object"
+      },
+      "ContractorInvoicePayInMethod": {
+        "description": "How Remote collects this payment: `bank_transfer` when the company wires it, `direct_debit` for a mandate-based collection, `card`, `prefunding_credit` when prefunded balance covers it, and `other` for anything else. Wire when this reads `bank_transfer`; Remote collects `direct_debit`, `card` and `prefunding_credit` itself and a transfer would pay twice. `not_selected` means Remote has not recorded a collection method: for Contractor of Record that lasts until the company starts the payment, so confirm the arrangement before wiring.",
+        "enum": [
+          "bank_transfer",
+          "direct_debit",
+          "card",
+          "prefunding_credit",
+          "other",
+          "not_selected"
+        ],
+        "example": "bank_transfer",
+        "title": "ContractorInvoicePayInMethod",
+        "type": "string"
       },
       "NotFoundResponse": {
         "description": "Returned when the requested resource does not exist or is not accessible with the current authentication credentials.",
@@ -241,219 +230,279 @@ This endpoint accepts any one of the following token types:
         "title": "UnprocessableEntityResponse",
         "type": "object"
       },
-      "ListPayrollRunResponse": {
-        "description": "Response containing a list of payroll runs for the company. Each payroll run includes summary information but not per-employee breakdowns.",
+      "PayInBankAccount": {
+        "additionalProperties": false,
+        "description": "One of Remote's receiving accounts for this payment. Every key is always present and is `null` when the account does not carry it, so a program can bind to a fixed key set. This differs from the employer API's pay-in details in three ways: `address` is an object rather than a formatted string, each identifier has exactly one spelling, and the key set never varies by rail.",
         "example": {
-          "payroll_runs": [
-            {
-              "approval_date": "2021-01-15",
-              "country": {
-                "alpha_2_code": "PT",
-                "code": "PRT",
-                "contractor_products_available": [
-                  "standard",
-                  "plus",
-                  "cor"
-                ],
-                "country_subdivisions": [
-                  {
-                    "code": "PT-06",
-                    "name": "Coimbra",
-                    "subdivision_type": "District"
-                  },
-                  {
-                    "code": "PT-11",
-                    "name": "Lisboa",
-                    "subdivision_type": "District"
-                  }
-                ],
-                "employment_agreement_preview_available": true,
-                "eor_onboarding": true,
-                "locked_benefits": "after_first_hire",
-                "name": "Portugal",
-                "region": "Europe",
-                "subregion": "Southern Europe",
-                "supported_json_schemas": [
-                  "additional_documents",
-                  "address_details",
-                  "administrative_details",
-                  "employment-basic-information",
-                  "bank_account_details",
-                  "contract_details",
-                  "emergency_contact"
-                ]
-              },
-              "currency_code": "USD",
-              "cutoff_date": "2021-01-20",
-              "expected_payout_date": "2021-01-25",
-              "id": "123e4567-e89b-12d3-a456-426614174000",
-              "period_end": "2021-01-31",
-              "period_start": "2021-01-01",
-              "status": "preparing",
-              "total_payroll_cost": 1000,
-              "type": "main"
-            }
-          ]
+          "account_holder": "Remote Technology Services, Inc",
+          "account_number": "70123456789",
+          "ach_routing_number": "021000089",
+          "address": {
+            "city": "New York",
+            "country": "United States",
+            "name": "Community Federal Savings Bank",
+            "postal_code": "10013",
+            "state": "NY",
+            "street": "388 Greenwich Street"
+          },
+          "bank_code": null,
+          "bank_name": "Citibank N.A.",
+          "branch_code": null,
+          "branch_name": null,
+          "bsb_code": null,
+          "charge": "OUR",
+          "clearing_code": null,
+          "cnaps_code": null,
+          "iban": null,
+          "ifsc": null,
+          "institution_number": null,
+          "intermediary_bank_code": null,
+          "sort_code": null,
+          "swift": "CITIUS33",
+          "transit_number": null,
+          "wire_routing_number": "021000089"
         },
         "properties": {
-          "payroll_runs": {
-            "description": "List of payroll runs matching the query filters.",
-            "items": {
-              "$ref": "#/components/schemas/MinimalPayrollRun"
-            },
-            "type": "array"
-          }
-        },
-        "title": "ListPayrollRunResponse",
-        "type": "object"
-      },
-      "MinimalPayrollRun": {
-        "description": "A lightweight representation of a payroll run used in list responses. Contains summary information and the total cost, but not the per-employee breakdown or cost category totals.",
-        "example": {
-          "approval_date": "2021-01-15",
-          "country": {
-            "alpha_2_code": "PT",
-            "code": "PRT",
-            "contractor_products_available": [
-              "standard",
-              "plus",
-              "cor"
-            ],
-            "country_subdivisions": [
-              {
-                "code": "PT-06",
-                "name": "Coimbra",
-                "subdivision_type": "District"
-              },
-              {
-                "code": "PT-11",
-                "name": "Lisboa",
-                "subdivision_type": "District"
-              }
-            ],
-            "employment_agreement_preview_available": true,
-            "eor_onboarding": true,
-            "locked_benefits": "after_first_hire",
-            "name": "Portugal",
-            "region": "Europe",
-            "subregion": "Southern Europe",
-            "supported_json_schemas": [
-              "additional_documents",
-              "address_details",
-              "administrative_details",
-              "employment-basic-information",
-              "bank_account_details",
-              "contract_details",
-              "emergency_contact"
-            ]
-          },
-          "currency_code": "USD",
-          "cutoff_date": "2021-01-20",
-          "expected_payout_date": "2021-01-25",
-          "id": "123e4567-e89b-12d3-a456-426614174000",
-          "period_end": "2021-01-31",
-          "period_start": "2021-01-01",
-          "status": "preparing",
-          "total_payroll_cost": 1000,
-          "type": "main"
-        },
-        "properties": {
-          "approval_date": {
-            "$ref": "#/components/schemas/NullableDate"
-          },
-          "country": {
-            "$ref": "#/components/schemas/Country"
-          },
-          "currency_code": {
-            "$ref": "#/components/schemas/CurrencyCode"
-          },
-          "cutoff_date": {
-            "$ref": "#/components/schemas/NullableDate"
-          },
-          "expected_payout_date": {
-            "$ref": "#/components/schemas/Date"
-          },
-          "id": {
-            "description": "The unique identifier of the payroll run.",
-            "format": "uuid",
+          "account_holder": {
+            "example": "Remote Technology Services, Inc",
+            "nullable": true,
             "type": "string"
           },
-          "period_end": {
-            "$ref": "#/components/schemas/Date"
+          "account_number": {
+            "example": "70123456789",
+            "nullable": true,
+            "type": "string"
           },
-          "period_start": {
-            "$ref": "#/components/schemas/Date"
+          "ach_routing_number": {
+            "example": "021000089",
+            "nullable": true,
+            "type": "string"
           },
-          "status": {
-            "description": "The current status of the payroll run.\n\n- `preparing`: The payroll run is being assembled. Costs are estimates.\n- `processing`: Submitted for processing. Costs are still estimates.\n- `completed`: Processing is complete. Costs are final.\n- `finalized`: Payments have been or will be disbursed.\n- `waiting_for_customer_approval`: Requires company approval before proceeding.\n- `rejected`: Rejected during approval and needs revision.\n",
+          "address": {
+            "$ref": "#/components/schemas/PayInBankAccountAddress"
+          },
+          "bank_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "bank_name": {
+            "example": "Citibank N.A.",
+            "nullable": true,
+            "type": "string"
+          },
+          "branch_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "branch_name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "bsb_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "charge": {
+            "description": "Details of charge to select when sending the wire, so the full amount reaches Remote.",
             "enum": [
-              "preparing",
-              "processing",
-              "completed",
-              "finalized",
-              "waiting_for_customer_approval",
-              "rejected"
+              "OUR",
+              "BEN",
+              "SHA"
             ],
             "type": "string"
           },
-          "total_payroll_cost": {
-            "description": "The total cost of this payroll run across all employees. Amount in cents.",
-            "type": "integer"
+          "clearing_code": {
+            "nullable": true,
+            "type": "string"
           },
-          "type": {
-            "description": "The type of payroll run.\n\n- `main`: Regular recurring payroll.\n- `one_off`: Ad-hoc off-cycle payment.\n- `pro_forma`: Simulated run for cost estimation.\n- `tax_documents`: Tax document generation only.\n- `expenses`: Dedicated expense reimbursement run.\n- `parallel`: Supplementary run alongside the main payroll.\n",
-            "enum": [
-              "main",
-              "one_off",
-              "pro_forma",
-              "tax_documents",
-              "year_end_reports",
-              "expenses",
-              "parallel"
-            ],
+          "cnaps_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "iban": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ifsc": {
+            "nullable": true,
+            "type": "string"
+          },
+          "institution_number": {
+            "nullable": true,
+            "type": "string"
+          },
+          "intermediary_bank_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "sort_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "swift": {
+            "example": "CITIUS33",
+            "nullable": true,
+            "type": "string"
+          },
+          "transit_number": {
+            "nullable": true,
+            "type": "string"
+          },
+          "wire_routing_number": {
+            "example": "021000089",
+            "nullable": true,
             "type": "string"
           }
         },
         "required": [
-          "id",
-          "status",
-          "period_start",
-          "period_end",
-          "approval_date",
-          "expected_payout_date",
-          "currency_code",
-          "country",
-          "total_payroll_cost",
-          "type"
+          "account_holder",
+          "bank_name",
+          "address",
+          "iban",
+          "account_number",
+          "swift",
+          "ach_routing_number",
+          "wire_routing_number",
+          "sort_code",
+          "bsb_code",
+          "ifsc",
+          "cnaps_code",
+          "clearing_code",
+          "institution_number",
+          "transit_number",
+          "bank_code",
+          "branch_code",
+          "branch_name",
+          "intermediary_bank_code",
+          "charge"
         ],
-        "title": "MinimalPayrollRun",
+        "title": "PayInBankAccount",
         "type": "object"
       },
-      "CountrySubdivision": {
-        "description": "A subdivision of a supported country on Remote",
+      "ContractorInvoicePaymentStatus": {
+        "description": "Where the payment stands: `awaiting_payment` means Remote has not received the funds and the payment is still expected, `processing` that a collection is in flight, and `paid` that Remote has received the funds. `partially_paid` means Remote received some of the amount but not all of it, because the company underpaid or part of a collection failed after the rest settled; `amount_due` still shows the original total rather than what remains, and Remote follows up with the company on the outstanding balance directly. `blocked` means the payment is on a compliance hold: the reference stays valid, and the payment returns to `awaiting_payment` once Remote lifts it.",
+        "enum": [
+          "awaiting_payment",
+          "partially_paid",
+          "blocked",
+          "processing",
+          "paid"
+        ],
+        "example": "awaiting_payment",
+        "title": "ContractorInvoicePaymentStatus",
+        "type": "string"
+      },
+      "PayInBankAccountAddress": {
+        "additionalProperties": false,
+        "description": "The address the rail publishes with the account, or `null` when it publishes none. `name` is who the rail named on the address, usually its owner, but some accounts pair Remote's entity name with the bank's street, so do not derive whose premises these are from `name` alone. A null `name` means the rail did not say whose address it is.",
         "example": {
-          "code": "PT-11",
-          "name": "Lisboa",
-          "subdivision_type": "District"
+          "city": "New York",
+          "country": "United States",
+          "name": "Community Federal Savings Bank",
+          "postal_code": "10013",
+          "state": "NY",
+          "street": "388 Greenwich Street"
         },
+        "nullable": true,
         "properties": {
-          "code": {
-            "description": "The ISO 3166-2 subdivision code (e.g., \"PT-11\" for Lisboa).",
+          "city": {
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "nullable": true,
             "type": "string"
           },
           "name": {
-            "description": "The subdivision's name (e.g., \"Lisboa\", \"California\").",
+            "description": "The name the rail attached to the address, usually its owner (the bank, or the account holder), though not guaranteed to match the street beside it. Null when the rail publishes an address without naming anyone.",
+            "nullable": true,
             "type": "string"
           },
-          "subdivision_type": {
-            "description": "The type of subdivision (e.g., \"District\", \"State\", \"Province\").",
+          "postal_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "nullable": true,
+            "type": "string"
+          },
+          "street": {
+            "nullable": true,
             "type": "string"
           }
         },
         "required": [
-          "name"
+          "name",
+          "street",
+          "city",
+          "state",
+          "postal_code",
+          "country"
         ],
-        "title": "CountrySubdivision",
+        "title": "PayInBankAccountAddress",
+        "type": "object"
+      },
+      "UuidSlug": {
+        "description": "A unique identifier in UUID v4 format.",
+        "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+        "format": "uuid",
+        "title": "UuidSlug",
+        "type": "string"
+      },
+      "TooManyRequestsResponse": {
+        "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
+        "example": {
+          "message": "Too many requests"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Too many requests",
+            "type": "string"
+          }
+        },
+        "title": "TooManyRequestsResponse",
+        "type": "object"
+      },
+      "BadRequestResponse": {
+        "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
+        "example": {
+          "message": "invalid {resource}"
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "message": {
+                "description": "A human-readable error message describing what was wrong with the request.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "message": {
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "title": "BadRequestResponse",
         "type": "object"
       },
       "NullableDate": {
@@ -481,11 +530,10 @@ This endpoint accepts any one of the following token types:
         "title": "UnauthorizedResponse",
         "type": "object"
       },
-      "Date": {
-        "description": "UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format",
-        "example": "2021-07-01",
-        "format": "date",
-        "title": "Date",
+      "ContractorInvoicePaymentReference": {
+        "description": "The reference to quote when paying: the transaction receipt number, or the Remote invoice number for Contractor of Record. Put it in the transfer memo, with the company name; Remote matches an incoming transfer on it.",
+        "example": "TR0000000042",
+        "title": "ContractorInvoicePaymentReference",
         "type": "string"
       },
       "ParameterError": {
@@ -515,6 +563,111 @@ This endpoint accepts any one of the following token types:
         ],
         "title": "ParameterError",
         "type": "object"
+      },
+      "ContractorInvoicePayInDetails": {
+        "additionalProperties": false,
+        "description": "What the company needs to pay this invoice: the payment it belongs to, how that payment is collected, and Remote's receiving accounts for it. `bank_accounts` is null once the funds are in flight or received, while the payment is on a compliance hold (`status: blocked`) or partly paid (`status: partially_paid`), and whenever Remote can publish no account. `pay_in_method` says whether a transfer is yours to send.",
+        "example": {
+          "amount_due": 350000,
+          "bank_accounts": [
+            {
+              "account_holder": "Remote Technology Services, Inc",
+              "account_number": "70123456789",
+              "ach_routing_number": "021000089",
+              "address": {
+                "city": "New York",
+                "country": "United States",
+                "name": "Community Federal Savings Bank",
+                "postal_code": "10013",
+                "state": "NY",
+                "street": "388 Greenwich Street"
+              },
+              "bank_code": null,
+              "bank_name": "Citibank N.A.",
+              "branch_code": null,
+              "branch_name": null,
+              "bsb_code": null,
+              "charge": "OUR",
+              "clearing_code": null,
+              "cnaps_code": null,
+              "iban": null,
+              "ifsc": null,
+              "institution_number": null,
+              "intermediary_bank_code": null,
+              "sort_code": null,
+              "swift": "CITIUS33",
+              "transit_number": null,
+              "wire_routing_number": "021000089"
+            }
+          ],
+          "currency": "USD",
+          "due_date": "2024-06-15",
+          "pay_in_method": "bank_transfer",
+          "reference": "TR0000000042",
+          "status": "awaiting_payment"
+        },
+        "properties": {
+          "amount_due": {
+            "$ref": "#/components/schemas/ContractorInvoicePaymentAmountDue"
+          },
+          "bank_accounts": {
+            "description": "Remote's receiving accounts for this payment, present while `status` is `awaiting_payment` and the rail can publish them. Null for every other status, including `partially_paid`: `amount_due` there overstates what remains, so wiring against it would pay twice, and Remote follows up with the balance directly. Whether you should wire is a separate question that `pay_in_method` answers: Remote collects direct debit, card and prefunded payments itself.",
+            "items": {
+              "$ref": "#/components/schemas/PayInBankAccount"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "due_date": {
+            "$ref": "#/components/schemas/NullableDate"
+          },
+          "pay_in_method": {
+            "$ref": "#/components/schemas/ContractorInvoicePayInMethod"
+          },
+          "reference": {
+            "$ref": "#/components/schemas/ContractorInvoicePaymentReference"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ContractorInvoicePaymentStatus"
+          }
+        },
+        "required": [
+          "reference",
+          "amount_due",
+          "currency",
+          "due_date",
+          "status",
+          "pay_in_method",
+          "bank_accounts"
+        ],
+        "title": "ContractorInvoicePayInDetails",
+        "type": "object"
+      },
+      "ForbiddenResponse": {
+        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
+        "example": {
+          "message": "Forbidden"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Forbidden",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ForbiddenResponse",
+        "type": "object"
+      },
+      "ContractorInvoicePaymentAmountDue": {
+        "description": "Total amount of the payment in cents, shared by every invoice in it. This is the amount the payment was raised for, not a running balance: when `status` is `partially_paid` Remote has already received part of it and the outstanding balance is lower. Remote contacts the company directly with that balance; it is not published here.",
+        "example": 350000,
+        "title": "ContractorInvoicePaymentAmountDue",
+        "type": "integer"
       }
     },
     "securitySchemes": {
@@ -730,52 +883,28 @@ This endpoint accepts any one of the following token types:
     }
   },
   "info": {
-    "title": "Pay & Compensation",
+    "title": "Contractors",
     "version": "2.0.0"
   },
   "openapi": "3.1.0",
   "paths": {
-    "/v1/payroll-runs": {
+    "/v1/contractor-invoices/{id}/pay-in-details": {
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Lists all payroll runs for a company\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |",
-        "operationId": "get_v1_payroll-runs",
+        "description": "Shows how the payment that collects a Contractor Invoice is paid in, and where to send it.\n\n`bank_accounts` carries Remote's receiving accounts while `status` is `awaiting_payment`.\nIt is null once the funds are in flight or received, while the payment sits on a compliance\nhold (`blocked`) or is partly paid (`partially_paid`, where `amount_due` overstates what\nremains and Remote follows up with the balance directly), and whenever Remote has no\naccount to publish.\n\n`pay_in_method` says whether a transfer is yours to send at all: Remote collects\n`direct_debit`, `card` and `prefunding_credit` payments itself, and a transfer would pay the\nsame invoices twice. That holds after a failed or disputed collection too: the payment reads\n`awaiting_payment` with its method unchanged until the company retries it in Remote, so a\nfailed debit is not an invitation to wire, even when accounts are present. Accounts can\ndiffer from one payment to the next, so read them before every transfer rather than storing\nthem.\n\nThe endpoint answers 404 only while no payment stands behind the invoice. A passing\ndatabase fault surfaces as a 504 or a 500; retry either.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| View pay-in bank details (`pay_in_details`) | View pay-in details (`pay_in_details:read`) | - |",
+        "operationId": "get_v1_contractor-invoices_id_pay-in-details",
         "parameters": [
           {
-            "description": "Filters payroll runs where period_start or period_end match the given date",
-            "example": "2021-07-01",
-            "in": "query",
-            "name": "payroll_period",
-            "required": false,
+            "description": "Contractor invoice identifier",
+            "example": "e6ce47fa-257e-4580-8266-bf013fe12c48",
+            "in": "path",
+            "name": "id",
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Date"
-            }
-          },
-          {
-            "description": "Starts fetching records after the given page",
-            "example": 1,
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "schema": {
-              "default": 1,
-              "minimum": 1,
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Number of items per page",
-            "example": 20,
-            "in": "query",
-            "name": "page_size",
-            "required": false,
-            "schema": {
-              "default": 20,
-              "maximum": 100,
-              "minimum": 1,
-              "type": "integer"
-            }
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -783,11 +912,21 @@ This endpoint accepts any one of the following token types:
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListPayrollRunResponse"
+                  "$ref": "#/components/schemas/ContractorInvoicePayInDetailsResponse"
                 }
               }
             },
-            "description": "Success"
+            "description": "Pay-in details"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "401": {
             "content": {
@@ -798,6 +937,16 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "404": {
             "content": {
@@ -818,29 +967,39 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too many requests"
           }
         },
         "security": [
           {
             "CustomerAPIToken": [
               "https://gateway.remote.com/company.manage",
-              "payroll_run:read",
-              "payroll",
+              "pay_in_details:read",
+              "pay_in_details",
               "all:write",
               "all:read"
             ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
-              "payroll_run:read",
-              "payroll",
+              "pay_in_details:read",
+              "pay_in_details",
               "all:write",
               "all:read"
             ]
           }
         ],
-        "summary": "List Company Payroll Runs",
+        "summary": "Show Contractor Invoice pay-in details",
         "tags": [
-          "Payroll Runs"
+          "Invoices"
         ]
       }
     }
@@ -860,25 +1019,34 @@ This endpoint accepts any one of the following token types:
       "variables": {}
     }
   ],
+  "tags": [
+    {
+      "name": "Employments"
+    }
+  ],
   "webhooks": {
-    "expense.approved": {
+    "contractor_invoice.employer_paid": {
       "post": {
         "deprecated": false,
-        "description": "This event is triggered when an expense is approved.",
-        "operationId": "expense.approved",
+        "description": "This event is triggered when Remote has confirmed receipt of the employer's\nfunds for a contractor invoice (the associated outstanding payment moves to\n`paid_in`). Payout to the contractor has not happened yet.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.employer_paid",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.approved",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.employer_paid"
                 },
                 "properties": {
                   "company_id": {
                     "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
                     "type": "string"
                   },
                   "employment_id": {
@@ -887,454 +1055,12 @@ This endpoint accepts any one of the following token types:
                   },
                   "event_type": {
                     "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
                     "type": "string"
                   }
                 },
                 "required": [
                   "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.approved",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "expense.created": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a draft expense is created.",
-        "operationId": "expense.created",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.created",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.created",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "expense.declined": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when an expense is declined.",
-        "operationId": "expense.declined",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.declined",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.declined",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "expense.deleted": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when an expense is deleted by a team member or an admin.",
-        "operationId": "expense.deleted",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.deleted",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.deleted",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "expense.reimbursed": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when an expense is reimbursed.",
-        "operationId": "expense.reimbursed",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.reimbursed",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.reimbursed",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "expense.submitted": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when an expense is submitted by an employee.",
-        "operationId": "expense.submitted",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.submitted",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.submitted",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "expense.updated": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered whenever an expense is updated.",
-        "operationId": "expense.updated",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "expense.updated",
-                  "expense_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "expense_id": {
-                    "description": "The unique identifier of the related expense.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "employment_id",
-                  "expense_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "expense.updated",
-        "tags": [
-          "Expenses"
-        ]
-      }
-    },
-    "incentive.created": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when an incentive is created",
-        "operationId": "incentive.created",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "incentive.created",
-                  "incentive_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "incentive_id": {
-                    "description": "The unique identifier of the related incentive.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "incentive_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "incentive.created",
-        "tags": [
-          "Incentives"
-        ]
-      }
-    },
-    "incentive.deleted": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered whenever an incentive is deleted.",
-        "operationId": "incentive.deleted",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "incentive.deleted",
-                  "incentive_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "incentive_id": {
-                    "description": "The unique identifier of the related incentive.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_type",
-                  "incentive_id",
+                  "contractor_invoice_id",
                   "employment_id",
                   "company_id"
                 ]
@@ -1348,30 +1074,34 @@ This endpoint accepts any one of the following token types:
           }
         },
         "security": [],
-        "summary": "incentive.deleted",
+        "summary": "contractor_invoice.employer_paid",
         "tags": [
-          "Incentives"
+          "Invoices"
         ]
       }
     },
-    "incentive.paid": {
+    "contractor_invoice.funds_returned": {
       "post": {
         "deprecated": false,
-        "description": "This event is triggered whenever an incentive is paid",
-        "operationId": "incentive.paid",
+        "description": "This event is triggered when the payout of a contractor invoice is returned — the funds were sent but the\ncontractor's bank rejected them, for example because of incorrect bank details. It is sent once per invoice:\nif a retry fails or is returned again, the event is not sent again.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.funds_returned",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2610f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "incentive.paid",
-                  "incentive_id": "0078fcb5-b669-4e4a-b963-2a47744e75a1"
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.funds_returned"
                 },
                 "properties": {
                   "company_id": {
                     "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
                     "type": "string"
                   },
                   "employment_id": {
@@ -1381,15 +1111,11 @@ This endpoint accepts any one of the following token types:
                   "event_type": {
                     "description": "The webhook event type identifier.",
                     "type": "string"
-                  },
-                  "incentive_id": {
-                    "description": "The unique identifier of the related incentive.",
-                    "type": "string"
                   }
                 },
                 "required": [
                   "event_type",
-                  "incentive_id",
+                  "contractor_invoice_id",
                   "employment_id",
                   "company_id"
                 ]
@@ -1403,26 +1129,245 @@ This endpoint accepts any one of the following token types:
           }
         },
         "security": [],
-        "summary": "incentive.paid",
+        "summary": "contractor_invoice.funds_returned",
         "tags": [
-          "Incentives"
+          "Invoices"
         ]
       }
     },
-    "incentive.processing_started": {
+    "contractor_invoice.issued": {
       "post": {
         "deprecated": false,
-        "description": "This event is triggered when an incentive has its processing started",
-        "operationId": "incentive.processing_started",
+        "description": "This event is triggered when a contractor invoice is issued for the first time —\neither submitted by the contractor on creation, or transitioned out of `draft`.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.issued",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.issued"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "contractor_invoice_id",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "contractor_invoice.issued",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "contractor_invoice.paid_out": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when a contractor invoice has been paid out — funds\nhave been delivered to the contractor. This is the terminal lifecycle event.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.paid_out",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.paid_out"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "contractor_invoice_id",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "contractor_invoice.paid_out",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "contractor_invoice.pay_out_failed": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when the payout of a contractor invoice fails — the funds could not be sent to the\ncontractor, for example because of an issue with the contractor's bank details. It is sent once per invoice:\nif a retry fails again, the event is not sent again.\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.pay_out_failed",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.pay_out_failed"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "contractor_invoice_id",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "contractor_invoice.pay_out_failed",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "contractor_invoice.payment_initiated": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when an employer initiates payment on a contractor invoice\nfor the first time (transition to `pending_payment` from `issued` or `approved`).\n\nThe payload is stateless. Use the contractor invoice ID and employment ID to retrieve current details.\n",
+        "operationId": "contractor_invoice.payment_initiated",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "123-example",
+                  "contractor_invoice_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "contractor_invoice.payment_initiated"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "contractor_invoice_id": {
+                    "description": "The unique identifier of the contractor invoice.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the related employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "contractor_invoice_id",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "contractor_invoice.payment_initiated",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "employment.contractor_management_plan.updated": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when a contractor's plan changes between Contractor Management (CM)\nand Contractor Management Plus (CM+).\n\nThe payload is stateless. Use the employment endpoint to retrieve the current plan details.\n",
+        "operationId": "employment.contractor_management_plan.updated",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33",
                   "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "incentive.processing_started",
-                  "incentive_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
+                  "event_type": "employment.contractor_management_plan.updated"
                 },
                 "properties": {
                   "company_id": {
@@ -1435,69 +1380,11 @@ This endpoint accepts any one of the following token types:
                   },
                   "event_type": {
                     "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "incentive_id": {
-                    "description": "The unique identifier of the related incentive.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "incentive_id",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "incentive.processing_started",
-        "tags": [
-          "Incentives"
-        ]
-      }
-    },
-    "incentive.updated": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered whenever an incentive is updated.",
-        "operationId": "incentive.updated",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "incentive.updated",
-                  "incentive_id": "129d02bc-dd6a-11ed-ac99-cb057df06a33"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "incentive_id": {
-                    "description": "The unique identifier of the related incentive.",
                     "type": "string"
                   }
                 },
                 "required": [
                   "event_type",
-                  "incentive_id",
                   "employment_id",
                   "company_id"
                 ]
@@ -1511,26 +1398,26 @@ This endpoint accepts any one of the following token types:
           }
         },
         "security": [],
-        "summary": "incentive.updated",
+        "summary": "employment.contractor_management_plan.updated",
         "tags": [
-          "Incentives"
+          "Employments"
         ]
       }
     },
-    "payslip.released": {
+    "employment.contractor_of_record_termination.cancelled": {
       "post": {
         "deprecated": false,
-        "description": "This event is triggered when a payslip is ready and available for an employee.\n",
-        "operationId": "payslip.released",
+        "description": "This event is triggered when a contractor of record termination request is cancelled.\n\nThe payload is stateless. Use the termination request ID and employment ID to retrieve the current details.\n",
+        "operationId": "employment.contractor_of_record_termination.cancelled",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "45b34922-2590-43a0-ac05-ad23834adb8f",
-                  "event_type": "payslip.released",
-                  "payslip_id": "86e56288-ca62-11ed-9702-a703c40b6c0d"
+                  "company_id": "123-example",
+                  "employment_id": "123-example",
+                  "event_type": "employment.contractor_of_record_termination.cancelled",
+                  "termination_request_id": "123-example"
                 },
                 "properties": {
                   "company_id": {
@@ -1545,15 +1432,15 @@ This endpoint accepts any one of the following token types:
                     "description": "The webhook event type identifier.",
                     "type": "string"
                   },
-                  "payslip_id": {
-                    "description": "The unique identifier of the related payslip.",
+                  "termination_request_id": {
+                    "description": "The unique identifier of the termination request.",
                     "type": "string"
                   }
                 },
                 "required": [
-                  "employment_id",
-                  "payslip_id",
                   "event_type",
+                  "termination_request_id",
+                  "employment_id",
                   "company_id"
                 ]
               }
@@ -1566,9 +1453,162 @@ This endpoint accepts any one of the following token types:
           }
         },
         "security": [],
-        "summary": "payslip.released",
+        "summary": "employment.contractor_of_record_termination.cancelled",
         "tags": [
-          "Payslips"
+          "Employments"
+        ]
+      }
+    },
+    "employment.cor_hiring.invoice_created": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when a invoice report is created for a employment.",
+        "operationId": "employment.cor_hiring.invoice_created",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "f2a1b3c4-d5e6-7f8g-9h0i-j1k2l3m4n5o6",
+                  "employment_id": "f8e9d2c7-3a1b-4f5c-9e6d-8b7a2c1d0e3f",
+                  "event_type": "employment.cor_hiring.invoice_created",
+                  "invoice_report_id": "c7f8e9d2-3a1b-4f5c-9e6d-8b7a2c1d0e3f"
+                },
+                "properties": {
+                  "company_id": {
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "type": "string"
+                  },
+                  "invoice_report_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "employment_id",
+                  "invoice_report_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "employment.cor_hiring.invoice_created",
+        "tags": [
+          "COR Hiring"
+        ]
+      }
+    },
+    "employment.cor_hiring.proof_of_payment_accepted": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when a proof of payment is accepted for a contractor of record employment.",
+        "operationId": "employment.cor_hiring.proof_of_payment_accepted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "f2a1b3c4-d5e6-7f8g-9h0i-j1k2l3m4n5o6",
+                  "employment_id": "f8e9d2c7-3a1b-4f5c-9e6d-8b7a2c1d0e3f",
+                  "event_type": "employment.cor_hiring.proof_of_payment_accepted",
+                  "proof_of_payment_id": "c7f8e9d2-3a1b-4f5c-9e6d-8b7a2c1d0e3f"
+                },
+                "properties": {
+                  "company_id": {
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "type": "string"
+                  },
+                  "proof_of_payment_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "employment_id",
+                  "proof_of_payment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "employment.cor_hiring.proof_of_payment_accepted",
+        "tags": [
+          "COR Hiring"
+        ]
+      }
+    },
+    "employment.cor_hiring.proof_of_payment_submitted": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when a proof of payment is submitted for a contractor of record employment.",
+        "operationId": "employment.cor_hiring.proof_of_payment_submitted",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "f2a1b3c4-d5e6-7f8g-9h0i-j1k2l3m4n5o6",
+                  "employment_id": "f8e9d2c7-3a1b-4f5c-9e6d-8b7a2c1d0e3f",
+                  "event_type": "employment.cor_hiring.proof_of_payment_submitted",
+                  "proof_of_payment_id": "c7f8e9d2-3a1b-4f5c-9e6d-8b7a2c1d0e3f"
+                },
+                "properties": {
+                  "company_id": {
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "type": "string"
+                  },
+                  "proof_of_payment_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "employment_id",
+                  "proof_of_payment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "employment.cor_hiring.proof_of_payment_submitted",
+        "tags": [
+          "COR Hiring"
         ]
       }
     }

@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 418,
+  "count": 419,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -646,6 +646,11 @@
       "page": "https://developer.remote.com/reference/get_v1_contractor-invoices_id",
       "markdown": "https://developer.remote.com/reference/get_v1_contractor-invoices_id.md",
       "file": "reference/get_v1_contractor-invoices_id.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_contractor-invoices_id_pay-in-details",
+      "markdown": "https://developer.remote.com/reference/get_v1_contractor-invoices_id_pay-in-details.md",
+      "file": "reference/get_v1_contractor-invoices_id_pay-in-details.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_contractors_cor-termination-requests",

@@ -69,6 +69,7 @@ This endpoint accepts any one of the following token types:
                 "billing_document_id": null,
                 "currency": "USD",
                 "due_date": "2024-06-15",
+                "pay_in_method": "bank_transfer",
                 "reference": "TR0000000042",
                 "status": "awaiting_payment"
               },
@@ -162,6 +163,20 @@ This endpoint accepts any one of the following token types:
         "title": "ContractorInvoiceStatus",
         "type": "string"
       },
+      "ContractorInvoicePayInMethod": {
+        "description": "How Remote collects this payment: `bank_transfer` when the company wires it, `direct_debit` for a mandate-based collection, `card`, `prefunding_credit` when prefunded balance covers it, and `other` for anything else. Wire when this reads `bank_transfer`; Remote collects `direct_debit`, `card` and `prefunding_credit` itself and a transfer would pay twice. `not_selected` means Remote has not recorded a collection method: for Contractor of Record that lasts until the company starts the payment, so confirm the arrangement before wiring.",
+        "enum": [
+          "bank_transfer",
+          "direct_debit",
+          "card",
+          "prefunding_credit",
+          "other",
+          "not_selected"
+        ],
+        "example": "bank_transfer",
+        "title": "ContractorInvoicePayInMethod",
+        "type": "string"
+      },
       "ContractorInvoiceItem": {
         "additionalProperties": false,
         "description": "Line Item schema for a Contractor Invoice.",
@@ -193,21 +208,20 @@ This endpoint accepts any one of the following token types:
       },
       "ContractorInvoicePayment": {
         "additionalProperties": false,
-        "description": "The payment that settles this invoice, or `null` while no payment does. `reference` is what the company writes on the wire: for Contractor Management it is the transaction receipt (TR) number shown in Remote under Contractor Payments then Transactions; for Contractor of Record it is the Remote invoice number. The reference changes when a payment is reset and re-initiated, so read it before every wire. `amount_due` is the total of the payment this invoice belongs to, shared by every invoice in it: group invoices by `reference` and pay each reference once. `status: awaiting_payment` means Remote has not received the funds, not that a bank transfer is expected - the invoice's pay-in details are the only authority on whether and where to wire. `status: blocked` means the company must not wire: the payment is on a compliance hold.",
+        "description": "The payment that settles this invoice, or `null` while no payment does. `reference` is the transaction receipt (TR) number for Contractor Management and the Remote invoice number for Contractor of Record; it changes when a payment is reset and re-initiated. `amount_due` is the total of the payment this invoice belongs to, shared by every invoice in it. `status` says where the payment stands and `pay_in_method` how Remote collects it; the invoice's pay-in details are the authority on whether and where to wire.",
         "example": {
           "amount_due": 350000,
           "billing_document_id": null,
           "currency": "USD",
           "due_date": "2024-06-15",
+          "pay_in_method": "bank_transfer",
           "reference": "TR0000000042",
           "status": "awaiting_payment"
         },
         "nullable": true,
         "properties": {
           "amount_due": {
-            "description": "Total amount of the payment in cents, shared by every invoice in it.",
-            "example": 350000,
-            "type": "integer"
+            "$ref": "#/components/schemas/ContractorInvoicePaymentAmountDue"
           },
           "billing_document_id": {
             "description": "The billing document's public id. Set only for Contractor-of-Record invoices, null otherwise.",
@@ -221,10 +235,11 @@ This endpoint accepts any one of the following token types:
           "due_date": {
             "$ref": "#/components/schemas/NullableDate"
           },
+          "pay_in_method": {
+            "$ref": "#/components/schemas/ContractorInvoicePayInMethod"
+          },
           "reference": {
-            "description": "The reference to quote when paying: the transaction receipt number, or the Remote invoice number for Contractor of Record.",
-            "example": "TR0000000042",
-            "type": "string"
+            "$ref": "#/components/schemas/ContractorInvoicePaymentReference"
           },
           "status": {
             "$ref": "#/components/schemas/ContractorInvoicePaymentStatus"
@@ -236,6 +251,7 @@ This endpoint accepts any one of the following token types:
           "currency",
           "due_date",
           "status",
+          "pay_in_method",
           "billing_document_id"
         ],
         "title": "ContractorInvoicePayment",
@@ -316,9 +332,10 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "ContractorInvoicePaymentStatus": {
-        "description": "Where the payment stands: `awaiting_payment` means Remote has not received the funds and the payment is still expected, `processing` that a direct debit or card collection is in flight, and `paid` that Remote has received the funds. `blocked` means the payment is on a compliance hold: the reference stays valid, but do not wire while the hold lasts - the payment returns to `awaiting_payment` once Remote lifts it.",
+        "description": "Where the payment stands: `awaiting_payment` means Remote has not received the funds and the payment is still expected, `processing` that a collection is in flight, and `paid` that Remote has received the funds. `partially_paid` means Remote received some of the amount but not all of it, because the company underpaid or part of a collection failed after the rest settled; `amount_due` still shows the original total rather than what remains, and Remote follows up with the company on the outstanding balance directly. `blocked` means the payment is on a compliance hold: the reference stays valid, and the payment returns to `awaiting_payment` once Remote lifts it.",
         "enum": [
           "awaiting_payment",
+          "partially_paid",
           "blocked",
           "processing",
           "paid"
@@ -358,6 +375,12 @@ This endpoint accepts any one of the following token types:
         ],
         "title": "UnauthorizedResponse",
         "type": "object"
+      },
+      "ContractorInvoicePaymentReference": {
+        "description": "The reference to quote when paying: the transaction receipt number, or the Remote invoice number for Contractor of Record. Put it in the transfer memo, with the company name; Remote matches an incoming transfer on it.",
+        "example": "TR0000000042",
+        "title": "ContractorInvoicePaymentReference",
+        "type": "string"
       },
       "ParameterError": {
         "example": {
@@ -404,6 +427,12 @@ This endpoint accepts any one of the following token types:
         "title": "ForbiddenResponse",
         "type": "object"
       },
+      "ContractorInvoicePaymentAmountDue": {
+        "description": "Total amount of the payment in cents, shared by every invoice in it. This is the amount the payment was raised for, not a running balance: when `status` is `partially_paid` Remote has already received part of it and the outstanding balance is lower. Remote contacts the company directly with that balance; it is not published here.",
+        "example": 350000,
+        "title": "ContractorInvoicePaymentAmountDue",
+        "type": "integer"
+      },
       "ContractorInvoice": {
         "additionalProperties": false,
         "description": "Contractor Invoice",
@@ -432,6 +461,7 @@ This endpoint accepts any one of the following token types:
             "billing_document_id": null,
             "currency": "USD",
             "due_date": "2024-06-15",
+            "pay_in_method": "bank_transfer",
             "reference": "TR0000000042",
             "status": "awaiting_payment"
           },
@@ -637,6 +667,7 @@ This endpoint accepts any one of the following token types:
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
               "project:write": "project:write",
+              "pay_in_details:read": "pay_in_details:read",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -659,6 +690,7 @@ This endpoint accepts any one of the following token types:
               "contract_amendment:write": "contract_amendment:write",
               "offboarding:read": "offboarding:read",
               "timeoff:read": "timeoff:read",
+              "pay_in_details": "pay_in_details",
               "probation_document:write": "probation_document:write",
               "country:read": "country:read",
               "webhook:read": "webhook:read",
@@ -749,6 +781,7 @@ This endpoint accepts any one of the following token types:
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
               "project:write": "project:write",
+              "pay_in_details:read": "pay_in_details:read",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -771,6 +804,7 @@ This endpoint accepts any one of the following token types:
               "contract_amendment:write": "contract_amendment:write",
               "offboarding:read": "offboarding:read",
               "timeoff:read": "timeoff:read",
+              "pay_in_details": "pay_in_details",
               "probation_document:write": "probation_document:write",
               "country:read": "country:read",
               "webhook:read": "webhook:read",
@@ -826,7 +860,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c3b1d8be-60e5-4780-8f91-8eda796b14de",
+            "example": "4c37df3a-9ee3-4fce-84a6-3308cc4ff2bc",
             "in": "path",
             "name": "id",
             "required": true,

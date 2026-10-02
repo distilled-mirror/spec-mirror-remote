@@ -208,6 +208,10 @@ This endpoint accepts any one of the following token types:
             "description": "Contractor-specific settings. Only present for contractor employments.",
             "nullable": true,
             "properties": {
+              "charges_vat": {
+                "description": "Whether the contractor charges VAT on their invoices. Set by the contractor. Only used for Contractor Management and Contractor Management Plus.",
+                "type": "boolean"
+              },
               "requires_work_confirmation": {
                 "description": "Whether the contractor requires work confirmation before submitting invoices.",
                 "type": "boolean"
@@ -884,20 +888,19 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "EmploymentStatus": {
-        "description": "The current status of the employment record.\n\n- `active`: The employee is fully onboarded and actively working.\n- `created`: The employment has been created but onboarding has not started.\n- `pre_hire`: A pre-hire employment record, created before formal onboarding begins.\n- `created_awaiting_reserve`: The employment is created but waiting for a risk reserve deposit to be paid.\n- `created_reserve_paid`: The risk reserve has been paid and the employment can proceed with onboarding.\n- `initiated`: Onboarding has been started by the employer.\n- `invited`: The employee has been invited to complete their self-enrollment on Remote.\n- `pending`: The employment is pending review or further action before it can become active.\n- `review`: The employment is under review by Remote (e.g., contract or compliance review).\n- `archived`: The employment has been terminated or offboarded.\n- `deleted`: The employment record has been deleted.\n",
+        "description": "The current status of the employment record.\n\n- `active`: The employee is fully onboarded and actively working.\n- `created`: The employment has been created but onboarding has not started.\n- `pre_hire`: A pre-hire employment record, created before formal onboarding begins.\n- `created_awaiting_reserve`: The employment is created but waiting for a risk reserve deposit to be paid.\n- `created_reserve_paid`: The risk reserve has been paid and the employment can proceed with onboarding.\n- `initiated`: Onboarding has been started by the employer.\n- `invited`: The employee has been invited to complete their self-enrollment on Remote.\n- `pending`: The employment is pending review or further action before it can become active.\n- `review`: The employment is under review by Remote (e.g., contract or compliance review).\n- `job_title_review`: The job title is pending verification by Remote; once approved, the employment returns to `created`.\n- `pending_post_self_enrollment_actions`: Self-enrollment is complete, but some actions are still missing before the employment can be activated.\n- `archived`: The employment has been terminated or offboarded.\n- `deleted`: The employment record has been deleted.\n",
         "enum": [
           "active",
           "created",
-          "pre_hire",
           "created_awaiting_reserve",
           "created_reserve_paid",
           "initiated",
           "invited",
           "pending",
+          "pre_hire",
           "review",
           "job_title_review",
           "pending_post_self_enrollment_actions",
-          "offboarding",
           "archived",
           "deleted"
         ],
@@ -1235,6 +1238,7 @@ This endpoint accepts any one of the following token types:
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
               "project:write": "project:write",
+              "pay_in_details:read": "pay_in_details:read",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -1257,6 +1261,7 @@ This endpoint accepts any one of the following token types:
               "contract_amendment:write": "contract_amendment:write",
               "offboarding:read": "offboarding:read",
               "timeoff:read": "timeoff:read",
+              "pay_in_details": "pay_in_details",
               "probation_document:write": "probation_document:write",
               "country:read": "country:read",
               "webhook:read": "webhook:read",
@@ -1347,6 +1352,7 @@ This endpoint accepts any one of the following token types:
               "employment_documents": "employment_documents",
               "onboarding:write": "onboarding:write",
               "project:write": "project:write",
+              "pay_in_details:read": "pay_in_details:read",
               "payroll_run:read": "payroll_run:read",
               "risk_reserve:write": "risk_reserve:write",
               "invoices": "invoices",
@@ -1369,6 +1375,7 @@ This endpoint accepts any one of the following token types:
               "contract_amendment:write": "contract_amendment:write",
               "offboarding:read": "offboarding:read",
               "timeoff:read": "timeoff:read",
+              "pay_in_details": "pay_in_details",
               "probation_document:write": "probation_document:write",
               "country:read": "country:read",
               "webhook:read": "webhook:read",
