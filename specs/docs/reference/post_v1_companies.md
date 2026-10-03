@@ -441,6 +441,116 @@ This endpoint requires the following token type:
         "type": "object"
       },
       "CreateCompanyParams": {
+        "allOf": [
+          {
+            "properties": {
+              "address_details": {
+                "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `address_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
+                "type": "object"
+              },
+              "bank_account_details": {
+                "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `bank_account_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
+                "type": "object"
+              },
+              "company_owner_email": {
+                "description": "The company owner email.\n\nThis value cannot be changed once set.\n",
+                "format": "email",
+                "type": "string"
+              },
+              "company_owner_name": {
+                "description": "The company owner name.\n\nThis value cannot be changed from the Remote API once set.\n",
+                "type": "string"
+              },
+              "country_code": {
+                "description": "3-letter country code of the country the company address is located in.\n\nFor a list of countries supported through the Remote API, make a call to the [list countries endpoint](#tag/Countries/operation/get_supported_country). This endpoint will also include the 3-letter country codes you can use for this field.\n",
+                "type": "string"
+              },
+              "desired_currency": {
+                "description": "Desired currency for invoicing and displaying converted salaries in Remote UI regardless of the employee's country.",
+                "enum": [
+                  "AUD",
+                  "CAD",
+                  "CHF",
+                  "DKK",
+                  "EUR",
+                  "GBP",
+                  "JPY",
+                  "NOK",
+                  "NZD",
+                  "SEK",
+                  "SGD",
+                  "USD"
+                ],
+                "type": "string"
+              },
+              "email_domain": {
+                "description": "The domain of the company. Use this field to specify the company domain name when it's different from the domain in the company owner's email.",
+                "type": "string"
+              },
+              "external_id": {
+                "description": "Id of the company as represented in the external partner system.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The company name",
+                "type": "string"
+              },
+              "phone_number": {
+                "description": "A phone number the company can be contacted with.",
+                "type": "string"
+              },
+              "registration_number": {
+                "description": "The company registration number. Exactly one of this field or `tax_number` must be submitted, not both.",
+                "type": "string"
+              },
+              "tax_number": {
+                "description": "The tax identifier of the company. Exactly one of this field or `registration_number` must be submitted, not both.",
+                "type": "string"
+              },
+              "terms_of_service_accepted_at": {
+                "description": "Date and time the Terms of Service were accepted. To ensure users read the most recent version of Remote's Terms of Service, their action cannot have been done more than fifteen minutes ago. The UTC offset must be included in the ISO 8601 format: `YYYY-MM-DD HOURS:MINUTES:SECONDSZ`",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": [
+              "company_owner_email",
+              "company_owner_name",
+              "country_code",
+              "desired_currency",
+              "name",
+              "terms_of_service_accepted_at"
+            ],
+            "type": "object"
+          },
+          {
+            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both.",
+            "oneOf": [
+              {
+                "properties": {
+                  "tax_number": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tax_number"
+                ],
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "registration_number": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "registration_number"
+                ],
+                "type": "object"
+              }
+            ]
+          }
+        ],
         "example": {
           "address_details": {
             "address": "1709 Broderick St",
@@ -467,86 +577,7 @@ This endpoint requires the following token type:
           "tax_number": "123456789",
           "terms_of_service_accepted_at": "2022-05-05 15:03:45Z"
         },
-        "properties": {
-          "address_details": {
-            "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `address_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
-            "type": "object"
-          },
-          "bank_account_details": {
-            "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `bank_account_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
-            "type": "object"
-          },
-          "company_owner_email": {
-            "description": "The company owner email.\n\nThis value cannot be changed once set.\n",
-            "format": "email",
-            "type": "string"
-          },
-          "company_owner_name": {
-            "description": "The company owner name.\n\nThis value cannot be changed from the Remote API once set.\n",
-            "type": "string"
-          },
-          "country_code": {
-            "description": "3-letter country code of the country the company address is located in.\n\nFor a list of countries supported through the Remote API, make a call to the [list countries endpoint](#tag/Countries/operation/get_supported_country). This endpoint will also include the 3-letter country codes you can use for this field.\n",
-            "type": "string"
-          },
-          "desired_currency": {
-            "description": "Desired currency for invoicing and displaying converted salaries in Remote UI regardless of the employee's country.",
-            "enum": [
-              "AUD",
-              "CAD",
-              "CHF",
-              "DKK",
-              "EUR",
-              "GBP",
-              "JPY",
-              "NOK",
-              "NZD",
-              "SEK",
-              "SGD",
-              "USD"
-            ],
-            "type": "string"
-          },
-          "email_domain": {
-            "description": "The domain of the company. Use this field to specify the company domain name when it's different from the domain in the company owner's email.",
-            "type": "string"
-          },
-          "external_id": {
-            "description": "Id of the company as represented in the external partner system.",
-            "type": "string"
-          },
-          "name": {
-            "description": "The company name",
-            "type": "string"
-          },
-          "phone_number": {
-            "description": "A phone number the company can be contacted with.",
-            "type": "string"
-          },
-          "registration_number": {
-            "description": "The company registration number. This field or `tax_number` (but not both) should be submitted.",
-            "type": "string"
-          },
-          "tax_number": {
-            "description": "The tax identifier of the company. This field or `registration_number` (but not both) should be submitted.",
-            "type": "string"
-          },
-          "terms_of_service_accepted_at": {
-            "description": "Date and time the Terms of Service were accepted. To ensure users read the most recent version of Remote's Terms of Service, their action cannot have been done more than fifteen minutes ago. The UTC offset must be included in the ISO 8601 format: `YYYY-MM-DD HOURS:MINUTES:SECONDSZ`",
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "required": [
-          "company_owner_email",
-          "company_owner_name",
-          "country_code",
-          "desired_currency",
-          "name",
-          "terms_of_service_accepted_at"
-        ],
-        "title": "CreateCompanyParams",
-        "type": "object"
+        "title": "CreateCompanyParams"
       },
       "BaseTokenResponse": {
         "example": {

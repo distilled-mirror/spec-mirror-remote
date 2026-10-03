@@ -303,7 +303,7 @@
     "/auth/oauth2/token": {
       "post": {
         "deprecated": false,
-        "description": "Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Basic authentication** (`BasicAuth`) — using the `CLIENT_ID` as login and the `CLIENT_SECRET` as password. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
+        "description": "Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows.\n\nFor backward compatibility, this endpoint returns `400` with `invalid_grant` in some cases where\nRFC 6749 would use `invalid_client` (invalid client credentials) or `unauthorized_client`\n(the integration is not allowed to use the grant type). Use `error_description` to tell these\ncases apart.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Basic authentication** (`BasicAuth`) — using the `CLIENT_ID` as login and the `CLIENT_SECRET` as password. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
         "operationId": "post_auth_oauth2_token",
         "requestBody": {
           "content": {
@@ -2775,7 +2775,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "Employment ID",
@@ -2785,7 +2786,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -4897,7 +4899,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "7cf7fff4-e343-419e-a048-88ae16c52433",
+            "example": "d20ea75d-4b6c-408e-af06-a7869205ddfa",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5293,7 +5295,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "051ab5db-d262-4452-a5be-f71e74404edf",
+            "example": "2b57a506-28ca-4dea-b8fb-05d7bae0cf2f",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5386,7 +5388,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e78d518c-a4d2-4b28-ac85-26a49f4c2f6c",
+            "example": "811f88a2-caaa-4113-88f6-7a3c8e691112",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5470,7 +5472,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e9dc4ae0-4b47-4819-b952-022bc231ec56",
+            "example": "1bb02e55-abe4-425b-a648-425af0df34b3",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5566,7 +5568,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "6c465571-7a7a-48ae-8102-63bcd8093fd3",
+            "example": "cd1b00ea-fd72-4572-8006-59e2d6c357f0",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5775,7 +5777,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4c37df3a-9ee3-4fce-84a6-3308cc4ff2bc",
+            "example": "ee7d190f-8033-46ce-84b5-04318d4f26c6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5850,7 +5852,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "e6ce47fa-257e-4580-8266-bf013fe12c48",
+            "example": "4f6c746a-0565-4f2a-bdb5-150640cc7de4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -10925,7 +10927,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -11021,7 +11023,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -11115,7 +11117,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -11211,7 +11213,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -13467,7 +13469,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "5a43c7c5-fea9-483b-a843-1cc8c795fba6",
+            "example": "0a7464ec-030a-4f6c-98f1-da7e7ed148b2",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14071,7 +14073,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -23096,7 +23099,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23446,7 +23449,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23540,7 +23543,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23636,7 +23639,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23732,7 +23735,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23797,7 +23800,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23883,7 +23886,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -23979,7 +23982,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },
@@ -30587,7 +30590,7 @@
         },
         "properties": {
           "client_id": {
-            "description": "The client id generated during registration",
+            "description": "The client id generated during registration. Optional here - it can instead be sent via the Basic auth header, which is always required for this grant type.",
             "type": "string"
           },
           "grant_type": {
@@ -30599,8 +30602,7 @@
           }
         },
         "required": [
-          "grant_type",
-          "client_id"
+          "grant_type"
         ],
         "title": "ClientCredentialsParams",
         "type": "object"
@@ -36409,6 +36411,116 @@
         "type": "object"
       },
       "CreateCompanyParams": {
+        "allOf": [
+          {
+            "properties": {
+              "address_details": {
+                "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `address_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
+                "type": "object"
+              },
+              "bank_account_details": {
+                "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `bank_account_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
+                "type": "object"
+              },
+              "company_owner_email": {
+                "description": "The company owner email.\n\nThis value cannot be changed once set.\n",
+                "format": "email",
+                "type": "string"
+              },
+              "company_owner_name": {
+                "description": "The company owner name.\n\nThis value cannot be changed from the Remote API once set.\n",
+                "type": "string"
+              },
+              "country_code": {
+                "description": "3-letter country code of the country the company address is located in.\n\nFor a list of countries supported through the Remote API, make a call to the [list countries endpoint](#tag/Countries/operation/get_supported_country). This endpoint will also include the 3-letter country codes you can use for this field.\n",
+                "type": "string"
+              },
+              "desired_currency": {
+                "description": "Desired currency for invoicing and displaying converted salaries in Remote UI regardless of the employee's country.",
+                "enum": [
+                  "AUD",
+                  "CAD",
+                  "CHF",
+                  "DKK",
+                  "EUR",
+                  "GBP",
+                  "JPY",
+                  "NOK",
+                  "NZD",
+                  "SEK",
+                  "SGD",
+                  "USD"
+                ],
+                "type": "string"
+              },
+              "email_domain": {
+                "description": "The domain of the company. Use this field to specify the company domain name when it's different from the domain in the company owner's email.",
+                "type": "string"
+              },
+              "external_id": {
+                "description": "Id of the company as represented in the external partner system.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The company name",
+                "type": "string"
+              },
+              "phone_number": {
+                "description": "A phone number the company can be contacted with.",
+                "type": "string"
+              },
+              "registration_number": {
+                "description": "The company registration number. Exactly one of this field or `tax_number` must be submitted, not both.",
+                "type": "string"
+              },
+              "tax_number": {
+                "description": "The tax identifier of the company. Exactly one of this field or `registration_number` must be submitted, not both.",
+                "type": "string"
+              },
+              "terms_of_service_accepted_at": {
+                "description": "Date and time the Terms of Service were accepted. To ensure users read the most recent version of Remote's Terms of Service, their action cannot have been done more than fifteen minutes ago. The UTC offset must be included in the ISO 8601 format: `YYYY-MM-DD HOURS:MINUTES:SECONDSZ`",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": [
+              "company_owner_email",
+              "company_owner_name",
+              "country_code",
+              "desired_currency",
+              "name",
+              "terms_of_service_accepted_at"
+            ],
+            "type": "object"
+          },
+          {
+            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both.",
+            "oneOf": [
+              {
+                "properties": {
+                  "tax_number": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tax_number"
+                ],
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "registration_number": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "registration_number"
+                ],
+                "type": "object"
+              }
+            ]
+          }
+        ],
         "example": {
           "address_details": {
             "address": "1709 Broderick St",
@@ -36435,86 +36547,7 @@
           "tax_number": "123456789",
           "terms_of_service_accepted_at": "2022-05-05 15:03:45Z"
         },
-        "properties": {
-          "address_details": {
-            "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `address_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
-            "type": "object"
-          },
-          "bank_account_details": {
-            "description": "Fields can vary depending on the country. Please, check the required fields structure using the [Show form schema endpoint](#operation/get_show_form_country).\nUse the desired country and `bank_account_details` as the form name for the placeholders.\nThe response complies with the [JSON Schema](https://developer.remote.com/docs/how-json-schemas-work) specification.\n",
-            "type": "object"
-          },
-          "company_owner_email": {
-            "description": "The company owner email.\n\nThis value cannot be changed once set.\n",
-            "format": "email",
-            "type": "string"
-          },
-          "company_owner_name": {
-            "description": "The company owner name.\n\nThis value cannot be changed from the Remote API once set.\n",
-            "type": "string"
-          },
-          "country_code": {
-            "description": "3-letter country code of the country the company address is located in.\n\nFor a list of countries supported through the Remote API, make a call to the [list countries endpoint](#tag/Countries/operation/get_supported_country). This endpoint will also include the 3-letter country codes you can use for this field.\n",
-            "type": "string"
-          },
-          "desired_currency": {
-            "description": "Desired currency for invoicing and displaying converted salaries in Remote UI regardless of the employee's country.",
-            "enum": [
-              "AUD",
-              "CAD",
-              "CHF",
-              "DKK",
-              "EUR",
-              "GBP",
-              "JPY",
-              "NOK",
-              "NZD",
-              "SEK",
-              "SGD",
-              "USD"
-            ],
-            "type": "string"
-          },
-          "email_domain": {
-            "description": "The domain of the company. Use this field to specify the company domain name when it's different from the domain in the company owner's email.",
-            "type": "string"
-          },
-          "external_id": {
-            "description": "Id of the company as represented in the external partner system.",
-            "type": "string"
-          },
-          "name": {
-            "description": "The company name",
-            "type": "string"
-          },
-          "phone_number": {
-            "description": "A phone number the company can be contacted with.",
-            "type": "string"
-          },
-          "registration_number": {
-            "description": "The company registration number. This field or `tax_number` (but not both) should be submitted.",
-            "type": "string"
-          },
-          "tax_number": {
-            "description": "The tax identifier of the company. This field or `registration_number` (but not both) should be submitted.",
-            "type": "string"
-          },
-          "terms_of_service_accepted_at": {
-            "description": "Date and time the Terms of Service were accepted. To ensure users read the most recent version of Remote's Terms of Service, their action cannot have been done more than fifteen minutes ago. The UTC offset must be included in the ISO 8601 format: `YYYY-MM-DD HOURS:MINUTES:SECONDSZ`",
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "required": [
-          "company_owner_email",
-          "company_owner_name",
-          "country_code",
-          "desired_currency",
-          "name",
-          "terms_of_service_accepted_at"
-        ],
-        "title": "CreateCompanyParams",
-        "type": "object"
+        "title": "CreateCompanyParams"
       },
       "CreateContractAmendmentParams": {
         "additionalProperties": false,
@@ -47772,7 +47805,7 @@
         "example": {
           "data": {
             "current_page": 1,
-            "data": [
+            "pay_items": [
               {
                 "amount": 7200,
                 "code": "overtime",
@@ -47803,7 +47836,7 @@
                 "minimum": 1,
                 "type": "integer"
               },
-              "data": {
+              "pay_items": {
                 "description": "List of pay items",
                 "items": {
                   "$ref": "#/components/schemas/PayItem"
@@ -47822,7 +47855,7 @@
               }
             },
             "required": [
-              "data",
+              "pay_items",
               "current_page",
               "total_pages",
               "total_count"
@@ -53747,6 +53780,7 @@
                   "resource_already_exists",
                   "action_unrecognized",
                   "action_invalid",
+                  "resource_not_found",
                   "parameter_invalid_date",
                   "resource_invalid_state",
                   "parameter_value_invalid",
@@ -55835,6 +55869,80 @@
           "type"
         ],
         "title": "TimeoffEntitlement",
+        "type": "object"
+      },
+      "TimeoffErrorResponse": {
+        "description": "A single consistent envelope for every validation error on time off write endpoints.",
+        "example": {
+          "errors": {
+            "timeoff_days/hours": [
+              "must be greater than or equal to 0",
+              "must be less than or equal to 8"
+            ]
+          },
+          "field_errors": [
+            {
+              "code": "parameter_value_unknown",
+              "field": "timeoff_days/hours",
+              "message": "must be greater than or equal to 0"
+            },
+            {
+              "code": "parameter_value_unknown",
+              "field": "timeoff_days/hours",
+              "message": "must be less than or equal to 8"
+            }
+          ],
+          "message": "Unprocessable Entity"
+        },
+        "properties": {
+          "errors": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Present only for a field-named failure, kept for compatibility with the shape this envelope replaced: a map of field name to that field's message(s). New consumers should read `field_errors` instead — this key may be absent.",
+            "nullable": true,
+            "type": "object"
+          },
+          "field_errors": {
+            "description": "The structured, per-error list. Always present — read this, not `errors`.",
+            "items": {
+              "properties": {
+                "code": {
+                  "description": "An error code that describes the nature of the error.",
+                  "type": "string"
+                },
+                "field": {
+                  "description": "The request field this error relates to, or null for a request-level failure.",
+                  "nullable": true,
+                  "type": "string"
+                },
+                "message": {
+                  "description": "A developer-friendly message describing this specific error.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "code",
+                "message"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "A flat, human-readable summary of the failure.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "field_errors"
+        ],
+        "title": "TimeoffErrorResponse",
         "type": "object"
       },
       "TimeoffResponse": {

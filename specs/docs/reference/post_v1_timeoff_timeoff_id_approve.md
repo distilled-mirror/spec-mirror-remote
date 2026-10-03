@@ -27,29 +27,6 @@ This endpoint accepts any one of the following token types:
 {
   "components": {
     "schemas": {
-      "ActionError": {
-        "properties": {
-          "action": {
-            "description": "The action that lead to the error message.",
-            "type": "string"
-          },
-          "code": {
-            "description": "An error code that describes the nature of the error.",
-            "type": "string"
-          },
-          "message": {
-            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "action"
-        ],
-        "title": "ActionError",
-        "type": "object"
-      },
       "NullableDateTime": {
         "description": "Optional UTC date time in YYYY-MM-DDTHH:mm:ss format",
         "example": "2021-07-15T18:18:17",
@@ -126,65 +103,6 @@ This endpoint accepts any one of the following token types:
         "nullable": true,
         "title": "NullableApproverId",
         "type": "string"
-      },
-      "UnprocessableEntityResponse": {
-        "anyOf": [
-          {
-            "properties": {
-              "errors": {
-                "type": "object"
-              }
-            },
-            "required": [
-              "errors"
-            ],
-            "type": "object"
-          },
-          {
-            "properties": {
-              "message": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ParameterError"
-                  },
-                  {
-                    "items": {
-                      "$ref": "#/components/schemas/ParameterError"
-                    },
-                    "title": "ParameterErrors",
-                    "type": "array"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ActionError"
-                  },
-                  {
-                    "items": {
-                      "$ref": "#/components/schemas/ActionError"
-                    },
-                    "title": "ActionErrors",
-                    "type": "array"
-                  }
-                ]
-              }
-            },
-            "required": [
-              "message"
-            ],
-            "type": "object"
-          }
-        ],
-        "example": {
-          "errors": {
-            "some_field": [
-              "is invalid"
-            ]
-          }
-        },
-        "title": "UnprocessableEntityResponse",
-        "type": "object"
       },
       "ResponseTimeoffType": {
         "description": "The type of leave a time off record or leave policy represents.\n\nResponses may return any of these values. The set is a superset of the values\naccepted when creating or updating a time off record (see `TimeoffType`): employments on the newer leave-type model can hold leave types that are not bookable by name.\n",
@@ -450,34 +368,6 @@ This endpoint accepts any one of the following token types:
         "title": "Date",
         "type": "string"
       },
-      "ParameterError": {
-        "example": {
-          "code": "invalid_param",
-          "message": "Invalid parameter",
-          "param": "employment_id"
-        },
-        "properties": {
-          "code": {
-            "description": "An error code that describes the nature of the error.",
-            "type": "string"
-          },
-          "message": {
-            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
-            "type": "string"
-          },
-          "param": {
-            "description": "The parameter that lead to the error message.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "param"
-        ],
-        "title": "ParameterError",
-        "type": "object"
-      },
       "Timeoff": {
         "additionalProperties": false,
         "description": "A time off record for an employee, representing a period of leave (e.g., vacation, sick leave, parental leave).",
@@ -634,6 +524,80 @@ This endpoint accepts any one of the following token types:
           "approver_id"
         ],
         "title": "ApproveTimeoffParams",
+        "type": "object"
+      },
+      "TimeoffErrorResponse": {
+        "description": "A single consistent envelope for every validation error on time off write endpoints.",
+        "example": {
+          "errors": {
+            "timeoff_days/hours": [
+              "must be greater than or equal to 0",
+              "must be less than or equal to 8"
+            ]
+          },
+          "field_errors": [
+            {
+              "code": "parameter_value_unknown",
+              "field": "timeoff_days/hours",
+              "message": "must be greater than or equal to 0"
+            },
+            {
+              "code": "parameter_value_unknown",
+              "field": "timeoff_days/hours",
+              "message": "must be less than or equal to 8"
+            }
+          ],
+          "message": "Unprocessable Entity"
+        },
+        "properties": {
+          "errors": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Present only for a field-named failure, kept for compatibility with the shape this envelope replaced: a map of field name to that field's message(s). New consumers should read `field_errors` instead — this key may be absent.",
+            "nullable": true,
+            "type": "object"
+          },
+          "field_errors": {
+            "description": "The structured, per-error list. Always present — read this, not `errors`.",
+            "items": {
+              "properties": {
+                "code": {
+                  "description": "An error code that describes the nature of the error.",
+                  "type": "string"
+                },
+                "field": {
+                  "description": "The request field this error relates to, or null for a request-level failure.",
+                  "nullable": true,
+                  "type": "string"
+                },
+                "message": {
+                  "description": "A developer-friendly message describing this specific error.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "code",
+                "message"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "A flat, human-readable summary of the failure.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "field_errors"
+        ],
+        "title": "TimeoffErrorResponse",
         "type": "object"
       }
     },
@@ -929,7 +893,7 @@ This endpoint accepts any one of the following token types:
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/TimeoffErrorResponse"
                 }
               }
             },

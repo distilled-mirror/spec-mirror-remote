@@ -212,7 +212,7 @@ This endpoint accepts any one of the following token types:
         "example": {
           "data": {
             "current_page": 1,
-            "data": [
+            "pay_items": [
               {
                 "amount": 7200,
                 "code": "overtime",
@@ -243,7 +243,7 @@ This endpoint accepts any one of the following token types:
                 "minimum": 1,
                 "type": "integer"
               },
-              "data": {
+              "pay_items": {
                 "description": "List of pay items",
                 "items": {
                   "$ref": "#/components/schemas/PayItem"
@@ -262,7 +262,7 @@ This endpoint accepts any one of the following token types:
               }
             },
             "required": [
-              "data",
+              "pay_items",
               "current_page",
               "total_pages",
               "total_count"

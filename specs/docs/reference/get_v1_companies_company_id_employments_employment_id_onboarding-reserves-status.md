@@ -403,7 +403,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "Employment ID",
@@ -413,7 +414,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {

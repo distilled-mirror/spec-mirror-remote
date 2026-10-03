@@ -6,7 +6,12 @@ agentTools:
 
 # Token
 
-Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows
+Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows.
+
+For backward compatibility, this endpoint returns `400` with `invalid_grant` in some cases where
+RFC 6749 would use `invalid_client` (invalid client credentials) or `unauthorized_client`
+(the integration is not allowed to use the grant type). Use `error_description` to tell these
+cases apart.
 
 ## Authentication
 
@@ -168,7 +173,7 @@ This endpoint requires the following token type:
         },
         "properties": {
           "client_id": {
-            "description": "The client id generated during registration",
+            "description": "The client id generated during registration. Optional here - it can instead be sent via the Basic auth header, which is always required for this grant type.",
             "type": "string"
           },
           "grant_type": {
@@ -180,8 +185,7 @@ This endpoint requires the following token type:
           }
         },
         "required": [
-          "grant_type",
-          "client_id"
+          "grant_type"
         ],
         "title": "ClientCredentialsParams",
         "type": "object"
@@ -606,7 +610,7 @@ This endpoint requires the following token type:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Basic authentication** (`BasicAuth`) — using the `CLIENT_ID` as login and the `CLIENT_SECRET` as password. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
+        "description": "Endpoint to exchange tokens in the Authorization Code, Assertion Flow, Client Credentials and Refresh Token flows.\n\nFor backward compatibility, this endpoint returns `400` with `invalid_grant` in some cases where\nRFC 6749 would use `invalid_client` (invalid client credentials) or `unauthorized_client`\n(the integration is not allowed to use the grant type). Use `error_description` to tell these\ncases apart.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Basic authentication** (`BasicAuth`) — using the `CLIENT_ID` as login and the `CLIENT_SECRET` as password. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
         "operationId": "post_auth_oauth2_token",
         "parameters": [],
         "requestBody": {

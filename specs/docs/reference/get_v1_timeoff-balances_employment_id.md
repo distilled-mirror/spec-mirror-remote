@@ -181,6 +181,7 @@ This endpoint accepts any one of the following token types:
                   "resource_already_exists",
                   "action_unrecognized",
                   "action_invalid",
+                  "resource_not_found",
                   "parameter_invalid_date",
                   "resource_invalid_state",
                   "parameter_value_invalid",
