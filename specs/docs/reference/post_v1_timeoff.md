@@ -213,7 +213,7 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "ResponseTimeoffType": {
-        "description": "The type of leave a time off record or leave policy represents.\n\nResponses may return any of these values. The set is a superset of the values\naccepted when creating or updating a time off record (see `TimeoffType`): employments on the newer leave-type model can hold leave types that are not bookable by name.\n",
+        "description": "The type of leave a time off record or leave policy represents.\n\nResponses may return any of these values. The set is a superset of the values\naccepted when creating a time off record (see `TimeoffType`): employments on the newer leave-type model can hold leave types that are not bookable by name.\n",
         "enum": [
           "time_off",
           "sick_leave",
@@ -530,7 +530,7 @@ This endpoint accepts any one of the following token types:
         "type": "string"
       },
       "TimeoffType": {
-        "description": "The type of leave accepted when creating or updating a time off record.",
+        "description": "The type of leave accepted when creating a time off record. It is fixed once the record exists and cannot be changed by updating it.\n",
         "enum": [
           "time_off",
           "sick_leave",

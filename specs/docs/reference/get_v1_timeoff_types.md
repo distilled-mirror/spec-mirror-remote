@@ -297,7 +297,7 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "TimeoffType": {
-        "description": "The type of leave accepted when creating or updating a time off record.",
+        "description": "The type of leave accepted when creating a time off record. It is fixed once the record exists and cannot be changed by updating it.\n",
         "enum": [
           "time_off",
           "sick_leave",

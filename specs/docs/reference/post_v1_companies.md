@@ -499,14 +499,6 @@ This endpoint requires the following token type:
                 "description": "A phone number the company can be contacted with.",
                 "type": "string"
               },
-              "registration_number": {
-                "description": "The company registration number. Exactly one of this field or `tax_number` must be submitted, not both.",
-                "type": "string"
-              },
-              "tax_number": {
-                "description": "The tax identifier of the company. Exactly one of this field or `registration_number` must be submitted, not both.",
-                "type": "string"
-              },
               "terms_of_service_accepted_at": {
                 "description": "Date and time the Terms of Service were accepted. To ensure users read the most recent version of Remote's Terms of Service, their action cannot have been done more than fifteen minutes ago. The UTC offset must be included in the ISO 8601 format: `YYYY-MM-DD HOURS:MINUTES:SECONDSZ`",
                 "format": "date-time",
@@ -527,25 +519,35 @@ This endpoint requires the following token type:
             "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both.",
             "oneOf": [
               {
+                "example": {
+                  "tax_number": "123456789"
+                },
                 "properties": {
                   "tax_number": {
+                    "description": "The tax identifier of the company. Exactly one of this field or `registration_number` must be submitted, not both.",
                     "type": "string"
                   }
                 },
                 "required": [
                   "tax_number"
                 ],
+                "title": "UsingTaxNumber",
                 "type": "object"
               },
               {
+                "example": {
+                  "registration_number": "123456789"
+                },
                 "properties": {
                   "registration_number": {
+                    "description": "The company registration number. Exactly one of this field or `tax_number` must be submitted, not both.",
                     "type": "string"
                   }
                 },
                 "required": [
                   "registration_number"
                 ],
+                "title": "UsingRegistrationNumber",
                 "type": "object"
               }
             ]

@@ -13,12 +13,22 @@ company on its own paper, are returned in the same shape.
 What the response contains:
 
 - The **configured** rate — not amounts that were scheduled, invoiced, or paid.
-- **Effective** rates only. Terms of a statement of work that has not been signed yet are not included.
+- The contractor's main rate, the one Show Employment returns as `contractor_rate`. It can belong
+  to a Statement of Work whose services have not started yet. When a Statement of Work established
+  it, its `service_start_date` says when it applies.
+- The rate of every signed Statement of Work that has not been replaced or ended, including one
+  whose services have not started. A Statement of Work past its planned end date keeps its rate
+  listed: the engagement continues month to month until it is replaced or ended.
+- Not listed: rates of replaced or ended Statements of Work other than the main rate, terms of an
+  unsigned Statement of Work, and a rate a later edit or signature replaced, unless a Statement of
+  Work still in force established it, in which case both the new and the original rate are listed.
 - The stored rate, even when the contractor's contract has already expired.
 
 `contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,
-not where the rate came from. `type` and `pay_frequency` are open enums, so treat an unrecognised
-value as opaque rather than an error. See the field descriptions for how each is derived.
+not where the rate came from; `service_start_date` and `service_end_date` describe the Statement
+of Work that established the rate and are null when none did. `type` and `pay_frequency` list
+every value Remote stores; a new value is announced as an API change. See the field descriptions
+for how each is derived.
 
 A contractor with no rate, and an employment that is not a contractor, both return an empty list.
 
@@ -165,7 +175,7 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "ContractorRate": {
-        "description": "A rate configured for a contractor, with the dates of the contract it is paid under.\n\n`type` discriminates the payment mode: `one_off` is a single payment on completion of\nservices; any other value is paid per pay period, where `type` is the calculation unit and\n`pay_frequency` the invoicing cadence.\n\n`type` and `pay_frequency` are open enums: new values may be added, so treat an unrecognised\nvalue as opaque rather than an error.\n",
+        "description": "A rate configured for a contractor, with the dates of the contract it is paid under and, when a\nStatement of Work established it, that Statement of Work's service dates.\n\n`type` discriminates the payment mode: `one_off` is a single payment on completion of\nservices; any other value is paid per pay period, where `type` is the calculation unit and\n`pay_frequency` the invoicing cadence.\n\n`type` and `pay_frequency` list every value Remote stores. A new value is announced as an API\nchange before it appears.\n",
         "example": {
           "amount": {
             "amount": "109.87",
@@ -179,6 +189,8 @@ This endpoint accepts any one of the following token types:
           "contract_start_date": "2026-01-01",
           "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "pay_frequency": "monthly",
+          "service_end_date": null,
+          "service_start_date": "2026-01-01",
           "type": "hourly"
         },
         "properties": {
@@ -205,13 +217,25 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "pay_frequency": {
-            "description": "How often the contractor is paid. Always null for `one_off` rates.",
+            "description": "How often the contractor is paid. Always null for `one_off` rates. Can be null for a recurring rate when the company did not record a frequency.",
             "enum": [
               "weekly",
               "bi_weekly",
               "semi_monthly",
               "monthly"
             ],
+            "nullable": true,
+            "type": "string"
+          },
+          "service_end_date": {
+            "description": "Planned end date of those services. The engagement continues month to month after it until the Statement of Work is replaced or ended, so the rate stays listed. Null for open-ended services and whenever `service_start_date` is null.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "service_start_date": {
+            "description": "Date the services under the Statement of Work that established this rate begin. Null when no Statement of Work record established the rate: one the company recorded itself, or one signed before Remote recorded service terms.",
+            "format": "date",
             "nullable": true,
             "type": "string"
           },
@@ -233,7 +257,9 @@ This endpoint accepts any one of the following token types:
           "type",
           "pay_frequency",
           "contract_start_date",
-          "contract_expiration_date"
+          "contract_expiration_date",
+          "service_start_date",
+          "service_end_date"
         ],
         "title": "ContractorRate",
         "type": "object"
@@ -316,6 +342,8 @@ This endpoint accepts any one of the following token types:
                 "contract_start_date": "2026-01-01",
                 "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
                 "pay_frequency": "monthly",
+                "service_end_date": null,
+                "service_start_date": "2026-01-01",
                 "type": "hourly"
               }
             ]
@@ -611,7 +639,7 @@ This endpoint accepts any one of the following token types:
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Lists the rates configured for a contractor, whatever the origin of their contract: rates agreed\nthrough a Remote-managed services agreement and statement of work, and rates recorded by the\ncompany on its own paper, are returned in the same shape.\n\nWhat the response contains:\n\n- The **configured** rate — not amounts that were scheduled, invoiced, or paid.\n- **Effective** rates only. Terms of a statement of work that has not been signed yet are not included.\n- The stored rate, even when the contractor's contract has already expired.\n\n`contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,\nnot where the rate came from. `type` and `pay_frequency` are open enums, so treat an unrecognised\nvalue as opaque rather than an error. See the field descriptions for how each is derived.\n\nA contractor with no rate, and an employment that is not a contractor, both return an empty list.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |",
+        "description": "Lists the rates configured for a contractor, whatever the origin of their contract: rates agreed\nthrough a Remote-managed services agreement and statement of work, and rates recorded by the\ncompany on its own paper, are returned in the same shape.\n\nWhat the response contains:\n\n- The **configured** rate — not amounts that were scheduled, invoiced, or paid.\n- The contractor's main rate, the one Show Employment returns as `contractor_rate`. It can belong\n  to a Statement of Work whose services have not started yet. When a Statement of Work established\n  it, its `service_start_date` says when it applies.\n- The rate of every signed Statement of Work that has not been replaced or ended, including one\n  whose services have not started. A Statement of Work past its planned end date keeps its rate\n  listed: the engagement continues month to month until it is replaced or ended.\n- Not listed: rates of replaced or ended Statements of Work other than the main rate, terms of an\n  unsigned Statement of Work, and a rate a later edit or signature replaced, unless a Statement of\n  Work still in force established it, in which case both the new and the original rate are listed.\n- The stored rate, even when the contractor's contract has already expired.\n\n`contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,\nnot where the rate came from; `service_start_date` and `service_end_date` describe the Statement\nof Work that established the rate and are null when none did. `type` and `pay_frequency` list\nevery value Remote stores; a new value is announced as an API change. See the field descriptions\nfor how each is derived.\n\nA contractor with no rate, and an employment that is not a contractor, both return an empty list.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |",
         "operationId": "get_v1_contractors_employments_employment_id_rates",
         "parameters": [
           {

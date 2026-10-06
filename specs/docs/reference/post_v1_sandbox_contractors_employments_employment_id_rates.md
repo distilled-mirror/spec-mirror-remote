@@ -6,8 +6,12 @@ agentTools:
 
 # Seed a contractor rate
 
-Creates or replaces the contractor's rate, so that the rate endpoints can be exercised without
-going through contract signature.
+Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a
+`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a
+Statement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint
+returns both while that Statement of Work is in force. This lets the rate endpoints be exercised
+without going through contract signature. Contractor Management Plus contractors cannot be
+seeded: the endpoint returns `422`.
 
 The currency is derived from the legal entity the contractor is paid in by. A rate in a
 currency the contractor cannot be paid in is rejected with `422`.
@@ -151,7 +155,7 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "ContractorRate": {
-        "description": "A rate configured for a contractor, with the dates of the contract it is paid under.\n\n`type` discriminates the payment mode: `one_off` is a single payment on completion of\nservices; any other value is paid per pay period, where `type` is the calculation unit and\n`pay_frequency` the invoicing cadence.\n\n`type` and `pay_frequency` are open enums: new values may be added, so treat an unrecognised\nvalue as opaque rather than an error.\n",
+        "description": "A rate configured for a contractor, with the dates of the contract it is paid under and, when a\nStatement of Work established it, that Statement of Work's service dates.\n\n`type` discriminates the payment mode: `one_off` is a single payment on completion of\nservices; any other value is paid per pay period, where `type` is the calculation unit and\n`pay_frequency` the invoicing cadence.\n\n`type` and `pay_frequency` list every value Remote stores. A new value is announced as an API\nchange before it appears.\n",
         "example": {
           "amount": {
             "amount": "109.87",
@@ -165,6 +169,8 @@ This endpoint accepts any one of the following token types:
           "contract_start_date": "2026-01-01",
           "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "pay_frequency": "monthly",
+          "service_end_date": null,
+          "service_start_date": "2026-01-01",
           "type": "hourly"
         },
         "properties": {
@@ -191,13 +197,25 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "pay_frequency": {
-            "description": "How often the contractor is paid. Always null for `one_off` rates.",
+            "description": "How often the contractor is paid. Always null for `one_off` rates. Can be null for a recurring rate when the company did not record a frequency.",
             "enum": [
               "weekly",
               "bi_weekly",
               "semi_monthly",
               "monthly"
             ],
+            "nullable": true,
+            "type": "string"
+          },
+          "service_end_date": {
+            "description": "Planned end date of those services. The engagement continues month to month after it until the Statement of Work is replaced or ended, so the rate stays listed. Null for open-ended services and whenever `service_start_date` is null.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "service_start_date": {
+            "description": "Date the services under the Statement of Work that established this rate begin. Null when no Statement of Work record established the rate: one the company recorded itself, or one signed before Remote recorded service terms.",
+            "format": "date",
             "nullable": true,
             "type": "string"
           },
@@ -219,7 +237,9 @@ This endpoint accepts any one of the following token types:
           "type",
           "pay_frequency",
           "contract_start_date",
-          "contract_expiration_date"
+          "contract_expiration_date",
+          "service_start_date",
+          "service_end_date"
         ],
         "title": "ContractorRate",
         "type": "object"
@@ -283,6 +303,8 @@ This endpoint accepts any one of the following token types:
             "contract_start_date": "2026-01-01",
             "id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "pay_frequency": "monthly",
+            "service_end_date": null,
+            "service_start_date": "2026-01-01",
             "type": "hourly"
           }
         },
@@ -650,7 +672,7 @@ This endpoint accepts any one of the following token types:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Creates or replaces the contractor's rate, so that the rate endpoints can be exercised without\ngoing through contract signature.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Contractor Management Plus contractors cannot be\nseeded: the endpoint returns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "post_v1_sandbox_contractors_employments_employment_id_rates",
         "parameters": [
           {

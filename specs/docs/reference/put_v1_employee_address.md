@@ -8,6 +8,8 @@ agentTools:
 
 Updates the authenticated employee's residential address.
 
+The address is replaced: optional fields that aren't sent are cleared.
+
 The employment is derived from the access token's subject — there is no
 employment id in the path. The token must be an employee-role token
 (typically obtained via the OAuth2 assertion grant with subject
@@ -83,10 +85,11 @@ This endpoint requires the following token type:
         "type": "object"
       },
       "UserStatus": {
-        "description": "The status of the user account associated with this employment.\n\n- `active`: The user account is active and the user can log in.\n- `created`: The user account has been created but not yet activated.\n- `initiated`: The user has been invited but has not completed registration.\n- `cancelled`: The user account was cancelled before activation.\n- `inactive`: The user account has been deactivated (e.g., after offboarding).\n- `deleted`: The user account has been deleted.\n",
+        "description": "The status of the user account associated with this employment.\n\n- `active`: The user account is active and the user can log in.\n- `created`: The user account has been created but not yet activated.\n- `invited`: The user has been invited but has not accepted the invitation yet.\n- `initiated`: The user has been invited but has not completed registration.\n- `cancelled`: The user account was cancelled before activation.\n- `inactive`: The user account has been deactivated (e.g., after offboarding).\n- `deleted`: The user account has been deleted.\n",
         "enum": [
           "active",
           "created",
+          "invited",
           "initiated",
           "cancelled",
           "inactive",
@@ -585,7 +588,7 @@ This endpoint requires the following token type:
       "put": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Updates the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `address_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage addresses (`address:write`) |",
+        "description": "Updates the authenticated employee's residential address.\n\nThe address is replaced: optional fields that aren't sent are cleared.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `address_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage addresses (`address:write`) |",
         "operationId": "put_v1_employee_address",
         "parameters": [
           {

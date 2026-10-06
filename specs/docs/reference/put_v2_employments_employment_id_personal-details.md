@@ -67,10 +67,11 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "UserStatus": {
-        "description": "The status of the user account associated with this employment.\n\n- `active`: The user account is active and the user can log in.\n- `created`: The user account has been created but not yet activated.\n- `initiated`: The user has been invited but has not completed registration.\n- `cancelled`: The user account was cancelled before activation.\n- `inactive`: The user account has been deactivated (e.g., after offboarding).\n- `deleted`: The user account has been deleted.\n",
+        "description": "The status of the user account associated with this employment.\n\n- `active`: The user account is active and the user can log in.\n- `created`: The user account has been created but not yet activated.\n- `invited`: The user has been invited but has not accepted the invitation yet.\n- `initiated`: The user has been invited but has not completed registration.\n- `cancelled`: The user account was cancelled before activation.\n- `inactive`: The user account has been deactivated (e.g., after offboarding).\n- `deleted`: The user account has been deleted.\n",
         "enum": [
           "active",
           "created",
+          "invited",
           "initiated",
           "cancelled",
           "inactive",
@@ -678,7 +679,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Version of the personal_details form schema",

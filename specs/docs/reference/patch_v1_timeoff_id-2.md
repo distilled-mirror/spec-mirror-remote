@@ -193,9 +193,6 @@ This endpoint accepts any one of the following token types:
             },
             "type": "array"
           },
-          "timeoff_type": {
-            "$ref": "#/components/schemas/TimeoffType"
-          },
           "timezone": {
             "$ref": "#/components/schemas/Timezone"
           }
@@ -208,7 +205,7 @@ This endpoint accepts any one of the following token types:
         "type": "object"
       },
       "ResponseTimeoffType": {
-        "description": "The type of leave a time off record or leave policy represents.\n\nResponses may return any of these values. The set is a superset of the values\naccepted when creating or updating a time off record (see `TimeoffType`): employments on the newer leave-type model can hold leave types that are not bookable by name.\n",
+        "description": "The type of leave a time off record or leave policy represents.\n\nResponses may return any of these values. The set is a superset of the values\naccepted when creating a time off record (see `TimeoffType`): employments on the newer leave-type model can hold leave types that are not bookable by name.\n",
         "enum": [
           "time_off",
           "sick_leave",
@@ -469,32 +466,6 @@ This endpoint accepts any one of the following token types:
         "example": "2021-07-01",
         "format": "date",
         "title": "Date",
-        "type": "string"
-      },
-      "TimeoffType": {
-        "description": "The type of leave accepted when creating or updating a time off record.",
-        "enum": [
-          "time_off",
-          "sick_leave",
-          "public_holiday",
-          "unpaid_leave",
-          "extended_leave",
-          "in_lieu_time",
-          "maternity_leave",
-          "paternity_leave",
-          "parental_leave",
-          "bereavement",
-          "military_leave",
-          "other",
-          "paid_time_off",
-          "custom_company_leave",
-          "rtt",
-          "casual_leave",
-          "rol",
-          "ex_festivita"
-        ],
-        "example": "sick_leave",
-        "title": "TimeoffType",
         "type": "string"
       },
       "Timeoff": {
