@@ -4899,7 +4899,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "83fc1aa1-d702-4d0b-b3fc-9591eb277f79",
+            "example": "42f0b286-45bf-40ed-8992-cfd2ee6114b5",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5295,7 +5295,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ad6f0624-5d8c-44b9-9ca1-0bb715275d31",
+            "example": "e7ed07ea-15be-4eb1-9078-4d01c748f401",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5388,7 +5388,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ddd0e0c7-9143-4c69-a7c6-f7f31305df87",
+            "example": "c20b511e-cf57-4112-b078-060efecd11f2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5472,7 +5472,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "aaa9f89e-2029-437a-89fa-bda3b530978b",
+            "example": "1a2ac928-ca7e-4281-9ee0-ef7844332e53",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5568,7 +5568,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "c3bb9a44-877d-42e3-96f2-b9fa41839930",
+            "example": "df8f58d2-e2c8-41d9-8a1e-3372f5f1cb26",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5777,7 +5777,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c60eb1fa-1010-4e41-947c-2f1fe46c33f4",
+            "example": "c6d20f57-7702-4d4f-8ca0-57877053967b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5852,14 +5852,14 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "2e189d8f-4ae5-4a12-9d87-00506abbbda2",
+            "example": "d7d1c8da-1718-4827-ac7a-0edc8a268ead",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
             },
-            "x-safe": true
+            "x-resource-type": "contractor_invoice"
           }
         ],
         "responses": {
@@ -10245,7 +10245,7 @@
     "/v1/employee/payslip-files": {
       "get": {
         "deprecated": false,
-        "description": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payslips (`payslip:read`) | - |",
+        "description": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |",
         "operationId": "get_v1_employee_payslip-files",
         "parameters": [
           {
@@ -10325,7 +10325,7 @@
     "/v1/employee/payslips": {
       "get": {
         "deprecated": false,
-        "description": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payslips (`payslip:read`) | - |",
+        "description": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |",
         "operationId": "get_v1_employee_payslips",
         "parameters": [
           {
@@ -13475,7 +13475,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "47b54699-5b73-4c89-8b26-7441a3f97e95",
+            "example": "be1ae8aa-4e88-41e0-b66a-2243ea61e378",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -19199,7 +19199,7 @@
     "/v1/payslips": {
       "get": {
         "deprecated": false,
-        "description": "Lists all payslips belonging to a company. Can also filter for a single employment belonging\nto that company.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payslips (`payslip:read`) | - |",
+        "description": "Lists all payslips belonging to a company. Can also filter for a single employment belonging\nto that company.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |",
         "operationId": "get_v1_payslips",
         "parameters": [
           {
@@ -19344,7 +19344,7 @@
     "/v1/payslips/{payslip_id}/pdf": {
       "get": {
         "deprecated": false,
-        "description": "Given a Payslip ID, downloads a payslip.\nIt is important to note that each country has a different payslip format and they are not authored by Remote.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payslips (`payslip:read`) | - |",
+        "description": "Given a Payslip ID, downloads a payslip.\nIt is important to note that each country has a different payslip format and they are not authored by Remote.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |",
         "operationId": "get_v1_payslips_payslip_id_pdf",
         "parameters": [
           {
@@ -21318,6 +21318,100 @@
           }
         },
         "summary": "Cancel Contract Amendment",
+        "tags": [
+          "Sandbox"
+        ]
+      }
+    },
+    "/v1/sandbox/contractor-invoices/initiate-payment": {
+      "post": {
+        "deprecated": false,
+        "description": "Approves the selected `issued` Contractor Invoices and initiates a bank-transfer payment for\nthem on the company's behalf, as Remote would. The invoices become `pending_payment` and\ncarry a payment reference, so the `payment` summary and the pay-in details of a real payment\ncan be read back.\n\nPreconditions:\n\n  * Run `POST /v1/sandbox/companies/{company_id}/bypass-eligibility-checks` first, so the\n    legal entity has passed KYB.\n  * Every contractor on the selected invoices must hold a bank-account payout method, and\n    every contractor in one request must use the same payout method.\n  * The company's legal entity must be able to pay in the invoice currency — its default\n    currency, or one it holds an active virtual account for.\n  * When the contractors are paid on Remote's licensed rails, the user initiating the\n    payment must have completed identity verification.\n\nCalling it again for invoices that are already `pending_payment` returns the same payment,\ncreates nothing new and does not retry the pay-in. If `pay_in_method` stays `not_selected`\nafter initiation, Remote has not recorded the pay-in: initiate a fresh batch of invoices,\nor contact Remote.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404. There is\nno pay action on the production API: payments are initiated in Remote.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "operationId": "post_v1_sandbox_contractor-invoices_initiate-payment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitiateContractorInvoicePaymentParams"
+              }
+            }
+          },
+          "description": "Contractor Invoice payment params",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Initiate a Contractor Invoice payment",
         "tags": [
           "Sandbox"
         ]
@@ -30405,6 +30499,10 @@
           "processed_count": {
             "description": "The number of processed rows, regardless of success or failure",
             "type": "integer"
+          },
+          "server_metadata": {
+            "description": "Metadata only Remote sets for the import job, for example whether it is a self-serve job",
+            "type": "object"
           },
           "stage": {
             "description": "  The stage of the import job.\n  * `creation` - The import job is in the creation stage, which means the rows are being created.\n  * `column_mapping` - The import job is in the column mapping stage, which means the CSV headers are being mapped to JSON schema fields.\n  * `validation` - The import job is in the validation stage, which means the rows are being validated.\n  * `submission` - The import job is in the submission stage, which means the rows are being submitted.\n",
@@ -45008,6 +45106,33 @@
           "data"
         ],
         "title": "IndexPreOnboardingRequirementsResponse",
+        "type": "object"
+      },
+      "InitiateContractorInvoicePaymentParams": {
+        "additionalProperties": false,
+        "description": "The Contractor Invoices to pay in one payment.",
+        "example": {
+          "contractor_invoice_ids": [
+            "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "0a4d1a10-2a8c-4d0e-9c1a-2c0bb5f7cd11"
+          ]
+        },
+        "properties": {
+          "contractor_invoice_ids": {
+            "description": "Identifiers of the Contractor Invoices to pay. They must all belong to the same payer legal entity and share one currency, and each one may appear only once.",
+            "items": {
+              "$ref": "#/components/schemas/UuidSlug"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "contractor_invoice_ids"
+        ],
+        "title": "InitiateContractorInvoicePaymentParams",
         "type": "object"
       },
       "Integrations.Scim.ErrorResponse": {

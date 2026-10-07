@@ -18,7 +18,7 @@ This endpoint requires the following token type:
 
 | Category | Read only Scope | Write only Scope (read access implicit) |
 |---|---|---|
-| Manage payroll runs (`payroll`) | View payslips (`payslip:read`) | - |
+| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |
 
 # OpenAPI definition
 
@@ -421,7 +421,7 @@ This endpoint requires the following token type:
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payslips (`payslip:read`) | - |",
+        "description": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |",
         "operationId": "get_v1_employee_payslip-files",
         "parameters": [
           {
@@ -497,7 +497,7 @@ This endpoint requires the following token type:
             "OAuth2Assertion": [
               "https://gateway.remote.com/employment.manage",
               "payslip:read",
-              "payroll",
+              "employment_documents",
               "all:write",
               "all:read"
             ]

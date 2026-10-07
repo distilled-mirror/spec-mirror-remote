@@ -620,6 +620,10 @@ This endpoint accepts any one of the following token types:
             "description": "The number of processed rows, regardless of success or failure",
             "type": "integer"
           },
+          "server_metadata": {
+            "description": "Metadata only Remote sets for the import job, for example whether it is a self-serve job",
+            "type": "object"
+          },
           "stage": {
             "description": "  The stage of the import job.\n  * `creation` - The import job is in the creation stage, which means the rows are being created.\n  * `column_mapping` - The import job is in the column mapping stage, which means the CSV headers are being mapped to JSON schema fields.\n  * `validation` - The import job is in the validation stage, which means the rows are being validated.\n  * `submission` - The import job is in the submission stage, which means the rows are being submitted.\n",
             "enum": [

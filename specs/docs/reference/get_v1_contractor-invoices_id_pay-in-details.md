@@ -897,14 +897,14 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "2e189d8f-4ae5-4a12-9d87-00506abbbda2",
+            "example": "d7d1c8da-1718-4827-ac7a-0edc8a268ead",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
             },
-            "x-safe": true
+            "x-resource-type": "contractor_invoice"
           }
         ],
         "responses": {
