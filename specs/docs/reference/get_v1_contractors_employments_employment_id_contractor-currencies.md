@@ -417,7 +417,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Restrict to currencies which payout is guaranteed (default: true)",

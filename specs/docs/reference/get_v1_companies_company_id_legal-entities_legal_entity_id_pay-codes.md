@@ -33,6 +33,23 @@ This endpoint accepts any one of the following token types:
         "example": {
           "category": "time_and_attendance",
           "code": "overtime",
+          "custom_configuration": {
+            "key": "gbr_hourly_flat_rate",
+            "label": "UK Hourly Flat Rate",
+            "required": false,
+            "schema": {
+              "properties": {
+                "hourly_rate": {
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "hourly_rate"
+              ],
+              "type": "object"
+            }
+          },
           "description": "Hours worked beyond standard schedule",
           "external_import_code": null,
           "name": "Overtime",
@@ -47,6 +64,9 @@ This endpoint accepts any one of the following token types:
           "code": {
             "description": "Code to use in the `code` field of POST /v1/pay-items/bulk",
             "type": "string"
+          },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayCodeCustomConfiguration"
           },
           "description": {
             "description": "Description of the pay code",
@@ -105,6 +125,23 @@ This endpoint accepts any one of the following token types:
             {
               "category": "time_and_attendance",
               "code": "overtime",
+              "custom_configuration": {
+                "key": "gbr_hourly_flat_rate",
+                "label": "UK Hourly Flat Rate",
+                "required": false,
+                "schema": {
+                  "properties": {
+                    "hourly_rate": {
+                      "minimum": 1,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "hourly_rate"
+                  ],
+                  "type": "object"
+                }
+              },
               "description": "Hours worked beyond standard schedule",
               "external_import_code": null,
               "name": "Overtime",
@@ -141,6 +178,53 @@ This endpoint accepts any one of the following token types:
           }
         },
         "title": "ListPayCodesResponse",
+        "type": "object"
+      },
+      "PayCodeCustomConfiguration": {
+        "additionalProperties": false,
+        "description": "The pay item custom configuration this pay code uses, such as the employee's company car. Present only on pay codes whose custom configuration is filled in for each employee.\n",
+        "example": {
+          "key": "gbr_hourly_flat_rate",
+          "label": "UK Hourly Flat Rate",
+          "required": false,
+          "schema": {
+            "properties": {
+              "hourly_rate": {
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "hourly_rate"
+            ],
+            "type": "object"
+          }
+        },
+        "properties": {
+          "key": {
+            "description": "The key in `provider_data` under which the custom configuration values are sent when creating or updating a pay item via POST /v1/pay-items/bulk or PATCH /v1/pay-items/:id.",
+            "type": "string"
+          },
+          "label": {
+            "description": "Human-readable name of the custom configuration",
+            "type": "string"
+          },
+          "required": {
+            "description": "Whether every pay item for this pay code must include the custom configuration values",
+            "type": "boolean"
+          },
+          "schema": {
+            "description": "JSON Schema the custom configuration values must match. Money values are whole numbers in the currency's minor unit, e.g. pence for GBP.\n",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "required",
+          "schema"
+        ],
+        "title": "PayCodeCustomConfiguration",
         "type": "object"
       },
       "UuidSlug": {

@@ -591,7 +591,7 @@ This endpoint accepts any one of the following token types:
             }
           },
           {
-            "description": "Required for `contract_amendment` and `global_payroll_state_taxes` forms",
+            "description": "Required for `contract_amendment` and `global_payroll_state_taxes` forms. Optional for `contract_details` and `global_payroll_contract_details`, where it tailors the schema to that employment.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "in": "query",
             "name": "employment_id",

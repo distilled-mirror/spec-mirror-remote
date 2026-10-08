@@ -1778,7 +1778,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Whether the request should be performed async\n",
@@ -4899,7 +4900,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "42f0b286-45bf-40ed-8992-cfd2ee6114b5",
+            "example": "cdfe5156-1562-4c2f-a548-cca21a939192",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5295,7 +5296,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e7ed07ea-15be-4eb1-9078-4d01c748f401",
+            "example": "3dcd8b42-f6d8-4e5b-bbb6-95f6d2ac71a4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5388,7 +5389,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c20b511e-cf57-4112-b078-060efecd11f2",
+            "example": "92d0fbc3-c6b9-4b93-ad42-e8b6feb7f898",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5472,7 +5473,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "1a2ac928-ca7e-4281-9ee0-ef7844332e53",
+            "example": "f63c329b-9361-44ff-bb76-8d3feff24bd6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5568,7 +5569,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "df8f58d2-e2c8-41d9-8a1e-3372f5f1cb26",
+            "example": "af0f5da3-20f7-4c81-99a3-d74243de8353",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5777,7 +5778,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c6d20f57-7702-4d4f-8ca0-57877053967b",
+            "example": "f9f06145-fbd9-4850-a5d1-9e715c93bfd8",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5852,7 +5853,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "d7d1c8da-1718-4827-ac7a-0edc8a268ead",
+            "example": "f8285c7b-7e01-4161-af05-828c3761e55c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -6520,7 +6521,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Restrict to currencies which payout is guaranteed (default: true)",
@@ -7037,7 +7039,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -7923,7 +7926,7 @@
             }
           },
           {
-            "description": "Required for `contract_amendment` and `global_payroll_state_taxes` forms",
+            "description": "Required for `contract_amendment` and `global_payroll_state_taxes` forms. Optional for `contract_details` and `global_payroll_contract_details`, where it tailors the schema to that employment.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "in": "query",
             "name": "employment_id",
@@ -11415,7 +11418,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -13105,7 +13109,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -13170,7 +13175,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Filter by contract document statuses",
@@ -13291,7 +13297,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -13475,7 +13482,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "be1ae8aa-4e88-41e0-b66a-2243ea61e378",
+            "example": "a30f520e-ba59-4c37-8893-a4cedb03648e",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -13758,7 +13765,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -13823,7 +13831,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -14186,7 +14195,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Filter by file type (optional)",
@@ -14296,7 +14306,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -14371,7 +14382,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -14436,7 +14448,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -14653,9 +14666,35 @@
     "/v1/expenses": {
       "get": {
         "deprecated": false,
-        "description": "Lists all expenses records\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |",
+        "description": "Lists expenses. Use `status` to list only expenses in the given statuses.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |",
         "operationId": "get_v1_expenses",
         "parameters": [
+          {
+            "description": "Filters expenses by status. To ask for several statuses, send `status` once with comma-separated values, for example `status=approved,reimbursed`. If you repeat `status`, only the last value counts. `status[]=` or any other value returns `422`. The list never contains pending contractor or card spend expenses, so `pending` returns only expenses an employer can review.",
+            "example": [
+              "approved",
+              "reimbursed"
+            ],
+            "explode": false,
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "items": {
+                "enum": [
+                  "canceled",
+                  "pending",
+                  "declined",
+                  "approved",
+                  "processing",
+                  "reimbursed"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
           {
             "description": "Starts fetching records after the given page",
             "example": 1,
@@ -14678,7 +14717,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {
@@ -15613,7 +15652,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -15678,7 +15718,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -15743,7 +15784,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -32927,11 +32969,12 @@
         "type": "object"
       },
       "ContractorInvoiceItemType": {
-        "description": "Current types.\n\n- `manual`: Item manually entered when creating invoice.\n- `time_tracking`: Item generated by time tracking.\n- `expense`: Item that represents an expense included in the invoice.\n",
+        "description": "Current types.\n\n- `manual`: Item manually entered when creating invoice.\n- `time_tracking`: Item generated by time tracking.\n- `expense`: Item that represents an expense included in the invoice.\n- `upload_summary`: Single item on an uploaded invoice. It carries the VAT the contractor stated on the uploaded PDF, and summarises the PDF rather than copying its lines.\n",
         "enum": [
           "manual",
           "time_tracking",
-          "expense"
+          "expense",
+          "upload_summary"
         ],
         "example": "manual",
         "nullable": false,
@@ -47919,6 +47962,23 @@
             {
               "category": "time_and_attendance",
               "code": "overtime",
+              "custom_configuration": {
+                "key": "gbr_hourly_flat_rate",
+                "label": "UK Hourly Flat Rate",
+                "required": false,
+                "schema": {
+                  "properties": {
+                    "hourly_rate": {
+                      "minimum": 1,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "hourly_rate"
+                  ],
+                  "type": "object"
+                }
+              },
               "description": "Hours worked beyond standard schedule",
               "external_import_code": null,
               "name": "Overtime",
@@ -50549,6 +50609,23 @@
         "example": {
           "category": "time_and_attendance",
           "code": "overtime",
+          "custom_configuration": {
+            "key": "gbr_hourly_flat_rate",
+            "label": "UK Hourly Flat Rate",
+            "required": false,
+            "schema": {
+              "properties": {
+                "hourly_rate": {
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "hourly_rate"
+              ],
+              "type": "object"
+            }
+          },
           "description": "Hours worked beyond standard schedule",
           "external_import_code": null,
           "name": "Overtime",
@@ -50563,6 +50640,9 @@
           "code": {
             "description": "Code to use in the `code` field of POST /v1/pay-items/bulk",
             "type": "string"
+          },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayCodeCustomConfiguration"
           },
           "description": {
             "description": "Description of the pay code",
@@ -50596,6 +50676,53 @@
           "category"
         ],
         "title": "PayCode",
+        "type": "object"
+      },
+      "PayCodeCustomConfiguration": {
+        "additionalProperties": false,
+        "description": "The pay item custom configuration this pay code uses, such as the employee's company car. Present only on pay codes whose custom configuration is filled in for each employee.\n",
+        "example": {
+          "key": "gbr_hourly_flat_rate",
+          "label": "UK Hourly Flat Rate",
+          "required": false,
+          "schema": {
+            "properties": {
+              "hourly_rate": {
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "hourly_rate"
+            ],
+            "type": "object"
+          }
+        },
+        "properties": {
+          "key": {
+            "description": "The key in `provider_data` under which the custom configuration values are sent when creating or updating a pay item via POST /v1/pay-items/bulk or PATCH /v1/pay-items/:id.",
+            "type": "string"
+          },
+          "label": {
+            "description": "Human-readable name of the custom configuration",
+            "type": "string"
+          },
+          "required": {
+            "description": "Whether every pay item for this pay code must include the custom configuration values",
+            "type": "boolean"
+          },
+          "schema": {
+            "description": "JSON Schema the custom configuration values must match. Money values are whole numbers in the currency's minor unit, e.g. pence for GBP.\n",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "required",
+          "schema"
+        ],
+        "title": "PayCodeCustomConfiguration",
         "type": "object"
       },
       "PayInBankAccount": {
