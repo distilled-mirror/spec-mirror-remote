@@ -92,6 +92,7 @@ This endpoint accepts any one of the following token types:
             ],
             "employment_agreement_preview_available": true,
             "eor_onboarding": true,
+            "global_payroll_supported": true,
             "locked_benefits": "after_first_hire",
             "name": "Portugal",
             "region": "Europe",
@@ -718,6 +719,7 @@ This endpoint accepts any one of the following token types:
           ],
           "employment_agreement_preview_available": true,
           "eor_onboarding": true,
+          "global_payroll_supported": true,
           "locked_benefits": "after_first_hire",
           "name": "Portugal",
           "region": "Europe",
@@ -770,6 +772,10 @@ This endpoint accepts any one of the following token types:
             "description": "Whether EOR (Employer of Record) onboarding is available in this country.",
             "type": "boolean"
           },
+          "global_payroll_supported": {
+            "description": "Whether Global Payroll employments can be onboarded in this country. When true, the \"global_payroll_administrative_details\", \"global_payroll_contract_details\" and \"global_payroll_personal_details\" forms are available from the Show form schema endpoint.",
+            "type": "boolean"
+          },
           "locked_benefits": {
             "description": "When benefit plan selections become locked for this country (e.g., \"after_first_hire\" means benefits cannot be changed after the first employee is hired).",
             "type": "string"
@@ -788,7 +794,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "supported_json_schemas": {
-            "description": "The list of JSON schema form names available for this country (e.g., \"address_details\", \"contract_details\"). Use these with the Show form schema endpoint to get country-specific field requirements.",
+            "description": "The list of JSON schema form names available for this country (e.g., \"address_details\", \"contract_details\", \"global_payroll_contract_details\"). Use these with the Show form schema endpoint to get country-specific field requirements.",
             "items": {
               "type": "string"
             },
@@ -1122,6 +1128,7 @@ This endpoint accepts any one of the following token types:
                 ],
                 "employment_agreement_preview_available": true,
                 "eor_onboarding": true,
+                "global_payroll_supported": true,
                 "locked_benefits": "after_first_hire",
                 "name": "Portugal",
                 "region": "Europe",
@@ -1438,6 +1445,15 @@ This endpoint accepts any one of the following token types:
               "type": "string"
             },
             "x-resource-type": "employment"
+          },
+          {
+            "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
+            "in": "query",
+            "name": "group_tax_servicing_countries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "requestBody": {

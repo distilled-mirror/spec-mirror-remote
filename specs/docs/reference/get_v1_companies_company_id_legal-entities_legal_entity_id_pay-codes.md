@@ -202,7 +202,7 @@ This endpoint accepts any one of the following token types:
         },
         "properties": {
           "key": {
-            "description": "The key in `provider_data` under which the custom configuration values are sent when creating or updating a pay item via POST /v1/pay-items/bulk or PATCH /v1/pay-items/:id.",
+            "description": "The `custom_configuration.key` to send, with the values, when creating or updating a pay item via POST /v1/pay-items/bulk or PATCH /v1/pay-items/:id.",
             "type": "string"
           },
           "label": {

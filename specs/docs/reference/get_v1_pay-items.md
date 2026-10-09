@@ -87,6 +87,9 @@ This endpoint accepts any one of the following token types:
             "description": "Pay item type code",
             "type": "string"
           },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayItemCustomConfiguration"
+          },
           "effective_date": {
             "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
@@ -131,6 +134,33 @@ This endpoint accepts any one of the following token types:
           "replaced_ids"
         ],
         "title": "PayItem",
+        "type": "object"
+      },
+      "PayItemCustomConfiguration": {
+        "additionalProperties": false,
+        "description": "The pay item custom configuration values for pay codes that use one, such as the employee's company car. The pay code's `custom_configuration` (GET …/pay-codes) gives the `key` and the JSON Schema of the `values`. On PATCH, `values` are merged onto the stored ones: nested objects merge, and `null` removes a field at any level. Send `null` for the whole `custom_configuration` to remove the stored values.\n",
+        "example": {
+          "key": "gbr_hourly_flat_rate",
+          "values": {
+            "hourly_rate": 1786
+          }
+        },
+        "nullable": true,
+        "properties": {
+          "key": {
+            "description": "The pay code's `custom_configuration.key`",
+            "type": "string"
+          },
+          "values": {
+            "description": "Values matching the pay code's `custom_configuration.schema`",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "values"
+        ],
+        "title": "PayItemCustomConfiguration",
         "type": "object"
       },
       "NotFoundResponse": {

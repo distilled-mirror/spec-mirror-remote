@@ -8,6 +8,7 @@ agentTools:
 
 Updates a pay item. Editing a pay item archives the existing one and creates a new one with a new `id` — use the response's `replaced_ids` to reconcile with the id you had stored. Only the fields provided are changed.
 Cannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.
+When `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.
 
 ## Authentication
 
@@ -152,6 +153,9 @@ This endpoint accepts any one of the following token types:
             "description": "Pay item type code",
             "type": "string"
           },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayItemCustomConfiguration"
+          },
           "effective_date": {
             "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
@@ -196,6 +200,33 @@ This endpoint accepts any one of the following token types:
           "replaced_ids"
         ],
         "title": "PayItem",
+        "type": "object"
+      },
+      "PayItemCustomConfiguration": {
+        "additionalProperties": false,
+        "description": "The pay item custom configuration values for pay codes that use one, such as the employee's company car. The pay code's `custom_configuration` (GET …/pay-codes) gives the `key` and the JSON Schema of the `values`. On PATCH, `values` are merged onto the stored ones: nested objects merge, and `null` removes a field at any level. Send `null` for the whole `custom_configuration` to remove the stored values.\n",
+        "example": {
+          "key": "gbr_hourly_flat_rate",
+          "values": {
+            "hourly_rate": 1786
+          }
+        },
+        "nullable": true,
+        "properties": {
+          "key": {
+            "description": "The pay code's `custom_configuration.key`",
+            "type": "string"
+          },
+          "values": {
+            "description": "Values matching the pay code's `custom_configuration.schema`",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "values"
+        ],
+        "title": "PayItemCustomConfiguration",
         "type": "object"
       },
       "NotFoundResponse": {
@@ -355,7 +386,7 @@ This endpoint accepts any one of the following token types:
       },
       "UpdatePayItemParams": {
         "additionalProperties": false,
-        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date` or `provider_data` alone updates the pay item in place and keeps the same `id`.\n",
+        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date`, `provider_data` or `custom_configuration` alone updates the pay item in place and keeps the same `id`.\n",
         "example": {
           "amount": 7800
         },
@@ -363,6 +394,9 @@ This endpoint accepts any one of the following token types:
           "amount": {
             "description": "Value of the pay item. See PayItemParams.amount for unit details. Must not be zero. Negative values are supported: send a negative `amount` to submit a deduction or to correct an earlier submission downwards — for any pay code, including hours-based ones such as `working_hours`.",
             "type": "integer"
+          },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayItemCustomConfiguration"
           },
           "effective_date": {
             "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
@@ -744,7 +778,7 @@ This endpoint accepts any one of the following token types:
       "patch": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Updates a pay item. Editing a pay item archives the existing one and creates a new one with a new `id` — use the response's `replaced_ids` to reconcile with the id you had stored. Only the fields provided are changed.\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Updates a pay item. Editing a pay item archives the existing one and creates a new one with a new `id` — use the response's `replaced_ids` to reconcile with the id you had stored. Only the fields provided are changed.\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "patch_v1_pay-items_id",
         "parameters": [
           {

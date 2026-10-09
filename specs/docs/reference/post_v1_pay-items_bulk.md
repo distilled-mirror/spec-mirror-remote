@@ -9,6 +9,7 @@ agentTools:
 Bulk creates pay items for employments. Supports up to 500 items per request.
 Each item must supply exactly one of `code` or `external_import_code` to identify the pay element.
 Integration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.
+Pay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.
 Only Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.
 
 ## Authentication
@@ -108,6 +109,10 @@ This endpoint accepts any one of the following token types:
           "message": {
             "description": "Human-readable detail for the failure reason.",
             "type": "string"
+          },
+          "param": {
+            "description": "Slash-separated path of the field at fault, e.g. `custom_configuration/values/make`.",
+            "type": "string"
           }
         },
         "required": [
@@ -177,6 +182,9 @@ This endpoint accepts any one of the following token types:
             "description": "Pay item type code",
             "type": "string"
           },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayItemCustomConfiguration"
+          },
           "effective_date": {
             "description": "Date the pay item is applied on (YYYY-MM-DD) — the day worked, the day a correction was submitted, or the first day of a leave period.",
             "format": "date",
@@ -221,6 +229,33 @@ This endpoint accepts any one of the following token types:
           "replaced_ids"
         ],
         "title": "PayItem",
+        "type": "object"
+      },
+      "PayItemCustomConfiguration": {
+        "additionalProperties": false,
+        "description": "The pay item custom configuration values for pay codes that use one, such as the employee's company car. The pay code's `custom_configuration` (GET …/pay-codes) gives the `key` and the JSON Schema of the `values`. On PATCH, `values` are merged onto the stored ones: nested objects merge, and `null` removes a field at any level. Send `null` for the whole `custom_configuration` to remove the stored values.\n",
+        "example": {
+          "key": "gbr_hourly_flat_rate",
+          "values": {
+            "hourly_rate": 1786
+          }
+        },
+        "nullable": true,
+        "properties": {
+          "key": {
+            "description": "The pay code's `custom_configuration.key`",
+            "type": "string"
+          },
+          "values": {
+            "description": "Values matching the pay code's `custom_configuration.schema`",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "values"
+        ],
+        "title": "PayItemCustomConfiguration",
         "type": "object"
       },
       "UnprocessableEntityResponse": {
@@ -448,6 +483,9 @@ This endpoint accepts any one of the following token types:
           "currency": {
             "$ref": "#/components/schemas/CurrencyCode"
           },
+          "custom_configuration": {
+            "$ref": "#/components/schemas/PayItemCustomConfiguration"
+          },
           "effective_date": {
             "description": "Date the pay item is applied on (YYYY-MM-DD). For an original submission this is the day worked; for a correction it is the day the correction is submitted, so the pay item lands in the right payroll run. The day being corrected goes in `provider_data.correction_effective_date`. On a leave-of-absence pay item this is the first day of the leave period, whose last day goes in `end_date`.",
             "format": "date",
@@ -488,7 +526,7 @@ This endpoint accepts any one of the following token types:
         },
         "properties": {
           "error": {
-            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date.",
+            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's.",
             "oneOf": [
               {
                 "type": "string"
@@ -891,7 +929,7 @@ This endpoint accepts any one of the following token types:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "post_v1_pay-items_bulk",
         "parameters": [],
         "requestBody": {
