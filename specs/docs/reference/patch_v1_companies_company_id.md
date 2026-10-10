@@ -736,7 +736,8 @@ This endpoint requires the following token type:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "requestBody": {

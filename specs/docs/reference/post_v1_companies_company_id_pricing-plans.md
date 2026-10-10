@@ -668,7 +668,8 @@ This endpoint requires the following token type:
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "requestBody": {

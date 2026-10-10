@@ -2182,7 +2182,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "responses": {
@@ -2313,7 +2314,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "requestBody": {
@@ -2455,7 +2457,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "requestBody": {
@@ -2551,7 +2554,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "responses": {
@@ -2636,7 +2640,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "responses": {
@@ -2701,7 +2706,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "The scope of the token",
@@ -3297,7 +3303,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "responses": {
@@ -3360,7 +3367,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "requestBody": {
@@ -3436,7 +3444,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "responses": {
@@ -4900,7 +4909,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "65bb4125-446e-4631-a19e-65ccef730cfa",
+            "example": "ef7d4e52-113d-46ec-8e4b-346f76f43166",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5296,7 +5305,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0db34365-fc58-4dc4-964b-54e102ebf7a8",
+            "example": "40dfd936-ca32-4e6f-91ec-67e9fc7c5f0b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5389,7 +5398,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0cc32fd0-2f58-4ba0-84dc-0cd113d960f2",
+            "example": "0e575bd4-9dfb-404b-8526-d19aa4532c77",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5473,7 +5482,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4d1e0dca-77e8-494c-a69f-155dd9462c73",
+            "example": "cfbd13e3-5820-4194-9380-78c93096833d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5569,7 +5578,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "f8371437-3f46-4718-913a-30b3e5064c0a",
+            "example": "f442381a-8fa5-4c30-88e2-23f093a41c7b",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5778,7 +5787,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "2aca8a96-0e80-4666-81fd-f77801612b84",
+            "example": "06363c4f-d0f5-449e-92f1-3f6580dc744e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5853,7 +5862,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "fed1a027-7619-4a14-898c-d88bda32e1b4",
+            "example": "76fe5f2f-6ad7-4064-8103-a50c792f0fb2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7902,7 +7911,7 @@
     "/v1/countries/{country_code}/{form}": {
       "get": {
         "deprecated": false,
-        "description": "Returns the json schema of a supported form. Possible form names are:\n```\n- address_details \n- administrative_details \n- bank_account_details \n- employment_basic_information \n- contractor_basic_information \n- contractor_contract_details \n- billing_address_details \n- contract_details \n- emergency_contact \n- emergency_contact_details \n- employment_document_details \n- engagement_agreement_details \n- personal_details \n- pricing_plan_details \n- company_basic_information \n- global_payroll_administrative_details \n- global_payroll_bank_account_details \n- global_payroll_basic_information \n- global_payroll_contract_details \n- global_payroll_federal_taxes \n- global_payroll_state_taxes \n- global_payroll_personal_details \n- benefit_renewal_request \n- hris_personal_details \n\n```\n\nMost forms require a company access token, as they are dependent on certain\nproperties of companies and their current employments. However, the `address_details`\nand `company_basic_information` forms can be accessed using client_credentials\nauthentication (without a company).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View forms (`form:read`) | - |",
+        "description": "Returns the json schema of a supported form. Possible form names are:\n```\n- address_details \n- administrative_details \n- bank_account_details \n- employment_basic_information \n- contractor_basic_information \n- contractor_contract_details \n- billing_address_details \n- contract_details \n- emergency_contact \n- emergency_contact_details \n- employment_document_details \n- engagement_agreement_details \n- personal_details \n- pricing_plan_details \n- company_basic_information \n- global_payroll_administrative_details \n- global_payroll_bank_account_details \n- global_payroll_basic_information \n- global_payroll_contract_details \n- global_payroll_federal_taxes \n- global_payroll_state_taxes \n- global_payroll_personal_details \n- benefit_renewal_request \n- hris_personal_details \n\n```\n\nMost forms require a company access token, as they are dependent on certain\nproperties of companies and their current employments. However, the `address_details`\nand `company_basic_information` forms can be accessed using client_credentials\nauthentication (without a company).\n\nThe `global_payroll_contract_details` form requires the `employment_id` query parameter,\nbecause its fields depend on the employment. For example, `overtime_eligible` is shown and\nrequired only when the employment's legal entity is not on Time & Attendance 2.0. A request\nwithout `employment_id` returns 400.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View forms (`form:read`) | - |",
         "operationId": "get_v1_countries_country_code_form",
         "parameters": [
           {
@@ -7926,7 +7935,7 @@
             }
           },
           {
-            "description": "Required for `contract_amendment` and `global_payroll_state_taxes` forms. Optional for `contract_details` and `global_payroll_contract_details`, where it tailors the schema to that employment.",
+            "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details`, where it tailors the schema to that employment.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "in": "query",
             "name": "employment_id",
@@ -10013,6 +10022,77 @@
       }
     },
     "/v1/employee/federal-taxes": {
+      "get": {
+        "deprecated": false,
+        "description": "Returns the authenticated employee's saved US federal tax (W-4) answers, keyed like the\n`global_payroll_federal_taxes` form so they can pre-fill it. `federal_taxes` is `null` when\nnothing has been saved yet.\n\nAvailable for US Global Payroll employees once they reach the\npost-enrollment state. Calls made before then return a 404.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_detail:write`) |",
+        "operationId": "get_v1_employee_federal-taxes",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeFederalTaxesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Show employee federal taxes",
+        "tags": [
+          "Employee Federal Taxes"
+        ]
+      },
       "put": {
         "deprecated": false,
         "description": "Submits the authenticated employee's US federal tax (W-4) details.\n\nAvailable for US Global Payroll employees once they reach the\npost-enrollment state. Calls made before then return a 404.\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_federal_taxes`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage personal details (`personal_detail:write`) |",
@@ -10676,6 +10756,89 @@
       }
     },
     "/v1/employee/state-taxes/{jurisdiction}": {
+      "get": {
+        "deprecated": false,
+        "description": "Returns the authenticated employee's saved US state tax withholding answers for a\nsingle jurisdiction (e.g. `NY`), keyed like that jurisdiction's\n`global_payroll_state_taxes` form so they can pre-fill it. `state_taxes` is `null`\nwhen nothing has been saved yet.\n\nReturns a 404 when the employment has no state tax form for the jurisdiction.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_detail:write`) |",
+        "operationId": "get_v1_employee_state-taxes_jurisdiction",
+        "parameters": [
+          {
+            "description": "Two-letter US state/jurisdiction code",
+            "example": "NY",
+            "in": "path",
+            "name": "jurisdiction",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeStateTaxesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Show employee state taxes",
+        "tags": [
+          "Employee State Taxes"
+        ]
+      },
       "put": {
         "deprecated": false,
         "description": "Submits the authenticated employee's US state tax withholding answers for a\nsingle jurisdiction (e.g. `NY`).\n\nAvailable for US Global Payroll employees once they reach the post-enrollment\nstate, at which point the per-jurisdiction state tax task exists.\n\nThis endpoint requires country/jurisdiction-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_state_taxes`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage personal details (`personal_detail:write`) |",
@@ -13527,7 +13690,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "1077edf1-9b10-4bbb-9f2e-eab29994f6f9",
+            "example": "51c9c882-a7ca-4e86-add6-17efd51c58d2",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14655,7 +14818,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -17005,7 +17169,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -17070,7 +17235,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -21718,7 +21884,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
@@ -21831,7 +21998,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -21914,7 +22082,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
@@ -22320,7 +22489,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -23362,7 +23532,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -28004,8 +28175,8 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
                 "employment_countries",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
                 "onboarding_reports",
@@ -39454,6 +39625,41 @@
         "title": "EmployeeDetailsResponse",
         "type": "object"
       },
+      "EmployeeFederalTaxesResponse": {
+        "description": "The authenticated employee's saved US federal tax (W-4) answers.\n",
+        "example": {
+          "data": {
+            "federal_taxes": {
+              "deductions": 99900,
+              "dependents_amount": 500,
+              "extra_withholding": 1200,
+              "filing_status": "Married",
+              "other_income": 56700,
+              "two_jobs": "yes"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "federal_taxes": {
+                "description": "The saved answers, keyed like the `global_payroll_federal_taxes` form, so they can be\n                   used as its initial values. `null` when nothing has been saved yet.",
+                "nullable": true,
+                "type": "object"
+              }
+            },
+            "required": [
+              "federal_taxes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "EmployeeFederalTaxesResponse",
+        "type": "object"
+      },
       "EmployeeFileParams": {
         "additionalProperties": false,
         "description": "Parameters to upload a file from an employee-issued token. The employment is derived from the access token's subject, so no employment id is required in the body.",
@@ -39588,6 +39794,38 @@
           "leave_policy_variant_id"
         ],
         "title": "EmployeeLeavePolicy",
+        "type": "object"
+      },
+      "EmployeeStateTaxesResponse": {
+        "description": "The authenticated employee's saved US state tax answers for one jurisdiction.\n",
+        "example": {
+          "data": {
+            "state_taxes": {
+              "allowances": 2,
+              "extra_withholding": 50,
+              "filing_status": "Single"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "state_taxes": {
+                "description": "The saved answers, keyed like the jurisdiction's `global_payroll_state_taxes` form, so\n                   they can be used as its initial values. `null` when nothing has been saved yet.",
+                "nullable": true,
+                "type": "object"
+              }
+            },
+            "required": [
+              "state_taxes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "EmployeeStateTaxesResponse",
         "type": "object"
       },
       "EmployeeStats": {
@@ -42083,7 +42321,7 @@
       },
       "EmploymentUpdateParams": {
         "additionalProperties": false,
-        "description": "Required params to update an employment in the Sandbox environment.\n\nCurrently supports setting the Employment Status to `active` and backdating the employment start date.\n",
+        "description": "Required params to update an employment in the Sandbox environment.\n\nCurrently supports setting the Employment Status to `active` and backdating the employment start date.\n\nAll fields other than the ones listed are ignored.\n",
         "example": {
           "provisional_start_date": "2024-01-01",
           "status": "active"

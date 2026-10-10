@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 420,
+  "count": 422,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -778,6 +778,11 @@
       "file": "reference/get_v1_employee_expenses.md"
     },
     {
+      "page": "https://developer.remote.com/reference/get_v1_employee_federal-taxes",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_federal-taxes.md",
+      "file": "reference/get_v1_employee_federal-taxes.md"
+    },
+    {
       "page": "https://developer.remote.com/reference/get_v1_employee_incentives",
       "markdown": "https://developer.remote.com/reference/get_v1_employee_incentives.md",
       "file": "reference/get_v1_employee_incentives.md"
@@ -811,6 +816,11 @@
       "page": "https://developer.remote.com/reference/get_v1_employee_personal-information",
       "markdown": "https://developer.remote.com/reference/get_v1_employee_personal-information.md",
       "file": "reference/get_v1_employee_personal-information.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_employee_state-taxes_jurisdiction",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_state-taxes_jurisdiction.md",
+      "file": "reference/get_v1_employee_state-taxes_jurisdiction.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_timeoff",

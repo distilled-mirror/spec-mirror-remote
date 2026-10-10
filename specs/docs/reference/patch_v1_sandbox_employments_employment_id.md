@@ -625,7 +625,7 @@ This endpoint accepts any one of the following token types:
       },
       "EmploymentUpdateParams": {
         "additionalProperties": false,
-        "description": "Required params to update an employment in the Sandbox environment.\n\nCurrently supports setting the Employment Status to `active` and backdating the employment start date.\n",
+        "description": "Required params to update an employment in the Sandbox environment.\n\nCurrently supports setting the Employment Status to `active` and backdating the employment start date.\n\nAll fields other than the ones listed are ignored.\n",
         "example": {
           "provisional_start_date": "2024-01-01",
           "status": "active"
@@ -1453,7 +1453,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "When true, returns `tax_servicing_countries` grouped into global/regions/subregions instead of a flat list of country names.",
