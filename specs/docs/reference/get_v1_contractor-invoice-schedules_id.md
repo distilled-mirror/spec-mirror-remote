@@ -715,7 +715,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a1207a54-714f-44ca-a901-f3dfab4ee6fe",
+            "example": "d92c6ccb-67c7-45f0-aee8-9dcc24a76c32",
             "in": "path",
             "name": "id",
             "required": true,

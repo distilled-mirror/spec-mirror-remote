@@ -2695,7 +2695,7 @@
     "/v1/companies/{company_id}/create-token": {
       "post": {
         "deprecated": false,
-        "description": "Creates new tokens for a given company\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
+        "description": "Creates new tokens for a given company, on behalf of the company owner.\n\nOnly available to integrations that Remote has allowed to act on behalf of users.\nOther integrations get a 403.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
         "operationId": "post_v1_companies_company_id_create-token",
         "parameters": [
           {
@@ -2740,6 +2740,16 @@
               }
             },
             "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "404": {
             "content": {
@@ -4909,7 +4919,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "fe7d7c79-bef3-43ab-a412-42a094059d1f",
+            "example": "bf2cce5a-c07f-4530-b1eb-8da5150cd525",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5305,7 +5315,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a1207a54-714f-44ca-a901-f3dfab4ee6fe",
+            "example": "d92c6ccb-67c7-45f0-aee8-9dcc24a76c32",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5398,7 +5408,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "45c547e2-05c2-4ca7-b4cf-46fe5605b2d2",
+            "example": "cf15275e-742d-4c0e-8ceb-35aa75733c78",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5482,7 +5492,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ba7e4c55-a8bd-4dbe-9fac-81b9f7e23a7d",
+            "example": "0f2daa0a-ffe1-4ed3-916d-e6907cff0976",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5578,7 +5588,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "41de666d-6a30-46ed-8a46-b9461087767d",
+            "example": "9b70f6a3-5168-4a21-9ccc-8581bfdd8a9b",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5787,7 +5797,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ba43718c-bd83-46ea-b9dc-1dc0a31390cd",
+            "example": "5e1eb518-2f13-4367-99df-f8365dfc7eb7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5862,7 +5872,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "539ba93b-92ac-4710-b189-eaa910ecf528",
+            "example": "2a61efb6-9d2e-45bf-90c5-be4875d8511e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13690,7 +13700,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "f678767d-2e43-44b3-b661-93652795afcb",
+            "example": "addcc48f-5609-4633-94ec-7211014f1d0c",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -28173,14 +28183,14 @@
                 "external",
                 "internal",
                 "rps",
-                "secondary_reports",
-                "direct_reports",
                 "employment_countries",
+                "onboarding_reports",
+                "direct_reports",
                 "direct_and_indirect_reports",
+                "assigned_billing_legal_entities",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "secondary_reports"
               ],
               "example": "all",
               "nullable": false,
@@ -54482,8 +54492,8 @@
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
-                  "parameter_required_missing",
                   "parameter_one_of_required_missing",
+                  "parameter_required_missing",
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",

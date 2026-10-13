@@ -6,7 +6,10 @@ agentTools:
 
 # Create a new token for a company
 
-Creates new tokens for a given company
+Creates new tokens for a given company, on behalf of the company owner.
+
+Only available to integrations that Remote has allowed to act on behalf of users.
+Other integrations get a 403.
 
 ## Authentication
 
@@ -191,6 +194,23 @@ This endpoint requires the following token type:
         ],
         "title": "ParameterError",
         "type": "object"
+      },
+      "ForbiddenResponse": {
+        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
+        "example": {
+          "message": "Forbidden"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Forbidden",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ForbiddenResponse",
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -348,7 +368,7 @@ This endpoint requires the following token type:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Creates new tokens for a given company\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
+        "description": "Creates new tokens for a given company, on behalf of the company owner.\n\nOnly available to integrations that Remote has allowed to act on behalf of users.\nOther integrations get a 403.\n\n## Authentication\n\nThis endpoint requires the following token type:\n\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
         "operationId": "post_v1_companies_company_id_create-token",
         "parameters": [
           {
@@ -393,6 +413,16 @@ This endpoint requires the following token type:
               }
             },
             "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "404": {
             "content": {
