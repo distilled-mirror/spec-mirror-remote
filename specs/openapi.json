@@ -4919,7 +4919,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "bf2cce5a-c07f-4530-b1eb-8da5150cd525",
+            "example": "b4856a1f-0b7d-408e-ad4a-417db968c045",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5315,7 +5315,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "d92c6ccb-67c7-45f0-aee8-9dcc24a76c32",
+            "example": "7d8ec473-7306-4268-b972-e6d9ef1cfd32",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5408,7 +5408,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "cf15275e-742d-4c0e-8ceb-35aa75733c78",
+            "example": "6dd7fbe6-ad9e-49b8-83b3-23d5e09eb79e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5492,7 +5492,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0f2daa0a-ffe1-4ed3-916d-e6907cff0976",
+            "example": "c2a053f2-7909-4d40-a364-5241b7470645",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5588,7 +5588,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "9b70f6a3-5168-4a21-9ccc-8581bfdd8a9b",
+            "example": "8a66bf3c-7bd3-499e-b767-06795a578688",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5797,7 +5797,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "5e1eb518-2f13-4367-99df-f8365dfc7eb7",
+            "example": "04687948-9939-4893-8516-6999c14bdf78",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5872,7 +5872,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "2a61efb6-9d2e-45bf-90c5-be4875d8511e",
+            "example": "f7554604-8d2a-405b-aad0-318e3d0884b5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7445,7 +7445,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "If the premium benefits should be included in the response",
@@ -7583,7 +7584,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Employment ID. Tailors the schema to the employment (e.g. Contractor of Record fields) and, for a caller permitted to read the contractor's compensation, sets `default` values on its fields from the contractor's current contract.",
@@ -7702,7 +7704,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Year for the holidays",
@@ -7712,7 +7715,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Country subdivision code according to ISO 3166-2 codes",
@@ -7787,7 +7791,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Name of the desired form",
@@ -7797,7 +7802,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Product type. Default value is global_payroll.",
@@ -7932,7 +7938,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Name of the desired form",
@@ -7942,7 +7949,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details`, where it tailors the schema to that employment.",
@@ -10779,7 +10787,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -10862,7 +10871,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "requestBody": {
@@ -13700,7 +13710,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "addcc48f-5609-4633-94ec-7211014f1d0c",
+            "example": "019d5e8d-536b-43d8-9bbe-ad8c8da77e76",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -18941,7 +18951,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Starts fetching records after the given page",
@@ -35688,6 +35699,11 @@
           },
           "has_extra_statutory_payment": false,
           "has_fringe_benefits_tax": false,
+          "indirect_tax_summary": {
+            "description": "A monthly cost that may apply based on local tax regulations. If legally required, it will be added to your reconciliation invoice.",
+            "estimate": "18% of total cost",
+            "guide_url": "https://support.remote.com/hc/en-us/articles/30490907518477"
+          },
           "minimum_onboarding_time": 10,
           "region": {
             "code": "USA",
@@ -35812,6 +35828,9 @@
           "has_fringe_benefits_tax": {
             "description": "Whether this country has a fringe benefits tax on employer-paid benefit premiums (e.g. New Zealand).",
             "type": "boolean"
+          },
+          "indirect_tax_summary": {
+            "$ref": "#/components/schemas/CostCalculatorIndirectTaxSummary"
           },
           "minimum_onboarding_time": {
             "description": "The minimum number of business days required to onboard an employee in this country. Null if not determined.",
@@ -36108,6 +36127,11 @@
                 },
                 "has_extra_statutory_payment": false,
                 "has_fringe_benefits_tax": false,
+                "indirect_tax_summary": {
+                  "description": "A monthly cost that may apply based on local tax regulations. If legally required, it will be added to your reconciliation invoice.",
+                  "estimate": "18% of total cost",
+                  "guide_url": "https://support.remote.com/hc/en-us/articles/30490907518477"
+                },
                 "minimum_onboarding_time": 10,
                 "region": {
                   "code": "USA",
@@ -36228,6 +36252,35 @@
           "data"
         ],
         "title": "CostCalculatorEstimateResponse",
+        "type": "object"
+      },
+      "CostCalculatorIndirectTaxSummary": {
+        "additionalProperties": false,
+        "description": "How local indirect tax applies to this employment. Null when the country has no indirect tax.",
+        "nullable": true,
+        "properties": {
+          "description": {
+            "description": "How indirect tax applies in this country.",
+            "example": "A monthly cost that may apply based on local tax regulations. If legally required, it will be added to your reconciliation invoice.",
+            "type": "string"
+          },
+          "estimate": {
+            "description": "Short text shown as the indirect tax cost.",
+            "example": "18% of total cost",
+            "type": "string"
+          },
+          "guide_url": {
+            "description": "Help center article explaining local country indirect taxes.",
+            "example": "https://support.remote.com/hc/en-us/articles/30490907518477",
+            "type": "string"
+          }
+        },
+        "required": [
+          "estimate",
+          "description",
+          "guide_url"
+        ],
+        "title": "CostCalculatorIndirectTaxSummary",
         "type": "object"
       },
       "CostCenter": {
@@ -54492,8 +54545,8 @@
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
-                  "parameter_one_of_required_missing",
                   "parameter_required_missing",
+                  "parameter_one_of_required_missing",
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",
@@ -58662,7 +58715,7 @@
         "type": "object"
       },
       "UserStatus": {
-        "description": "The status of the user account associated with this employment.\n\n- `active`: The user account is active and the user can log in.\n- `created`: The user account has been created but not yet activated.\n- `invited`: The user has been invited but has not accepted the invitation yet.\n- `initiated`: The user has been invited but has not completed registration.\n- `cancelled`: The user account was cancelled before activation.\n- `inactive`: The user account has been deactivated (e.g., after offboarding).\n- `deleted`: The user account has been deleted.\n",
+        "description": "The status of the user account associated with this employment.\n\n- `active`: The user account is active and the user can log in.\n- `created`: The user account has been created but the user hasn't been invited yet.\n- `invited`: The user has been invited but has not accepted the invitation yet.\n- `initiated`: The user has been invited but has not completed registration.\n- `cancelled`: The user account was cancelled before activation.\n- `inactive`: The user account has been deactivated (e.g., after offboarding).\n- `deleted`: The user account has been deleted.\n",
         "enum": [
           "active",
           "created",

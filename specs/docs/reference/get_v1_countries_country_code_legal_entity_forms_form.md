@@ -549,7 +549,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Name of the desired form",
@@ -559,7 +560,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Product type. Default value is global_payroll.",

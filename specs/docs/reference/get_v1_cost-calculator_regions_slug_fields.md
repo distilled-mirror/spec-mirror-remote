@@ -455,7 +455,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "If the premium benefits should be included in the response",

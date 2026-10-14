@@ -466,7 +466,8 @@ This endpoint requires the following token type:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "requestBody": {

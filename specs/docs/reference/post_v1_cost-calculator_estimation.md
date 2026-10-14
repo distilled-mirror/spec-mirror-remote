@@ -97,6 +97,35 @@ This endpoint accepts any one of the following token types:
         "title": "MinimalCountry",
         "type": "object"
       },
+      "CostCalculatorIndirectTaxSummary": {
+        "additionalProperties": false,
+        "description": "How local indirect tax applies to this employment. Null when the country has no indirect tax.",
+        "nullable": true,
+        "properties": {
+          "description": {
+            "description": "How indirect tax applies in this country.",
+            "example": "A monthly cost that may apply based on local tax regulations. If legally required, it will be added to your reconciliation invoice.",
+            "type": "string"
+          },
+          "estimate": {
+            "description": "Short text shown as the indirect tax cost.",
+            "example": "18% of total cost",
+            "type": "string"
+          },
+          "guide_url": {
+            "description": "Help center article explaining local country indirect taxes.",
+            "example": "https://support.remote.com/hc/en-us/articles/30490907518477",
+            "type": "string"
+          }
+        },
+        "required": [
+          "estimate",
+          "description",
+          "guide_url"
+        ],
+        "title": "CostCalculatorIndirectTaxSummary",
+        "type": "object"
+      },
       "ActionError": {
         "properties": {
           "action": {
@@ -392,6 +421,11 @@ This endpoint accepts any one of the following token types:
                 },
                 "has_extra_statutory_payment": false,
                 "has_fringe_benefits_tax": false,
+                "indirect_tax_summary": {
+                  "description": "A monthly cost that may apply based on local tax regulations. If legally required, it will be added to your reconciliation invoice.",
+                  "estimate": "18% of total cost",
+                  "guide_url": "https://support.remote.com/hc/en-us/articles/30490907518477"
+                },
                 "minimum_onboarding_time": 10,
                 "region": {
                   "code": "USA",
@@ -1004,6 +1038,11 @@ This endpoint accepts any one of the following token types:
           },
           "has_extra_statutory_payment": false,
           "has_fringe_benefits_tax": false,
+          "indirect_tax_summary": {
+            "description": "A monthly cost that may apply based on local tax regulations. If legally required, it will be added to your reconciliation invoice.",
+            "estimate": "18% of total cost",
+            "guide_url": "https://support.remote.com/hc/en-us/articles/30490907518477"
+          },
           "minimum_onboarding_time": 10,
           "region": {
             "code": "USA",
@@ -1128,6 +1167,9 @@ This endpoint accepts any one of the following token types:
           "has_fringe_benefits_tax": {
             "description": "Whether this country has a fringe benefits tax on employer-paid benefit premiums (e.g. New Zealand).",
             "type": "boolean"
+          },
+          "indirect_tax_summary": {
+            "$ref": "#/components/schemas/CostCalculatorIndirectTaxSummary"
           },
           "minimum_onboarding_time": {
             "description": "The minimum number of business days required to onboard an employee in this country. Null if not determined.",

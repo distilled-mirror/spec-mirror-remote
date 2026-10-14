@@ -752,7 +752,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Starts fetching records after the given page",

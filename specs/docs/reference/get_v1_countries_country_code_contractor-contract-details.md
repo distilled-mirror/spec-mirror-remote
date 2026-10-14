@@ -521,7 +521,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Employment ID. Tailors the schema to the employment (e.g. Contractor of Record fields) and, for a caller permitted to read the contractor's compensation, sets `default` values on its fields from the contractor's current contract.",

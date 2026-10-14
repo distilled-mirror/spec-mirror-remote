@@ -502,7 +502,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Year for the holidays",
@@ -512,7 +513,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Country subdivision code according to ISO 3166-2 codes",

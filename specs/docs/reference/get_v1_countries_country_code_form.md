@@ -583,7 +583,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Name of the desired form",
@@ -593,7 +594,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details`, where it tailors the schema to that employment.",
