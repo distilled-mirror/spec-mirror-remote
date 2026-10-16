@@ -2869,7 +2869,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "Starts fetching records after the given page",
@@ -3151,7 +3152,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "Legal entity ID",
@@ -3160,7 +3162,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -4919,7 +4922,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "8d941596-bd4f-4b1c-8753-54f910900bb9",
+            "example": "aa43a85f-8e98-45cd-b453-f64a8badafb1",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5315,7 +5318,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "1d52a64a-d59e-4be2-af01-5e6f7d53326a",
+            "example": "741c5b48-f78d-4c25-baa3-b968ef81f6ae",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5408,7 +5411,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "25933a52-e4fa-4cbd-9584-8ab58b5f922f",
+            "example": "570982a6-953c-47be-8560-bbd5f39150f0",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5492,7 +5495,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "cb15d611-edd9-400a-a2ca-f631797843a5",
+            "example": "046d20b0-baa4-4db4-9520-1096b09b858d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5588,7 +5591,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "acc76a79-93ac-42cf-80cd-f8641ea1492d",
+            "example": "158ba65f-30fa-4ac5-a2af-4a1c99fff69f",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5797,7 +5800,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "b5aeb3b4-604c-4702-a108-b081f16bcfa5",
+            "example": "4228489e-f46f-46c1-8026-fb31abb56d84",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5872,7 +5875,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "c970a725-e549-4149-b96b-a3cfe35a2af8",
+            "example": "da31cbcd-8577-4d6d-9a1c-a9873ca8f13a",
             "in": "path",
             "name": "id",
             "required": true,
@@ -6169,7 +6172,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -6245,7 +6249,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Document ID",
@@ -6255,7 +6260,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "requestBody": {
@@ -6321,7 +6327,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Document ID",
@@ -6331,7 +6338,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -6396,7 +6404,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -6469,7 +6478,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -6626,7 +6636,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -6692,7 +6703,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -6757,7 +6769,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -6832,7 +6845,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Termination Request ID",
@@ -6842,7 +6856,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -6982,7 +6997,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -8443,7 +8459,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Employment ID",
@@ -8453,7 +8470,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -8516,7 +8534,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Employment ID",
@@ -8526,7 +8545,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -8610,7 +8630,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           },
           {
             "description": "Employment ID",
@@ -8620,7 +8641,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -12860,7 +12882,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Background Check Id",
@@ -12870,7 +12893,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -13710,7 +13734,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "d5f6f71f-c51a-4873-9253-b2ba8ba2dbff",
+            "example": "3173c47a-188a-4173-8d51-070f1b2dd311",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -13903,7 +13927,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Starts fetching records after the given page",
@@ -18423,7 +18448,7 @@
     "/v1/pay-items": {
       "get": {
         "deprecated": false,
-        "description": "Lists pay items for a company with optional filtering by employment, legal entity, date range, and pagination.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |",
+        "description": "Lists pay items for a company with optional filtering by employment, legal entity, date range, and pagination.\nRecurring pay items are not included; the monthly payments generated from them are.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |",
         "operationId": "get_v1_pay-items",
         "parameters": [
           {
@@ -18633,7 +18658,7 @@
     "/v1/pay-items/{id}": {
       "delete": {
         "deprecated": false,
-        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", so a retried delete never removes anything else.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "delete_v1_pay-items_id",
         "parameters": [
           {
@@ -18725,7 +18750,7 @@
       },
       "patch": {
         "deprecated": false,
-        "description": "Updates a pay item. Editing a pay item archives the existing one and creates a new one with a new `id` — use the response's `replaced_ids` to reconcile with the id you had stored. Only the fields provided are changed.\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "patch_v1_pay-items_id",
         "parameters": [
           {
@@ -25167,7 +25192,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "webhook_callback"
           }
         ],
         "responses": {
@@ -25229,7 +25255,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "webhook_callback"
           }
         ],
         "requestBody": {
@@ -28194,14 +28221,14 @@
                 "external",
                 "internal",
                 "rps",
-                "employment_countries",
-                "onboarding_reports",
+                "secondary_reports",
                 "direct_reports",
                 "direct_and_indirect_reports",
-                "assigned_billing_legal_entities",
+                "employment_countries",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "secondary_reports"
+                "onboarding_reports",
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,
@@ -51412,7 +51439,7 @@
             "type": "string"
           },
           "id": {
-            "description": "Pay item's unique identifier",
+            "description": "Pay item's unique identifier. Editing `amount` or `effective_date` creates a new version with a new `id`; every `id` this API returned for a pay item edited through `PATCH` keeps working on `PATCH` and `DELETE` and resolves to the current version. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\n",
             "format": "uuid",
             "type": "string"
           },
@@ -51420,7 +51447,7 @@
             "$ref": "#/components/schemas/PayItemProviderData"
           },
           "replaced_ids": {
-            "description": "Ids of pay items this one has replaced, oldest first. Empty if this pay item has never been edited.\n",
+            "description": "Earlier `id`s of this pay item, oldest first; empty if it has never been edited. Each of them still resolves to the current version on `PATCH` and `DELETE`, so tracking them is strongly advised but not necessary.\n",
             "items": {
               "format": "uuid",
               "type": "string"
@@ -58352,7 +58379,7 @@
       },
       "UpdatePayItemParams": {
         "additionalProperties": false,
-        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date`, `provider_data` or `custom_configuration` alone updates the pay item in place and keeps the same `id`.\n",
+        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; the old `id` keeps working, and the response's `replaced_ids` lists the earlier ids for integrations that track changes. Editing `end_date`, `provider_data` or `custom_configuration` alone updates the pay item in place and keeps the same `id`.\n",
         "example": {
           "amount": 7800
         },

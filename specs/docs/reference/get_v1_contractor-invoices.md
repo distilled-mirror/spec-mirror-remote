@@ -888,7 +888,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "acc76a79-93ac-42cf-80cd-f8641ea1492d",
+            "example": "158ba65f-30fa-4ac5-a2af-4a1c99fff69f",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,

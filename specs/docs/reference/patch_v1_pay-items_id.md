@@ -6,8 +6,9 @@ agentTools:
 
 # Update a Pay Item
 
-Updates a pay item. Editing a pay item archives the existing one and creates a new one with a new `id` — use the response's `replaced_ids` to reconcile with the id you had stored. Only the fields provided are changed.
-Cannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.
+Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message "Pay item not found because it was deleted".
+Cannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.
+Recurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.
 When `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.
 
 ## Authentication
@@ -173,7 +174,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "id": {
-            "description": "Pay item's unique identifier",
+            "description": "Pay item's unique identifier. Editing `amount` or `effective_date` creates a new version with a new `id`; every `id` this API returned for a pay item edited through `PATCH` keeps working on `PATCH` and `DELETE` and resolves to the current version. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\n",
             "format": "uuid",
             "type": "string"
           },
@@ -181,7 +182,7 @@ This endpoint accepts any one of the following token types:
             "$ref": "#/components/schemas/PayItemProviderData"
           },
           "replaced_ids": {
-            "description": "Ids of pay items this one has replaced, oldest first. Empty if this pay item has never been edited.\n",
+            "description": "Earlier `id`s of this pay item, oldest first; empty if it has never been edited. Each of them still resolves to the current version on `PATCH` and `DELETE`, so tracking them is strongly advised but not necessary.\n",
             "items": {
               "format": "uuid",
               "type": "string"
@@ -386,7 +387,7 @@ This endpoint accepts any one of the following token types:
       },
       "UpdatePayItemParams": {
         "additionalProperties": false,
-        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; use the response's `replaced_ids` to reconcile. Editing `end_date`, `provider_data` or `custom_configuration` alone updates the pay item in place and keeps the same `id`.\n",
+        "description": "Partial update — only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`; the old `id` keeps working, and the response's `replaced_ids` lists the earlier ids for integrations that track changes. Editing `end_date`, `provider_data` or `custom_configuration` alone updates the pay item in place and keeps the same `id`.\n",
         "example": {
           "amount": 7800
         },
@@ -778,7 +779,7 @@ This endpoint accepts any one of the following token types:
       "patch": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Updates a pay item. Editing a pay item archives the existing one and creates a new one with a new `id` — use the response's `replaced_ids` to reconcile with the id you had stored. Only the fields provided are changed.\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, or pay items whose payroll run is no longer in preparation.\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "patch_v1_pay-items_id",
         "parameters": [
           {

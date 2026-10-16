@@ -202,7 +202,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "id": {
-            "description": "Pay item's unique identifier",
+            "description": "Pay item's unique identifier. Editing `amount` or `effective_date` creates a new version with a new `id`; every `id` this API returned for a pay item edited through `PATCH` keeps working on `PATCH` and `DELETE` and resolves to the current version. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\n",
             "format": "uuid",
             "type": "string"
           },
@@ -210,7 +210,7 @@ This endpoint accepts any one of the following token types:
             "$ref": "#/components/schemas/PayItemProviderData"
           },
           "replaced_ids": {
-            "description": "Ids of pay items this one has replaced, oldest first. Empty if this pay item has never been edited.\n",
+            "description": "Earlier `id`s of this pay item, oldest first; empty if it has never been edited. Each of them still resolves to the current version on `PATCH` and `DELETE`, so tracking them is strongly advised but not necessary.\n",
             "items": {
               "format": "uuid",
               "type": "string"
