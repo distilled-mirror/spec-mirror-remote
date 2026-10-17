@@ -173,7 +173,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "role": {
-            "description": "The role assigned for the new manager. The value should be one of the following:\n\n- `admin`: an Admin can manage most of the resources in remote.\n- `onboarding_manager`: an Onboarding Manager can add, see and manage new hires.\n- `people_manager`: a People Manager can view employee profiles of the team members they manage and approve and decline time off and expenses for their employees.\n",
+            "description": "The role assigned for the new manager. The value should be one of the following:\n\n- `admin`: assigns the Super Admin role. A Super Admin has full access to the company on Remote, like the owner.\n- `onboarding_manager`: an Onboarding Manager can add, see and manage new hires.\n- `people_manager`: a People Manager can view employee profiles of the team members they manage and approve and decline time off and expenses for their employees.\n",
             "type": "string"
           }
         },

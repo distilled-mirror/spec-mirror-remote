@@ -6,7 +6,7 @@ agentTools:
 
 # offboarding.submitted
 
-This event is triggered when an offboarding request is submitted.
+This event is triggered when an offboarding is created, either from a submitted offboarding request or by Remote (for example automatically, when a fixed-term contract is ending).
 
 # OpenAPI definition
 
@@ -153,7 +153,7 @@ This event is triggered when an offboarding request is submitted.
     "offboarding.submitted": {
       "post": {
         "deprecated": false,
-        "description": "This event is triggered when an offboarding request is submitted.",
+        "description": "This event is triggered when an offboarding is created, either from a submitted offboarding request or by Remote (for example automatically, when a fixed-term contract is ending).",
         "operationId": "offboarding.submitted",
         "requestBody": {
           "content": {
@@ -184,7 +184,8 @@ This event is triggered when an offboarding request is submitted.
                     "type": "string"
                   },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },

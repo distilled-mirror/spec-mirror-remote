@@ -2950,7 +2950,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "Legal entity ID",
@@ -2960,7 +2961,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -3030,7 +3032,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "company"
           },
           {
             "description": "Legal entity ID",
@@ -3040,7 +3043,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-safe": true
           }
         ],
         "requestBody": {
@@ -3523,7 +3527,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company"
           }
         ],
         "responses": {
@@ -4922,7 +4927,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "aa43a85f-8e98-45cd-b453-f64a8badafb1",
+            "example": "c8b55d14-4b67-4cd7-b068-a0490650a06d",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5318,7 +5323,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "741c5b48-f78d-4c25-baa3-b968ef81f6ae",
+            "example": "88048aca-68e5-4726-82b1-ee0929a1fbbe",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5411,7 +5416,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "570982a6-953c-47be-8560-bbd5f39150f0",
+            "example": "279457f3-898f-4c52-a02d-3ee77d8034d9",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5495,7 +5500,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "046d20b0-baa4-4db4-9520-1096b09b858d",
+            "example": "322e4de4-13cf-4634-9e1a-678378446991",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5591,7 +5596,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "158ba65f-30fa-4ac5-a2af-4a1c99fff69f",
+            "example": "b38135e8-7bc4-4920-97ba-dd65b770e6e5",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5800,7 +5805,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4228489e-f46f-46c1-8026-fb31abb56d84",
+            "example": "ab14e9e8-61fb-4b83-9cc6-b8856ab78209",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5875,7 +5880,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "da31cbcd-8577-4d6d-9a1c-a9873ca8f13a",
+            "example": "4473ea7e-2081-4c68-8aaa-16e8ab946f38",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13734,7 +13739,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "3173c47a-188a-4173-8d51-070f1b2dd311",
+            "example": "6c5fb0c4-a97b-4394-9979-961c71f70c4d",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -17797,7 +17802,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "responses": {
@@ -17863,7 +17869,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           }
         ],
         "requestBody": {
@@ -17950,7 +17957,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Pre-onboarding document ID",
@@ -17960,7 +17968,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -18025,7 +18034,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment"
           },
           {
             "description": "Pre-onboarding document ID",
@@ -18035,7 +18045,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-safe": true
           }
         ],
         "requestBody": {
@@ -21728,7 +21739,7 @@
     "/v1/sandbox/contractors/employments/{employment_id}/rates": {
       "post": {
         "deprecated": false,
-        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Contractor Management Plus contractors cannot be\nseeded: the endpoint returns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Contractor of Record contractors, including ones not\nactive yet, and Contractor Management Plus contractors whose contract is signed cannot be seeded,\nsince their Statement of Work sets the rate: the endpoint returns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "post_v1_sandbox_contractors_employments_employment_id_rates",
         "parameters": [
           {
@@ -31900,7 +31911,7 @@
             "type": "string"
           },
           "role": {
-            "description": "The role assigned for the new manager. The value should be one of the following:\n\n- `admin`: an Admin can manage most of the resources in remote.\n- `onboarding_manager`: an Onboarding Manager can add, see and manage new hires.\n- `people_manager`: a People Manager can view employee profiles of the team members they manage and approve and decline time off and expenses for their employees.\n",
+            "description": "The role assigned for the new manager. The value should be one of the following:\n\n- `admin`: assigns the Super Admin role. A Super Admin has full access to the company on Remote, like the owner.\n- `onboarding_manager`: an Onboarding Manager can add, see and manage new hires.\n- `people_manager`: a People Manager can view employee profiles of the team members they manage and approve and decline time off and expenses for their employees.\n",
             "type": "string"
           }
         },
@@ -40847,7 +40858,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` to clear it. Surrounding\nwhitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"
@@ -41818,7 +41829,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` to clear it. Surrounding\nwhitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"
@@ -42461,7 +42472,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` to clear it. Surrounding\nwhitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"

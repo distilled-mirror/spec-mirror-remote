@@ -1114,7 +1114,8 @@ This endpoint accepts any one of the following token types:
                     "type": "string"
                   },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },
@@ -1175,7 +1176,8 @@ This endpoint accepts any one of the following token types:
                     "type": "string"
                   },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },
@@ -1215,6 +1217,7 @@ This endpoint accepts any one of the following token types:
                   "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
                   "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
                   "event_type": "offboarding.done",
+                  "offboarding_id": "ba310525-9282-40c9-8977-14d844bf891a",
                   "offboarding_request_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
                 },
                 "properties": {
@@ -1230,8 +1233,13 @@ This endpoint accepts any one of the following token types:
                     "description": "The webhook event type identifier.",
                     "type": "string"
                   },
+                  "offboarding_id": {
+                    "description": "The unique identifier of the offboarding. Use this to query `GET /v2/offboardings/{id}`.",
+                    "type": "string"
+                  },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },
@@ -1239,6 +1247,7 @@ This endpoint accepts any one of the following token types:
                   "event_type",
                   "employment_id",
                   "offboarding_request_id",
+                  "offboarding_id",
                   "company_id"
                 ]
               }
@@ -1270,7 +1279,8 @@ This endpoint accepts any one of the following token types:
                   "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
                   "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
                   "event_type": "offboarding.review_started",
-                  "offboarding_request_id": "ba310525-9282-40c9-8977-14d844bf891a"
+                  "offboarding_id": "ba310525-9282-40c9-8977-14d844bf891a",
+                  "offboarding_request_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
                 },
                 "properties": {
                   "company_id": {
@@ -1285,8 +1295,13 @@ This endpoint accepts any one of the following token types:
                     "description": "The webhook event type identifier.",
                     "type": "string"
                   },
+                  "offboarding_id": {
+                    "description": "The unique identifier of the offboarding. Use this to query `GET /v2/offboardings/{id}`.",
+                    "type": "string"
+                  },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },
@@ -1294,6 +1309,7 @@ This endpoint accepts any one of the following token types:
                   "event_type",
                   "employment_id",
                   "offboarding_request_id",
+                  "offboarding_id",
                   "company_id"
                 ]
               }
@@ -1315,7 +1331,7 @@ This endpoint accepts any one of the following token types:
     "offboarding.submitted": {
       "post": {
         "deprecated": false,
-        "description": "This event is triggered when an offboarding request is submitted.",
+        "description": "This event is triggered when an offboarding is created, either from a submitted offboarding request or by Remote (for example automatically, when a fixed-term contract is ending).",
         "operationId": "offboarding.submitted",
         "requestBody": {
           "content": {
@@ -1346,7 +1362,8 @@ This endpoint accepts any one of the following token types:
                     "type": "string"
                   },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },
@@ -1407,7 +1424,8 @@ This endpoint accepts any one of the following token types:
                     "type": "string"
                   },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },

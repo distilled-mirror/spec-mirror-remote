@@ -184,7 +184,8 @@ This event is triggered whenever an offboarding request is deleted.
                     "type": "string"
                   },
                   "offboarding_request_id": {
-                    "description": "The unique identifier of the offboarding request.",
+                    "description": "The unique identifier of the offboarding request. Null when the offboarding was not created from an offboarding request, for example when Remote creates it automatically because a fixed-term contract is ending. Use `offboarding_id` to identify the offboarding instead.",
+                    "nullable": true,
                     "type": "string"
                   }
                 },
