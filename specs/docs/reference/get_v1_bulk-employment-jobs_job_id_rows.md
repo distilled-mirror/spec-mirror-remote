@@ -160,6 +160,30 @@ This endpoint accepts any one of the following token types:
                         "name": {
                           "type": "string"
                         },
+                        "roles": {
+                          "items": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "user_type": {
+                                "enum": [
+                                  "contractor",
+                                  "admin",
+                                  "employer",
+                                  "employee",
+                                  "freelancer"
+                                ],
+                                "example": "contractor",
+                                "nullable": false,
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "user_type"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
                         "slug": {
                           "type": "string"
                         }

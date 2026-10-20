@@ -4927,7 +4927,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "5287a38f-6aea-4147-995c-72e7afc13767",
+            "example": "a5bff2e6-c5b1-4c00-9e67-fd124b61edfa",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5323,7 +5323,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c3d957ef-6a72-4063-8caf-995354d12dd0",
+            "example": "451f0f32-d36f-43c3-bcbf-b72588bd37e9",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5416,7 +5416,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "44ed51e0-56be-43f3-a82a-7d3f8a4f0bf7",
+            "example": "27f5fea5-eb0f-4f5a-af9b-e1b59f77dee1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5500,7 +5500,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "68047115-0002-420b-ba9c-36ebee31b614",
+            "example": "ed0492a6-cf6e-414a-9a45-8a654b0cb173",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5596,7 +5596,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "1ec56fb2-62e4-45b6-8fe6-18e99dc02668",
+            "example": "07fd08da-3976-4e04-83dd-3c0a59a7e040",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5805,7 +5805,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "56e408b8-63d9-4f13-bec9-c7300a3efbbe",
+            "example": "4f8fba12-8414-4aed-b1c8-0859e3309b95",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5880,7 +5880,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "a6022622-6cab-405b-9e56-c6027cbd3432",
+            "example": "afe2bd45-7617-42c7-bbce-acf209c6dba7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13739,7 +13739,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "dbb606d0-c3f9-4e39-b5d3-9256615639d4",
+            "example": "d8e15f7f-0baa-4f63-ab95-1ea742c6203d",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -28234,8 +28234,8 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
                 "employment_countries",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
                 "onboarding_reports",
@@ -44015,6 +44015,30 @@
                       "properties": {
                         "name": {
                           "type": "string"
+                        },
+                        "roles": {
+                          "items": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "user_type": {
+                                "enum": [
+                                  "contractor",
+                                  "admin",
+                                  "employer",
+                                  "employee",
+                                  "freelancer"
+                                ],
+                                "example": "contractor",
+                                "nullable": false,
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "user_type"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
                         },
                         "slug": {
                           "type": "string"
