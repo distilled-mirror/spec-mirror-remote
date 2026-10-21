@@ -4927,7 +4927,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "a5bff2e6-c5b1-4c00-9e67-fd124b61edfa",
+            "example": "665bced4-ead7-4234-839e-daadfcd80e3c",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5323,7 +5323,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "451f0f32-d36f-43c3-bcbf-b72588bd37e9",
+            "example": "b09002a1-1ed2-4188-9d0f-74686d6ef18b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5416,7 +5416,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "27f5fea5-eb0f-4f5a-af9b-e1b59f77dee1",
+            "example": "363b2081-7b50-4b6b-a071-5225bd770c16",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5500,7 +5500,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ed0492a6-cf6e-414a-9a45-8a654b0cb173",
+            "example": "5b536da1-2726-408b-bfa7-7e8062093ad0",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5596,7 +5596,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "07fd08da-3976-4e04-83dd-3c0a59a7e040",
+            "example": "18f28242-f8e3-4899-af0d-4f8448b6541f",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5805,7 +5805,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4f8fba12-8414-4aed-b1c8-0859e3309b95",
+            "example": "41bf687d-7613-4649-9fea-ab5a9392fb6b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5880,7 +5880,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "afe2bd45-7617-42c7-bbce-acf209c6dba7",
+            "example": "eb452716-c9fd-4b73-8cf0-25ab8fc9b74c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -6310,6 +6310,16 @@
               }
             },
             "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
           }
         },
         "summary": "Sign a document for a contractor",
@@ -13739,7 +13749,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "d8e15f7f-0baa-4f63-ab95-1ea742c6203d",
+            "example": "ede0387c-3e14-4db3-a7b7-5ccab9645304",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -18499,6 +18509,19 @@
             }
           },
           {
+            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the pay item; another integration's identifiers are never matched. Matching is\nexact, including case. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "example": "TS-0042",
+            "in": "query",
+            "name": "partner_external_id",
+            "required": false,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            }
+          },
+          {
             "description": "Starts fetching records after the given page",
             "example": 1,
             "in": "query",
@@ -18534,6 +18557,16 @@
               }
             },
             "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "401": {
             "content": {
@@ -28234,8 +28267,8 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "employment_countries",
                 "direct_and_indirect_reports",
+                "employment_countries",
                 "employment_departments",
                 "employment_company_structure_nodes",
                 "onboarding_reports",
@@ -51478,6 +51511,11 @@
             "format": "uuid",
             "type": "string"
           },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "nullable": true,
+            "type": "string"
+          },
           "provider_data": {
             "$ref": "#/components/schemas/PayItemProviderData"
           },
@@ -58434,6 +58472,12 @@
           "end_date": {
             "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Leave-of-absence pay codes only; send `null` to clear it.",
             "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "maxLength": 64,
             "nullable": true,
             "type": "string"
           },

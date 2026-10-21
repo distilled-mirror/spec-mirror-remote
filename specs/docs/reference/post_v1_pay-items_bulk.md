@@ -206,6 +206,11 @@ This endpoint accepts any one of the following token types:
             "format": "uuid",
             "type": "string"
           },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "nullable": true,
+            "type": "string"
+          },
           "provider_data": {
             "$ref": "#/components/schemas/PayItemProviderData"
           },

@@ -178,6 +178,11 @@ This endpoint accepts any one of the following token types:
             "format": "uuid",
             "type": "string"
           },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "nullable": true,
+            "type": "string"
+          },
           "provider_data": {
             "$ref": "#/components/schemas/PayItemProviderData"
           },
@@ -407,6 +412,12 @@ This endpoint accepts any one of the following token types:
           "end_date": {
             "description": "Last day of a leave period, inclusive (YYYY-MM-DD). Leave-of-absence pay codes only; send `null` to clear it.",
             "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "maxLength": 64,
             "nullable": true,
             "type": "string"
           },

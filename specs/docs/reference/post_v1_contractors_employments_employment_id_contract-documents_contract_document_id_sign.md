@@ -25,6 +25,21 @@ This endpoint accepts any one of the following token types:
 {
   "components": {
     "schemas": {
+      "NotFoundResponse": {
+        "description": "Returned when the requested resource does not exist or is not accessible with the current authentication credentials.",
+        "example": {
+          "message": "{resource} not found"
+        },
+        "properties": {
+          "message": {
+            "description": "A message indicating which resource was not found.",
+            "pattern": "Not Found",
+            "type": "string"
+          }
+        },
+        "title": "NotFoundResponse",
+        "type": "object"
+      },
       "SuccessResponse": {
         "description": "A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).",
         "example": {
@@ -415,6 +430,16 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
           }
         },
         "security": [

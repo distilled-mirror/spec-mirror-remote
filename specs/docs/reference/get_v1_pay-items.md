@@ -112,6 +112,11 @@ This endpoint accepts any one of the following token types:
             "format": "uuid",
             "type": "string"
           },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "nullable": true,
+            "type": "string"
+          },
           "provider_data": {
             "$ref": "#/components/schemas/PayItemProviderData"
           },
@@ -352,6 +357,48 @@ This endpoint accepts any one of the following token types:
         "format": "uuid",
         "title": "UuidSlug",
         "type": "string"
+      },
+      "BadRequestResponse": {
+        "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
+        "example": {
+          "message": "invalid {resource}"
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "message": {
+                "description": "A human-readable error message describing what was wrong with the request.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "message": {
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "title": "BadRequestResponse",
+        "type": "object"
       },
       "UnauthorizedResponse": {
         "description": "Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.",
@@ -685,6 +732,19 @@ This endpoint accepts any one of the following token types:
             }
           },
           {
+            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the pay item; another integration's identifiers are never matched. Matching is\nexact, including case. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "example": "TS-0042",
+            "in": "query",
+            "name": "partner_external_id",
+            "required": false,
+            "schema": {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            }
+          },
+          {
             "description": "Starts fetching records after the given page",
             "example": 1,
             "in": "query",
@@ -720,6 +780,16 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "401": {
             "content": {
