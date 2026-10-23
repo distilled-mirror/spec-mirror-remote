@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 422,
+  "count": 424,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -1503,6 +1503,11 @@
       "file": "reference/post_v1_contractors_eligibility-questionnaire.md"
     },
     {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_activate",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_activate.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_activate.md"
+    },
+    {
       "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contract-documents",
       "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_contract-documents.md",
       "file": "reference/post_v1_contractors_employments_employment_id_contract-documents.md"
@@ -1526,6 +1531,11 @@
       "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_cor-termination-requests",
       "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_cor-termination-requests.md",
       "file": "reference/post_v1_contractors_employments_employment_id_cor-termination-requests.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_deactivate",
+      "markdown": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_deactivate.md",
+      "file": "reference/post_v1_contractors_employments_employment_id_deactivate.md"
     },
     {
       "page": "https://developer.remote.com/reference/post_v1_contractors_employments_employment_id_terminate-cor-employment",

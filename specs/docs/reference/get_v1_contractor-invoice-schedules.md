@@ -633,7 +633,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "665bced4-ead7-4234-839e-daadfcd80e3c",
+            "example": "4ee6af3c-4aaf-4413-a6cf-5f1a3e953ddc",
             "in": "query",
             "name": "employment_id",
             "required": false,

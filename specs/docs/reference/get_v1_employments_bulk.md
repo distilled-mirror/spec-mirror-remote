@@ -311,6 +311,10 @@ This endpoint accepts any one of the following token types:
             "format": "date-time",
             "type": "string"
           },
+          "has_active_withdrawal_method": {
+            "description": "Whether the contractor has at least one active withdrawal method (the deposit method their invoices\nare paid out to). Only present for contractor employments. Use it to warn before creating an\ninvoice schedule for a contractor who hasn't added one yet.\n",
+            "type": "boolean"
+          },
           "basic_information": {
             "description": "Employment basic information. Its properties may vary depending on the country.\n\nWhen present, `login_email` indicates which address the employee logs in with:\n`\"personal\"` or `\"work\"`.\n",
             "type": "object"

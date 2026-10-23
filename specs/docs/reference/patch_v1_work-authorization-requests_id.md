@@ -359,6 +359,7 @@ This endpoint accepts any one of the following token types:
         "description": "Schema for updating a work authorization request",
         "example": {
           "employer_special_instructions": "some special instruction",
+          "service_level": "assessment_only",
           "status": "approved_by_manager"
         },
         "oneOf": [
@@ -376,11 +377,20 @@ This endpoint accepts any one of the following token types:
         "description": "Schema for approved work authorization",
         "example": {
           "employer_special_instructions": "some special instruction",
+          "service_level": "assessment_only",
           "status": "approved_by_manager"
         },
         "properties": {
           "employer_special_instructions": {
             "nullable": true,
+            "type": "string"
+          },
+          "service_level": {
+            "description": "The mobility service level for the approved request.",
+            "enum": [
+              "assessment_only",
+              "full_service"
+            ],
             "type": "string"
           },
           "status": {
@@ -391,7 +401,8 @@ This endpoint accepts any one of the following token types:
           }
         },
         "required": [
-          "status"
+          "status",
+          "service_level"
         ],
         "title": "ApprovedWorkAuthozation",
         "type": "object"

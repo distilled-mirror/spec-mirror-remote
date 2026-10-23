@@ -139,7 +139,7 @@ This endpoint requires the following token type:
         "type": "object"
       },
       "ParamsToCreateEmployeeExpense": {
-        "description": "  Params for creating an expense as the authenticated employee.\n\n  The employment is implied by the access token, so `employment_id` is not accepted.\n  `reviewer_id` and `reviewed_at` are also omitted — they only apply to manager-created expenses.\n\n  Category selection mirrors the company endpoint: use either `category` (legacy enum, deprecated but supported)\n  or `expense_category_slug` (recommended). When both are provided, `expense_category_slug` wins.\n",
+        "description": "  Params for creating an expense as the authenticated employee.\n\n  The employment is implied by the access token, so `employment_id` is not accepted.\n  `reviewer_id` and `reviewed_at` are also omitted — they only apply to manager-created expenses.\n\n  Category selection mirrors the company endpoint: use either `category` (legacy enum, deprecated but supported)\n  or `expense_category_slug` (recommended). When both are provided, `expense_category_slug` wins.\n\n  `expense_category_slug` must be the `slug` of a category listed for the employee by\n  `GET /v1/employee/expense-categories`. Slugs differ between sandbox and production, so read them\n  from that endpoint instead of storing them. A slug that isn't listed is refused, unless `category`\n  is also sent: then `category` is used.\n",
         "example": {
           "amount": 8000,
           "currency": "EUR",
@@ -195,7 +195,7 @@ This endpoint requires the following token type:
             "type": "string"
           },
           "expense_category_slug": {
-            "description": "Slug of the expense category from the hierarchical categories system (recommended). Takes precedence over legacy category field.",
+            "description": "Slug of a category listed by `GET /v1/employee/expense-categories` for the employee (recommended). Takes precedence over legacy category field.",
             "nullable": true,
             "type": "string"
           },

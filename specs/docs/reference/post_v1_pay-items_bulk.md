@@ -11,6 +11,11 @@ Each item must supply exactly one of `code` or `external_import_code` to identif
 Integration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.
 Pay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.
 Only Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.
+An item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.
+When that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.
+When more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item.
+Within one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.
+An item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.
 
 ## Authentication
 
@@ -511,6 +516,12 @@ This endpoint accepts any one of the following token types:
             "description": "Partner-defined pay element identifier, as configured on the legal entity pay element. Mutually exclusive with `code` — provide exactly one.",
             "type": "string"
           },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nWhen the integration already holds this value on a live pay item, the item updates that\npay item; otherwise it creates a new pay item holding the value. `null` or an empty string\nfails the item. An item without the field always creates a new pay item, so sending it\nagain creates a duplicate. Surrounding whitespace is trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "maxLength": 64,
+            "nullable": true,
+            "type": "string"
+          },
           "provider_data": {
             "$ref": "#/components/schemas/PayItemProviderDataParams"
           }
@@ -531,7 +542,7 @@ This endpoint accepts any one of the following token types:
         },
         "properties": {
           "error": {
-            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's.",
+            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's. An item with a `partner_external_id` can also fail with `partner_external_id_not_available`, `partner_external_id_blank`, `partner_external_id_repeated_in_request`, `partner_external_id_ambiguous` or `partner_external_id_held_by_other_pay_item` (as `code`/`message`), with the errors `PATCH` returns when the matched pay item cannot be updated, or with `errors.partner_external_id` when the value is refused.",
             "oneOf": [
               {
                 "type": "string"
@@ -934,7 +945,7 @@ This endpoint accepts any one of the following token types:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\nAn item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.\nWhen that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.\nWhen more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item.\nWithin one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.\nAn item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "post_v1_pay-items_bulk",
         "parameters": [],
         "requestBody": {

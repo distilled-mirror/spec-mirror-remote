@@ -143,6 +143,9 @@
       "name": "Employment Management"
     },
     {
+      "name": "Employments"
+    },
+    {
       "name": "Engagement Agreement Details"
     },
     {
@@ -3957,7 +3960,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company_admin"
           }
         ],
         "responses": {
@@ -4135,7 +4139,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "company_admin"
           }
         ],
         "responses": {
@@ -4927,7 +4932,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "665bced4-ead7-4234-839e-daadfcd80e3c",
+            "example": "4ee6af3c-4aaf-4413-a6cf-5f1a3e953ddc",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5323,7 +5328,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "b09002a1-1ed2-4188-9d0f-74686d6ef18b",
+            "example": "927069a1-8223-40a4-b0f3-bedf7747be8d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5416,7 +5421,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "363b2081-7b50-4b6b-a071-5225bd770c16",
+            "example": "ffb35532-beb7-424d-b1b6-29301c0749a5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5500,7 +5505,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "5b536da1-2726-408b-bfa7-7e8062093ad0",
+            "example": "e50e75b2-866b-4566-ad5e-5878b8a1fbcf",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5596,7 +5601,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "18f28242-f8e3-4899-af0d-4f8448b6541f",
+            "example": "ddf1dd5e-2528-4ab7-ad61-8bb661c23db6",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5805,13 +5810,14 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "41bf687d-7613-4649-9fea-ab5a9392fb6b",
+            "example": "d0f45bd0-e9cc-466b-98df-15054a0fb503",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "contractor_invoice"
           }
         ],
         "responses": {
@@ -5880,7 +5886,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "eb452716-c9fd-4b73-8cf0-25ab8fc9b74c",
+            "example": "e2af0e86-b097-4b90-9452-41a0e05558a7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -6160,6 +6166,82 @@
         "summary": "Submit eligibility questionnaire",
         "tags": [
           "Eligibility"
+        ]
+      }
+    },
+    "/v1/contractors/employments/{employment_id}/activate": {
+      "post": {
+        "deprecated": false,
+        "description": "Activates a Contractor Management (CM/CM+) contractor that was previously\ndeactivated: the employment, the contractor's user account and the latest\ncontract are reactivated.\n\nOnly contractor employments are supported; any other employment type returns\na 422. Contractor of Record (COR) employments cannot be activated through\nthis endpoint and return a 422.\n\nRequirements:\n\n* The contractor's user account must be inactive.\n* The employment status must be `archived`.\n* The requesting user must be allowed to manage this contractor.\n\nWhen the employment has no product assigned, the standard Contractor\nManagement product is assigned on activation. Resources deleted by a\nprevious deactivation (invoices, incentives, automatic payments, time off)\nare not restored. A Contractor Plus subscription that was scheduled to end\nby the deactivation is not reinstated: the contractor keeps Plus until that\nend date and then drops to standard. To keep the contractor on Plus,\nupgrade again through the contractor-plus-subscription endpoint after\nactivation.\n\nOn success the `employment.user_status.activated` webhook is triggered.\n\nCalling this endpoint for an employment that is already active returns a\n422 with a descriptive message.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "operationId": "post_v1_contractors_employments_employment_id_activate",
+        "parameters": [
+          {
+            "description": "Employment ID",
+            "example": "c0a167b8-459d-4e96-9766-7a04c160892e",
+            "in": "path",
+            "name": "employment_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "employment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Activate a contractor employment",
+        "tags": [
+          "Employments"
         ]
       }
     },
@@ -6910,6 +6992,82 @@
         "summary": "Show a contractor of record (COR) termination request",
         "tags": [
           "Subscriptions"
+        ]
+      }
+    },
+    "/v1/contractors/employments/{employment_id}/deactivate": {
+      "post": {
+        "deprecated": false,
+        "description": "Deactivates a Contractor Management (CM/CM+) contractor: the employment is\narchived and the contractor's user account is deactivated.\n\nOnly contractor employments are supported; any other employment type returns\na 422. Contractor of Record (COR) employments cannot be deactivated through\nthis endpoint and return a 422.\n\nRequirements:\n\n* The contractor's user account must be active.\n* The employment status must be `created` or `active`.\n* The requesting user must be allowed to manage this contractor. Managing\n  a contractor who has completed onboarding requires the\n  people-onboarded/update permission; without it the request returns a 403.\n\nDeactivation also deletes or cancels the contractor's open resources, and\nthese are NOT restored by a later activation: recurring contractor invoices,\nscheduled contractor invoices, open contractor invoices, recurring\nincentives, automatic payments and pending time off. Pending contract\ndocuments are archived and the contract is set to inactive.\n\nBe aware of the following consequences, which match deactivating a\ncontractor in the Remote app:\n\n* An active Contractor Plus subscription is scheduled to end at the end of\n  the following month; a pending (not yet started) Contractor Plus upgrade\n  is cancelled immediately. Neither is restored by a later activation.\n* If the contractor also has a company admin profile, that profile is\n  deleted.\n* Payments that are already processing remain billable.\n* The contractor's signed Statements of Work are ended.\n\nOn success the `employment.user_status.deactivated` webhook is triggered.\n\nCalling this endpoint for an employment that is already deactivated returns\na 422 with a descriptive message.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "operationId": "post_v1_contractors_employments_employment_id_deactivate",
+        "parameters": [
+          {
+            "description": "Employment ID",
+            "example": "c0a167b8-459d-4e96-9766-7a04c160892e",
+            "in": "path",
+            "name": "employment_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "employment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Deactivate a contractor employment",
+        "tags": [
+          "Employments"
         ]
       }
     },
@@ -13749,7 +13907,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "ede0387c-3e14-4db3-a7b7-5ccab9645304",
+            "example": "b8ba716d-dc99-4cc5-a332-a33a024f98b5",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -18618,7 +18776,7 @@
     "/v1/pay-items/bulk": {
       "post": {
         "deprecated": false,
-        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\nAn item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.\nWhen that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.\nWhen more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item.\nWithin one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.\nAn item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "post_v1_pay-items_bulk",
         "requestBody": {
           "content": {
@@ -18702,7 +18860,7 @@
     "/v1/pay-items/{id}": {
       "delete": {
         "deprecated": false,
-        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", so a retried delete never removes anything else.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", so a retried delete never removes anything else.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "delete_v1_pay-items_id",
         "parameters": [
           {
@@ -18794,7 +18952,7 @@
       },
       "patch": {
         "deprecated": false,
-        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nThe one change allowed on a pay item linked to a payroll adjustment, a salary pay item, one created from an external source or one whose payroll run is no longer in preparation is clearing `partner_external_id`: a request whose only field is `partner_external_id`, sent as `null` or an empty string, clears it and leaves the pay item itself unchanged. Setting a value on such a pay item is refused, so the clear can't be undone, and a bulk item sent again with the cleared value creates a new pay item. A clear still gets the not found, recurring, more than one live version and \"is not available\" refusals; any pay item they allow accepts it, including one dated after the employment's termination date.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "patch_v1_pay-items_id",
         "parameters": [
           {
@@ -28267,12 +28425,12 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
                 "employment_countries",
+                "assigned_billing_legal_entities",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "direct_and_indirect_reports",
+                "onboarding_reports"
               ],
               "example": "all",
               "nullable": false,
@@ -28517,11 +28675,20 @@
         "description": "Schema for approved work authorization",
         "example": {
           "employer_special_instructions": "some special instruction",
+          "service_level": "assessment_only",
           "status": "approved_by_manager"
         },
         "properties": {
           "employer_special_instructions": {
             "nullable": true,
+            "type": "string"
+          },
+          "service_level": {
+            "description": "The mobility service level for the approved request.",
+            "enum": [
+              "assessment_only",
+              "full_service"
+            ],
             "type": "string"
           },
           "status": {
@@ -28532,7 +28699,8 @@
           }
         },
         "required": [
-          "status"
+          "status",
+          "service_level"
         ],
         "title": "ApprovedWorkAuthozation",
         "type": "object"
@@ -40273,6 +40441,10 @@
             "format": "date-time",
             "type": "string"
           },
+          "has_active_withdrawal_method": {
+            "description": "Whether the contractor has at least one active withdrawal method (the deposit method their invoices\nare paid out to). Only present for contractor employments. Use it to warn before creating an\ninvoice schedule for a contractor who hasn't added one yet.\n",
+            "type": "boolean"
+          },
           "basic_information": {
             "description": "Employment basic information. Its properties may vary depending on the country.\n\nWhen present, `login_email` indicates which address the employee logs in with:\n`\"personal\"` or `\"work\"`.\n",
             "type": "object"
@@ -50931,7 +51103,7 @@
         "type": "object"
       },
       "ParamsToCreateEmployeeExpense": {
-        "description": "  Params for creating an expense as the authenticated employee.\n\n  The employment is implied by the access token, so `employment_id` is not accepted.\n  `reviewer_id` and `reviewed_at` are also omitted — they only apply to manager-created expenses.\n\n  Category selection mirrors the company endpoint: use either `category` (legacy enum, deprecated but supported)\n  or `expense_category_slug` (recommended). When both are provided, `expense_category_slug` wins.\n",
+        "description": "  Params for creating an expense as the authenticated employee.\n\n  The employment is implied by the access token, so `employment_id` is not accepted.\n  `reviewer_id` and `reviewed_at` are also omitted — they only apply to manager-created expenses.\n\n  Category selection mirrors the company endpoint: use either `category` (legacy enum, deprecated but supported)\n  or `expense_category_slug` (recommended). When both are provided, `expense_category_slug` wins.\n\n  `expense_category_slug` must be the `slug` of a category listed for the employee by\n  `GET /v1/employee/expense-categories`. Slugs differ between sandbox and production, so read them\n  from that endpoint instead of storing them. A slug that isn't listed is refused, unless `category`\n  is also sent: then `category` is used.\n",
         "example": {
           "amount": 8000,
           "currency": "EUR",
@@ -50987,7 +51159,7 @@
             "type": "string"
           },
           "expense_category_slug": {
-            "description": "Slug of the expense category from the hierarchical categories system (recommended). Takes precedence over legacy category field.",
+            "description": "Slug of a category listed by `GET /v1/employee/expense-categories` for the employee (recommended). Takes precedence over legacy category field.",
             "nullable": true,
             "type": "string"
           },
@@ -51576,7 +51748,7 @@
         },
         "properties": {
           "error": {
-            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's.",
+            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's. An item with a `partner_external_id` can also fail with `partner_external_id_not_available`, `partner_external_id_blank`, `partner_external_id_repeated_in_request`, `partner_external_id_ambiguous` or `partner_external_id_held_by_other_pay_item` (as `code`/`message`), with the errors `PATCH` returns when the matched pay item cannot be updated, or with `errors.partner_external_id` when the value is refused.",
             "oneOf": [
               {
                 "type": "string"
@@ -51717,6 +51889,12 @@
           },
           "external_import_code": {
             "description": "Partner-defined pay element identifier, as configured on the legal entity pay element. Mutually exclusive with `code` — provide exactly one.",
+            "type": "string"
+          },
+          "partner_external_id": {
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nWhen the integration already holds this value on a live pay item, the item updates that\npay item; otherwise it creates a new pay item holding the value. `null` or an empty string\nfails the item. An item without the field always creates a new pay item, so sending it\nagain creates a duplicate. Surrounding whitespace is trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "maxLength": 64,
+            "nullable": true,
             "type": "string"
           },
           "provider_data": {
@@ -58788,6 +58966,7 @@
         "description": "Schema for updating a work authorization request",
         "example": {
           "employer_special_instructions": "some special instruction",
+          "service_level": "assessment_only",
           "status": "approved_by_manager"
         },
         "oneOf": [

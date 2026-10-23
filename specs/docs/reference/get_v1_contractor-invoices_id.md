@@ -861,13 +861,14 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "41bf687d-7613-4649-9fea-ab5a9392fb6b",
+            "example": "d0f45bd0-e9cc-466b-98df-15054a0fb503",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "contractor_invoice"
           }
         ],
         "responses": {
