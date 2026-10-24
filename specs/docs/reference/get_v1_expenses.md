@@ -385,6 +385,7 @@ This endpoint accepts any one of the following token types:
           "expense_category": null,
           "expense_date": null,
           "id": "123e4567-e89b-12d3-a456-426614174000",
+          "project": null,
           "receipts": [],
           "tax_amount": null,
           "title": "Incomplete draft expense"
@@ -511,6 +512,25 @@ This endpoint accepts any one of the following token types:
             "description": "Optional additional notes about the expense.",
             "nullable": true,
             "type": "string"
+          },
+          "project": {
+            "description": "The company project the expense is tagged with. Null when it has none.",
+            "nullable": true,
+            "properties": {
+              "code": {
+                "description": "The customer's own project code, to match in their finance system",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the project",
+                "type": "string"
+              },
+              "name": {
+                "description": "Project name",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reason": {
             "description": "Not applicable for draft expenses. Always null.",
@@ -645,6 +665,11 @@ This endpoint accepts any one of the following token types:
           },
           "expense_date": "2021-09-03",
           "id": "123e4567-e89b-12d3-a456-426614174000",
+          "project": {
+            "code": "PRJ-001",
+            "id": "uuid-client-site-project-slug",
+            "name": "Client site rollout"
+          },
           "receipts": [
             {
               "id": "9880b711-file-id-ecf8f551bd78",
@@ -752,6 +777,25 @@ This endpoint accepts any one of the following token types:
             "description": "Optional additional notes or context about the expense.",
             "nullable": true,
             "type": "string"
+          },
+          "project": {
+            "description": "The company project the expense is tagged with. Null when it has none.",
+            "nullable": true,
+            "properties": {
+              "code": {
+                "description": "The customer's own project code, to match in their finance system",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the project",
+                "type": "string"
+              },
+              "name": {
+                "description": "Project name",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reason": {
             "description": "The reason provided when the expense was declined. Null for non-declined expenses.",

@@ -4932,7 +4932,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "4ee6af3c-4aaf-4413-a6cf-5f1a3e953ddc",
+            "example": "aeab4967-ffe9-4541-bbdd-08348332b663",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5328,7 +5328,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "927069a1-8223-40a4-b0f3-bedf7747be8d",
+            "example": "a50d6f3f-9198-4a8b-af33-c3be912e5a13",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5421,7 +5421,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ffb35532-beb7-424d-b1b6-29301c0749a5",
+            "example": "14234ad7-67a4-4224-ad66-6674baf6fe51",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5505,7 +5505,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e50e75b2-866b-4566-ad5e-5878b8a1fbcf",
+            "example": "f5a679b5-1b5e-43fe-a6cb-1f4885fbb9de",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5601,7 +5601,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "ddf1dd5e-2528-4ab7-ad61-8bb661c23db6",
+            "example": "8876b619-36ba-4778-ba8c-0a00da14c80c",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5810,7 +5810,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "d0f45bd0-e9cc-466b-98df-15054a0fb503",
+            "example": "2b07402e-9f8c-42aa-b383-74e51349d895",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5886,7 +5886,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "e2af0e86-b097-4b90-9452-41a0e05558a7",
+            "example": "88f4d318-c941-4e95-84d8-7545ec304846",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13907,7 +13907,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "b8ba716d-dc99-4cc5-a332-a33a024f98b5",
+            "example": "bc74be4f-93c9-4b65-984f-136e881bd482",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -39234,6 +39234,7 @@
           "expense_category": null,
           "expense_date": null,
           "id": "123e4567-e89b-12d3-a456-426614174000",
+          "project": null,
           "receipts": [],
           "tax_amount": null,
           "title": "Incomplete draft expense"
@@ -39360,6 +39361,25 @@
             "description": "Optional additional notes about the expense.",
             "nullable": true,
             "type": "string"
+          },
+          "project": {
+            "description": "The company project the expense is tagged with. Null when it has none.",
+            "nullable": true,
+            "properties": {
+              "code": {
+                "description": "The customer's own project code, to match in their finance system",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the project",
+                "type": "string"
+              },
+              "name": {
+                "description": "Project name",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reason": {
             "description": "Not applicable for draft expenses. Always null.",
@@ -43018,6 +43038,11 @@
           },
           "expense_date": "2021-09-03",
           "id": "123e4567-e89b-12d3-a456-426614174000",
+          "project": {
+            "code": "PRJ-001",
+            "id": "uuid-client-site-project-slug",
+            "name": "Client site rollout"
+          },
           "receipts": [
             {
               "id": "9880b711-file-id-ecf8f551bd78",
@@ -43125,6 +43150,25 @@
             "description": "Optional additional notes or context about the expense.",
             "nullable": true,
             "type": "string"
+          },
+          "project": {
+            "description": "The company project the expense is tagged with. Null when it has none.",
+            "nullable": true,
+            "properties": {
+              "code": {
+                "description": "The customer's own project code, to match in their finance system",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier for the project",
+                "type": "string"
+              },
+              "name": {
+                "description": "Project name",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reason": {
             "description": "The reason provided when the expense was declined. Null for non-declined expenses.",
@@ -43359,6 +43403,11 @@
               },
               "expense_date": "2021-09-03",
               "id": "123e4567-e89b-12d3-a456-426614174000",
+              "project": {
+                "code": "PRJ-001",
+                "id": "uuid-client-site-project-slug",
+                "name": "Client site rollout"
+              },
               "receipts": [
                 {
                   "id": "9880b711-file-id-ecf8f551bd78",
@@ -45011,6 +45060,52 @@
                 "additionalProperties": true,
                 "description": "Import-type-specific aggregates computed over the complete import job",
                 "properties": {
+                  "employing_countries": {
+                    "description": "Multi-entity pay item uploads only: each employing country the upload's rows have, sorted by name. Rows whose employee wasn't found, and the deleted and skipped rows the rows list never shows, are left out",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "description": "ISO 3166-1 alpha-3 country code",
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "name"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "employing_legal_entities": {
+                    "description": "Multi-entity pay item uploads only: each employing legal entity the upload's rows have, sorted by name. Rows whose employee wasn't found, and the deleted and skipped rows the rows list never shows, are left out",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "country_code": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "slug",
+                        "name",
+                        "country_code"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "team_member_counts": {
                     "additionalProperties": false,
                     "description": "Distinct team members across the complete import job, counted once even when they are split across several table records. `needs_changes` and `ready_to_submit` are mutually exclusive; `successfully_assigned` and `failed_to_assign` are subsets of `ready_to_submit`. The counts describe the job as of `job_stage`: the same rows count as needing changes before submission and as failed to assign afterwards.",

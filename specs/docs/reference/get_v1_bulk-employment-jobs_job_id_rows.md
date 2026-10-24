@@ -965,6 +965,52 @@ This endpoint accepts any one of the following token types:
                 "additionalProperties": true,
                 "description": "Import-type-specific aggregates computed over the complete import job",
                 "properties": {
+                  "employing_countries": {
+                    "description": "Multi-entity pay item uploads only: each employing country the upload's rows have, sorted by name. Rows whose employee wasn't found, and the deleted and skipped rows the rows list never shows, are left out",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "code": {
+                          "description": "ISO 3166-1 alpha-3 country code",
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "name"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "employing_legal_entities": {
+                    "description": "Multi-entity pay item uploads only: each employing legal entity the upload's rows have, sorted by name. Rows whose employee wasn't found, and the deleted and skipped rows the rows list never shows, are left out",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "country_code": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "slug",
+                        "name",
+                        "country_code"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "team_member_counts": {
                     "additionalProperties": false,
                     "description": "Distinct team members across the complete import job, counted once even when they are split across several table records. `needs_changes` and `ready_to_submit` are mutually exclusive; `successfully_assigned` and `failed_to_assign` are subsets of `ready_to_submit`. The counts describe the job as of `job_stage`: the same rows count as needing changes before submission and as failed to assign afterwards.",
