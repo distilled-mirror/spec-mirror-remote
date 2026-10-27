@@ -901,7 +901,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "benefit_renewal_request"
           }
         ],
         "responses": {
@@ -964,7 +965,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "benefit_renewal_request"
           },
           {
             "description": "Version of the form schema",
@@ -1023,6 +1025,16 @@
             },
             "description": "Unauthorized"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
           "422": {
             "content": {
               "application/json": {
@@ -1064,7 +1076,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "benefit_renewal_request"
           },
           {
             "description": "Version of the form schema",
@@ -4932,7 +4945,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "9bf66155-34bf-4f8d-84a5-61d5ee40d8bc",
+            "example": "cacd4d7c-0de8-41a6-ae6f-fc04af2c21f4",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5328,7 +5341,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0a5720bb-042d-47ec-a95b-d01166b6d8ef",
+            "example": "980b5acd-319b-4526-9c1c-0546ba1e7d10",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5421,7 +5434,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "3bcf56cf-7f14-4f8a-bb9e-9f5d0f24f8cd",
+            "example": "39bc8b69-5648-430e-820c-d7cdd6d7a0c6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5505,7 +5518,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "9465bd53-a925-4691-bd82-3c16c4d4e96c",
+            "example": "7e231d05-069c-4c39-87cb-4dde3a46af03",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5601,7 +5614,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "b070bc0f-d6fc-40de-83db-595adc0ea2a7",
+            "example": "56a4d185-5157-4003-a401-26e49f517e0f",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5810,7 +5823,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c2688120-8641-4a8f-9cce-acfc631c822d",
+            "example": "e53c94dd-b5a8-4b74-a349-7b06e9751b15",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5886,7 +5899,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "1396f94b-5603-4087-9e2e-5017f0a7662e",
+            "example": "602d549f-ac9c-4462-9667-f40f85547b56",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13907,7 +13920,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "6993d817-84ee-465e-8e32-684a3b6f337d",
+            "example": "9361bcba-085f-4c94-9b92-baf35f1791d0",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -15687,7 +15700,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "expense"
           }
         ],
         "responses": {
@@ -15769,7 +15783,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "expense"
           }
         ],
         "requestBody": {
@@ -15872,7 +15887,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "expense"
           }
         ],
         "requestBody": {
@@ -23952,7 +23968,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "responses": {
@@ -24035,7 +24052,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -24129,7 +24147,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -24225,7 +24244,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -24321,7 +24341,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -24417,7 +24438,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "responses": {
@@ -24440,6 +24462,16 @@
               }
             },
             "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
           },
           "422": {
             "content": {
@@ -24482,7 +24514,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -24516,6 +24549,16 @@
               }
             },
             "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
           },
           "409": {
             "content": {
@@ -24568,7 +24611,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -28426,11 +28470,11 @@
                 "secondary_reports",
                 "direct_reports",
                 "employment_countries",
-                "assigned_billing_legal_entities",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "direct_and_indirect_reports",
-                "onboarding_reports"
+                "onboarding_reports",
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,
@@ -45105,6 +45149,25 @@
                       "type": "object"
                     },
                     "type": "array"
+                  },
+                  "employing_legal_entity_counts": {
+                    "additionalProperties": false,
+                    "description": "Multi-entity pay item uploads only: distinct employing legal entities across the complete import job",
+                    "properties": {
+                      "ready_to_submit": {
+                        "description": "Employing legal entities of the rows the next submission adds",
+                        "type": "integer"
+                      },
+                      "successful": {
+                        "description": "Employing legal entities of the successful rows; after submission, of the added rows",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "ready_to_submit",
+                      "successful"
+                    ],
+                    "type": "object"
                   },
                   "team_member_counts": {
                     "additionalProperties": false,

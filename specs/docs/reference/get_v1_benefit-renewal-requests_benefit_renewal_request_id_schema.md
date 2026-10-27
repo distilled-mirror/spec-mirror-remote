@@ -433,7 +433,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "benefit_renewal_request"
           },
           {
             "description": "Version of the form schema",

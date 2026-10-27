@@ -56,6 +56,21 @@ This endpoint accepts any one of the following token types:
         "title": "BenefitRenewalRequests.UpdateBenefitRenewalRequest",
         "type": "object"
       },
+      "NotFoundResponse": {
+        "description": "Returned when the requested resource does not exist or is not accessible with the current authentication credentials.",
+        "example": {
+          "message": "{resource} not found"
+        },
+        "properties": {
+          "message": {
+            "description": "A message indicating which resource was not found.",
+            "pattern": "Not Found",
+            "type": "string"
+          }
+        },
+        "title": "NotFoundResponse",
+        "type": "object"
+      },
       "UnprocessableEntityResponse": {
         "anyOf": [
           {
@@ -449,7 +464,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "benefit_renewal_request"
           },
           {
             "description": "Version of the form schema",
@@ -507,6 +523,16 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Unauthorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
           },
           "422": {
             "content": {

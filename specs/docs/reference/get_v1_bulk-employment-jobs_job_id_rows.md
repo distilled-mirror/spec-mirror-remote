@@ -1011,6 +1011,25 @@ This endpoint accepts any one of the following token types:
                     },
                     "type": "array"
                   },
+                  "employing_legal_entity_counts": {
+                    "additionalProperties": false,
+                    "description": "Multi-entity pay item uploads only: distinct employing legal entities across the complete import job",
+                    "properties": {
+                      "ready_to_submit": {
+                        "description": "Employing legal entities of the rows the next submission adds",
+                        "type": "integer"
+                      },
+                      "successful": {
+                        "description": "Employing legal entities of the successful rows; after submission, of the added rows",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "ready_to_submit",
+                      "successful"
+                    ],
+                    "type": "object"
+                  },
                   "team_member_counts": {
                     "additionalProperties": false,
                     "description": "Distinct team members across the complete import job, counted once even when they are split across several table records. `needs_changes` and `ready_to_submit` are mutually exclusive; `successfully_assigned` and `failed_to_assign` are subsets of `ready_to_submit`. The counts describe the job as of `job_stage`: the same rows count as needing changes before submission and as failed to assign afterwards.",

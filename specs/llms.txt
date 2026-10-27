@@ -54,6 +54,7 @@
 - [Magic Links for Passwordless Login](https://developer.remote.com/docs/magic-links-for-passwordless-login.md)
 - [SSO Configuration](https://developer.remote.com/docs/sso-configuration.md)
 - [Scopes](https://developer.remote.com/docs/scopes.md): Control exactly what your integration can read and write on a company's behalf.
+- [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records.md): Store your own reference on a Remote record with partner_external_id, then find the record by it.
 
 ## Guides: Embed in your product
 - [Partner with Remote](https://developer.remote.com/docs/getting-started-for-partners.md)
@@ -91,6 +92,7 @@
 - [List Payroll Calendar](https://developer.remote.com/docs/list-payroll-calendar.md)
   - [List Company Payroll Calendar](https://developer.remote.com/docs/list-company-payroll-calendar.md)
   - [List EOR Payroll Calendar](https://developer.remote.com/docs/list-eor-payroll-calendar.md)
+- [Sync time and attendance to payroll with your own IDs](https://developer.remote.com/docs/sync-time-and-attendance-to-payroll-with-your-own-ids.md): Send pay items from your time and attendance system with partner_external_id, so resends, changes and corrections never create duplicates.
 
 ## Guides: Financial Reporting
 - [Pull your EOR cost breakdown for reconciliation](https://developer.remote.com/docs/pull-eor-cost-breakdown.md): Reconcile Remote EOR costs in your own accounting system — match what you pre-funded against what you actually paid, per employee, and book it to your GL.
