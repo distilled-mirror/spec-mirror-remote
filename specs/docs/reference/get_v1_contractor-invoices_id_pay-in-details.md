@@ -897,7 +897,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "602d549f-ac9c-4462-9667-f40f85547b56",
+            "example": "8fb695d8-2a71-4814-a509-6f7b61f25eae",
             "in": "path",
             "name": "id",
             "required": true,

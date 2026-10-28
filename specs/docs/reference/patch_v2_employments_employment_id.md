@@ -171,7 +171,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },
@@ -517,7 +517,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. At most 64 characters, counting any surrounding whitespace sent; that whitespace is\nthen trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"

@@ -176,7 +176,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },

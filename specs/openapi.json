@@ -4945,7 +4945,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "cacd4d7c-0de8-41a6-ae6f-fc04af2c21f4",
+            "example": "689be4c9-1fbb-4628-ba33-3ea12f480edb",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5341,7 +5341,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "980b5acd-319b-4526-9c1c-0546ba1e7d10",
+            "example": "17393e3f-4bce-443f-bce0-1a076bcdca59",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5434,7 +5434,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "39bc8b69-5648-430e-820c-d7cdd6d7a0c6",
+            "example": "9707be76-f7c5-450e-abc0-f12efbae3312",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5518,7 +5518,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "7e231d05-069c-4c39-87cb-4dde3a46af03",
+            "example": "7704152c-7e48-4d53-adc9-a35b8f93d9dc",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5614,7 +5614,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "56a4d185-5157-4003-a401-26e49f517e0f",
+            "example": "db068954-5c6b-4bed-b22a-364de1ae363d",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5823,7 +5823,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e53c94dd-b5a8-4b74-a349-7b06e9751b15",
+            "example": "4e55cf2b-a197-4197-9952-c0c35c717029",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5899,7 +5899,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "602d549f-ac9c-4462-9667-f40f85547b56",
+            "example": "8fb695d8-2a71-4814-a509-6f7b61f25eae",
             "in": "path",
             "name": "id",
             "required": true,
@@ -11953,7 +11953,7 @@
             }
           },
           {
-            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the employment; another integration's identifiers are never matched. Matching is\nexact, including case. The same value may be set on several employments (for example\na rehire), so several results may be returned.\n",
+            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the employment; another integration's identifiers are never matched. Matching is\nexact, including case. The same value may be set on several employments (for example\na rehire), so several results may be returned.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "example": "EMP-1234",
             "in": "query",
             "name": "partner_external_id",
@@ -12375,7 +12375,7 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_contact_details`.\nIf you want to provide additional information for an employment, please make sure to do so **before** the employee is invited.\nWe block updates to some employment data because employees need to agree to amendments in certain cases, such as when there are changes to their contract_details.\nCurrently, these amendments can only be done through the Remote UI.\n\nIt is possible to update the `external_id` of the employment for all employment statuses.\n\nThe same applies to `partner_external_id`, the reference code private to the calling integration. Omit the field to leave it unchanged; send `null` to clear it.\n\n## Global Payroll Employees\n\nTo update a Global Payment employment your input data must comply with the global payroll json schemas.\n\n**For `active` employments:** In addition to the above list, you can update personal_details.\n\n## Direct Employees\n\nTo update an HRIS employment your input data must comply with the HRIS json schemas.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n\nPlease contact Remote if you need to update contractors via API since it's currently not supported.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_contact_details`.\nIf you want to provide additional information for an employment, please make sure to do so **before** the employee is invited.\nWe block updates to some employment data because employees need to agree to amendments in certain cases, such as when there are changes to their contract_details.\nCurrently, these amendments can only be done through the Remote UI.\n\nIt is possible to update the `external_id` of the employment for all employment statuses.\n\nThe same applies to `partner_external_id`, the reference code private to the calling integration. Omit the field to leave it unchanged; send `null` or an empty string to clear it.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n\n## Global Payroll Employees\n\nTo update a Global Payment employment your input data must comply with the global payroll json schemas.\n\n**For `active` employments:** In addition to the above list, you can update personal_details.\n\n## Direct Employees\n\nTo update an HRIS employment your input data must comply with the HRIS json schemas.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n\nPlease contact Remote if you need to update contractors via API since it's currently not supported.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "patch_v1_employments_employment_id",
         "parameters": [
           {
@@ -12715,7 +12715,7 @@
       },
       "patch": {
         "deprecated": false,
-        "description": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_contact_details`.\nIf you want to provide additional information for an employment, please make sure to do so **before** the employee is invited.\nWe block updates to some employment data because employees need to agree to amendments in certain cases, such as when there are changes to their contract_details.\nCurrently, these amendments can only be done through the Remote UI.\n\nIt is possible to update the `external_id` of the employment for all employment statuses.\n\nThe same applies to `partner_external_id`, the reference code private to the calling integration. Omit the field to leave it unchanged; send `null` to clear it.\n\n## Global Payroll Employees\n\nTo update a Global Payment employment your input data must comply with the global payroll json schemas.\n\n**For `active` employments:** In addition to the above list, you can update personal_details.\n\n## Direct Employees\n\nTo update an HRIS employment your input data must comply with the HRIS json schemas.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n\nPlease contact Remote if you need to update contractors via API since it's currently not supported.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_contact_details`.\nIf you want to provide additional information for an employment, please make sure to do so **before** the employee is invited.\nWe block updates to some employment data because employees need to agree to amendments in certain cases, such as when there are changes to their contract_details.\nCurrently, these amendments can only be done through the Remote UI.\n\nIt is possible to update the `external_id` of the employment for all employment statuses.\n\nThe same applies to `partner_external_id`, the reference code private to the calling integration. Omit the field to leave it unchanged; send `null` or an empty string to clear it.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n\n## Global Payroll Employees\n\nTo update a Global Payment employment your input data must comply with the global payroll json schemas.\n\n**For `active` employments:** In addition to the above list, you can update personal_details.\n\n## Direct Employees\n\nTo update an HRIS employment your input data must comply with the HRIS json schemas.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n\nPlease contact Remote if you need to update contractors via API since it's currently not supported.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "patch_v1_employments_employment_id (2)",
         "parameters": [
           {
@@ -13859,7 +13859,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/ContractOriginResponse"
                 }
               }
             },
@@ -13920,7 +13920,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "9361bcba-085f-4c94-9b92-baf35f1791d0",
+            "example": "5939aefa-8e21-4719-a3b6-a8e7bbd215d4",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -18683,7 +18683,7 @@
             }
           },
           {
-            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the pay item; another integration's identifiers are never matched. Matching is\nexact, including case. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the pay item; another integration's identifiers are never matched. Matching is\nexact, including case. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "example": "TS-0042",
             "in": "query",
             "name": "partner_external_id",
@@ -18792,7 +18792,7 @@
     "/v1/pay-items/bulk": {
       "post": {
         "deprecated": false,
-        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\nAn item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.\nWhen that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.\nWhen more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item.\nWithin one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.\nAn item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\nAn item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.\nWhen that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.\nWhen more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item.\nWithin one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.\nAn item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "post_v1_pay-items_bulk",
         "requestBody": {
           "content": {
@@ -18876,7 +18876,7 @@
     "/v1/pay-items/{id}": {
       "delete": {
         "deprecated": false,
-        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", so a retried delete never removes anything else.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", so a retried delete never removes anything else.\nDeleting a pay item frees its `partner_external_id`, so a later pay item can take the value.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "delete_v1_pay-items_id",
         "parameters": [
           {
@@ -18968,7 +18968,7 @@
       },
       "patch": {
         "deprecated": false,
-        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nThe one change allowed on a pay item linked to a payroll adjustment, a salary pay item, one created from an external source or one whose payroll run is no longer in preparation is clearing `partner_external_id`: a request whose only field is `partner_external_id`, sent as `null` or an empty string, clears it and leaves the pay item itself unchanged. Setting a value on such a pay item is refused, so the clear can't be undone, and a bulk item sent again with the cleared value creates a new pay item. A clear still gets the not found, recurring, more than one live version and \"is not available\" refusals; any pay item they allow accepts it, including one dated after the employment's termination date.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nSend `partner_external_id` to set or change the calling integration's own reference code, or `null` or an empty string to clear it. An edit that creates a new `id` keeps the value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nThe one change allowed on a pay item linked to a payroll adjustment, a salary pay item, one created from an external source or one whose payroll run is no longer in preparation is clearing `partner_external_id`: a request whose only field is `partner_external_id`, sent as `null` or an empty string, clears it and leaves the pay item itself unchanged. Setting a value on such a pay item is refused, so the clear can't be undone, and a bulk item sent again with the cleared value creates a new pay item. A clear still gets the not found, recurring, more than one live version and \"is not available\" refusals; any pay item they allow accepts it, including one dated after the employment's termination date.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "patch_v1_pay-items_id",
         "parameters": [
           {
@@ -28469,8 +28469,8 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "employment_countries",
                 "direct_and_indirect_reports",
+                "employment_countries",
                 "employment_departments",
                 "employment_company_structure_nodes",
                 "onboarding_reports",
@@ -33006,6 +33006,37 @@
           "data"
         ],
         "title": "ContractDocumentResponse",
+        "type": "object"
+      },
+      "ContractOriginResponse": {
+        "description": "Either `data.status` (when no contract document is created) or `data.slug` (when one is), depending on the `contract_origin` that was set.",
+        "example": {
+          "data": {
+            "slug": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
+          }
+        },
+        "properties": {
+          "data": {
+            "properties": {
+              "slug": {
+                "description": "ID of the contract document that was created. Returned when `contract_origin` is `remote_contract` or `custom_remote_contract`. Pass it as the contract document ID to the contract document endpoints (`/contractors/employments/{employment_id}/contract-documents/{id}` and its `sign` action). Calling this endpoint again creates a new contract document and archives the pending one, so keep the ID from the latest call.",
+                "type": "string"
+              },
+              "status": {
+                "description": "Always `\"ok\"`. Returned when no contract document is created (`contract_origin` is `provided_by_customer`).",
+                "enum": [
+                  "ok"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "ContractOriginResponse",
         "type": "object"
       },
       "ContractPendingChanges": {
@@ -40374,7 +40405,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },
@@ -40852,7 +40883,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },
@@ -41127,7 +41158,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. At most 64 characters, counting any surrounding whitespace sent; that whitespace is\nthen trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"
@@ -42098,7 +42129,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. At most 64 characters, counting any surrounding whitespace sent; that whitespace is\nthen trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"
@@ -42741,7 +42772,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. At most 64 characters, counting any surrounding whitespace sent; that whitespace is\nthen trimmed off. It can be set at any employment status, and the same\nvalue may be used on several employments (for example a rehire).\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"
@@ -46682,7 +46713,7 @@
             "type": "array"
           },
           "description": {
-            "description": "A description of the job's responsibilities and scope. Null if not set.",
+            "description": "A description of the job's responsibilities and scope. It may be plain text or HTML. HTML keeps only these tags: p, h1 to h6, strong, b, em, i, u, s, br, ul, ol, li, a, code, pre, blockquote, span and div, a text-align style on paragraphs and headings, and http, https and mailto links. Other tags are removed. Text over 10,000 bytes, and most text that looks like tags but has none of these, is returned HTML-escaped. Null if not set.",
             "nullable": true,
             "type": "string"
           },
@@ -50230,7 +50261,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the employment record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },
@@ -51842,7 +51873,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },
@@ -52050,7 +52081,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nWhen the integration already holds this value on a live pay item, the item updates that\npay item; otherwise it creates a new pay item holding the value. `null` or an empty string\nfails the item. An item without the field always creates a new pay item, so sending it\nagain creates a duplicate. Surrounding whitespace is trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nWhen the integration already holds this value on a live pay item, the item updates that\npay item; otherwise it creates a new pay item holding the value. `null` or an empty string\nfails the item. An item without the field always creates a new pay item, so sending it\nagain creates a duplicate. At most 64 characters, counting any surrounding whitespace\nsent; that whitespace is then trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"
@@ -58812,7 +58843,7 @@
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. Surrounding whitespace is trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nOmit the field to leave the value unchanged; send `null` or an empty string to clear\nit. At most 64 characters, counting any surrounding whitespace sent; that whitespace is\nthen trimmed off. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "maxLength": 64,
             "nullable": true,
             "type": "string"

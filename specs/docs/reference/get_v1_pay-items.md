@@ -113,7 +113,7 @@ This endpoint accepts any one of the following token types:
             "type": "string"
           },
           "partner_external_id": {
-            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\n",
+            "description": "A reference code for the pay item record in the calling integration's own system.\nPrivate to that integration — no other integration can read or overwrite it.\nNull when the integration has not set one.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "nullable": true,
             "type": "string"
           },
@@ -732,7 +732,7 @@ This endpoint accepts any one of the following token types:
             }
           },
           {
-            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the pay item; another integration's identifiers are never matched. Matching is\nexact, including case. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version. At most 64 characters, after trimming.\n",
+            "description": "Filters the results by the `partner_external_id` value the calling integration holds\nfor the pay item; another integration's identifiers are never matched. Matching is\nexact, including case. A value can be held by one live pay item at a time, per integration and company; editing a\npay item keeps its value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n",
             "example": "TS-0042",
             "in": "query",
             "name": "partner_external_id",

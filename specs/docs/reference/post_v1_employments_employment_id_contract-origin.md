@@ -116,18 +116,25 @@ This endpoint accepts any one of the following token types:
         "title": "UnprocessableEntityResponse",
         "type": "object"
       },
-      "SuccessResponse": {
-        "description": "A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).",
+      "ContractOriginResponse": {
+        "description": "Either `data.status` (when no contract document is created) or `data.slug` (when one is), depending on the `contract_origin` that was set.",
         "example": {
           "data": {
-            "status": "ok"
+            "slug": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
           }
         },
         "properties": {
           "data": {
             "properties": {
+              "slug": {
+                "description": "ID of the contract document that was created. Returned when `contract_origin` is `remote_contract` or `custom_remote_contract`. Pass it as the contract document ID to the contract document endpoints (`/contractors/employments/{employment_id}/contract-documents/{id}` and its `sign` action). Calling this endpoint again creates a new contract document and archives the pending one, so keep the ID from the latest call.",
+                "type": "string"
+              },
               "status": {
-                "description": "The result status. Always `\"ok\"` for successful operations.",
+                "description": "Always `\"ok\"`. Returned when no contract document is created (`contract_origin` is `provided_by_customer`).",
+                "enum": [
+                  "ok"
+                ],
                 "type": "string"
               }
             },
@@ -137,7 +144,7 @@ This endpoint accepts any one of the following token types:
         "required": [
           "data"
         ],
-        "title": "SuccessResponse",
+        "title": "ContractOriginResponse",
         "type": "object"
       },
       "TooManyRequestsResponse": {
@@ -519,7 +526,7 @@ This endpoint accepts any one of the following token types:
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/ContractOriginResponse"
                 }
               }
             },

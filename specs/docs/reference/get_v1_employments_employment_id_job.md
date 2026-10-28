@@ -222,7 +222,7 @@ This endpoint accepts any one of the following token types:
             "type": "array"
           },
           "description": {
-            "description": "A description of the job's responsibilities and scope. Null if not set.",
+            "description": "A description of the job's responsibilities and scope. It may be plain text or HTML. HTML keeps only these tags: p, h1 to h6, strong, b, em, i, u, s, br, ul, ol, li, a, code, pre, blockquote, span and div, a text-align style on paragraphs and headings, and http, https and mailto links. Other tags are removed. Text over 10,000 bytes, and most text that looks like tags but has none of these, is returned HTML-escaped. Null if not set.",
             "nullable": true,
             "type": "string"
           },
