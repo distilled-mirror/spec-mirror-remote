@@ -888,7 +888,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "db068954-5c6b-4bed-b22a-364de1ae363d",
+            "example": "7649e736-e5a5-4cb9-95a8-cc6376442967",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -1085,14 +1085,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "invoices:read",
-              "invoices:write",
-              "invoices",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "invoices:read",
@@ -1101,6 +1093,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "List Contractor Invoices. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",

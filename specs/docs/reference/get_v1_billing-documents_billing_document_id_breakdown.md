@@ -686,14 +686,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "invoices:read",
-              "invoices:write",
-              "invoices",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "invoices:read",
@@ -702,6 +694,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Get Billing Document Breakdown. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",

@@ -571,13 +571,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "company_structure:read",
-              "company_admin",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "company_structure:read",
@@ -585,6 +578,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "List company structure nodes",

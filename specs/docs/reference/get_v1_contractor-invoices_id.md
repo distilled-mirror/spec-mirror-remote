@@ -861,7 +861,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4e55cf2b-a197-4197-9952-c0c35c717029",
+            "example": "15591656-abe0-40f6-89af-2a3fcfce91ca",
             "in": "path",
             "name": "id",
             "required": true,
@@ -925,14 +925,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "invoices:read",
-              "invoices:write",
-              "invoices",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "invoices:read",
@@ -941,6 +933,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Show Contractor Invoice",

@@ -636,18 +636,15 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "custom_field_value:write",
-              "employments",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "custom_field_value:write",
               "employments",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Update a Custom Field Value",

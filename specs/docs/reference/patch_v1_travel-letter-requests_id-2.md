@@ -1038,18 +1038,15 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "travel_letter:write",
-              "employment_documents",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "travel_letter:write",
               "employment_documents",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Updates a travel letter request",

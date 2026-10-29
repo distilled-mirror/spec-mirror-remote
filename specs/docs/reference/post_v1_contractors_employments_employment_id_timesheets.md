@@ -974,18 +974,15 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "timesheet:write",
-              "time_and_attendance",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "timesheet:write",
               "time_and_attendance",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Create a contractor timesheet",

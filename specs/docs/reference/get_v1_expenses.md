@@ -1099,8 +1099,8 @@ This endpoint accepts any one of the following token types:
         "operationId": "get_v1_expenses",
         "parameters": [
           {
-            "description": "Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
-            "example": "Bearer <COMPANY-SCOPED ACCESS TOKEN>",
+            "description": "An access token of one of the types listed in this endpoint's Authentication section, as `Bearer <ACCESS TOKEN>`.\n\nA token from the Refresh Token flow is of the same type as the token issued with that refresh token.\n",
+            "example": "Bearer ACCESS_TOKEN",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -1219,14 +1219,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "expense:read",
-              "expense:write",
-              "employment_payments",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "expense:read",
@@ -1235,6 +1227,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "List expenses",

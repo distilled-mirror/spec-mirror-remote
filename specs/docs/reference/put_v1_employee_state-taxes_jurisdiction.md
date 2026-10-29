@@ -411,7 +411,7 @@ This endpoint requires the following token type:
         "type": "oauth2"
       },
       "OAuth2Assertion": {
-        "description": "Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.\n",
+        "description": "Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.\n\nOpenAPI has no flow type for this grant, so it is declared as a client credentials flow. Request the token\nfrom the token URL with this grant type and a signed assertion, not with `client_credentials`.\n",
         "flows": {
           "clientCredentials": {
             "scopes": {
@@ -438,7 +438,7 @@ This endpoint requires the following token type:
               "timesheet:read": "timesheet:read"
             },
             "tokenUrl": "/auth/oauth2/token",
-            "x-assertionType": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+            "x-grantType": "urn:ietf:params:oauth:grant-type:jwt-bearer"
           }
         },
         "type": "oauth2"

@@ -771,8 +771,8 @@ This endpoint accepts any one of the following token types:
         "operationId": "post_v1_webhook-callbacks",
         "parameters": [
           {
-            "description": "This endpoint works with any of the access tokens provided. You can use an access\ntoken obtained through the Client Credentials flow, the Authorization Code flow, or the Refresh Token flow.\n",
-            "example": "Bearer <ANY ACCESS TOKEN>",
+            "description": "An access token of one of the types listed in this endpoint's Authentication section, as `Bearer <ACCESS TOKEN>`.\n\nA token from the Refresh Token flow is of the same type as the token issued with that refresh token.\n",
+            "example": "Bearer ACCESS_TOKEN",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -836,24 +836,23 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "webhook:write",
-              "company_admin",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "webhook:write",
               "company_admin",
               "all:write"
-            ],
+            ]
+          },
+          {
             "OAuth2ClientCredentials": [
               "https://gateway.remote.com/company.manage",
               "webhook:write",
               "company_admin",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Create a Webhook Callback",

@@ -556,9 +556,13 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [],
-            "OAuth2AuthorizationCode": [],
+            "OAuth2AuthorizationCode": []
+          },
+          {
             "OAuth2ClientCredentials": []
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "List groups via SCIM v2.0",

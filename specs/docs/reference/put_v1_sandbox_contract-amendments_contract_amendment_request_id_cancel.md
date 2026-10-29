@@ -546,8 +546,10 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [],
             "OAuth2AuthorizationCode": []
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Cancel Contract Amendment",

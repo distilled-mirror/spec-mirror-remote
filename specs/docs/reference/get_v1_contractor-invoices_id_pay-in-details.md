@@ -897,7 +897,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "8fb695d8-2a71-4814-a509-6f7b61f25eae",
+            "example": "bdf822d5-54a6-45e1-a53e-56b64b3ca24b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -981,13 +981,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "pay_in_details:read",
-              "pay_in_details",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "pay_in_details:read",
@@ -995,6 +988,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Show Contractor Invoice pay-in details",

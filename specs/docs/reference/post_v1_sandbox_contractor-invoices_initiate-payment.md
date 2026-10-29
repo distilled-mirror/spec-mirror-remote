@@ -627,8 +627,10 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [],
             "OAuth2AuthorizationCode": []
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Initiate a Contractor Invoice payment",

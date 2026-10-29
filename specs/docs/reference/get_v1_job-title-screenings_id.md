@@ -521,7 +521,9 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "OAuth2AuthorizationCode": [],
+            "OAuth2AuthorizationCode": []
+          },
+          {
             "OAuth2ClientCredentials": []
           }
         ],

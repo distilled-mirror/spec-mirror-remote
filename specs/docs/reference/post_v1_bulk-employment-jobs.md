@@ -183,8 +183,8 @@ This endpoint accepts any one of the following token types:
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
                 "employment_countries",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
                 "onboarding_reports",
@@ -1651,18 +1651,15 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "employment:write",
-              "employments",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "employment:write",
               "employments",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Create bulk employment job",

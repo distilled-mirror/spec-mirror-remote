@@ -1063,8 +1063,8 @@ This endpoint requires the following token type:
         "operationId": "post_v1_companies",
         "parameters": [
           {
-            "description": "Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
-            "example": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>",
+            "description": "An access token of one of the types listed in this endpoint's Authentication section, as `Bearer <ACCESS TOKEN>`.\n\nA token from the Refresh Token flow is of the same type as the token issued with that refresh token.\n",
+            "example": "Bearer ACCESS_TOKEN",
             "in": "header",
             "name": "Authorization",
             "required": true,

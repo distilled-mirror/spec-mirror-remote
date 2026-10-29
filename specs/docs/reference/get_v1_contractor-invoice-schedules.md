@@ -633,7 +633,7 @@ This endpoint accepts any one of the following token types:
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "689be4c9-1fbb-4628-ba33-3ea12f480edb",
+            "example": "d2f12ea1-3e83-4378-a87b-20c1954164e0",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -761,18 +761,15 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "invoices:write",
-              "invoices",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "invoices:write",
               "invoices",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "List Contractor Invoice Schedules",

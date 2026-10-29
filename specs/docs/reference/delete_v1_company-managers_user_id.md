@@ -476,8 +476,8 @@ This endpoint accepts any one of the following token types:
         "operationId": "delete_v1_company-managers_user_id",
         "parameters": [
           {
-            "description": "Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
-            "example": "Bearer <COMPANY-SCOPED ACCESS TOKEN>",
+            "description": "An access token of one of the types listed in this endpoint's Authentication section, as `Bearer <ACCESS TOKEN>`.\n\nA token from the Refresh Token flow is of the same type as the token issued with that refresh token.\n",
+            "example": "Bearer ACCESS_TOKEN",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -561,18 +561,15 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "company_manager:write",
-              "company_admin",
-              "all:write"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "company_manager:write",
               "company_admin",
               "all:write"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Deletes a Company Manager user",

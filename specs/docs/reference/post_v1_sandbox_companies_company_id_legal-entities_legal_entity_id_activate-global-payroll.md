@@ -563,8 +563,10 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [],
             "OAuth2AuthorizationCode": []
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Activate Global Payroll for a legal entity",

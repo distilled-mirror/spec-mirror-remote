@@ -20,110 +20,48 @@ This endpoint requires the following token type:
 {
   "components": {
     "schemas": {
-      "ActionError": {
+      "AdpSubscriptionOrderEventResponse": {
+        "description": "The answer to an ADP Marketplace event: either the success acknowledgement or the error one.",
+        "example": {
+          "accountIdentifier": "G3XZAJYHXEV6DH1N",
+          "success": true
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AdpSubscriptionOrderSuccessAck"
+          },
+          {
+            "$ref": "#/components/schemas/AdpSubscriptionOrderErrorAck"
+          }
+        ],
+        "title": "AdpSubscriptionOrderEventResponse"
+      },
+      "AdpSubscriptionOrderSuccessAck": {
+        "description": "The answer to ADP when the event was received. ADP's own connectivity test (a call without `eventUrl`) is answered with `success` only.",
+        "example": {
+          "accountIdentifier": "G3XZAJYHXEV6DH1N",
+          "success": true
+        },
         "properties": {
-          "action": {
-            "description": "The action that lead to the error message.",
+          "accountIdentifier": {
+            "description": "The organization identifier from the event. A value does not mean the subscription was saved. Absent for ADP's connectivity test, and may be `null`.",
+            "example": "G3XZAJYHXEV6DH1N",
+            "nullable": true,
             "type": "string"
           },
-          "code": {
-            "description": "An error code that describes the nature of the error.",
-            "type": "string"
-          },
-          "message": {
-            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
-            "type": "string"
+          "success": {
+            "description": "`true` means the event was received. It is also sent when the event could not be saved.",
+            "enum": [
+              true
+            ],
+            "example": true,
+            "type": "boolean"
           }
         },
         "required": [
-          "code",
-          "message",
-          "action"
+          "success"
         ],
-        "title": "ActionError",
-        "type": "object"
-      },
-      "UnprocessableEntityResponse": {
-        "anyOf": [
-          {
-            "properties": {
-              "errors": {
-                "type": "object"
-              }
-            },
-            "required": [
-              "errors"
-            ],
-            "type": "object"
-          },
-          {
-            "properties": {
-              "message": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ParameterError"
-                  },
-                  {
-                    "items": {
-                      "$ref": "#/components/schemas/ParameterError"
-                    },
-                    "title": "ParameterErrors",
-                    "type": "array"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ActionError"
-                  },
-                  {
-                    "items": {
-                      "$ref": "#/components/schemas/ActionError"
-                    },
-                    "title": "ActionErrors",
-                    "type": "array"
-                  }
-                ]
-              }
-            },
-            "required": [
-              "message"
-            ],
-            "type": "object"
-          }
-        ],
-        "example": {
-          "errors": {
-            "some_field": [
-              "is invalid"
-            ]
-          }
-        },
-        "title": "UnprocessableEntityResponse",
-        "type": "object"
-      },
-      "SuccessResponse": {
-        "description": "A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).",
-        "example": {
-          "data": {
-            "status": "ok"
-          }
-        },
-        "properties": {
-          "data": {
-            "properties": {
-              "status": {
-                "description": "The result status. Always `\"ok\"` for successful operations.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          }
-        },
-        "required": [
-          "data"
-        ],
-        "title": "SuccessResponse",
+        "title": "AdpSubscriptionOrderSuccessAck",
         "type": "object"
       },
       "UnauthorizedResponse": {
@@ -143,32 +81,57 @@ This endpoint requires the following token type:
         "title": "UnauthorizedResponse",
         "type": "object"
       },
-      "ParameterError": {
+      "AdpSubscriptionOrderErrorAck": {
+        "description": "The answer to ADP when the event could not be fetched or processed. ADP requires HTTP 200 with this body, never a 4xx or 5xx.",
         "example": {
-          "code": "invalid_param",
-          "message": "Invalid parameter",
-          "param": "employment_id"
+          "errorCode": "TRANSPORT_ERROR",
+          "message": "Failed to process the event",
+          "success": "false"
         },
         "properties": {
-          "code": {
-            "description": "An error code that describes the nature of the error.",
+          "errorCode": {
+            "description": "One of ADP's predefined subscription response error codes. `TRANSPORT_ERROR`: the event URL was refused, or the fetch from ADP failed or returned an error status. `INVALID_RESPONSE`: anything else went wrong, including getting Tiger's ADP token.",
+            "enum": [
+              "TRANSPORT_ERROR",
+              "INVALID_RESPONSE"
+            ],
             "type": "string"
           },
           "message": {
-            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
+            "description": "A short description of the failure.",
             "type": "string"
           },
-          "param": {
-            "description": "The parameter that lead to the error message.",
+          "success": {
+            "description": "Always the string `\"false\"`.",
+            "enum": [
+              "false"
+            ],
             "type": "string"
           }
         },
         "required": [
-          "code",
-          "message",
-          "param"
+          "success",
+          "errorCode",
+          "message"
         ],
-        "title": "ParameterError",
+        "title": "AdpSubscriptionOrderErrorAck",
+        "type": "object"
+      },
+      "ForbiddenResponse": {
+        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
+        "example": {
+          "message": "Forbidden"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Forbidden",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ForbiddenResponse",
         "type": "object"
       }
     },
@@ -345,11 +308,11 @@ This endpoint requires the following token type:
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/AdpSubscriptionOrderEventResponse"
                 }
               }
             },
-            "description": "Success"
+            "description": "ADP acknowledgement, success or error (always HTTP 200)"
           },
           "401": {
             "content": {
@@ -361,15 +324,15 @@ This endpoint requires the following token type:
             },
             "description": "Unauthorized"
           },
-          "422": {
+          "403": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/ForbiddenResponse"
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Forbidden"
           }
         },
         "security": [

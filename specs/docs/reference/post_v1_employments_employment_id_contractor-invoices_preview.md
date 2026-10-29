@@ -558,7 +558,7 @@ This endpoint accepts any one of the following token types:
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "5939aefa-8e21-4719-a3b6-a8e7bbd215d4",
+            "example": "8adeff1f-feff-47c0-838b-c16487720710",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -633,14 +633,6 @@ This endpoint accepts any one of the following token types:
         },
         "security": [
           {
-            "CustomerAPIToken": [
-              "https://gateway.remote.com/company.manage",
-              "invoices:read",
-              "invoices:write",
-              "invoices",
-              "all:write",
-              "all:read"
-            ],
             "OAuth2AuthorizationCode": [
               "https://gateway.remote.com/company.manage",
               "invoices:read",
@@ -649,6 +641,9 @@ This endpoint accepts any one of the following token types:
               "all:write",
               "all:read"
             ]
+          },
+          {
+            "CustomerAPIToken": []
           }
         ],
         "summary": "Preview a Contractor Invoice",
