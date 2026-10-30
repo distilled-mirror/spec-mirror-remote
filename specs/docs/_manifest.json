@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 424,
+  "count": 425,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -1071,6 +1071,11 @@
       "page": "https://developer.remote.com/reference/get_v1_payslips",
       "markdown": "https://developer.remote.com/reference/get_v1_payslips.md",
       "file": "reference/get_v1_payslips.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_payslips_payslip_id_download",
+      "markdown": "https://developer.remote.com/reference/get_v1_payslips_payslip_id_download.md",
+      "file": "reference/get_v1_payslips_payslip_id_download.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_payslips_payslip_id_pdf",
