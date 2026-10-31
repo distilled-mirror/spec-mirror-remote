@@ -762,13 +762,14 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "integer"
           },
           "type": {
-            "description": "The type of payroll run.\n\n- `main`: The regular recurring payroll for the period.\n- `one_off`: An ad-hoc payroll run outside the regular cycle, typically for off-cycle payments.\n- `pro_forma`: A simulated payroll run used for cost estimation purposes. Not actually processed.\n- `tax_documents`: A payroll run for generating tax-related documents only.\n- `expenses`: A payroll run dedicated to reimbursing approved expenses.\n- `parallel`: A supplementary payroll run that runs alongside the main payroll for the same period.\n",
+            "description": "The type of payroll run.\n\n- `main`: The regular recurring payroll for the period.\n- `one_off`: An ad-hoc payroll run outside the regular cycle, typically for off-cycle payments.\n- `pro_forma`: A simulated payroll run used for cost estimation purposes. Not actually processed.\n- `tax_documents`: A payroll run for generating tax-related documents only.\n- `year_end_reports`: A year-end run holding employees' year-end tax documents (e.g. T4, RL-1).\n- `employer_year_end_reports`: A year-end run holding company-level reports for the employer to review and approve. Global Payroll only.\n- `expenses`: A payroll run dedicated to reimbursing approved expenses.\n- `parallel`: A supplementary payroll run that runs alongside the main payroll for the same period.\n",
             "enum": [
               "main",
               "one_off",
               "pro_forma",
               "tax_documents",
               "year_end_reports",
+              "employer_year_end_reports",
               "expenses",
               "parallel"
             ],

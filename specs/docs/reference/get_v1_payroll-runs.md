@@ -413,13 +413,14 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "integer"
           },
           "type": {
-            "description": "The type of payroll run.\n\n- `main`: Regular recurring payroll.\n- `one_off`: Ad-hoc off-cycle payment.\n- `pro_forma`: Simulated run for cost estimation.\n- `tax_documents`: Tax document generation only.\n- `expenses`: Dedicated expense reimbursement run.\n- `parallel`: Supplementary run alongside the main payroll.\n",
+            "description": "The type of payroll run.\n\n- `main`: Regular recurring payroll.\n- `one_off`: Ad-hoc off-cycle payment.\n- `pro_forma`: Simulated run for cost estimation.\n- `tax_documents`: Tax document generation only.\n- `year_end_reports`: Year-end run holding employees' year-end tax documents.\n- `employer_year_end_reports`: Year-end run holding company-level reports for the employer to review and approve. Global Payroll only.\n- `expenses`: Dedicated expense reimbursement run.\n- `parallel`: Supplementary run alongside the main payroll.\n",
             "enum": [
               "main",
               "one_off",
               "pro_forma",
               "tax_documents",
               "year_end_reports",
+              "employer_year_end_reports",
               "expenses",
               "parallel"
             ],

@@ -92,6 +92,7 @@
 - [List Payroll Calendar](https://developer.remote.com/docs/list-payroll-calendar.md)
   - [List Company Payroll Calendar](https://developer.remote.com/docs/list-company-payroll-calendar.md)
   - [List EOR Payroll Calendar](https://developer.remote.com/docs/list-eor-payroll-calendar.md)
+- [Send time & attendance to payroll with pay items](https://developer.remote.com/docs/send-time-and-attendance-to-payroll-with-pay-items.md): Send hours worked, overtime, leave and other pay inputs from your time and attendance system into Remote Payroll as pay items.
 - [Sync time and attendance to payroll with your own IDs](https://developer.remote.com/docs/sync-time-and-attendance-to-payroll-with-your-own-ids.md): Send pay items from your time and attendance system with partner_external_id, so resends, changes and corrections never create duplicates.
 
 ## Guides: Financial Reporting

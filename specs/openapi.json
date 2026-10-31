@@ -4836,7 +4836,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -4945,7 +4946,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "cbcae16d-f0fd-40c5-a278-6fdb4adf875c",
+            "example": "c016f3f3-af9a-4580-8324-75d65abfdaa3",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5251,7 +5252,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e4692ca1-c26b-48f4-ad84-444d7207e6f6",
+            "example": "afddf9d3-c9a6-46b8-b1d7-664feb7505df",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5344,7 +5345,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "eb07a4b3-4852-40e4-8ac7-f35994a1952a",
+            "example": "fb9dc044-9327-4cee-a62f-715634e7e7f5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5428,7 +5429,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a58ced79-cb7a-49e6-a780-ca8c0f0851d6",
+            "example": "46465794-7aa8-4919-b1ba-39ac50822cb0",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5524,7 +5525,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "1a6df941-c76f-4905-a706-69397363591a",
+            "example": "21183495-9209-403b-a12a-7b86daffce02",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5534,7 +5535,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "7b88c56e-9c30-45b2-ac1c-5ac62a3385ee",
+            "example": "237f36e7-f6de-4d15-bff7-40b552610dd6",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5743,7 +5744,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "afcc8a7a-745f-4d54-99d1-7d574587a265",
+            "example": "a01aa74d-656a-4f91-83f9-e33ea077dff3",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5819,7 +5820,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "62b6f0bc-c98e-43b1-b140-b2c5de3113a9",
+            "example": "7dfb35ca-b76d-47ac-b727-cb6bbdb13cf7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13837,7 +13838,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "94f293b7-dfaf-4204-a085-bddf5cb345c8",
+            "example": "51e332f9-50ab-4d45-ba34-708f84d6766b",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -20155,7 +20156,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -20294,7 +20296,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -20817,7 +20820,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -21007,7 +21011,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "requestBody": {
@@ -28314,7 +28319,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "offboarding"
           }
         ],
         "responses": {
@@ -50631,13 +50637,14 @@
             "type": "integer"
           },
           "type": {
-            "description": "The type of payroll run.\n\n- `main`: Regular recurring payroll.\n- `one_off`: Ad-hoc off-cycle payment.\n- `pro_forma`: Simulated run for cost estimation.\n- `tax_documents`: Tax document generation only.\n- `expenses`: Dedicated expense reimbursement run.\n- `parallel`: Supplementary run alongside the main payroll.\n",
+            "description": "The type of payroll run.\n\n- `main`: Regular recurring payroll.\n- `one_off`: Ad-hoc off-cycle payment.\n- `pro_forma`: Simulated run for cost estimation.\n- `tax_documents`: Tax document generation only.\n- `year_end_reports`: Year-end run holding employees' year-end tax documents.\n- `employer_year_end_reports`: Year-end run holding company-level reports for the employer to review and approve. Global Payroll only.\n- `expenses`: Dedicated expense reimbursement run.\n- `parallel`: Supplementary run alongside the main payroll.\n",
             "enum": [
               "main",
               "one_off",
               "pro_forma",
               "tax_documents",
               "year_end_reports",
+              "employer_year_end_reports",
               "expenses",
               "parallel"
             ],
@@ -52974,13 +52981,14 @@
             "type": "integer"
           },
           "type": {
-            "description": "The type of payroll run.\n\n- `main`: The regular recurring payroll for the period.\n- `one_off`: An ad-hoc payroll run outside the regular cycle, typically for off-cycle payments.\n- `pro_forma`: A simulated payroll run used for cost estimation purposes. Not actually processed.\n- `tax_documents`: A payroll run for generating tax-related documents only.\n- `expenses`: A payroll run dedicated to reimbursing approved expenses.\n- `parallel`: A supplementary payroll run that runs alongside the main payroll for the same period.\n",
+            "description": "The type of payroll run.\n\n- `main`: The regular recurring payroll for the period.\n- `one_off`: An ad-hoc payroll run outside the regular cycle, typically for off-cycle payments.\n- `pro_forma`: A simulated payroll run used for cost estimation purposes. Not actually processed.\n- `tax_documents`: A payroll run for generating tax-related documents only.\n- `year_end_reports`: A year-end run holding employees' year-end tax documents (e.g. T4, RL-1).\n- `employer_year_end_reports`: A year-end run holding company-level reports for the employer to review and approve. Global Payroll only.\n- `expenses`: A payroll run dedicated to reimbursing approved expenses.\n- `parallel`: A supplementary payroll run that runs alongside the main payroll for the same period.\n",
             "enum": [
               "main",
               "one_off",
               "pro_forma",
               "tax_documents",
               "year_end_reports",
+              "employer_year_end_reports",
               "expenses",
               "parallel"
             ],

@@ -753,7 +753,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {

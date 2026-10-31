@@ -795,7 +795,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "requestBody": {
