@@ -248,6 +248,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "row_errors": {
             "type": "object"
           },
+          "row_level_errors": {
+            "description": "The row's errors outside the requested `column_fields`, then its submission errors unless the row is successful or imported (those rows keep the submission errors of an earlier failed submit). Only present when the rows were requested with `row_level_errors=true`.",
+            "items": {
+              "$ref": "#/components/schemas/ImportJobRowError"
+            },
+            "type": "array"
+          },
           "row_number": {
             "type": "integer"
           },
@@ -1103,7 +1110,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   ],
                   "type": "object"
                 },
-                "description": "Per-column error and valid row counts across all rows, keyed by the column's field path",
+                "description": "Per-column error and valid row counts, keyed by the column's field path. Counts every row that is not deleted or skipped, or only the rows in `filter[status]` when it is given. `counts_by_status` always counts the whole job",
                 "type": "object"
               },
               "counts_by_status": {

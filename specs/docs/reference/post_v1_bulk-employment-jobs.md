@@ -189,11 +189,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
                 "secondary_reports",
                 "direct_reports",
                 "employment_countries",
-                "direct_and_indirect_reports",
-                "employment_departments",
-                "employment_company_structure_nodes",
                 "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "direct_and_indirect_reports",
+                "assigned_billing_legal_entities",
+                "employment_departments",
+                "employment_company_structure_nodes"
               ],
               "example": "all",
               "nullable": false,
@@ -389,6 +389,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           },
           "name": "import-foobars",
           "processed_count": 0,
+          "reupload_merge_fields": [],
+          "reupload_modes": [
+            "replace",
+            "append"
+          ],
           "stage": "submission",
           "status": "finished",
           "total_count": 100,
@@ -699,6 +704,26 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "processed_count": {
             "description": "The number of processed rows, regardless of success or failure",
             "type": "integer"
+          },
+          "reupload_merge_fields": {
+            "description": "Row-data fields this uploader matches on when a re-uploaded CSV is merged into the draft. Empty when the uploader cannot merge.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "reupload_modes": {
+            "description": "How a re-uploaded CSV may be applied to this uploader's existing rows. The uploader lists them with `reupload_modes` in its config, and an empty list means none is offered. While the `bulk_uploader_reupload_modes` flag is off only `replace` is listed.",
+            "items": {
+              "enum": [
+                "replace",
+                "merge_or_add",
+                "merge_only",
+                "append"
+              ],
+              "type": "string"
+            },
+            "type": "array"
           },
           "server_metadata": {
             "description": "Metadata only Remote sets for the import job, for example whether it is a self-serve job",
@@ -1120,6 +1145,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             },
             "name": "import-foobars",
             "processed_count": 0,
+            "reupload_merge_fields": [],
+            "reupload_modes": [
+              "replace",
+              "append"
+            ],
             "stage": "submission",
             "status": "finished",
             "total_count": 100,

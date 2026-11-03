@@ -4946,7 +4946,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "423a49e3-9c84-4a38-877a-13ec789525e5",
+            "example": "9b08f925-56c4-4a5d-bed6-e1c4e74223b2",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5252,7 +5252,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "44b46ee5-5f21-4b46-b9cb-876fa1b8e2f6",
+            "example": "34cf2c66-994a-40fc-ae14-e937eecdd283",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5345,7 +5345,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "34d6f727-63f5-4b90-85be-cdcc2f827474",
+            "example": "1a3a0675-cb6a-4172-817e-7856f07d151f",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5429,7 +5429,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "35883c8d-f86e-48e3-84be-89a1833e4dd3",
+            "example": "c25ece06-0f32-4133-8f52-7e69651b86b5",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5525,7 +5525,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "036a224f-e13e-4e9e-b7d6-fd943accd620",
+            "example": "b5bd4bdd-562f-463f-8b28-d21ce5309281",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5535,7 +5535,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "eff0d4f8-ac1c-4a08-951c-bf9f5b8ec1d1",
+            "example": "e637238b-bcab-42f8-8e80-fca2e1b2c6f4",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5744,7 +5744,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "51b2cec1-7ba1-4726-9186-1b28dfe0b49c",
+            "example": "598d6c6a-9d84-489b-8e59-d47b5f25f514",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5820,7 +5820,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "6c7b5f41-ed66-4888-99c1-d60353a2d67b",
+            "example": "bac3686b-4c42-4c96-874c-125f0de20238",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13838,7 +13838,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "3e0bfbc9-3df6-4d4f-a2ff-838f355a4412",
+            "example": "afed3f4c-d3ca-41e1-88ea-c70f6dcc72e3",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -16716,7 +16716,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "recurring_incentive"
           }
         ],
         "responses": {
@@ -16800,7 +16801,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "incentive"
           }
         ],
         "responses": {
@@ -16882,7 +16884,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "incentive"
           }
         ],
         "requestBody": {
@@ -16985,7 +16988,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "incentive"
           }
         ],
         "responses": {
@@ -17077,7 +17081,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "incentive"
           }
         ],
         "requestBody": {
@@ -18561,7 +18566,7 @@
     "/v1/pay-items": {
       "get": {
         "deprecated": false,
-        "description": "Lists pay items for a company with optional filtering by employment, legal entity, date range, and pagination.\nRecurring pay items are not included; the monthly payments generated from them are.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |",
+        "description": "Lists pay items for a company with optional filtering by employment, legal entity, date range, and pagination.\nNeither recurring pay items nor the payments generated from them are included.\nRemote still pays those payments, and a one-off pay item is paid in addition to the payments generated for the same period.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |",
         "operationId": "get_v1_pay-items",
         "parameters": [
           {
@@ -18710,7 +18715,7 @@
     "/v1/pay-items/bulk": {
       "post": {
         "deprecated": false,
-        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\nAn item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.\nWhen that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.\nWhen more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item.\nWithin one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.\nAn item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nEach item must supply exactly one of `code` or `external_import_code` to identify the pay element.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nPay codes that use a pay item custom configuration, such as a company car, describe it under `custom_configuration` in GET /v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes. Send its values in the pay item's `custom_configuration`, with the same `key`.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\nAn item whose `partner_external_id` the integration already holds on a live pay item of the company updates that pay item under the same rules as `PATCH`, and any other item creates a new pay item.\nWhen that pay item belongs to another employment or pay code, the item fails with `partner_external_id_held_by_other_pay_item` instead.\nWhen pay items generated from a recurring pay item hold the value, the item fails with `partner_external_id_held_by_generated_pay_item`, naming them. Clear its `partner_external_id` with `PATCH` to use the value again; when it has more than one live version, contact Remote support.\nWhen more than one live pay item holds the value, the item fails with `partner_external_id_ambiguous`, unless it already fails for its employment or its pay code, or because the value is held by a recurring pay item or a payment generated from one.\nWithin one request each `partner_external_id` may appear once, and `null` or an empty string fails the item.\nAn item without `partner_external_id` always creates a new pay item, so sending it again creates a duplicate.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "post_v1_pay-items_bulk",
         "requestBody": {
           "content": {
@@ -18794,7 +18799,7 @@
     "/v1/pay-items/{id}": {
       "delete": {
         "deprecated": false,
-        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", so a retried delete never removes anything else.\nDeleting a pay item frees its `partner_external_id`, so a later pay item can take the value.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Archives a pay item. Cannot delete pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nAny `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, is accepted and archives its current version, except for payments generated from a recurring pay item, which return 422. A pay item that was already deleted returns 404 with the message \"Pay item not found because it was deleted\", or 422 when it was a payment generated from a recurring pay item, so a retried delete never removes anything else.\nDeleting a pay item frees its `partner_external_id`, so a later pay item can take the value.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\nRecurring pay items and the payments generated from them cannot be updated or deleted through this API and return 422.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item or a payment generated from one (422), then a pay item with more than one live version (422).\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "delete_v1_pay-items_id",
         "parameters": [
           {
@@ -18886,7 +18891,7 @@
       },
       "patch": {
         "deprecated": false,
-        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version, so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\".\nSend `partner_external_id` to set or change the calling integration's own reference code, or `null` or an empty string to clear it. An edit that creates a new `id` keeps the value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nThe one change allowed on a pay item linked to a payroll adjustment, a salary pay item, one created from an external source or one whose payroll run is no longer in preparation is clearing `partner_external_id`: a request whose only field is `partner_external_id`, sent as `null` or an empty string, clears it and leaves the pay item itself unchanged. Setting a value on such a pay item is refused, so the clear can't be undone, and a bulk item sent again with the cleared value creates a new pay item. A clear still gets the not found, recurring, more than one live version and \"is not available\" refusals; any pay item they allow accepts it, including one dated after the employment's termination date.\nRecurring pay items cannot be updated or deleted through this API and return 422. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item (422), then a pay item with more than one live version (422).\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
+        "description": "Updates a pay item. Only the fields provided are changed. Editing `amount` or `effective_date` archives the existing pay item and creates a new one with a new `id`. Any `id` this API returned for a pay item edited through `PATCH`, including every entry of `replaced_ids`, keeps working and resolves to its current version (except for payments generated from a recurring pay item, which return 422), so storing the new id is strongly advised but not necessary; `replaced_ids` in the response lists the earlier ids for integrations that track changes. A deleted pay item (no live version left) returns 404 with the message \"Pay item not found because it was deleted\". A deleted payment generated from a recurring pay item returns 422 instead, unless the request only clears `partner_external_id`.\nSend `partner_external_id` to set or change the calling integration's own reference code, or `null` or an empty string to clear it. An edit that creates a new `id` keeps the value on the new version.\nSee [Your own IDs on Remote records](https://developer.remote.com/docs/your-own-ids-on-remote-records).\nCannot update pay items linked to a payroll adjustment, salary pay items, pay items automatically created from an external source, pay items whose payroll run is no longer in preparation, or pay items with more than one live version.\nThe one change allowed on a pay item linked to a payroll adjustment, a salary pay item, one created from an external source, a payment generated from a recurring pay item or one whose payroll run is no longer in preparation is clearing `partner_external_id`: a request whose only field is `partner_external_id`, sent as `null` or an empty string, clears it and leaves the pay item itself unchanged. Setting a value on such a pay item is refused, so the clear can't be undone, and a bulk item sent again with the cleared value creates a new pay item. A clear still gets the not found, recurring, more than one live version and \"is not available\" refusals; any pay item they allow accepts it, including one dated after the employment's termination date.\nRecurring pay items cannot be updated or deleted through this API and return 422, and neither can the payments generated from them, except to clear `partner_external_id`.\nWhen more than one refusal applies, the first in this order is returned: an employment that isn't on Global Payroll (404 \"Pay item not found\"), a recurring pay item or a payment generated from one (422), then a pay item with more than one live version (422).\nWhen `custom_configuration` doesn't match the pay code's custom configuration, the 422 response is a parameter error with the same `code` bulk create returns: `custom_configuration_not_used`, `custom_configuration_required` or `invalid_custom_configuration`, and the `param` at fault.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Company-scoped access token (assertion) | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n| Customer API token | Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |",
         "operationId": "patch_v1_pay-items_id",
         "parameters": [
           {
@@ -19799,7 +19804,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "payslip"
           }
         ],
         "responses": {
@@ -19924,7 +19930,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "payslip"
           }
         ],
         "responses": {
@@ -20906,7 +20913,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -21770,7 +21778,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -21855,7 +21864,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "employment_request"
           }
         ],
         "responses": {
@@ -28548,11 +28558,11 @@
                 "secondary_reports",
                 "direct_reports",
                 "employment_countries",
-                "direct_and_indirect_reports",
-                "employment_departments",
-                "employment_company_structure_nodes",
                 "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "direct_and_indirect_reports",
+                "assigned_billing_legal_entities",
+                "employment_departments",
+                "employment_company_structure_nodes"
               ],
               "example": "all",
               "nullable": false,
@@ -31042,6 +31052,11 @@
           },
           "name": "import-foobars",
           "processed_count": 0,
+          "reupload_merge_fields": [],
+          "reupload_modes": [
+            "replace",
+            "append"
+          ],
           "stage": "submission",
           "status": "finished",
           "total_count": 100,
@@ -31353,6 +31368,26 @@
             "description": "The number of processed rows, regardless of success or failure",
             "type": "integer"
           },
+          "reupload_merge_fields": {
+            "description": "Row-data fields this uploader matches on when a re-uploaded CSV is merged into the draft. Empty when the uploader cannot merge.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "reupload_modes": {
+            "description": "How a re-uploaded CSV may be applied to this uploader's existing rows. The uploader lists them with `reupload_modes` in its config, and an empty list means none is offered. While the `bulk_uploader_reupload_modes` flag is off only `replace` is listed.",
+            "items": {
+              "enum": [
+                "replace",
+                "merge_or_add",
+                "merge_only",
+                "append"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
           "server_metadata": {
             "description": "Metadata only Remote sets for the import job, for example whether it is a self-serve job",
             "type": "object"
@@ -31513,6 +31548,11 @@
             },
             "name": "import-foobars",
             "processed_count": 0,
+            "reupload_merge_fields": [],
+            "reupload_modes": [
+              "replace",
+              "append"
+            ],
             "stage": "submission",
             "status": "finished",
             "total_count": 100,
@@ -44654,6 +44694,13 @@
           "row_errors": {
             "type": "object"
           },
+          "row_level_errors": {
+            "description": "The row's errors outside the requested `column_fields`, then its submission errors unless the row is successful or imported (those rows keep the submission errors of an earlier failed submit). Only present when the rows were requested with `row_level_errors=true`.",
+            "items": {
+              "$ref": "#/components/schemas/ImportJobRowError"
+            },
+            "type": "array"
+          },
           "row_number": {
             "type": "integer"
           },
@@ -45494,7 +45541,7 @@
                   ],
                   "type": "object"
                 },
-                "description": "Per-column error and valid row counts across all rows, keyed by the column's field path",
+                "description": "Per-column error and valid row counts, keyed by the column's field path. Counts every row that is not deleted or skipped, or only the rows in `filter[status]` when it is given. `counts_by_status` always counts the whole job",
                 "type": "object"
               },
               "counts_by_status": {
@@ -52100,7 +52147,7 @@
             "type": "string"
           },
           "id": {
-            "description": "Pay item's unique identifier. Editing `amount` or `effective_date` creates a new version with a new `id`; every `id` this API returned for a pay item edited through `PATCH` keeps working on `PATCH` and `DELETE` and resolves to the current version. A monthly payment generated from a recurring pay item can be regenerated with a new `id` when the recurring item changes; its old `id` then returns 404.\n",
+            "description": "Pay item's unique identifier. Editing `amount` or `effective_date` creates a new version with a new `id`; every `id` this API returned for a pay item edited through `PATCH` keeps working on `PATCH` and `DELETE` and resolves to the current version, except for a payment generated from a recurring pay item, which returns 422.\n",
             "format": "uuid",
             "type": "string"
           },
@@ -52169,7 +52216,7 @@
         },
         "properties": {
           "error": {
-            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's. An item with a `partner_external_id` can also fail with `partner_external_id_not_available`, `partner_external_id_blank`, `partner_external_id_repeated_in_request`, `partner_external_id_ambiguous` or `partner_external_id_held_by_other_pay_item` (as `code`/`message`), with the errors `PATCH` returns when the matched pay item cannot be updated, or with `errors.partner_external_id` when the value is refused.",
+            "description": "Failure reason. Includes `employment_not_global_payroll` when the provided employment is not Global Payroll, `pay_item_code_not_allowed` / `pay_item_external_import_code_not_allowed` when the given identifier does not resolve to an allowed pay element, and `effective_date_after_termination_date` (as a `code`/`message` pair) when a `time_attendance` pay item's `effective_date` falls after the employment's termination date. It also includes `custom_configuration_required`, `custom_configuration_not_used` and `invalid_custom_configuration` (as `code`/`message`/`param`) when the pay item's `custom_configuration` doesn't match the pay code's. An item with a `partner_external_id` can also fail with `partner_external_id_not_available`, `partner_external_id_blank`, `partner_external_id_repeated_in_request`, `partner_external_id_ambiguous`, `partner_external_id_held_by_other_pay_item` or `partner_external_id_held_by_generated_pay_item` (as `code`/`message`), with the errors `PATCH` returns when the matched pay item cannot be updated, or with `errors.partner_external_id` when the value is refused.",
             "oneOf": [
               {
                 "type": "string"
