@@ -198,6 +198,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",
+                  "request_idempotency_in_progress",
+                  "request_idempotency_key_reused",
                   "resource_not_supported_for_country"
                 ],
                 "type": "string"

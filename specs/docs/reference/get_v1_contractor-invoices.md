@@ -1002,7 +1002,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "b5bd4bdd-562f-463f-8b28-d21ce5309281",
+            "example": "abb042b0-6ac0-4525-87e9-47a66cbe5bb7",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -1012,7 +1012,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "e637238b-bcab-42f8-8e80-fca2e1b2c6f4",
+            "example": "bd9241d9-fcda-494a-be41-2c41a26caeec",
             "in": "query",
             "name": "employment_id",
             "required": false,

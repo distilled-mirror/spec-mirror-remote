@@ -1621,7 +1621,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "import_job"
           }
         ],
         "responses": {
@@ -1695,7 +1696,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "import_job"
           },
           {
             "description": "Starts fetching records after the given page",
@@ -4946,7 +4948,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "9b08f925-56c4-4a5d-bed6-e1c4e74223b2",
+            "example": "3c0525c5-ba69-433a-bd9b-8e9dc4d2718a",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5252,7 +5254,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "34cf2c66-994a-40fc-ae14-e937eecdd283",
+            "example": "f09f9982-deb6-4099-a388-2640af724af3",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5345,7 +5347,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "1a3a0675-cb6a-4172-817e-7856f07d151f",
+            "example": "689ef972-fc0d-4908-ae63-3de546bffd74",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5429,7 +5431,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c25ece06-0f32-4133-8f52-7e69651b86b5",
+            "example": "5aee8ef0-c39f-4df2-a36e-cfc53f0c472c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5525,7 +5527,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "b5bd4bdd-562f-463f-8b28-d21ce5309281",
+            "example": "abb042b0-6ac0-4525-87e9-47a66cbe5bb7",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5535,7 +5537,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "e637238b-bcab-42f8-8e80-fca2e1b2c6f4",
+            "example": "bd9241d9-fcda-494a-be41-2c41a26caeec",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5744,7 +5746,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "598d6c6a-9d84-489b-8e59-d47b5f25f514",
+            "example": "760c73dc-17cc-4939-9a0b-669d3d4d866d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5820,7 +5822,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "bac3686b-4c42-4c96-874c-125f0de20238",
+            "example": "d0cc6b70-35c5-4dc1-ba5a-c8d2ecbc9a6a",
             "in": "path",
             "name": "id",
             "required": true,
@@ -9699,7 +9701,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "file"
           }
         ],
         "responses": {
@@ -13838,7 +13841,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "afed3f4c-d3ca-41e1-88ea-c70f6dcc72e3",
+            "example": "d941b27f-3423-4f16-b3de-a760560446e4",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -15358,7 +15361,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "expense"
           }
         ],
         "responses": {
@@ -15473,7 +15477,7 @@
     "/v1/expenses/{expense_id}/receipts/{receipt_id}": {
       "get": {
         "deprecated": false,
-        "description": "Download a receipt by id.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n| Company-scoped access token (assertion) | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n| Customer API token | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |",
+        "description": "Download a receipt by id. The id must be one of the expense's receipts or its document scan; any other file returns 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n| Company-scoped access token (assertion) | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n| Customer API token | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |",
         "operationId": "get_v1_expenses_expense_id_receipts_receipt_id",
         "parameters": [
           {
@@ -15484,7 +15488,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "expense"
           },
           {
             "description": "The receipt ID",
@@ -15494,7 +15499,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "expense_receipt"
           }
         ],
         "responses": {
@@ -15912,7 +15918,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "file"
           }
         ],
         "responses": {
@@ -19298,7 +19305,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "payroll_run"
           }
         ],
         "responses": {
@@ -19363,7 +19371,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "payroll_run"
           },
           {
             "description": "Starts fetching records after the given page",
@@ -21418,6 +21427,102 @@
           }
         },
         "summary": "Reassign default legal entity",
+        "tags": [
+          "Sandbox"
+        ]
+      }
+    },
+    "/v1/sandbox/companies/{company_id}/feature-flags": {
+      "get": {
+        "deprecated": false,
+        "description": "Lists the feature flags that change how the Remote API behaves for a company, whether each is\non, and what it changes. Use it to see why a flow behaves the way it does in Sandbox, for\nexample why contractors are invited without the pricing plan and contract details steps.\n\n`applies_to` says who a flag's state is for: `company` flags can differ between companies and\nare evaluated for the company admin the API acts as (the token's user, or the company owner for\nan integration token); `environment` flags are the same for every company in the environment.\n\nOnly flags that change the public API are listed, and the list can change. A flag that is\nremoved no longer changes anything: its behaviour is then the same for every company, so check\nthe API changelog. The state in Sandbox doesn't tell you the state in production.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View companies (`company:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View companies (`company:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n| Customer API token | Manage company resources (`company_admin`) | View companies (`company:read`) | - |",
+        "operationId": "get_v1_sandbox_companies_company_id_feature-flags",
+        "parameters": [
+          {
+            "description": "Company ID",
+            "example": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+            "in": "path",
+            "name": "company_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "company"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureFlagsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "List feature flags",
         "tags": [
           "Sandbox"
         ]
@@ -43783,6 +43888,84 @@
         "title": "ExpenseResponse",
         "type": "object"
       },
+      "FeatureFlag": {
+        "additionalProperties": false,
+        "description": "A feature flag that changes how the Remote API behaves, and whether it is on.",
+        "example": {
+          "applies_to": "company",
+          "description": "Contractors created through the API are invited right away, so the pricing plan and contract details steps are skipped.",
+          "enabled": true,
+          "name": "remote_api_eligible_companies_auto_invitation"
+        },
+        "properties": {
+          "applies_to": {
+            "description": "`company`: the state is for the company in the path, evaluated for the company admin the API acts as (the token's user, or the company owner for an integration token), and can differ between companies. `environment`: the state is the same for every company in this environment.",
+            "enum": [
+              "company",
+              "environment"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "description": "What the flag changes in the Remote API when it is on.",
+            "type": "string"
+          },
+          "enabled": {
+            "description": "Whether the API acts as if the flag is on, in Sandbox. It doesn't tell you the flag's state in production. For the two job title check flags, at most one is on: the check mode the company gets, which is off when its integration may skip the check.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "The flag's name. It doesn't change while the flag exists.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "enabled",
+          "applies_to",
+          "description"
+        ],
+        "title": "FeatureFlag",
+        "type": "object"
+      },
+      "FeatureFlagsResponse": {
+        "additionalProperties": false,
+        "description": "The feature flags that change the Remote API for a company, sorted by name.",
+        "example": {
+          "data": {
+            "feature_flags": [
+              {
+                "applies_to": "company",
+                "description": "Contractors created through the API are invited right away, so the pricing plan and contract details steps are skipped.",
+                "enabled": true,
+                "name": "remote_api_eligible_companies_auto_invitation"
+              }
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "additionalProperties": false,
+            "properties": {
+              "feature_flags": {
+                "items": {
+                  "$ref": "#/components/schemas/FeatureFlag"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "feature_flags"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "FeatureFlagsResponse",
+        "type": "object"
+      },
       "File": {
         "additionalProperties": false,
         "description": "A file associated with an employment, such as a contract, tax document, or identity document.",
@@ -55329,6 +55512,8 @@
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",
+                  "request_idempotency_in_progress",
+                  "request_idempotency_key_reused",
                   "resource_not_supported_for_country"
                 ],
                 "type": "string"

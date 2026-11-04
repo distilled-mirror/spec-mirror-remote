@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 425,
+  "count": 426,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -1121,6 +1121,11 @@
       "page": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id_resignation-letter",
       "markdown": "https://developer.remote.com/reference/get_v1_resignations_offboarding_request_id_resignation-letter.md",
       "file": "reference/get_v1_resignations_offboarding_request_id_resignation-letter.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/get_v1_sandbox_companies_company_id_feature-flags",
+      "markdown": "https://developer.remote.com/reference/get_v1_sandbox_companies_company_id_feature-flags.md",
+      "file": "reference/get_v1_sandbox_companies_company_id_feature-flags.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_scim_v2_groups",
