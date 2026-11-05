@@ -45,7 +45,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "document_constraints_ack_at": "2024-01-15T10:30:00Z",
           "freeze_employment_data": true,
           "name": "Master Service Agreement",
-          "needs_constraints_ack": false,
+          "needs_constraints_ack": true,
           "redlining_help_email": "redlining-help@remote.com",
           "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "status": "awaiting_signatures",
@@ -66,7 +66,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "string"
           },
           "document_constraints_ack_at": {
-            "description": "Timestamp when the customer acknowledged the constraints (if any).",
+            "description": "Timestamp when the customer acknowledged the constraints, if they have.",
             "format": "date-time",
             "nullable": true,
             "type": "string"
@@ -81,7 +81,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "string"
           },
           "needs_constraints_ack": {
-            "description": "Whether the customer must acknowledge the hiring constraints of the country before creating a document.",
+            "description": "Whether the customer must acknowledge the hiring constraints of the country before creating a document. Acknowledge them with `POST .../pre-onboarding-requirements/:requirement_slug/acknowledge`, taking the acknowledgement requirement's slug from `GET .../pre-onboarding-requirements`.",
             "type": "boolean"
           },
           "redlining_help_email": {
@@ -151,7 +151,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               "document_constraints_ack_at": "2024-01-15T10:30:00Z",
               "freeze_employment_data": true,
               "name": "Master Service Agreement",
-              "needs_constraints_ack": false,
+              "needs_constraints_ack": true,
               "redlining_help_email": "redlining-help@remote.com",
               "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "status": "awaiting_signatures",

@@ -996,7 +996,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "responses": {

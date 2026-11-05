@@ -394,7 +394,7 @@
         "operationId": "get_v1_adp_subscription-cancellations",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,
@@ -448,7 +448,7 @@
         "operationId": "get_v1_adp_subscription-changes",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,
@@ -502,7 +502,7 @@
         "operationId": "get_v1_adp_subscription-orders",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,
@@ -556,7 +556,7 @@
         "operationId": "get_v1_adp_subscription-status",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,
@@ -610,7 +610,7 @@
         "operationId": "get_v1_adp_user-assignments",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,
@@ -664,7 +664,7 @@
         "operationId": "get_v1_adp_user-unassignments",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,
@@ -4948,7 +4948,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "3c0525c5-ba69-433a-bd9b-8e9dc4d2718a",
+            "example": "8ee11c96-7520-4a16-aed1-c12c48d6f794",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5254,13 +5254,14 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "f09f9982-deb6-4099-a388-2640af724af3",
+            "example": "7e060d75-e926-4ba4-ad63-d722d43fb33f",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "scheduled_contractor_invoice"
           }
         ],
         "responses": {
@@ -5347,13 +5348,14 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "689ef972-fc0d-4908-ae63-3de546bffd74",
+            "example": "dfde344c-2e23-4f06-ace8-add062f21962",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "scheduled_contractor_invoice"
           }
         ],
         "requestBody": {
@@ -5431,13 +5433,14 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "5aee8ef0-c39f-4df2-a36e-cfc53f0c472c",
+            "example": "adb56bba-7888-4163-9da4-198b563067e7",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "scheduled_contractor_invoice"
           }
         ],
         "requestBody": {
@@ -5527,7 +5530,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "abb042b0-6ac0-4525-87e9-47a66cbe5bb7",
+            "example": "46306d17-53aa-4967-ac93-651d90d99cc1",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5537,7 +5540,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "bd9241d9-fcda-494a-be41-2c41a26caeec",
+            "example": "b35918b2-1ccc-4358-b5dc-5e98dd5e4248",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5746,7 +5749,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "760c73dc-17cc-4939-9a0b-669d3d4d866d",
+            "example": "d441908f-1cd3-4417-b059-f052da9dc819",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5822,7 +5825,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "d0cc6b70-35c5-4dc1-ba5a-c8d2ecbc9a6a",
+            "example": "771d0c36-621c-49c8-95b5-6c0d28db91a0",
             "in": "path",
             "name": "id",
             "required": true,
@@ -11279,7 +11282,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -11373,7 +11377,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -11469,7 +11474,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timeoff"
           }
         ],
         "requestBody": {
@@ -13841,7 +13847,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "d941b27f-3423-4f16-b3de-a760560446e4",
+            "example": "e7bc42e9-b461-4260-9982-02bb2c50db5d",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -25016,7 +25022,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timesheet"
           }
         ],
         "responses": {
@@ -25081,7 +25088,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timesheet"
           }
         ],
         "responses": {
@@ -25146,7 +25154,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "timesheet"
           }
         ],
         "requestBody": {
@@ -25354,7 +25363,8 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "responses": {
@@ -25417,7 +25427,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "requestBody": {
@@ -25491,7 +25502,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "requestBody": {
@@ -26123,7 +26135,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "responses": {
@@ -26176,7 +26189,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "requestBody": {
@@ -26250,7 +26264,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "mobility_request"
           }
         ],
         "requestBody": {
@@ -28662,12 +28677,12 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "employment_countries",
-                "onboarding_reports",
                 "direct_and_indirect_reports",
-                "assigned_billing_legal_entities",
+                "employment_countries",
                 "employment_departments",
-                "employment_company_structure_nodes"
+                "employment_company_structure_nodes",
+                "onboarding_reports",
+                "assigned_billing_legal_entities"
               ],
               "example": "all",
               "nullable": false,
@@ -44050,10 +44065,12 @@
         },
         "properties": {
           "constraints_ack_at": {
-            "description": "Timestamp when the customer acknowledged the hiring constraints. Required when the requirement has `needs_constraints_ack: true`.",
+            "deprecated": true,
+            "description": "**Deprecated — accepted and ignored.** Acknowledge the hiring constraints with `POST .../pre-onboarding-requirements/:requirement_slug/acknowledge` before creating the document, taking the slug from `GET .../pre-onboarding-requirements`.",
             "format": "date-time",
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-remote-ignored": true
           },
           "pre_onboarding_document_requirement_slug": {
             "description": "Slug of the pre-onboarding document requirement to fulfil. Obtain this from the `GET .../pre-onboarding-document-requirements` endpoint.",
@@ -46437,7 +46454,7 @@
               "document_constraints_ack_at": "2024-01-15T10:30:00Z",
               "freeze_employment_data": true,
               "name": "Master Service Agreement",
-              "needs_constraints_ack": false,
+              "needs_constraints_ack": true,
               "redlining_help_email": "redlining-help@remote.com",
               "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "status": "awaiting_signatures",
@@ -53742,7 +53759,7 @@
           "document_constraints_ack_at": "2024-01-15T10:30:00Z",
           "freeze_employment_data": true,
           "name": "Master Service Agreement",
-          "needs_constraints_ack": false,
+          "needs_constraints_ack": true,
           "redlining_help_email": "redlining-help@remote.com",
           "slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "status": "awaiting_signatures",
@@ -53763,7 +53780,7 @@
             "type": "string"
           },
           "document_constraints_ack_at": {
-            "description": "Timestamp when the customer acknowledged the constraints (if any).",
+            "description": "Timestamp when the customer acknowledged the constraints, if they have.",
             "format": "date-time",
             "nullable": true,
             "type": "string"
@@ -53778,7 +53795,7 @@
             "type": "string"
           },
           "needs_constraints_ack": {
-            "description": "Whether the customer must acknowledge the hiring constraints of the country before creating a document.",
+            "description": "Whether the customer must acknowledge the hiring constraints of the country before creating a document. Acknowledge them with `POST .../pre-onboarding-requirements/:requirement_slug/acknowledge`, taking the acknowledgement requirement's slug from `GET .../pre-onboarding-requirements`.",
             "type": "boolean"
           },
           "redlining_help_email": {

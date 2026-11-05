@@ -306,7 +306,7 @@ This endpoint requires the following token type:
         "operationId": "get_v1_adp_subscription-status",
         "parameters": [
           {
-            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch.",
+            "description": "URL ADP provides to fetch the event payload from. Absent for ADP's own connectivity/test calls, which are acked without a fetch. An address Remote already received for an order, change, cancel or notice event is acknowledged with the same success answer, without being fetched or applied again.",
             "in": "query",
             "name": "eventUrl",
             "required": false,

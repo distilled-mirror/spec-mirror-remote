@@ -854,13 +854,14 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "689ef972-fc0d-4908-ae63-3de546bffd74",
+            "example": "dfde344c-2e23-4f06-ace8-add062f21962",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/UuidSlug"
-            }
+            },
+            "x-resource-type": "scheduled_contractor_invoice"
           }
         ],
         "requestBody": {

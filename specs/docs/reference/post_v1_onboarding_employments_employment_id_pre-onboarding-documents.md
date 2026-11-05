@@ -250,10 +250,12 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         },
         "properties": {
           "constraints_ack_at": {
-            "description": "Timestamp when the customer acknowledged the hiring constraints. Required when the requirement has `needs_constraints_ack: true`.",
+            "deprecated": true,
+            "description": "**Deprecated — accepted and ignored.** Acknowledge the hiring constraints with `POST .../pre-onboarding-requirements/:requirement_slug/acknowledge` before creating the document, taking the slug from `GET .../pre-onboarding-requirements`.",
             "format": "date-time",
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "x-remote-ignored": true
           },
           "pre_onboarding_document_requirement_slug": {
             "description": "Slug of the pre-onboarding document requirement to fulfil. Obtain this from the `GET .../pre-onboarding-document-requirements` endpoint.",
