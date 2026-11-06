@@ -1573,14 +1573,14 @@
       "file": "reference/post_v1_cost-calculator_estimation-pdf.md"
     },
     {
+      "page": "https://developer.remote.com/reference/post_v1_currency-converter",
+      "markdown": "https://developer.remote.com/reference/post_v1_currency-converter.md",
+      "file": "reference/post_v1_currency-converter.md"
+    },
+    {
       "page": "https://developer.remote.com/reference/post_v1_currency-converter_effective",
       "markdown": "https://developer.remote.com/reference/post_v1_currency-converter_effective.md",
       "file": "reference/post_v1_currency-converter_effective.md"
-    },
-    {
-      "page": "https://developer.remote.com/reference/post_v1_currency-converter_effective-2",
-      "markdown": "https://developer.remote.com/reference/post_v1_currency-converter_effective-2.md",
-      "file": "reference/post_v1_currency-converter_effective-2.md"
     },
     {
       "page": "https://developer.remote.com/reference/post_v1_currency-converter_raw",

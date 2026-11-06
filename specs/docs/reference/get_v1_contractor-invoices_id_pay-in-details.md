@@ -1008,7 +1008,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "771d0c36-621c-49c8-95b5-6c0d28db91a0",
+            "example": "308bc71e-e2a2-463f-8d9d-32cb4ded8429",
             "in": "path",
             "name": "id",
             "required": true,

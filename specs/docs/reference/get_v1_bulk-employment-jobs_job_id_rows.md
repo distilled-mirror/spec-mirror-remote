@@ -1156,6 +1156,10 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               "current_page": {
                 "type": "integer"
               },
+              "match_count": {
+                "description": "Find-and-replace occurrences across all filtered rows, independent of pagination. Returned when include_match_count is true and replace_path and replace_value are provided. Exact matches and empty values count once per cell",
+                "type": "integer"
+              },
               "ordered_rows": {
                 "items": {
                   "type": "integer"
