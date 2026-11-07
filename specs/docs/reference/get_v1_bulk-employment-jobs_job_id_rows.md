@@ -107,8 +107,19 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "object"
           },
           "metadata": {
-            "description": "Row metadata. For login-email-selection-enabled imports (e.g. EOR bulk invite), each reviewed row carries a `login_email_signals` object with the per-row login-email review signals.",
+            "description": "Row metadata. For login-email-selection-enabled imports (e.g. EOR bulk invite), each reviewed row carries a `login_email_signals` object with the per-row login-email review signals. For bulk Global Payroll invitations, a sent row carries `invite_outcome`.",
             "properties": {
+              "invite_outcome": {
+                "description": "Bulk Global Payroll invitations only: what the row's employee was sent. `already_onboarded` means they were already on the platform, so nothing was due.",
+                "enum": [
+                  "invited",
+                  "conversion_completed",
+                  "reminder_sent",
+                  "notification_sent",
+                  "already_onboarded"
+                ],
+                "type": "string"
+              },
               "login_email_signals": {
                 "description": "Per-row review-step signals for login email selection, present only when the feature is enabled. `sso_enforced` reflects whether SSO login is enforced for the row's category. `personal` and `work` report, for each provided email, whether it is already registered on another account.",
                 "example": {

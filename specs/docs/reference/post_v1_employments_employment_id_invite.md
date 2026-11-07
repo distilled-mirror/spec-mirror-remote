@@ -249,6 +249,23 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         ],
         "title": "ParameterError",
         "type": "object"
+      },
+      "ForbiddenResponse": {
+        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
+        "example": {
+          "message": "Forbidden"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Forbidden",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ForbiddenResponse",
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -624,6 +641,16 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
               }
             },
             "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "409": {
             "content": {
