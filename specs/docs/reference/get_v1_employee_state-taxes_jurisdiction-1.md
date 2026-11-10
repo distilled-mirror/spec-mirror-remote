@@ -1,12 +1,17 @@
 ---
-updatedAt: 2026-05-27T21:29:57.000Z
+updatedAt: 2026-11-09T14:04:17.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
 
-# List Employee Leave Policies
+# Show employee state taxes
 
-List the leave policies for the current employee
+Returns the authenticated employee's saved US state tax withholding answers for a
+single jurisdiction (e.g. `NY`), keyed like that jurisdiction's
+`global_payroll_state_taxes` form so they can pre-fill it. `state_taxes` is `null`
+when nothing has been saved yet.
+
+Returns a 404 when the employment has no state tax form for the jurisdiction.
 
 ## Authentication
 
@@ -21,8 +26,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
 
 | Token type | Category | Read only Scope | Write only Scope (read access implicit) |
 |---|---|---|---|
-| Employee-scoped access token | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
-| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+| Employee-scoped access token | Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_detail:write`) |
+| Company-scoped access token | Manage employments (`employments`) | View personal details (`personal_detail:read`) | - |
 
 # OpenAPI definition
 
@@ -30,30 +35,27 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
 {
   "components": {
     "schemas": {
-      "ListLeavePoliciesDetailsResponse": {
-        "description": "Response schema for listing leave policies details",
-        "example": {
-          "data": [
-            {
-              "custom": true,
-              "leave_policy_variant_id": "123e4567-e89b-12d3-a456-426614174000",
-              "name": "Self-Care",
-              "uses_accrual_as_balance": false
-            }
-          ]
-        },
+      "ActionError": {
         "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/LeavePolicyDetails"
-            },
-            "type": "array"
+          "action": {
+            "description": "The action that lead to the error message.",
+            "type": "string"
+          },
+          "code": {
+            "description": "An error code that describes the nature of the error.",
+            "type": "string"
+          },
+          "message": {
+            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
+            "type": "string"
           }
         },
         "required": [
-          "data"
+          "code",
+          "message",
+          "action"
         ],
-        "title": "ListLeavePoliciesDetailsResponse",
+        "title": "ActionError",
         "type": "object"
       },
       "NotFoundResponse": {
@@ -71,102 +73,109 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "title": "NotFoundResponse",
         "type": "object"
       },
-      "LeavePolicyDetails": {
-        "additionalProperties": false,
-        "description": "Leave Policy Details",
+      "UnprocessableEntityResponse": {
+        "anyOf": [
+          {
+            "properties": {
+              "errors": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "errors"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "message": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ParameterError"
+                  },
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/ParameterError"
+                    },
+                    "title": "ParameterErrors",
+                    "type": "array"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ActionError"
+                  },
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/ActionError"
+                    },
+                    "title": "ActionErrors",
+                    "type": "array"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "message"
+            ],
+            "type": "object"
+          }
+        ],
         "example": {
-          "custom": true,
-          "leave_policy_variant_id": "123e4567-e89b-12d3-a456-426614174000",
-          "name": "Self-Care",
-          "uses_accrual_as_balance": false
+          "errors": {
+            "some_field": [
+              "is invalid"
+            ]
+          }
+        },
+        "title": "UnprocessableEntityResponse",
+        "type": "object"
+      },
+      "EmployeeStateTaxesResponse": {
+        "description": "The authenticated employee's saved US state tax answers for one jurisdiction.\n",
+        "example": {
+          "data": {
+            "state_taxes": {
+              "allowances": 2,
+              "extra_withholding": 50,
+              "filing_status": "Single"
+            }
+          }
         },
         "properties": {
-          "custom": {
-            "example": true,
-            "type": "boolean"
-          },
-          "leave_policy_variant_id": {
-            "anyOf": [
-              {
-                "example": "123e4567-e89b-12d3-a456-426614174000",
-                "format": "uuid",
-                "type": "string"
-              },
-              {
-                "description": "The type of leave a time off record or leave policy represents.\n\nResponses may return any of these values. The set is a superset of the values\naccepted when creating a time off record (see `TimeoffType`): employments on the newer leave-type model can hold leave types that are not bookable by name.\n",
-                "enum": [
-                  "time_off",
-                  "sick_leave",
-                  "public_holiday",
-                  "unpaid_leave",
-                  "extended_leave",
-                  "in_lieu_time",
-                  "maternity_leave",
-                  "paternity_leave",
-                  "parental_leave",
-                  "bereavement",
-                  "military_leave",
-                  "other",
-                  "paid_time_off",
-                  "custom_company_leave",
-                  "rtt",
-                  "casual_leave",
-                  "rol",
-                  "ex_festivita",
-                  "civic_duty",
-                  "adoption",
-                  "caregiver",
-                  "transfer",
-                  "exam",
-                  "monkhood",
-                  "marriage",
-                  "sterilization",
-                  "celebration",
-                  "blood_donation",
-                  "health_day",
-                  "special",
-                  "career",
-                  "study",
-                  "voluntary",
-                  "adv",
-                  "public_duties",
-                  "force_majeure",
-                  "medical_visits",
-                  "marriage_child",
-                  "breastfeeding",
-                  "maternity_paid",
-                  "maternity_unpaid",
-                  "paternity_paid",
-                  "paternity_unpaid",
-                  "pregnancy_leave",
-                  "business_trip_eu",
-                  "business_trip_non_eu",
-                  "training",
-                  "sustainable_employability"
-                ],
-                "example": "sick_leave",
-                "title": "ResponseTimeoffType",
-                "type": "string"
+          "data": {
+            "properties": {
+              "state_taxes": {
+                "description": "The saved answers, keyed like the jurisdiction's `global_payroll_state_taxes` form, so\n                   they can be used as its initial values. `null` when nothing has been saved yet.",
+                "nullable": true,
+                "type": "object"
               }
+            },
+            "required": [
+              "state_taxes"
             ],
-            "description": "The ID of the leave policy variant"
-          },
-          "name": {
-            "example": "Self-Care",
-            "type": "string"
-          },
-          "uses_accrual_as_balance": {
-            "description": "Whether leave balance is determined by accruals",
-            "example": false,
-            "type": "boolean"
+            "type": "object"
           }
         },
         "required": [
-          "leave_policy_variant_id",
-          "custom",
-          "name"
+          "data"
         ],
-        "title": "LeavePolicyDetails",
+        "title": "EmployeeStateTaxesResponse",
+        "type": "object"
+      },
+      "TooManyRequestsResponse": {
+        "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
+        "example": {
+          "message": "Too many requests"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Too many requests",
+            "type": "string"
+          }
+        },
+        "title": "TooManyRequestsResponse",
         "type": "object"
       },
       "UnauthorizedResponse": {
@@ -184,6 +193,51 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "message"
         ],
         "title": "UnauthorizedResponse",
+        "type": "object"
+      },
+      "ParameterError": {
+        "example": {
+          "code": "invalid_param",
+          "message": "Invalid parameter",
+          "param": "employment_id"
+        },
+        "properties": {
+          "code": {
+            "description": "An error code that describes the nature of the error.",
+            "type": "string"
+          },
+          "message": {
+            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
+            "type": "string"
+          },
+          "param": {
+            "description": "The parameter that lead to the error message.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "param"
+        ],
+        "title": "ParameterError",
+        "type": "object"
+      },
+      "ForbiddenResponse": {
+        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
+        "example": {
+          "message": "Forbidden"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Forbidden",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ForbiddenResponse",
         "type": "object"
       }
     },
@@ -442,24 +496,36 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
     }
   },
   "info": {
-    "title": "Time & Attendance",
+    "title": "Employee Actions",
     "version": "2.0.0"
   },
   "openapi": "3.1.0",
   "paths": {
-    "/v1/employee/leave-policies": {
+    "/v1/employee/state-taxes/{jurisdiction}": {
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "List the leave policies for the current employee\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |",
-        "operationId": "get_v1_employee_leave-policies",
-        "parameters": [],
+        "description": "Returns the authenticated employee's saved US state tax withholding answers for a\nsingle jurisdiction (e.g. `NY`), keyed like that jurisdiction's\n`global_payroll_state_taxes` form so they can pre-fill it. `state_taxes` is `null`\nwhen nothing has been saved yet.\n\nReturns a 404 when the employment has no state tax form for the jurisdiction.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_detail:write`) |\n| Company-scoped access token | Manage employments (`employments`) | View personal details (`personal_detail:read`) | - |",
+        "operationId": "get_v1_employee_state-taxes_jurisdiction",
+        "parameters": [
+          {
+            "description": "Two-letter US state/jurisdiction code",
+            "example": "NY",
+            "in": "path",
+            "name": "jurisdiction",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-safe": true
+          }
+        ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListLeavePoliciesDetailsResponse"
+                  "$ref": "#/components/schemas/EmployeeStateTaxesResponse"
                 }
               }
             },
@@ -475,6 +541,16 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             },
             "description": "Unauthorized"
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
           "404": {
             "content": {
               "application/json": {
@@ -484,12 +560,32 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               }
             },
             "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
           }
         },
         "security": [
           {
             "OAuth2Assertion": [
-              "timeoff:read"
+              "personal_detail:read"
             ]
           },
           {
@@ -504,12 +600,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "OAuth2AuthorizationCode": [
-              "https://gateway.remote.com/employment.manage"
-            ]
-          },
-          {
-            "OAuth2AuthorizationCode": [
-              "timeoff:read"
+              "personal_detail:read"
             ]
           },
           {
@@ -523,9 +614,9 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             ]
           }
         ],
-        "summary": "List Employee Leave Policies",
+        "summary": "Show employee state taxes",
         "tags": [
-          "Leave Policies"
+          "Employee State Taxes"
         ]
       }
     }
@@ -544,558 +635,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       "url": "https://gateway.remote-sandbox.com/",
       "variables": {}
     }
-  ],
-  "webhooks": {
-    "timeoff.approved": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff is set as approved.",
-        "operationId": "timeoff.approved",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.approved",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.approved",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.canceled": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff has status changed to cancelled.",
-        "operationId": "timeoff.canceled",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.canceled",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.canceled",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.cancellation_requested": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when an approved timeoff cancellation is requested.",
-        "operationId": "timeoff.cancellation_requested",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.cancellation_requested",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.cancellation_requested",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.date_changed": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff has its date changed.",
-        "operationId": "timeoff.date_changed",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.date_changed",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.date_changed",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.declined": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff is declined",
-        "operationId": "timeoff.declined",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.declined",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.declined",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.requested": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff is requested",
-        "operationId": "timeoff.requested",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.requested",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.requested",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.started": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff has started.",
-        "operationId": "timeoff.started",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.started",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.started",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.taken": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff is set as taken.",
-        "operationId": "timeoff.taken",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.taken",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.taken",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timeoff.updated": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timeoff is updated.",
-        "operationId": "timeoff.updated",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timeoff.updated",
-                  "timeoff_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timeoff_id": {
-                    "description": "The unique identifier of the related time off record.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timeoff_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timeoff.updated",
-        "tags": [
-          "Time Off"
-        ]
-      }
-    },
-    "timesheet.submitted": {
-      "post": {
-        "deprecated": false,
-        "description": "This event is triggered when a timesheet is submitted by an employee",
-        "operationId": "timesheet.submitted",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "example": {
-                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
-                  "employment_id": "2614f814-b08e-4c8e-8c4d-ddbcc4692d99",
-                  "event_type": "timesheet.submitted",
-                  "timesheet_id": "0073fcb5-b669-4e4a-b963-2a47744e75a1"
-                },
-                "properties": {
-                  "company_id": {
-                    "description": "The unique identifier of the related company.",
-                    "type": "string"
-                  },
-                  "employment_id": {
-                    "description": "The unique identifier of the related employment.",
-                    "type": "string"
-                  },
-                  "event_type": {
-                    "description": "The webhook event type identifier.",
-                    "type": "string"
-                  },
-                  "timesheet_id": {
-                    "description": "The unique identifier of the related timesheet.",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "timesheet_id",
-                  "employment_id",
-                  "event_type",
-                  "company_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "2XX": {
-            "description": "Any 200 response confirms that the webhook was delivered."
-          }
-        },
-        "security": [],
-        "summary": "timesheet.submitted",
-        "tags": [
-          "Timesheets"
-        ]
-      }
-    }
-  }
+  ]
 }
 ```

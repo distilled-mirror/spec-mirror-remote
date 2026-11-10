@@ -125,6 +125,9 @@
       "name": "Employee Files"
     },
     {
+      "name": "Employee Leave Policies"
+    },
+    {
       "name": "Employee Personal Details"
     },
     {
@@ -4948,7 +4951,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "da83f83c-e6fb-451a-8715-c3d54e036c45",
+            "example": "59576b53-609a-44ed-b727-8d1e53ac048b",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5254,7 +5257,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "59cc001c-a6b2-4c37-8661-58d579f99280",
+            "example": "ff4fe6f6-3737-4164-84d6-34db4c1e9634",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5348,7 +5351,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "db76ac1a-eeeb-404f-8e28-6a00392e2dc3",
+            "example": "40573b4a-d7b4-4e99-a692-2882f1b8fc17",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5433,7 +5436,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "3cc18632-a3d2-406e-a4ae-f420cbd0c6e1",
+            "example": "a3d7b3ec-fad2-4918-bdee-ca49bd8a8d0e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5530,7 +5533,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "85e059f7-2645-46cb-950c-145b0bcec079",
+            "example": "e936e24a-1ed0-4f6c-b5f6-5cbe2f05e2b5",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5540,7 +5543,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "c46423b5-e19e-4dea-8baa-fc9e675cf74f",
+            "example": "51fa159f-9d8c-47e5-8ee8-2381bece43fe",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5749,7 +5752,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "d39cea6c-0ffe-4b2f-8afb-15bc3bd5debf",
+            "example": "0a783b13-50a6-48ab-8c76-cfacd5aa9ce6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5825,7 +5828,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "151b3f7d-2f36-413e-925e-4fd7600137a3",
+            "example": "7e2bd38a-c62f-464a-9580-2800e5fa03f4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -10438,7 +10441,7 @@
         },
         "summary": "List Employee Leave Policies",
         "tags": [
-          "Leave Policies"
+          "Employee Leave Policies"
         ]
       }
     },
@@ -10481,7 +10484,7 @@
         },
         "summary": "List Employee Leave Policies Summary",
         "tags": [
-          "Leave Policies"
+          "Employee Leave Policies"
         ]
       }
     },
@@ -13867,7 +13870,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "09011401-d983-4cfc-bfe8-eb3421dcd305",
+            "example": "b0ffdbc5-7585-4f89-9cfc-c5d7359ff701",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -51152,6 +51155,13 @@
             "title": "URL",
             "type": "string"
           },
+          "redacted_fields": {
+            "description": "Names of fields redacted because the caller lacks the required attribute permission",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "slug": {
             "$ref": "#/components/schemas/Slug"
           },
@@ -55569,8 +55579,8 @@
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
-                  "parameter_required_missing",
                   "parameter_one_of_required_missing",
+                  "parameter_required_missing",
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",

@@ -866,6 +866,13 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "title": "URL",
             "type": "string"
           },
+          "redacted_fields": {
+            "description": "Names of fields redacted because the caller lacks the required attribute permission",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "slug": {
             "$ref": "#/components/schemas/Slug"
           },

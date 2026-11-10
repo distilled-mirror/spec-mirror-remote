@@ -738,14 +738,14 @@
       "file": "reference/get_v1_direct-offboardings.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_address",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_address.md",
-      "file": "reference/get_v1_employee_address.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_address-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_address-1.md",
+      "file": "reference/get_v1_employee_address-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_bank-account",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_bank-account.md",
-      "file": "reference/get_v1_employee_bank-account.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_bank-account-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_bank-account-1.md",
+      "file": "reference/get_v1_employee_bank-account-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_current",
@@ -753,19 +753,19 @@
       "file": "reference/get_v1_employee_current.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_documents",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_documents.md",
-      "file": "reference/get_v1_employee_documents.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_documents_id-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_documents_id-1.md",
+      "file": "reference/get_v1_employee_documents_id-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_documents_id",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_documents_id.md",
-      "file": "reference/get_v1_employee_documents_id.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_documents-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_documents-1.md",
+      "file": "reference/get_v1_employee_documents-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_emergency-contact",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_emergency-contact.md",
-      "file": "reference/get_v1_employee_emergency-contact.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_emergency-contact-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_emergency-contact-1.md",
+      "file": "reference/get_v1_employee_emergency-contact-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_expense-categories",
@@ -778,9 +778,9 @@
       "file": "reference/get_v1_employee_expenses.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_federal-taxes",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_federal-taxes.md",
-      "file": "reference/get_v1_employee_federal-taxes.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_federal-taxes-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_federal-taxes-1.md",
+      "file": "reference/get_v1_employee_federal-taxes-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_incentives",
@@ -788,14 +788,14 @@
       "file": "reference/get_v1_employee_incentives.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_leave-policies",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_leave-policies.md",
-      "file": "reference/get_v1_employee_leave-policies.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_leave-policies_summary-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_leave-policies_summary-1.md",
+      "file": "reference/get_v1_employee_leave-policies_summary-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_leave-policies_summary",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_leave-policies_summary.md",
-      "file": "reference/get_v1_employee_leave-policies_summary.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_leave-policies-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_leave-policies-1.md",
+      "file": "reference/get_v1_employee_leave-policies-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_payslip-files",
@@ -808,9 +808,9 @@
       "file": "reference/get_v1_employee_payslips.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_personal-details",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_personal-details.md",
-      "file": "reference/get_v1_employee_personal-details.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_personal-details-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_personal-details-1.md",
+      "file": "reference/get_v1_employee_personal-details-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_personal-information",
@@ -818,14 +818,14 @@
       "file": "reference/get_v1_employee_personal-information.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_state-taxes_jurisdiction",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_state-taxes_jurisdiction.md",
-      "file": "reference/get_v1_employee_state-taxes_jurisdiction.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_state-taxes_jurisdiction-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_state-taxes_jurisdiction-1.md",
+      "file": "reference/get_v1_employee_state-taxes_jurisdiction-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_employee_timeoff",
-      "markdown": "https://developer.remote.com/reference/get_v1_employee_timeoff.md",
-      "file": "reference/get_v1_employee_timeoff.md"
+      "page": "https://developer.remote.com/reference/get_v1_employee_timeoff-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_employee_timeoff-1.md",
+      "file": "reference/get_v1_employee_timeoff-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_employee_timesheets",
@@ -1338,14 +1338,14 @@
       "file": "reference/patch_v1_custom-fields_custom_field_id_values_employment_id-2.md"
     },
     {
-      "page": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id",
-      "markdown": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id.md",
-      "file": "reference/patch_v1_employee_timeoff_id.md"
+      "page": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-1",
+      "markdown": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-1.md",
+      "file": "reference/patch_v1_employee_timeoff_id-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-2",
-      "markdown": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-2.md",
-      "file": "reference/patch_v1_employee_timeoff_id-2.md"
+      "page": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-2-1",
+      "markdown": "https://developer.remote.com/reference/patch_v1_employee_timeoff_id-2-1.md",
+      "file": "reference/patch_v1_employee_timeoff_id-2-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/patch_v1_employments_employment_id",
@@ -1598,9 +1598,9 @@
       "file": "reference/post_v1_documents.md"
     },
     {
-      "page": "https://developer.remote.com/reference/post_v1_employee_documents",
-      "markdown": "https://developer.remote.com/reference/post_v1_employee_documents.md",
-      "file": "reference/post_v1_employee_documents.md"
+      "page": "https://developer.remote.com/reference/post_v1_employee_documents-1",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_documents-1.md",
+      "file": "reference/post_v1_employee_documents-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/post_v1_employee_expenses",
@@ -1608,14 +1608,14 @@
       "file": "reference/post_v1_employee_expenses.md"
     },
     {
-      "page": "https://developer.remote.com/reference/post_v1_employee_timeoff",
-      "markdown": "https://developer.remote.com/reference/post_v1_employee_timeoff.md",
-      "file": "reference/post_v1_employee_timeoff.md"
+      "page": "https://developer.remote.com/reference/post_v1_employee_timeoff_id_cancel-1",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_timeoff_id_cancel-1.md",
+      "file": "reference/post_v1_employee_timeoff_id_cancel-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/post_v1_employee_timeoff_id_cancel",
-      "markdown": "https://developer.remote.com/reference/post_v1_employee_timeoff_id_cancel.md",
-      "file": "reference/post_v1_employee_timeoff_id_cancel.md"
+      "page": "https://developer.remote.com/reference/post_v1_employee_timeoff-1",
+      "markdown": "https://developer.remote.com/reference/post_v1_employee_timeoff-1.md",
+      "file": "reference/post_v1_employee_timeoff-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/post_v1_employments",
@@ -1888,34 +1888,34 @@
       "file": "reference/put_v1_companies_company_id_legal-entities_legal_entity_id_administrative-details.md"
     },
     {
-      "page": "https://developer.remote.com/reference/put_v1_employee_address",
-      "markdown": "https://developer.remote.com/reference/put_v1_employee_address.md",
-      "file": "reference/put_v1_employee_address.md"
+      "page": "https://developer.remote.com/reference/put_v1_employee_address-1",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_address-1.md",
+      "file": "reference/put_v1_employee_address-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/put_v1_employee_bank-account",
-      "markdown": "https://developer.remote.com/reference/put_v1_employee_bank-account.md",
-      "file": "reference/put_v1_employee_bank-account.md"
+      "page": "https://developer.remote.com/reference/put_v1_employee_bank-account-1",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_bank-account-1.md",
+      "file": "reference/put_v1_employee_bank-account-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/put_v1_employee_emergency-contact",
-      "markdown": "https://developer.remote.com/reference/put_v1_employee_emergency-contact.md",
-      "file": "reference/put_v1_employee_emergency-contact.md"
+      "page": "https://developer.remote.com/reference/put_v1_employee_emergency-contact-1",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_emergency-contact-1.md",
+      "file": "reference/put_v1_employee_emergency-contact-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/put_v1_employee_federal-taxes",
-      "markdown": "https://developer.remote.com/reference/put_v1_employee_federal-taxes.md",
-      "file": "reference/put_v1_employee_federal-taxes.md"
+      "page": "https://developer.remote.com/reference/put_v1_employee_federal-taxes-1",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_federal-taxes-1.md",
+      "file": "reference/put_v1_employee_federal-taxes-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/put_v1_employee_personal-details",
-      "markdown": "https://developer.remote.com/reference/put_v1_employee_personal-details.md",
-      "file": "reference/put_v1_employee_personal-details.md"
+      "page": "https://developer.remote.com/reference/put_v1_employee_personal-details-1",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_personal-details-1.md",
+      "file": "reference/put_v1_employee_personal-details-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction",
-      "markdown": "https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction.md",
-      "file": "reference/put_v1_employee_state-taxes_jurisdiction.md"
+      "page": "https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction-1",
+      "markdown": "https://developer.remote.com/reference/put_v1_employee_state-taxes_jurisdiction-1.md",
+      "file": "reference/put_v1_employee_state-taxes_jurisdiction-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/put_v1_employments_employment_id_basic-information",
