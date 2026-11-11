@@ -157,7 +157,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       },
       "EmploymentDocument": {
         "additionalProperties": false,
-        "description": "Employment document file",
+        "description": "Employment document file. `null` when there is no document to share with you.",
         "example": {
           "id": "f4e2f1fe-2056-4d9f-b9e0-ea322b781eb7",
           "inserted_at": "2021-01-01T00:00:00Z",

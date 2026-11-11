@@ -4951,7 +4951,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "59576b53-609a-44ed-b727-8d1e53ac048b",
+            "example": "84d4528c-67a9-4e15-9fff-fe9d5e5e9130",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5257,7 +5257,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ff4fe6f6-3737-4164-84d6-34db4c1e9634",
+            "example": "3e3d3bc6-3766-4231-b86b-78d33f29b27b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5351,7 +5351,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "40573b4a-d7b4-4e99-a692-2882f1b8fc17",
+            "example": "94597485-5529-473d-937c-4560ede7473d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5436,7 +5436,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a3d7b3ec-fad2-4918-bdee-ca49bd8a8d0e",
+            "example": "9f333295-3579-4f6f-a3f6-5c951e52d051",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5533,7 +5533,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "e936e24a-1ed0-4f6c-b5f6-5cbe2f05e2b5",
+            "example": "204e9a13-f5d0-4deb-a4b3-7aec0ed234b7",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5543,7 +5543,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "51fa159f-9d8c-47e5-8ee8-2381bece43fe",
+            "example": "6b64b16d-032e-4bdc-b70f-17c943123836",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5752,7 +5752,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0a783b13-50a6-48ab-8c76-cfacd5aa9ce6",
+            "example": "0a2f0e2c-c5e7-40ac-ae3b-6b37fe63259c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5828,7 +5828,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "7e2bd38a-c62f-464a-9580-2800e5fa03f4",
+            "example": "eb95a6d5-5b5a-4cc6-af0b-c5135c80e4dd",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13870,7 +13870,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "b0ffdbc5-7585-4f89-9cfc-c5d7359ff701",
+            "example": "446b94e6-89c4-4e8f-89e9-cac1088581b1",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -21474,7 +21474,7 @@
     "/v1/sandbox/companies/{company_id}/feature-flags": {
       "get": {
         "deprecated": false,
-        "description": "Lists the feature flags that change how the Remote API behaves for a company, whether each is\non, and what it changes. Use it to see why a flow behaves the way it does in Sandbox, for\nexample why contractors are invited without the pricing plan and contract details steps.\n\n`applies_to` says who a flag's state is for: `company` flags can differ between companies;\n`environment` flags are the same for every company in the environment. The other `company` flags are\nevaluated for the company admin the API acts as (the token's user, or the company owner for an\nintegration token). The two `job_title_eligibility_check_*` flags are set per company instead,\nand are not evaluated for the admin.\n\nOnly flags that change the public API are listed, and the list can change. A flag that is\nremoved no longer changes anything: its behaviour is then the same for every company, so check\nthe API changelog. The state in Sandbox doesn't tell you the state in production.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View companies (`company:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View companies (`company:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n| Customer API token | Manage company resources (`company_admin`) | View companies (`company:read`) | - |",
+        "description": "Lists the feature flags that change how the Remote API behaves for a company, whether each is\non, and what it changes. Use it to see why a flow behaves the way it does in Sandbox, for\nexample why contractors are invited without the pricing plan and contract details steps.\n\n`applies_to` says who a flag's state is for: `company` flags can differ between companies;\n`environment` flags are the same for every company in the environment. The two\n`job_title_eligibility_check_*` flags are set per company instead, and are not evaluated for the\ncaller. Any other `company` flag that depends on the caller is evaluated for the token's user with\na Company-scoped access token (either kind) or a Customer API token. A Client credentials access\ntoken has no user, so it gets the company owner's state, for reference only: the endpoints these\nflags change don't accept that token, so use one of the other tokens to see the state for its user.\n\nOnly flags that change the public API are listed, and the list can change. A flag that is\nremoved no longer changes anything: its behaviour is then the same for every company, so check\nthe API changelog. The state in Sandbox doesn't tell you the state in production.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View companies (`company:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View companies (`company:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n| Customer API token | Manage company resources (`company_admin`) | View companies (`company:read`) | - |",
         "operationId": "get_v1_sandbox_companies_company_id_feature-flags",
         "parameters": [
           {
@@ -23227,7 +23227,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "department"
           }
         ],
         "responses": {
@@ -23385,7 +23386,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "user_employment"
           }
         ],
         "responses": {
@@ -41904,7 +41906,7 @@
       },
       "EmploymentDocument": {
         "additionalProperties": false,
-        "description": "Employment document file",
+        "description": "Employment document file. `null` when there is no document to share with you.",
         "example": {
           "id": "f4e2f1fe-2056-4d9f-b9e0-ea322b781eb7",
           "inserted_at": "2021-01-01T00:00:00Z",
@@ -43941,13 +43943,13 @@
         "description": "A feature flag that changes how the Remote API behaves, and whether it is on.",
         "example": {
           "applies_to": "company",
-          "description": "Contractors created through the API are invited right away, so the pricing plan and contract details steps are skipped.",
+          "description": "Contractors created through the API are invited right away, so the pricing plan and contract details steps are skipped. Creating a contractor needs a Company-scoped access token (either kind) or a Customer API token; for a Client credentials access token, the state shown is the company owner's, for reference only.",
           "enabled": true,
           "name": "remote_api_eligible_companies_auto_invitation"
         },
         "properties": {
           "applies_to": {
-            "description": "`company`: the state is for the company in the path and can differ between companies. The other company flags are evaluated for the company admin the API acts as (the token's user, or the company owner for an integration token). The two `job_title_eligibility_check_*` flags are set per company instead. `environment`: the state is the same for every company in this environment.",
+            "description": "`company`: the state is for the company in the path, and can differ between companies. The two `job_title_eligibility_check_*` flags are set per company instead. Any other flag that depends on the caller is evaluated for the token's user with a Company-scoped access token (either kind) or a Customer API token. A Client credentials access token has no user, so it gets the company owner's state, for reference only: the endpoints these flags change don't accept that token, so use one of the other tokens to see the state for its user. `environment`: the state is the same for every company in this environment.",
             "enum": [
               "company",
               "environment"
@@ -43984,7 +43986,7 @@
             "feature_flags": [
               {
                 "applies_to": "company",
-                "description": "Contractors created through the API are invited right away, so the pricing plan and contract details steps are skipped.",
+                "description": "Contractors created through the API are invited right away, so the pricing plan and contract details steps are skipped. Creating a contractor needs a Company-scoped access token (either kind) or a Customer API token; for a Client credentials access token, the state shown is the company owner's, for reference only.",
                 "enabled": true,
                 "name": "remote_api_eligible_companies_auto_invitation"
               }
@@ -44939,7 +44941,7 @@
             "type": "object"
           },
           "row_level_errors": {
-            "description": "The row's errors outside the requested `column_fields`, then its submission errors unless the row is successful or imported (those rows keep the submission errors of an earlier failed submit). Only present when the rows were requested with `row_level_errors=true`.",
+            "description": "The row's validation errors outside the requested `column_fields`, then its submission errors with no field name or for a field outside them, unless the row is successful or imported (those rows keep the submission errors of an earlier failed submit). Only present when the rows were requested with `row_level_errors=true`.",
             "items": {
               "$ref": "#/components/schemas/ImportJobRowError"
             },
@@ -45785,7 +45787,7 @@
                   ],
                   "type": "object"
                 },
-                "description": "Per-column error and valid row counts, keyed by the column's field path. Counts every row that is not deleted or skipped, or only the rows in `filter[status]` when it is given. `counts_by_status` always counts the whole job",
+                "description": "Per-column error and valid row counts, keyed by the column's field path. `error` counts each row once that has a field-level validation error or a current submission error with that field name; submission errors of successful and imported rows are not counted. Counts every row that is not deleted or skipped, or only the rows in `filter[status]` when it is given. `counts_by_status` always counts the whole job",
                 "type": "object"
               },
               "counts_by_status": {
@@ -55579,8 +55581,8 @@
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
-                  "parameter_one_of_required_missing",
                   "parameter_required_missing",
+                  "parameter_one_of_required_missing",
                   "parameter_too_many",
                   "parameter_unknown",
                   "parameter_map_empty",

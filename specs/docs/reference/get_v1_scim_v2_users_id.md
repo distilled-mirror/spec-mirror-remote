@@ -613,7 +613,8 @@ This endpoint accepts any one of the following token types:
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "user_employment"
           }
         ],
         "responses": {

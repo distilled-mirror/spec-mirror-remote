@@ -260,7 +260,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "object"
           },
           "row_level_errors": {
-            "description": "The row's errors outside the requested `column_fields`, then its submission errors unless the row is successful or imported (those rows keep the submission errors of an earlier failed submit). Only present when the rows were requested with `row_level_errors=true`.",
+            "description": "The row's validation errors outside the requested `column_fields`, then its submission errors with no field name or for a field outside them, unless the row is successful or imported (those rows keep the submission errors of an earlier failed submit). Only present when the rows were requested with `row_level_errors=true`.",
             "items": {
               "$ref": "#/components/schemas/ImportJobRowError"
             },
@@ -1121,7 +1121,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   ],
                   "type": "object"
                 },
-                "description": "Per-column error and valid row counts, keyed by the column's field path. Counts every row that is not deleted or skipped, or only the rows in `filter[status]` when it is given. `counts_by_status` always counts the whole job",
+                "description": "Per-column error and valid row counts, keyed by the column's field path. `error` counts each row once that has a field-level validation error or a current submission error with that field name; submission errors of successful and imported rows are not counted. Counts every row that is not deleted or skipped, or only the rows in `filter[status]` when it is given. `counts_by_status` always counts the whole job",
                 "type": "object"
               },
               "counts_by_status": {
