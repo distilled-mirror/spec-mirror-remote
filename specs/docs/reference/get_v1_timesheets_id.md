@@ -763,7 +763,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               "break",
               "unpaid_break",
               "time_off",
-              "public_holiday"
+              "public_holiday",
+              "top_up"
             ],
             "type": "string"
           },
