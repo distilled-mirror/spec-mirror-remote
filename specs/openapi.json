@@ -4951,7 +4951,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "d60b7493-6a97-4934-8c34-2ea66666496b",
+            "example": "060fcd9a-5b36-47da-b4ba-6bb2be52054d",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5257,7 +5257,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "48994e19-b01d-4d69-8363-096e6c5eb392",
+            "example": "848be615-a619-44da-9c24-3f39be8518a1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5351,7 +5351,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "b2b961d8-99af-4e06-acc1-1cce2f76446e",
+            "example": "c583df1d-49c1-4838-aab3-62eea7887832",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5436,7 +5436,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "33ffb52e-8c18-4e5b-8bc7-45ffd70003dd",
+            "example": "01d493af-7fb7-4bc8-a4dc-9eac0ea034ac",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5586,7 +5586,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "653c6f2b-23a2-433f-94e6-ee778748cf11",
+            "example": "3629f38a-cead-48ec-a4e8-7b29dffdf0ff",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5596,7 +5596,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "96cdc2ed-e348-4b24-a61b-8d5c82908c85",
+            "example": "7f205376-9c66-4473-9998-a7bdc978b05f",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5805,7 +5805,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "27ad5f95-0fdd-4da8-b1f4-763f02f99767",
+            "example": "964a8970-09de-404f-9705-db0c1afcdeb2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5881,7 +5881,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "a61fada8-9fa8-4011-84a3-b702ebcc49e9",
+            "example": "f87d849d-3613-491e-8019-ff98eed87017",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7066,7 +7066,7 @@
     "/v1/contractors/employments/{employment_id}/rates": {
       "get": {
         "deprecated": false,
-        "description": "Lists the rates configured for a contractor, whatever the origin of their contract: rates agreed\nthrough a Remote-managed services agreement and statement of work, and rates recorded by the\ncompany on its own paper, are returned in the same shape.\n\nWhat the response contains:\n\n- The **configured** rate — not amounts that were scheduled, invoiced, or paid.\n- The contractor's main rate, the one Show Employment returns as `contractor_rate`. It can belong\n  to a Statement of Work whose services have not started yet. When a Statement of Work established\n  it, its `service_start_date` says when it applies.\n- The rate of every signed Statement of Work that has not been replaced or ended, including one\n  whose services have not started. A Statement of Work past its planned end date keeps its rate\n  listed: the engagement continues month to month until it is replaced or ended.\n- Not listed: rates of replaced or ended Statements of Work other than the main rate, terms of an\n  unsigned Statement of Work, and a rate a later edit or signature replaced, unless a Statement of\n  Work still in force established it, in which case both the new and the original rate are listed.\n- The stored rate, even when the contractor's contract has already expired.\n\n`contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,\nnot where the rate came from; `service_start_date` and `service_end_date` describe the Statement\nof Work that established the rate and are null when none did. `type` and `pay_frequency` list\nevery value Remote stores; a new value is announced as an API change. See the field descriptions\nfor how each is derived.\n\nA contractor with no rate, and an employment that is not a contractor, both return an empty list.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |",
+        "description": "Lists the rates configured for a contractor, whatever the origin of their contract: rates agreed\nthrough a Remote-managed services agreement and statement of work, and rates recorded by the\ncompany on its own paper, are returned in the same shape.\n\nWhat the response contains:\n\n- The **configured** rate — not amounts that were scheduled, invoiced, or paid.\n- The contractor's main rate, the one Show Employment returns as `contractor_rate`. It can belong\n  to a Statement of Work whose services have not started yet. When a Statement of Work established\n  it, its `service_start_date` says when it applies.\n- The rate of every signed Statement of Work that has not been replaced or ended, including one\n  whose services have not started. A Statement of Work past its planned end date keeps its rate\n  listed: the engagement continues month to month until it is replaced or ended.\n- Not listed: rates of replaced or ended Statements of Work other than the main rate, terms of an\n  unsigned Statement of Work, and a rate a later edit or signature replaced, unless a Statement of\n  Work still in force established it, in which case both the new and the original rate are listed.\n- The stored rate, even when the contractor's contract has already expired.\n\n`contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,\nnot where the rate came from; `service_start_date` and `service_end_date` describe the Statement\nof Work that established the rate and are null when none did. `statement_of_work` identifies that\nStatement of Work and its signed document, and is null when none did. `type` and `pay_frequency` list\nevery value Remote stores; a new value is announced as an API change. See the field descriptions\nfor how each is derived.\n\nA contractor with no rate, and an employment that is not a contractor, both return an empty list.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |",
         "operationId": "get_v1_contractors_employments_employment_id_rates",
         "parameters": [
           {
@@ -13923,7 +13923,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "4eb076c1-d1d1-4bc8-8f76-8d65e74dbf56",
+            "example": "39578ed9-ec4d-4ff1-b2cf-0b19995acc5b",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -23176,7 +23176,7 @@
     "/v1/scim/v2/Groups": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Groups",
         "parameters": [
           {
@@ -23270,7 +23270,7 @@
     "/v1/scim/v2/Groups/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a single group (department) for the authenticated company by group ID\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a single group (department) for the authenticated company by group ID\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Groups_id",
         "parameters": [
           {
@@ -23335,7 +23335,7 @@
     "/v1/scim/v2/Users": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a list of users for the authenticated company following SCIM 2.0 standard\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a list of users for the authenticated company following SCIM 2.0 standard\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Users",
         "parameters": [
           {
@@ -23429,7 +23429,7 @@
     "/v1/scim/v2/Users/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a single user for the authenticated company by user ID\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a single user for the authenticated company by user ID\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Users_id",
         "parameters": [
           {
@@ -31553,6 +31553,41 @@
             "title": "AccountsUser",
             "type": "object"
           },
+          "last_reupload_summary": {
+            "description": "What the last merge or append did to the draft. Null after a replace, or while a newly uploaded file still waits for its columns to be matched. The counts stay until the next upload or replace: editing, deleting or fixing rows does not clear them.",
+            "nullable": true,
+            "properties": {
+              "added": {
+                "description": "Rows added below the existing ones.",
+                "type": "integer"
+              },
+              "merged": {
+                "description": "Rows that matched an existing row and were updated.",
+                "type": "integer"
+              },
+              "mode": {
+                "enum": [
+                  "merge_or_add",
+                  "merge_only",
+                  "append"
+                ],
+                "example": "merge_or_add",
+                "nullable": false,
+                "type": "string"
+              },
+              "skipped": {
+                "description": "Rows left out: no matching row in \"Update existing rows only\", or already imported.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "added",
+              "merged",
+              "mode",
+              "skipped"
+            ],
+            "type": "object"
+          },
           "legal_entity": {
             "nullable": true,
             "properties": {
@@ -31570,6 +31605,16 @@
             "type": "object"
           },
           "name": {
+            "type": "string"
+          },
+          "pending_reupload_mode": {
+            "description": "Set while the file of a merge or append waits for its columns to be matched, with `stage` at `column_mapping`. Null otherwise: it is cleared once the mapping is confirmed, and `last_reupload_summary` then carries the counts.",
+            "enum": [
+              "merge_or_add",
+              "merge_only",
+              "append"
+            ],
+            "nullable": true,
             "type": "string"
           },
           "processed_count": {
@@ -35174,6 +35219,11 @@
           "pay_frequency": "monthly",
           "service_end_date": null,
           "service_start_date": "2026-01-01",
+          "statement_of_work": {
+            "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+            "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+            "version": 1
+          },
           "type": "hourly"
         },
         "properties": {
@@ -35222,6 +35272,9 @@
             "nullable": true,
             "type": "string"
           },
+          "statement_of_work": {
+            "$ref": "#/components/schemas/ContractorRateStatementOfWork"
+          },
           "type": {
             "description": "The unit the amount is paid per.",
             "enum": [
@@ -35242,9 +35295,44 @@
           "contract_start_date",
           "contract_expiration_date",
           "service_start_date",
-          "service_end_date"
+          "service_end_date",
+          "statement_of_work"
         ],
         "title": "ContractorRate",
+        "type": "object"
+      },
+      "ContractorRateStatementOfWork": {
+        "description": "The Statement of Work that established the rate. Null when no Statement of Work record backs\nthe rate: a rate the company entered or edited itself, or a rate from a Statement of Work signed\nbefore Remote kept a record of each Statement of Work.\n\nWhen the company edits a rate after its Statement of Work is signed, the edit is listed as a new\nmain rate with a null `statement_of_work`, and the signed rate stays listed with its reference\nwhile that Statement of Work is in force. The main rate is listed whatever its Statement of\nWork's state, so its reference can name one that was later replaced or ended.\n\nA new version of a signed Statement of Work is a new record: its rate has a new `id` and a\n`version` one higher. The Statement of Work's name is on its document: read it from the contract\ndocuments endpoints with `contract_document_id`.\n",
+        "example": {
+          "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+          "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+          "version": 1
+        },
+        "nullable": true,
+        "properties": {
+          "contract_document_id": {
+            "description": "ID of the signed document that carries the Statement of Work, as the contract documents endpoints return it. For a Statement of Work inside a Contractor Services Agreement, the agreement's document.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier of this version of the Statement of Work. Edits made before signature keep it; each new version gets a new one.",
+            "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "format": "uuid",
+            "title": "ContractorRateStatementOfWorkID",
+            "type": "string"
+          },
+          "version": {
+            "description": "1 for a new Statement of Work, one higher for each new version that replaces it.",
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "contract_document_id"
+        ],
+        "title": "ContractorRateStatementOfWork",
         "type": "object"
       },
       "ContractorSubscriptionSummariesResponse": {
@@ -37933,7 +38021,7 @@
             "type": "object"
           },
           {
-            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both.",
+            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both. A field sent as `null` next to the other one is ignored, and sending both as `null` is the same as sending neither.",
             "oneOf": [
               {
                 "example": {
@@ -41009,6 +41097,12 @@
             "description": "Name of related department, if any. Otherwise, null.",
             "nullable": true,
             "type": "string"
+          },
+          "sow_rolled_over": {
+            "description": "Whether the Statement of Work (SOW) of an active Contractor of Record (COR) employment has rolled over.\nOnly present for contractor employments, and `null` unless the employment is an active COR employment.\n\n- `true`: the SOW is past its `expiration_date`. If the contractor keeps providing services, the SOW\n  continues month to month on the same terms until it is replaced or ended, so no new SOW is needed.\n  It is based on `expiration_date` and does not show whether services continue.\n- `false`: the SOW has not passed its `expiration_date` (it is still `false` on that date), or it has none.\n\nIt stays `true` while a termination is in progress. Before telling a contractor the SOW continues, check\n`GET /contractors/cor-termination-requests?employment_id={id}&status=initiated` or subscribe to the\n`employment.contractor_of_record_termination.initiated` webhook.\n",
+            "example": true,
+            "nullable": true,
+            "type": "boolean"
           },
           "manager_email": {
             "description": "The email address of the employee's manager. Null if no manager is assigned.",
@@ -48652,6 +48746,11 @@
                 "pay_frequency": "monthly",
                 "service_end_date": null,
                 "service_start_date": "2026-01-01",
+                "statement_of_work": {
+                  "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+                  "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+                  "version": 1
+                },
                 "type": "hourly"
               }
             ]
@@ -55779,9 +55878,9 @@
                   "action_unrecognized",
                   "action_invalid",
                   "resource_not_found",
+                  "parameter_value_invalid",
                   "parameter_invalid_date",
                   "resource_invalid_state",
-                  "parameter_value_invalid",
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
@@ -56183,6 +56282,11 @@
             "pay_frequency": "monthly",
             "service_end_date": null,
             "service_start_date": "2026-01-01",
+            "statement_of_work": {
+              "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+              "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+              "version": 1
+            },
             "type": "hourly"
           }
         },

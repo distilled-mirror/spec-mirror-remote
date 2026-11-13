@@ -173,6 +173,11 @@ This endpoint accepts any one of the following token types:
           "pay_frequency": "monthly",
           "service_end_date": null,
           "service_start_date": "2026-01-01",
+          "statement_of_work": {
+            "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+            "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+            "version": 1
+          },
           "type": "hourly"
         },
         "properties": {
@@ -221,6 +226,9 @@ This endpoint accepts any one of the following token types:
             "nullable": true,
             "type": "string"
           },
+          "statement_of_work": {
+            "$ref": "#/components/schemas/ContractorRateStatementOfWork"
+          },
           "type": {
             "description": "The unit the amount is paid per.",
             "enum": [
@@ -241,7 +249,8 @@ This endpoint accepts any one of the following token types:
           "contract_start_date",
           "contract_expiration_date",
           "service_start_date",
-          "service_end_date"
+          "service_end_date",
+          "statement_of_work"
         ],
         "title": "ContractorRate",
         "type": "object"
@@ -275,6 +284,40 @@ This endpoint accepts any one of the following token types:
           "unit": "major"
         }
       },
+      "ContractorRateStatementOfWork": {
+        "description": "The Statement of Work that established the rate. Null when no Statement of Work record backs\nthe rate: a rate the company entered or edited itself, or a rate from a Statement of Work signed\nbefore Remote kept a record of each Statement of Work.\n\nWhen the company edits a rate after its Statement of Work is signed, the edit is listed as a new\nmain rate with a null `statement_of_work`, and the signed rate stays listed with its reference\nwhile that Statement of Work is in force. The main rate is listed whatever its Statement of\nWork's state, so its reference can name one that was later replaced or ended.\n\nA new version of a signed Statement of Work is a new record: its rate has a new `id` and a\n`version` one higher. The Statement of Work's name is on its document: read it from the contract\ndocuments endpoints with `contract_document_id`.\n",
+        "example": {
+          "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+          "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+          "version": 1
+        },
+        "nullable": true,
+        "properties": {
+          "contract_document_id": {
+            "description": "ID of the signed document that carries the Statement of Work, as the contract documents endpoints return it. For a Statement of Work inside a Contractor Services Agreement, the agreement's document.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier of this version of the Statement of Work. Edits made before signature keep it; each new version gets a new one.",
+            "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "format": "uuid",
+            "title": "ContractorRateStatementOfWorkID",
+            "type": "string"
+          },
+          "version": {
+            "description": "1 for a new Statement of Work, one higher for each new version that replaces it.",
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "contract_document_id"
+        ],
+        "title": "ContractorRateStatementOfWork",
+        "type": "object"
+      },
       "TooManyRequestsResponse": {
         "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
         "example": {
@@ -307,6 +350,11 @@ This endpoint accepts any one of the following token types:
             "pay_frequency": "monthly",
             "service_end_date": null,
             "service_start_date": "2026-01-01",
+            "statement_of_work": {
+              "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+              "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+              "version": 1
+            },
             "type": "hourly"
           }
         },

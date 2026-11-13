@@ -607,6 +607,41 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "title": "AccountsUser",
             "type": "object"
           },
+          "last_reupload_summary": {
+            "description": "What the last merge or append did to the draft. Null after a replace, or while a newly uploaded file still waits for its columns to be matched. The counts stay until the next upload or replace: editing, deleting or fixing rows does not clear them.",
+            "nullable": true,
+            "properties": {
+              "added": {
+                "description": "Rows added below the existing ones.",
+                "type": "integer"
+              },
+              "merged": {
+                "description": "Rows that matched an existing row and were updated.",
+                "type": "integer"
+              },
+              "mode": {
+                "enum": [
+                  "merge_or_add",
+                  "merge_only",
+                  "append"
+                ],
+                "example": "merge_or_add",
+                "nullable": false,
+                "type": "string"
+              },
+              "skipped": {
+                "description": "Rows left out: no matching row in \"Update existing rows only\", or already imported.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "added",
+              "merged",
+              "mode",
+              "skipped"
+            ],
+            "type": "object"
+          },
           "legal_entity": {
             "nullable": true,
             "properties": {
@@ -624,6 +659,16 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "object"
           },
           "name": {
+            "type": "string"
+          },
+          "pending_reupload_mode": {
+            "description": "Set while the file of a merge or append waits for its columns to be matched, with `stage` at `column_mapping`. Null otherwise: it is cleared once the mapping is confirmed, and `last_reupload_summary` then carries the counts.",
+            "enum": [
+              "merge_or_add",
+              "merge_only",
+              "append"
+            ],
+            "nullable": true,
             "type": "string"
           },
           "processed_count": {

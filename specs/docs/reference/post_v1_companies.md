@@ -518,7 +518,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "type": "object"
           },
           {
-            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both.",
+            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both. A field sent as `null` next to the other one is ignored, and sending both as `null` is the same as sending neither.",
             "oneOf": [
               {
                 "example": {

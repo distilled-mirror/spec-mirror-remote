@@ -203,6 +203,12 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "nullable": true,
             "type": "string"
           },
+          "sow_rolled_over": {
+            "description": "Whether the Statement of Work (SOW) of an active Contractor of Record (COR) employment has rolled over.\nOnly present for contractor employments, and `null` unless the employment is an active COR employment.\n\n- `true`: the SOW is past its `expiration_date`. If the contractor keeps providing services, the SOW\n  continues month to month on the same terms until it is replaced or ended, so no new SOW is needed.\n  It is based on `expiration_date` and does not show whether services continue.\n- `false`: the SOW has not passed its `expiration_date` (it is still `false` on that date), or it has none.\n\nIt stays `true` while a termination is in progress. Before telling a contractor the SOW continues, check\n`GET /contractors/cor-termination-requests?employment_id={id}&status=initiated` or subscribe to the\n`employment.contractor_of_record_termination.initiated` webhook.\n",
+            "example": true,
+            "nullable": true,
+            "type": "boolean"
+          },
           "manager_email": {
             "description": "The email address of the employee's manager. Null if no manager is assigned.",
             "nullable": true,

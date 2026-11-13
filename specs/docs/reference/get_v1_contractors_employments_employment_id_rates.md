@@ -26,7 +26,8 @@ What the response contains:
 
 `contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,
 not where the rate came from; `service_start_date` and `service_end_date` describe the Statement
-of Work that established the rate and are null when none did. `type` and `pay_frequency` list
+of Work that established the rate and are null when none did. `statement_of_work` identifies that
+Statement of Work and its signed document, and is null when none did. `type` and `pay_frequency` list
 every value Remote stores; a new value is announced as an API change. See the field descriptions
 for how each is derived.
 
@@ -196,6 +197,11 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "pay_frequency": "monthly",
           "service_end_date": null,
           "service_start_date": "2026-01-01",
+          "statement_of_work": {
+            "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+            "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+            "version": 1
+          },
           "type": "hourly"
         },
         "properties": {
@@ -244,6 +250,9 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "nullable": true,
             "type": "string"
           },
+          "statement_of_work": {
+            "$ref": "#/components/schemas/ContractorRateStatementOfWork"
+          },
           "type": {
             "description": "The unit the amount is paid per.",
             "enum": [
@@ -264,7 +273,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "contract_start_date",
           "contract_expiration_date",
           "service_start_date",
-          "service_end_date"
+          "service_end_date",
+          "statement_of_work"
         ],
         "title": "ContractorRate",
         "type": "object"
@@ -297,6 +307,40 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "currency": "currency.code",
           "unit": "major"
         }
+      },
+      "ContractorRateStatementOfWork": {
+        "description": "The Statement of Work that established the rate. Null when no Statement of Work record backs\nthe rate: a rate the company entered or edited itself, or a rate from a Statement of Work signed\nbefore Remote kept a record of each Statement of Work.\n\nWhen the company edits a rate after its Statement of Work is signed, the edit is listed as a new\nmain rate with a null `statement_of_work`, and the signed rate stays listed with its reference\nwhile that Statement of Work is in force. The main rate is listed whatever its Statement of\nWork's state, so its reference can name one that was later replaced or ended.\n\nA new version of a signed Statement of Work is a new record: its rate has a new `id` and a\n`version` one higher. The Statement of Work's name is on its document: read it from the contract\ndocuments endpoints with `contract_document_id`.\n",
+        "example": {
+          "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+          "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+          "version": 1
+        },
+        "nullable": true,
+        "properties": {
+          "contract_document_id": {
+            "description": "ID of the signed document that carries the Statement of Work, as the contract documents endpoints return it. For a Statement of Work inside a Contractor Services Agreement, the agreement's document.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier of this version of the Statement of Work. Edits made before signature keep it; each new version gets a new one.",
+            "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+            "format": "uuid",
+            "title": "ContractorRateStatementOfWorkID",
+            "type": "string"
+          },
+          "version": {
+            "description": "1 for a new Statement of Work, one higher for each new version that replaces it.",
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "contract_document_id"
+        ],
+        "title": "ContractorRateStatementOfWork",
+        "type": "object"
       },
       "TooManyRequestsResponse": {
         "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
@@ -349,6 +393,11 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                 "pay_frequency": "monthly",
                 "service_end_date": null,
                 "service_start_date": "2026-01-01",
+                "statement_of_work": {
+                  "contract_document_id": "3a1c9b7e-5d2f-4a8b-8e6c-1f0d9b2a7c45",
+                  "id": "8d5f1a3e-2b7c-4e9a-9f61-0c3d2e4b5a69",
+                  "version": 1
+                },
                 "type": "hourly"
               }
             ]
@@ -750,7 +799,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Lists the rates configured for a contractor, whatever the origin of their contract: rates agreed\nthrough a Remote-managed services agreement and statement of work, and rates recorded by the\ncompany on its own paper, are returned in the same shape.\n\nWhat the response contains:\n\n- The **configured** rate — not amounts that were scheduled, invoiced, or paid.\n- The contractor's main rate, the one Show Employment returns as `contractor_rate`. It can belong\n  to a Statement of Work whose services have not started yet. When a Statement of Work established\n  it, its `service_start_date` says when it applies.\n- The rate of every signed Statement of Work that has not been replaced or ended, including one\n  whose services have not started. A Statement of Work past its planned end date keeps its rate\n  listed: the engagement continues month to month until it is replaced or ended.\n- Not listed: rates of replaced or ended Statements of Work other than the main rate, terms of an\n  unsigned Statement of Work, and a rate a later edit or signature replaced, unless a Statement of\n  Work still in force established it, in which case both the new and the original rate are listed.\n- The stored rate, even when the contractor's contract has already expired.\n\n`contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,\nnot where the rate came from; `service_start_date` and `service_end_date` describe the Statement\nof Work that established the rate and are null when none did. `type` and `pay_frequency` list\nevery value Remote stores; a new value is announced as an API change. See the field descriptions\nfor how each is derived.\n\nA contractor with no rate, and an employment that is not a contractor, both return an empty list.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |",
+        "description": "Lists the rates configured for a contractor, whatever the origin of their contract: rates agreed\nthrough a Remote-managed services agreement and statement of work, and rates recorded by the\ncompany on its own paper, are returned in the same shape.\n\nWhat the response contains:\n\n- The **configured** rate — not amounts that were scheduled, invoiced, or paid.\n- The contractor's main rate, the one Show Employment returns as `contractor_rate`. It can belong\n  to a Statement of Work whose services have not started yet. When a Statement of Work established\n  it, its `service_start_date` says when it applies.\n- The rate of every signed Statement of Work that has not been replaced or ended, including one\n  whose services have not started. A Statement of Work past its planned end date keeps its rate\n  listed: the engagement continues month to month until it is replaced or ended.\n- Not listed: rates of replaced or ended Statements of Work other than the main rate, terms of an\n  unsigned Statement of Work, and a rate a later edit or signature replaced, unless a Statement of\n  Work still in force established it, in which case both the new and the original rate are listed.\n- The stored rate, even when the contractor's contract has already expired.\n\n`contract_start_date` and `contract_expiration_date` describe the contract the rate is paid under,\nnot where the rate came from; `service_start_date` and `service_end_date` describe the Statement\nof Work that established the rate and are null when none did. `statement_of_work` identifies that\nStatement of Work and its signed document, and is null when none did. `type` and `pay_frequency` list\nevery value Remote stores; a new value is announced as an API change. See the field descriptions\nfor how each is derived.\n\nA contractor with no rate, and an employment that is not a contractor, both return an empty list.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |",
         "operationId": "get_v1_contractors_employments_employment_id_rates",
         "parameters": [
           {
