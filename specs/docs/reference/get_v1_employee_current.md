@@ -8,6 +8,10 @@ agentTools:
 
 Returns user and company information for the authenticated employee.
 
+Works while the employee is still onboarding, so it can confirm which employee a token
+belongs to before the employment is active. An offboarded employee gets 400, or 401 once
+their user account is closed.
+
 ## Authentication
 
 This endpoint accepts any one of the following token types:
@@ -43,6 +47,62 @@ This endpoint accepts any one of the following token types:
           "data"
         ],
         "title": "SuccessResponse",
+        "type": "object"
+      },
+      "TooManyRequestsResponse": {
+        "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
+        "example": {
+          "message": "Too many requests"
+        },
+        "properties": {
+          "message": {
+            "pattern": "Too many requests",
+            "type": "string"
+          }
+        },
+        "title": "TooManyRequestsResponse",
+        "type": "object"
+      },
+      "BadRequestResponse": {
+        "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
+        "example": {
+          "message": "invalid {resource}"
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "message": {
+                "description": "A human-readable error message describing what was wrong with the request.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "message": {
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "title": "BadRequestResponse",
         "type": "object"
       },
       "UnauthorizedResponse": {
@@ -344,7 +404,7 @@ This endpoint accepts any one of the following token types:
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Returns user and company information for the authenticated employee.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
+        "description": "Returns user and company information for the authenticated employee.\n\nWorks while the employee is still onboarding, so it can confirm which employee a token\nbelongs to before the employment is active. An offboarded employee gets 400, or 401 once\ntheir user account is closed.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).",
         "operationId": "get_v1_employee_current",
         "parameters": [],
         "responses": {
@@ -357,6 +417,16 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "401": {
             "content": {
@@ -377,6 +447,16 @@ This endpoint accepts any one of the following token types:
               }
             },
             "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequestsResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
           }
         },
         "security": [

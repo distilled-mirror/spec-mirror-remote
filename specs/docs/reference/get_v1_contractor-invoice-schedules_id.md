@@ -826,7 +826,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "848be615-a619-44da-9c24-3f39be8518a1",
+            "example": "d257ce24-f04c-4dbe-9b8a-896bbe37acea",
             "in": "path",
             "name": "id",
             "required": true,
@@ -905,7 +905,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Too Many Requests"
           }
         },
         "security": [

@@ -352,7 +352,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         },
         "properties": {
           "is_pending_primary_billing_contact": {
-            "description": "Whether this manager will become the primary billing contact once they have an active login",
+            "deprecated": true,
+            "description": "Deprecated. Always false.",
             "type": "boolean"
           },
           "is_primary_billing_contact": {

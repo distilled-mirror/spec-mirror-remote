@@ -6,8 +6,51 @@ agentTools:
 
 # Update a Company Manager's billing contact assignment
 
-Assigns or unassigns a Company Manager as the billing contact (primary or additional)
-for one or more legal entities.
+Replaces the legal entities a Company Manager is a billing contact for, among the
+legal entities the caller can change (see below). After the call they receive Remote
+invoices for the legal entities in `billing_contact_for`, each marked primary or not,
+and stop being a billing contact for the other legal entities the caller can change.
+Send an empty list to remove them from all of those (the company owner stays primary
+where no one else is, see below).
+
+- Making the manager primary replaces the legal entity's current primary contact.
+  Removing or demoting a primary contact is allowed: the company owner then receives
+  the invoices until someone else is made primary.
+- The company owner is the primary billing contact for every legal entity where no
+  one else is primary, whether or not they are listed. For the owner, listing such a
+  legal entity as primary changes nothing, and leaving it out does not remove them;
+  make someone else primary instead. Listing it as not primary adds the owner as a
+  regular contact there, and they stay primary until someone else is made primary.
+- The manager does not need permission to read billing, or a confirmed account, to be
+  added or made primary.
+- A newly added contact also receives contractor invoices, and removing a contact
+  stops both.
+- Contacts who only receive contractor invoices are not shown by this API and are
+  left unchanged, unless their legal entity is listed, in which case they also start
+  receiving Remote invoices.
+- Every listed legal entity must have an active billing account and appear only once.
+  A newly created legal entity's billing account may not be active yet; retry once it
+  is. Adding the manager to a legal entity that already has 15 invoice recipients,
+  counting ones this API doesn't show, also fails. Any of these returns 422 and
+  changes nothing.
+- The legal entities the caller can change are the ones the same caller's GET lists
+  that one of their roles with permission to update billing communications also
+  covers. Listing any other legal entity returns 404, and the call leaves the manager
+  as they are everywhere else, so sending back what GET returned never removes the
+  manager from a legal entity GET didn't show. If any of the caller's roles is
+  assigned to some legal entities only, the caller can change only those, even where
+  another of their roles covers the whole company. GET can still list legal entities
+  this call refuses: ones no role with permission to update billing communications
+  covers, and, on integrations that don't limit callers to the legal entities they
+  can access, any legal entity outside those roles or outside a role assigned to some
+  legal entities. A caller with no role that can read team members can change no
+  legal entity: an empty list changes nothing, and any other list returns 404.
+  Changing a deleted manager returns 404.
+  Deleting the manager is still refused while they are primary for any legal entity,
+  including ones the caller can't see.
+
+Requires permission to update billing communications. If your integration checks
+callers' roles, it also requires permission to update team members.
 
 ## Authentication
 
@@ -41,7 +84,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         },
         "properties": {
           "is_primary_billing_contact": {
-            "description": "Whether this manager is the primary billing contact for the legal entity",
+            "description": "Whether this manager should be the primary billing contact for the legal entity. True replaces the current primary contact.",
             "type": "boolean"
           },
           "legal_entity_slug": {
@@ -376,7 +419,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         },
         "properties": {
           "is_pending_primary_billing_contact": {
-            "description": "Whether this manager will become the primary billing contact once they have an active login",
+            "deprecated": true,
+            "description": "Deprecated. Always false.",
             "type": "boolean"
           },
           "is_primary_billing_contact": {
@@ -408,7 +452,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         },
         "properties": {
           "billing_contact_for": {
-            "description": "The legal entities to assign or unassign this manager as billing contact for.",
+            "description": "Every legal entity this manager should be a billing contact for. Each must be listed by the caller's GET and covered by one of their roles with permission to update billing communications, or the call returns 404. A role assigned to some legal entities only limits the caller to those, even where another role covers the whole company. Legal entities left out that the caller can change stop having this manager as a billing contact.",
             "items": {
               "$ref": "#/components/schemas/CompanyManagerBillingContact"
             },
@@ -750,7 +794,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "patch": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Assigns or unassigns a Company Manager as the billing contact (primary or additional)\nfor one or more legal entities.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |\n| Customer API token | Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |",
+        "description": "Replaces the legal entities a Company Manager is a billing contact for, among the\nlegal entities the caller can change (see below). After the call they receive Remote\ninvoices for the legal entities in `billing_contact_for`, each marked primary or not,\nand stop being a billing contact for the other legal entities the caller can change.\nSend an empty list to remove them from all of those (the company owner stays primary\nwhere no one else is, see below).\n\n- Making the manager primary replaces the legal entity's current primary contact.\n  Removing or demoting a primary contact is allowed: the company owner then receives\n  the invoices until someone else is made primary.\n- The company owner is the primary billing contact for every legal entity where no\n  one else is primary, whether or not they are listed. For the owner, listing such a\n  legal entity as primary changes nothing, and leaving it out does not remove them;\n  make someone else primary instead. Listing it as not primary adds the owner as a\n  regular contact there, and they stay primary until someone else is made primary.\n- The manager does not need permission to read billing, or a confirmed account, to be\n  added or made primary.\n- A newly added contact also receives contractor invoices, and removing a contact\n  stops both.\n- Contacts who only receive contractor invoices are not shown by this API and are\n  left unchanged, unless their legal entity is listed, in which case they also start\n  receiving Remote invoices.\n- Every listed legal entity must have an active billing account and appear only once.\n  A newly created legal entity's billing account may not be active yet; retry once it\n  is. Adding the manager to a legal entity that already has 15 invoice recipients,\n  counting ones this API doesn't show, also fails. Any of these returns 422 and\n  changes nothing.\n- The legal entities the caller can change are the ones the same caller's GET lists\n  that one of their roles with permission to update billing communications also\n  covers. Listing any other legal entity returns 404, and the call leaves the manager\n  as they are everywhere else, so sending back what GET returned never removes the\n  manager from a legal entity GET didn't show. If any of the caller's roles is\n  assigned to some legal entities only, the caller can change only those, even where\n  another of their roles covers the whole company. GET can still list legal entities\n  this call refuses: ones no role with permission to update billing communications\n  covers, and, on integrations that don't limit callers to the legal entities they\n  can access, any legal entity outside those roles or outside a role assigned to some\n  legal entities. A caller with no role that can read team members can change no\n  legal entity: an empty list changes nothing, and any other list returns 404.\n  Changing a deleted manager returns 404.\n  Deleting the manager is still refused while they are primary for any legal entity,\n  including ones the caller can't see.\n\nRequires permission to update billing communications. If your integration checks\ncallers' roles, it also requires permission to update team members.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |\n| Customer API token | Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |",
         "operationId": "patch_v1_company-managers_user_id (2)",
         "parameters": [
           {

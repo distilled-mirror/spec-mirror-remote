@@ -975,7 +975,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "964a8970-09de-404f-9705-db0c1afcdeb2",
+            "example": "a885af41-6b94-4c5b-9301-608c6c8dfc47",
             "in": "path",
             "name": "id",
             "required": true,

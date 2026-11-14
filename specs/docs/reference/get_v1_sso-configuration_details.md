@@ -540,7 +540,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Too Many Requests"
           }
         },
         "security": [

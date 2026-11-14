@@ -885,7 +885,7 @@ This endpoint accepts any one of the following token types:
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Too Many Requests"
           }
         },
         "security": [

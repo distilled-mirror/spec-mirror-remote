@@ -644,7 +644,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Too Many Requests"
           }
         },
         "security": [
