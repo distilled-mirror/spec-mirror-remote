@@ -197,7 +197,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         },
         "properties": {
           "billing_contacts": {
-            "description": "The legal entities this manager is a billing contact for.",
+            "description": "The legal entities this manager receives Remote invoices for. Each listed legal entity has one\nprimary billing contact: the manager chosen as primary, or the company owner when none is chosen.\nThe owner is listed as primary on those legal entities even without being chosen as a recipient.\nThe list can leave out legal entities the caller can't access, so it can be empty.\n",
             "items": {
               "$ref": "#/components/schemas/CompanyManagerBillingContactStatus"
             },

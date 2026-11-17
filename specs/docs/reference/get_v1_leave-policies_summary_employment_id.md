@@ -76,17 +76,69 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       },
       "LimitedDaysandHoursResponse": {
         "additionalProperties": false,
+        "description": "A limited amount of leave. Read `unit`, `value` and `breakdown`: they are counted in the unit the policy counts leave in, and need no conversion. `days` and `hours` are the legacy pair, encoded with an 8-hour day for clients that have not moved yet; do not sum or show them for new work.",
         "example": {
+          "breakdown": {
+            "days": 1.38
+          },
           "days": 1,
           "hours": 3,
-          "type": "limited"
+          "type": "limited",
+          "unit": "days",
+          "value": 1.38
         },
         "properties": {
+          "breakdown": {
+            "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+            "oneOf": [
+              {
+                "additionalProperties": false,
+                "example": {
+                  "days": 1.38
+                },
+                "properties": {
+                  "days": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "days"
+                ],
+                "title": "DaysBreakdown",
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "example": {
+                  "hours": 36,
+                  "minutes": 24
+                },
+                "properties": {
+                  "hours": {
+                    "type": "integer"
+                  },
+                  "minutes": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "hours",
+                  "minutes"
+                ],
+                "title": "HoursBreakdown",
+                "type": "object"
+              }
+            ]
+          },
           "days": {
+            "deprecated": true,
+            "description": "Legacy. Whole days of an 8-hour day.",
             "nullable": false,
             "type": "integer"
           },
           "hours": {
+            "deprecated": true,
+            "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
             "nullable": false,
             "type": "integer"
           },
@@ -95,6 +147,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               "limited"
             ],
             "type": "string"
+          },
+          "unit": {
+            "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+            "enum": [
+              "days",
+              "hours"
+            ],
+            "example": "days",
+            "nullable": false,
+            "type": "string"
+          },
+          "value": {
+            "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+            "type": "number"
           }
         },
         "required": [
@@ -185,29 +251,54 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "data": [
             {
               "annual_balance": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "annual_entitlement": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "balance": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "booked": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "current_entitlement": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "leave_policy": {
                 "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.",
@@ -217,29 +308,54 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                 "unit": "days"
               },
               "pending_approval": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "taken": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "upcoming_approved": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "upcoming_requested": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "used": {
+                "breakdown": {
+                  "days": 1.38
+                },
                 "days": 1,
                 "hours": 3,
-                "type": "limited"
+                "type": "limited",
+                "unit": "days",
+                "value": 1.38
               },
               "working_hours_per_day": 8
             }
@@ -320,29 +436,54 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "description": "Leave Policy Summary",
         "example": {
           "annual_balance": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "annual_entitlement": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "balance": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "booked": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "current_entitlement": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "leave_policy": {
             "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.",
@@ -352,29 +493,54 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "unit": "days"
           },
           "pending_approval": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "taken": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "upcoming_approved": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "upcoming_requested": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "used": {
+            "breakdown": {
+              "days": 1.38
+            },
             "days": 1,
             "hours": 3,
-            "type": "limited"
+            "type": "limited",
+            "unit": "days",
+            "value": 1.38
           },
           "working_hours_per_day": 8
         },
@@ -416,16 +582,67 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "additionalProperties": false,
             "description": "Includes all upcoming requested time off.",
             "example": {
+              "breakdown": {
+                "days": 1.38
+              },
               "days": 1,
               "hours": 3,
-              "type": "limited"
+              "type": "limited",
+              "unit": "days",
+              "value": 1.38
             },
             "properties": {
+              "breakdown": {
+                "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "days": 1.38
+                    },
+                    "properties": {
+                      "days": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "days"
+                    ],
+                    "title": "DaysBreakdown",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "hours": 36,
+                      "minutes": 24
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "integer"
+                      },
+                      "minutes": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "title": "HoursBreakdown",
+                    "type": "object"
+                  }
+                ]
+              },
               "days": {
+                "deprecated": true,
+                "description": "Legacy. Whole days of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
               "hours": {
+                "deprecated": true,
+                "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
@@ -434,6 +651,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "limited"
                 ],
                 "type": "string"
+              },
+              "unit": {
+                "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+                "enum": [
+                  "days",
+                  "hours"
+                ],
+                "example": "days",
+                "nullable": false,
+                "type": "string"
+              },
+              "value": {
+                "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+                "type": "number"
               }
             },
             "required": [
@@ -462,16 +693,67 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "additionalProperties": false,
             "description": "Includes requested timeoffs (not approved) in the past or in the future.",
             "example": {
+              "breakdown": {
+                "days": 1.38
+              },
               "days": 1,
               "hours": 3,
-              "type": "limited"
+              "type": "limited",
+              "unit": "days",
+              "value": 1.38
             },
             "properties": {
+              "breakdown": {
+                "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "days": 1.38
+                    },
+                    "properties": {
+                      "days": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "days"
+                    ],
+                    "title": "DaysBreakdown",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "hours": 36,
+                      "minutes": 24
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "integer"
+                      },
+                      "minutes": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "title": "HoursBreakdown",
+                    "type": "object"
+                  }
+                ]
+              },
               "days": {
+                "deprecated": true,
+                "description": "Legacy. Whole days of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
               "hours": {
+                "deprecated": true,
+                "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
@@ -480,6 +762,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "limited"
                 ],
                 "type": "string"
+              },
+              "unit": {
+                "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+                "enum": [
+                  "days",
+                  "hours"
+                ],
+                "example": "days",
+                "nullable": false,
+                "type": "string"
+              },
+              "value": {
+                "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+                "type": "number"
               }
             },
             "required": [
@@ -494,16 +790,67 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "additionalProperties": false,
             "description": "Includes all time off (past and future, pending or approved).",
             "example": {
+              "breakdown": {
+                "days": 1.38
+              },
               "days": 1,
               "hours": 3,
-              "type": "limited"
+              "type": "limited",
+              "unit": "days",
+              "value": 1.38
             },
             "properties": {
+              "breakdown": {
+                "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "days": 1.38
+                    },
+                    "properties": {
+                      "days": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "days"
+                    ],
+                    "title": "DaysBreakdown",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "hours": 36,
+                      "minutes": 24
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "integer"
+                      },
+                      "minutes": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "title": "HoursBreakdown",
+                    "type": "object"
+                  }
+                ]
+              },
               "days": {
+                "deprecated": true,
+                "description": "Legacy. Whole days of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
               "hours": {
+                "deprecated": true,
+                "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
@@ -512,6 +859,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "limited"
                 ],
                 "type": "string"
+              },
+              "unit": {
+                "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+                "enum": [
+                  "days",
+                  "hours"
+                ],
+                "example": "days",
+                "nullable": false,
+                "type": "string"
+              },
+              "value": {
+                "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+                "type": "number"
               }
             },
             "required": [
@@ -526,16 +887,67 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "additionalProperties": false,
             "description": "Includes all upcoming approved time off.",
             "example": {
+              "breakdown": {
+                "days": 1.38
+              },
               "days": 1,
               "hours": 3,
-              "type": "limited"
+              "type": "limited",
+              "unit": "days",
+              "value": 1.38
             },
             "properties": {
+              "breakdown": {
+                "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "days": 1.38
+                    },
+                    "properties": {
+                      "days": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "days"
+                    ],
+                    "title": "DaysBreakdown",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "hours": 36,
+                      "minutes": 24
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "integer"
+                      },
+                      "minutes": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "title": "HoursBreakdown",
+                    "type": "object"
+                  }
+                ]
+              },
               "days": {
+                "deprecated": true,
+                "description": "Legacy. Whole days of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
               "hours": {
+                "deprecated": true,
+                "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
@@ -544,6 +956,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "limited"
                 ],
                 "type": "string"
+              },
+              "unit": {
+                "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+                "enum": [
+                  "days",
+                  "hours"
+                ],
+                "example": "days",
+                "nullable": false,
+                "type": "string"
+              },
+              "value": {
+                "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+                "type": "number"
               }
             },
             "required": [
@@ -558,16 +984,67 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "additionalProperties": false,
             "description": "Includes all upcoming requested time off.",
             "example": {
+              "breakdown": {
+                "days": 1.38
+              },
               "days": 1,
               "hours": 3,
-              "type": "limited"
+              "type": "limited",
+              "unit": "days",
+              "value": 1.38
             },
             "properties": {
+              "breakdown": {
+                "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "days": 1.38
+                    },
+                    "properties": {
+                      "days": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "days"
+                    ],
+                    "title": "DaysBreakdown",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "hours": 36,
+                      "minutes": 24
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "integer"
+                      },
+                      "minutes": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "title": "HoursBreakdown",
+                    "type": "object"
+                  }
+                ]
+              },
               "days": {
+                "deprecated": true,
+                "description": "Legacy. Whole days of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
               "hours": {
+                "deprecated": true,
+                "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
@@ -576,6 +1053,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "limited"
                 ],
                 "type": "string"
+              },
+              "unit": {
+                "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+                "enum": [
+                  "days",
+                  "hours"
+                ],
+                "example": "days",
+                "nullable": false,
+                "type": "string"
+              },
+              "value": {
+                "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+                "type": "number"
               }
             },
             "required": [
@@ -590,16 +1081,67 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "additionalProperties": false,
             "description": "Includes only approved time off in the past.",
             "example": {
+              "breakdown": {
+                "days": 1.38
+              },
               "days": 1,
               "hours": 3,
-              "type": "limited"
+              "type": "limited",
+              "unit": "days",
+              "value": 1.38
             },
             "properties": {
+              "breakdown": {
+                "description": "The same amount split for display. On a days policy only `days` (the same fraction as `value`), because a day has no fixed length in hours. On an hours policy `hours` and the remaining `minutes`.",
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "days": 1.38
+                    },
+                    "properties": {
+                      "days": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "days"
+                    ],
+                    "title": "DaysBreakdown",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "example": {
+                      "hours": 36,
+                      "minutes": 24
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "integer"
+                      },
+                      "minutes": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "title": "HoursBreakdown",
+                    "type": "object"
+                  }
+                ]
+              },
               "days": {
+                "deprecated": true,
+                "description": "Legacy. Whole days of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
               "hours": {
+                "deprecated": true,
+                "description": "Legacy. Hours left over after `days`, of an 8-hour day.",
                 "nullable": false,
                 "type": "integer"
               },
@@ -608,6 +1150,20 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "limited"
                 ],
                 "type": "string"
+              },
+              "unit": {
+                "description": "The unit the leave policy counts leave in. `value` and `breakdown` are in this unit.",
+                "enum": [
+                  "days",
+                  "hours"
+                ],
+                "example": "days",
+                "nullable": false,
+                "type": "string"
+              },
+              "value": {
+                "description": "The amount as a decimal in `unit`, rounded to two decimals: day fractions on a days policy, hours on an hours policy. Show it as is. Do not add rounded values up: use the totals Tiger returns.",
+                "type": "number"
               }
             },
             "required": [
