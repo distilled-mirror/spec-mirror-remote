@@ -177,6 +177,61 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "title": "UnprocessableEntityResponse",
         "type": "object"
       },
+      "TopUpTimeTracking": {
+        "additionalProperties": false,
+        "description": "An entry Remote writes to pay hours the employee did not work, such as the guaranteed hours on their contract. It is never worked time and never carries a work interval: `total_hours` is the amount this entry pays, and `date` is the day the entry is filed under. A `guaranteed_hours` entry covers the whole timesheet week, so its amount is not one day's pay.",
+        "example": {
+          "date": "2026-10-11",
+          "notes": "Guaranteed hours top-up",
+          "reason": "guaranteed_hours",
+          "total_hours": {
+            "hours": 5,
+            "minutes": 0
+          },
+          "type": "top_up"
+        },
+        "properties": {
+          "date": {
+            "description": "The day this entry is filed under. A `minimum_engagement` or `late_cancellation` entry is filed under the local day of the call-in, or of the shift the change was about, in the entry's timezone. A `guaranteed_hours` entry is filed under the last day of the timesheet week, or the last day in that week the contract guarantees hours; its `total_hours` covers the whole week, so it is not that day's pay.",
+            "format": "date",
+            "type": "string"
+          },
+          "notes": {
+            "description": "Free-text notes about this entry. Always present; both top-up writers set one.",
+            "nullable": true,
+            "type": "string"
+          },
+          "reason": {
+            "description": "Why Remote wrote the top-up. `guaranteed_hours`: the week's worked time is below the contract's guaranteed hours. `minimum_engagement`: a call-in is shorter than the policy's minimum paid time. `late_cancellation`: an employer cancelled, shortened or moved a shift inside the paid notice window, and the worker is paid the hours lost. Null only for an entry the system never writes.",
+            "enum": [
+              "guaranteed_hours",
+              "minimum_engagement",
+              "late_cancellation"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "total_hours": {
+            "$ref": "#/components/schemas/HoursAndMinutes"
+          },
+          "type": {
+            "description": "Always `top_up`: the entry pays hours the employee did not work.",
+            "enum": [
+              "top_up"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "notes",
+          "reason",
+          "date",
+          "total_hours"
+        ],
+        "title": "TopUpTimeTracking",
+        "type": "object"
+      },
       "ListTimesheetsResponse": {
         "description": "Response schema listing many timesheets",
         "example": {
@@ -272,6 +327,22 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                     "hours": 35,
                     "minutes": 13
                   }
+                }
+              ],
+              "top_up_hours": {
+                "hours": 5,
+                "minutes": 0
+              },
+              "top_up_time_trackings": [
+                {
+                  "date": "2026-10-11",
+                  "notes": "Guaranteed hours top-up",
+                  "reason": "guaranteed_hours",
+                  "total_hours": {
+                    "hours": 5,
+                    "minutes": 0
+                  },
+                  "type": "top_up"
                 }
               ],
               "total_hours": {
@@ -440,6 +511,22 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               }
             }
           ],
+          "top_up_hours": {
+            "hours": 5,
+            "minutes": 0
+          },
+          "top_up_time_trackings": [
+            {
+              "date": "2026-10-11",
+              "notes": "Guaranteed hours top-up",
+              "reason": "guaranteed_hours",
+              "total_hours": {
+                "hours": 5,
+                "minutes": 0
+              },
+              "type": "top_up"
+            }
+          ],
           "total_hours": {
             "hours": 35,
             "minutes": 13
@@ -506,7 +593,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "string"
           },
           "time_trackings": {
-            "description": "The individual time tracking entries that make up this timesheet.",
+            "description": "The entries recorded against this timesheet: regular hours, overtime, on-call and breaks that were logged, plus the time off and public holidays Remote writes. Do not add these up for worked time: breaks, time off and public holidays are in here too. Read `total_hours` instead. Top-ups are never among these entries: they come back in `top_up_time_trackings`.",
             "items": {
               "$ref": "#/components/schemas/TimeTracking"
             },
@@ -515,8 +602,50 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "timeoff_hours": {
             "$ref": "#/components/schemas/HoursAndMinutes"
           },
+          "top_up_hours": {
+            "description": "The total of `top_up_time_trackings`: hours Remote pays on top of the hours logged on the timesheet. It covers every reason a top-up is written and is not worked time, so it is not included in `total_hours`.",
+            "example": {
+              "hours": 35,
+              "minutes": 13
+            },
+            "properties": {
+              "hours": {
+                "description": "The number of whole hours.",
+                "type": "integer"
+              },
+              "minutes": {
+                "description": "The number of remaining minutes (0-59).",
+                "type": "integer"
+              }
+            },
+            "title": "TopUpHours",
+            "type": "object"
+          },
+          "top_up_time_trackings": {
+            "description": "Entries Remote writes to pay hours the employee did not work, such as the guaranteed hours on their contract or the minimum paid time of a call-in. Filled when approval processing writes them, so re-read a timesheet that was just approved. A send back or reopen before payroll took them removes them, and approving again writes them afresh; a timesheet reopened after payroll already took its top-ups keeps them.",
+            "items": {
+              "$ref": "#/components/schemas/TopUpTimeTracking"
+            },
+            "type": "array"
+          },
           "total_hours": {
-            "$ref": "#/components/schemas/HoursAndMinutes"
+            "description": "The worked time on this timesheet: the clocked time of the regular, overtime and on-call entries. Paid breaks, time off and top-ups are not included, so this is the number to use for worked hours.",
+            "example": {
+              "hours": 35,
+              "minutes": 13
+            },
+            "properties": {
+              "hours": {
+                "description": "The number of whole hours.",
+                "type": "integer"
+              },
+              "minutes": {
+                "description": "The number of remaining minutes (0-59).",
+                "type": "integer"
+              }
+            },
+            "title": "WorkedHours",
+            "type": "object"
           },
           "unpaid_break_hours": {
             "$ref": "#/components/schemas/HoursAndMinutes"
@@ -544,7 +673,9 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "weekend_hours",
           "night_hours",
           "on_call_hours",
-          "time_trackings"
+          "time_trackings",
+          "top_up_time_trackings",
+          "top_up_hours"
         ],
         "title": "Timesheet",
         "type": "object"
@@ -672,7 +803,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       },
       "TimeTracking": {
         "additionalProperties": false,
-        "description": "A single time tracking entry within a timesheet, representing a block of work with clock-in/out times. Includes detailed breakdowns of hours by type (regular, overtime, night, weekend, holiday).",
+        "description": "A single time tracking entry within a timesheet, representing a block of time with clock-in/out times: work, a break, or time off. Includes detailed breakdowns of hours by type (regular, overtime, night, weekend, holiday). Top-ups are not logged time and come back in `top_up_time_trackings`, under their own schema.",
         "example": {
           "clock_in": "2021-07-15T18:18:17Z",
           "clock_out": "2021-07-15T18:18:17Z",
@@ -769,7 +900,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "$ref": "#/components/schemas/HoursAndMinutes"
           },
           "type": {
-            "description": "The category of time being tracked (e.g., regular hours, overtime, on-call, break time).",
+            "description": "The category of time being tracked (e.g., regular hours, overtime, on-call, break time). `time_off` and `public_holiday` are system-generated, and cannot be set when creating a timesheet. `top_up` is system-generated too but never appears in this array: top-ups come back in `top_up_time_trackings`.",
             "enum": [
               "regular_hours",
               "overtime",

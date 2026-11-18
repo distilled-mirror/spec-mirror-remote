@@ -168,7 +168,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "properties": {
               "details": {
                 "additionalProperties": false,
-                "oneOf": [
+                "anyOf": [
                   {
                     "additionalProperties": false,
                     "properties": {
@@ -309,6 +309,117 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                       }
                     },
                     "title": "EngagementAgreementDetailsDEU",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "arduous_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "available_pto": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "has_bonus": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "has_commissions": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "has_signing_bonus": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "has_similar_roles": {
+                        "type": "string"
+                      },
+                      "has_similar_work_conditions": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "max_annual_gross_salary": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "min_annual_gross_salary": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "night_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "obstacle_to_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "on_call_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "overtime_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "probation_period_months": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "provided_equipment": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "type": "array"
+                      },
+                      "provided_training": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "type": "array"
+                      },
+                      "public_holiday_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "similar_role_job_title": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "similar_work_conditions_details": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "weekend_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "work_hours_per_week": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "working_days": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "type": "array"
+                      }
+                    },
+                    "title": "EngagementAgreementDetailsCZE",
                     "type": "object"
                   }
                 ],

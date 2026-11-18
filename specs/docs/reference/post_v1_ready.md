@@ -216,6 +216,25 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "employment_lifecycle_stage": {
             "$ref": "#/components/schemas/EmploymentLifecycleStage"
           },
+          "eor_hiring_model": {
+            "description": "EOR hiring model the active contract is under. Null when it has none.",
+            "enum": [
+              "deu_solutions",
+              "deu_aug",
+              "deu_aug_de3",
+              "deu_solutions_legacy",
+              "cze_consulting",
+              "cze_tea",
+              "fra_wage_portage",
+              "fra_consulting",
+              "ita_apl",
+              "ita_consulting"
+            ],
+            "example": "deu_solutions",
+            "nullable": true,
+            "title": "EorHiringModel",
+            "type": "string"
+          },
           "administrative_details": {
             "description": "Administrative information. Its properties may vary depending on the country.",
             "type": "object"
@@ -394,6 +413,12 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
               "$ref": "#/components/schemas/File"
             },
             "type": "array"
+          },
+          "is_offboarding_service_charge_waived": {
+            "description": "Whether an active discount fully waives the offboarding service charge (Termination) for this\nemployment. The charge applies to a termination, and to a cancellation before the start date made by\nthe customer.\n\n- `true`: a discount fully waives the charge, so the employer is not charged it on the reconciliation\n  invoice.\n- `false`: no active discount fully waives the charge. Whether the charge applies to a given offboarding\n  is decided separately, so `false` does not guarantee that the employer is charged.\n",
+            "example": false,
+            "nullable": true,
+            "type": "boolean"
           },
           "active_contract_id": {
             "description": "The unique identifier (UUID) of the currently active contract for this employment.",

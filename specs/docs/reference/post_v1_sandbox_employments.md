@@ -103,6 +103,25 @@ This endpoint accepts any one of the following token types:
           "employment_lifecycle_stage": {
             "$ref": "#/components/schemas/EmploymentLifecycleStage"
           },
+          "eor_hiring_model": {
+            "description": "EOR hiring model the active contract is under. Null when it has none.",
+            "enum": [
+              "deu_solutions",
+              "deu_aug",
+              "deu_aug_de3",
+              "deu_solutions_legacy",
+              "cze_consulting",
+              "cze_tea",
+              "fra_wage_portage",
+              "fra_consulting",
+              "ita_apl",
+              "ita_consulting"
+            ],
+            "example": "deu_solutions",
+            "nullable": true,
+            "title": "EorHiringModel",
+            "type": "string"
+          },
           "full_name": {
             "description": "The employee's full name.",
             "type": "string"

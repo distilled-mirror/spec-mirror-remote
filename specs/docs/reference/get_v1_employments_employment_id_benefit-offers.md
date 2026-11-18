@@ -113,6 +113,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "additionalProperties": false,
         "description": "The list of benefit offers for an employment schema",
         "example": {
+          "benefits_valid": true,
           "data": [
             {
               "benefit_group": {
@@ -132,6 +133,11 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           ]
         },
         "properties": {
+          "benefits_valid": {
+            "description": "Whether the current benefit selection passes the check that runs when the employee is invited, as a company user sees it. True when the country has no benefits to choose. False when the selection is missing, out of date or not allowed, and when the employment has no contract yet. For a contractor or direct employee, which cannot have benefit offers, true when there are none and false when there are some.",
+            "example": true,
+            "type": "boolean"
+          },
           "data": {
             "items": {
               "$ref": "#/components/schemas/Unified.Employment.BenefitOffer"
@@ -140,7 +146,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           }
         },
         "required": [
-          "data"
+          "data",
+          "benefits_valid"
         ],
         "title": "Employments.BenefitOffers.ListBenefitOffers",
         "type": "object"

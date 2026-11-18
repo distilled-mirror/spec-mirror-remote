@@ -764,7 +764,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "billing_document"
           },
           {
             "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",

@@ -720,7 +720,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "billing_document"
           },
           {
             "description": "Filters the results by the type of the billing breakdown item. Matched exactly against the `type` field of\nthe returned items, so unrecognised values yield an empty list. Card spend is reported as `Card expenses`,\nseparately from payroll-reimbursed `Expenses`. Other Compensation is reported as `Other compensation`,\nseparately from `Base salary`. Payslip benefits can be returned as `Payslip benefits` for existing\nbreakdown items, or as `Payslip Benefit Cash` and `Payslip Benefit Non-Cash` for newly generated items.\n",

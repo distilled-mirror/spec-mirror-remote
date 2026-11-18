@@ -1296,7 +1296,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "billing_document"
           },
           {
             "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
@@ -1391,7 +1392,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "billing_document"
           },
           {
             "description": "Filters the results by the type of the billing breakdown item. Matched exactly against the `type` field of\nthe returned items, so unrecognised values yield an empty list. Card spend is reported as `Card expenses`,\nseparately from payroll-reimbursed `Expenses`. Other Compensation is reported as `Other compensation`,\nseparately from `Base salary`. Payslip benefits can be returned as `Payslip benefits` for existing\nbreakdown items, or as `Payslip Benefit Cash` and `Payslip Benefit Non-Cash` for newly generated items.\n",
@@ -1486,7 +1488,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "x-resource-type": "billing_document"
           }
         ],
         "responses": {
@@ -4951,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "47fd324a-c394-48fd-a71b-2334952e94ca",
+            "example": "ba03bb97-f507-4543-a995-4616ccfb3f0d",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5257,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "baa58b77-aa48-46e6-8190-93396b07a0b6",
+            "example": "23c4d7b7-a854-4cfe-8a12-dd7e34290da9",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5351,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "60c6826b-5fc0-4c3c-ba6e-efca305d640b",
+            "example": "0d35a2ac-36a4-4a49-a109-a4e1b7b1ad30",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5436,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "1d0fbdd0-0d6c-49e5-b342-82a4c7d9a7ce",
+            "example": "c8972907-6147-4ab7-873b-aed541b91c8e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5586,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "f8ff1daf-bad3-4c60-8028-a2590f7e635a",
+            "example": "e6105118-ca2a-4975-995f-985c4c4fb764",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5596,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "602a194c-c67d-467b-9983-9df486708fe8",
+            "example": "621a0fad-079b-42e7-a8e3-56c105ea9e4e",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5805,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "634d3171-1308-4952-aee3-cf9b642f26ab",
+            "example": "5ed9eaca-1b70-43e6-ba14-d4ec4aee560c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5881,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "d3ab7fbc-d97b-4794-8de7-2003bf3119e9",
+            "example": "6e0d4837-211e-4eee-a2e9-fb9295b8f81c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13943,7 +13946,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "5f938715-ce1b-4f5d-92db-a7754094d0ec",
+            "example": "f08fa446-f6af-4734-8fb4-722613a855b7",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -16096,7 +16099,8 @@
             "required": true,
             "schema": {
               "type": "integer"
-            }
+            },
+            "x-safe": true
           }
         ],
         "responses": {
@@ -38042,7 +38046,7 @@
             "type": "object"
           },
           {
-            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both. A field sent as `null` next to the other one is ignored, and sending both as `null` is the same as sending neither.",
+            "description": "Exactly one of `tax_number` or `registration_number` must be submitted, not both, and its value must be a string. A field sent as `null` next to the other one is ignored, and sending both as `null` is the same as sending neither.",
             "oneOf": [
               {
                 "example": {
@@ -41177,6 +41181,25 @@
           "employment_lifecycle_stage": {
             "$ref": "#/components/schemas/EmploymentLifecycleStage"
           },
+          "eor_hiring_model": {
+            "description": "EOR hiring model the active contract is under. Null when it has none.",
+            "enum": [
+              "deu_solutions",
+              "deu_aug",
+              "deu_aug_de3",
+              "deu_solutions_legacy",
+              "cze_consulting",
+              "cze_tea",
+              "fra_wage_portage",
+              "fra_consulting",
+              "ita_apl",
+              "ita_consulting"
+            ],
+            "example": "deu_solutions",
+            "nullable": true,
+            "title": "EorHiringModel",
+            "type": "string"
+          },
           "administrative_details": {
             "description": "Administrative information. Its properties may vary depending on the country.",
             "type": "object"
@@ -41355,6 +41378,12 @@
               "$ref": "#/components/schemas/File"
             },
             "type": "array"
+          },
+          "is_offboarding_service_charge_waived": {
+            "description": "Whether an active discount fully waives the offboarding service charge (Termination) for this\nemployment. The charge applies to a termination, and to a cancellation before the start date made by\nthe customer.\n\n- `true`: a discount fully waives the charge, so the employer is not charged it on the reconciliation\n  invoice.\n- `false`: no active discount fully waives the charge. Whether the charge applies to a given offboarding\n  is decided separately, so `false` does not guarantee that the employer is charged.\n",
+            "example": false,
+            "nullable": true,
+            "type": "boolean"
           },
           "active_contract_id": {
             "description": "The unique identifier (UUID) of the currently active contract for this employment.",
@@ -41604,6 +41633,25 @@
           },
           "employment_lifecycle_stage": {
             "$ref": "#/components/schemas/EmploymentLifecycleStage"
+          },
+          "eor_hiring_model": {
+            "description": "EOR hiring model the active contract is under. Null when it has none.",
+            "enum": [
+              "deu_solutions",
+              "deu_aug",
+              "deu_aug_de3",
+              "deu_solutions_legacy",
+              "cze_consulting",
+              "cze_tea",
+              "fra_wage_portage",
+              "fra_consulting",
+              "ita_apl",
+              "ita_consulting"
+            ],
+            "example": "deu_solutions",
+            "nullable": true,
+            "title": "EorHiringModel",
+            "type": "string"
           },
           "full_name": {
             "description": "The employee's full name.",
@@ -42360,8 +42408,7 @@
         "properties": {
           "engagement_agreement_details": {
             "additionalProperties": false,
-            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_v1_countries_country_code_form) endpoint\npassing the country code and the `engagement_agreement_details` form name.\n",
-            "oneOf": [
+            "anyOf": [
               {
                 "additionalProperties": false,
                 "properties": {
@@ -42504,8 +42551,120 @@
                 },
                 "title": "EngagementAgreementDetailsParamsDEU",
                 "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "arduous_work_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "available_pto": {
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "has_bonus": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "has_commissions": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "has_signing_bonus": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "has_similar_roles": {
+                    "type": "string"
+                  },
+                  "has_similar_work_conditions": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "max_annual_gross_salary": {
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "min_annual_gross_salary": {
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "night_work_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "obstacle_to_work_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "on_call_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "overtime_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "probation_period_months": {
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "provided_equipment": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
+                  },
+                  "provided_training": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
+                  },
+                  "public_holiday_work_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "similar_role_job_title": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "similar_work_conditions_details": {
+                    "nullable": true,
+                    "type": "string"
+                  },
+                  "weekend_work_premium_percentage": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "work_hours_per_week": {
+                    "format": "double",
+                    "nullable": true,
+                    "type": "number"
+                  },
+                  "working_days": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true,
+                    "type": "array"
+                  }
+                },
+                "title": "EngagementAgreementDetailsParamsCZE",
+                "type": "object"
               }
             ],
+            "description": "Engagement agreement details params. As its properties may vary depending on the country,\nyou must query the [Show form schema](#tag/Countries/operation/get_v1_countries_country_code_form) endpoint\npassing the country code and the `engagement_agreement_details` form name.\n",
             "type": "object"
           }
         },
@@ -42531,7 +42690,7 @@
             "properties": {
               "details": {
                 "additionalProperties": false,
-                "oneOf": [
+                "anyOf": [
                   {
                     "additionalProperties": false,
                     "properties": {
@@ -42672,6 +42831,117 @@
                       }
                     },
                     "title": "EngagementAgreementDetailsDEU",
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "arduous_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "available_pto": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "has_bonus": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "has_commissions": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "has_signing_bonus": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "has_similar_roles": {
+                        "type": "string"
+                      },
+                      "has_similar_work_conditions": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "max_annual_gross_salary": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "min_annual_gross_salary": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "night_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "obstacle_to_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "on_call_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "overtime_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "probation_period_months": {
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "provided_equipment": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "type": "array"
+                      },
+                      "provided_training": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "type": "array"
+                      },
+                      "public_holiday_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "similar_role_job_title": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "similar_work_conditions_details": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "weekend_work_premium_percentage": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "work_hours_per_week": {
+                        "format": "double",
+                        "nullable": true,
+                        "type": "number"
+                      },
+                      "working_days": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "type": "array"
+                      }
+                    },
+                    "title": "EngagementAgreementDetailsCZE",
                     "type": "object"
                   }
                 ],
@@ -43581,6 +43851,7 @@
         "additionalProperties": false,
         "description": "The list of benefit offers for an employment schema",
         "example": {
+          "benefits_valid": true,
           "data": [
             {
               "benefit_group": {
@@ -43600,6 +43871,11 @@
           ]
         },
         "properties": {
+          "benefits_valid": {
+            "description": "Whether the current benefit selection passes the check that runs when the employee is invited, as a company user sees it. True when the country has no benefits to choose. False when the selection is missing, out of date or not allowed, and when the employment has no contract yet. For a contractor or direct employee, which cannot have benefit offers, true when there are none and false when there are some.",
+            "example": true,
+            "type": "boolean"
+          },
           "data": {
             "items": {
               "$ref": "#/components/schemas/Unified.Employment.BenefitOffer"
@@ -43608,7 +43884,8 @@
           }
         },
         "required": [
-          "data"
+          "data",
+          "benefits_valid"
         ],
         "title": "Employments.BenefitOffers.ListBenefitOffers",
         "type": "object"
@@ -46035,6 +46312,31 @@
                     "required": [
                       "ready_to_submit",
                       "successful"
+                    ],
+                    "type": "object"
+                  },
+                  "locked_field_overwrite": {
+                    "additionalProperties": false,
+                    "description": "Country pay item uploads only: how many active legal entity pay items submitting the upload will overwrite, because it changes their country pay item's locked fields. An upper bound, counted when the file was last validated. `null` before validation, after a row is edited until the file is validated again, and when validation couldn't check the changes",
+                    "nullable": true,
+                    "properties": {
+                      "count": {
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "skipped_reason": {
+                        "description": "Why `count` is 0 though the upload may change locked fields, so nothing is copied to legal entity pay items: `propagation_disabled` when copying from imports isn't turned on for this importer (checked first), `no_templates_update_permission` when the importer can't update country pay items",
+                        "enum": [
+                          "propagation_disabled",
+                          "no_templates_update_permission"
+                        ],
+                        "nullable": true,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "count",
+                      "skipped_reason"
                     ],
                     "type": "object"
                   },
@@ -51018,6 +51320,22 @@
                     "hours": 35,
                     "minutes": 13
                   }
+                }
+              ],
+              "top_up_hours": {
+                "hours": 5,
+                "minutes": 0
+              },
+              "top_up_time_trackings": [
+                {
+                  "date": "2026-10-11",
+                  "notes": "Guaranteed hours top-up",
+                  "reason": "guaranteed_hours",
+                  "total_hours": {
+                    "hours": 5,
+                    "minutes": 0
+                  },
+                  "type": "top_up"
                 }
               ],
               "total_hours": {
@@ -57909,7 +58227,7 @@
       },
       "TimeTracking": {
         "additionalProperties": false,
-        "description": "A single time tracking entry within a timesheet, representing a block of work with clock-in/out times. Includes detailed breakdowns of hours by type (regular, overtime, night, weekend, holiday).",
+        "description": "A single time tracking entry within a timesheet, representing a block of time with clock-in/out times: work, a break, or time off. Includes detailed breakdowns of hours by type (regular, overtime, night, weekend, holiday). Top-ups are not logged time and come back in `top_up_time_trackings`, under their own schema.",
         "example": {
           "clock_in": "2021-07-15T18:18:17Z",
           "clock_out": "2021-07-15T18:18:17Z",
@@ -58006,7 +58324,7 @@
             "$ref": "#/components/schemas/HoursAndMinutes"
           },
           "type": {
-            "description": "The category of time being tracked (e.g., regular hours, overtime, on-call, break time).",
+            "description": "The category of time being tracked (e.g., regular hours, overtime, on-call, break time). `time_off` and `public_holiday` are system-generated, and cannot be set when creating a timesheet. `top_up` is system-generated too but never appears in this array: top-ups come back in `top_up_time_trackings`.",
             "enum": [
               "regular_hours",
               "overtime",
@@ -58873,6 +59191,22 @@
               }
             }
           ],
+          "top_up_hours": {
+            "hours": 5,
+            "minutes": 0
+          },
+          "top_up_time_trackings": [
+            {
+              "date": "2026-10-11",
+              "notes": "Guaranteed hours top-up",
+              "reason": "guaranteed_hours",
+              "total_hours": {
+                "hours": 5,
+                "minutes": 0
+              },
+              "type": "top_up"
+            }
+          ],
           "total_hours": {
             "hours": 35,
             "minutes": 13
@@ -58939,7 +59273,7 @@
             "type": "string"
           },
           "time_trackings": {
-            "description": "The individual time tracking entries that make up this timesheet.",
+            "description": "The entries recorded against this timesheet: regular hours, overtime, on-call and breaks that were logged, plus the time off and public holidays Remote writes. Do not add these up for worked time: breaks, time off and public holidays are in here too. Read `total_hours` instead. Top-ups are never among these entries: they come back in `top_up_time_trackings`.",
             "items": {
               "$ref": "#/components/schemas/TimeTracking"
             },
@@ -58948,8 +59282,50 @@
           "timeoff_hours": {
             "$ref": "#/components/schemas/HoursAndMinutes"
           },
+          "top_up_hours": {
+            "description": "The total of `top_up_time_trackings`: hours Remote pays on top of the hours logged on the timesheet. It covers every reason a top-up is written and is not worked time, so it is not included in `total_hours`.",
+            "example": {
+              "hours": 35,
+              "minutes": 13
+            },
+            "properties": {
+              "hours": {
+                "description": "The number of whole hours.",
+                "type": "integer"
+              },
+              "minutes": {
+                "description": "The number of remaining minutes (0-59).",
+                "type": "integer"
+              }
+            },
+            "title": "TopUpHours",
+            "type": "object"
+          },
+          "top_up_time_trackings": {
+            "description": "Entries Remote writes to pay hours the employee did not work, such as the guaranteed hours on their contract or the minimum paid time of a call-in. Filled when approval processing writes them, so re-read a timesheet that was just approved. A send back or reopen before payroll took them removes them, and approving again writes them afresh; a timesheet reopened after payroll already took its top-ups keeps them.",
+            "items": {
+              "$ref": "#/components/schemas/TopUpTimeTracking"
+            },
+            "type": "array"
+          },
           "total_hours": {
-            "$ref": "#/components/schemas/HoursAndMinutes"
+            "description": "The worked time on this timesheet: the clocked time of the regular, overtime and on-call entries. Paid breaks, time off and top-ups are not included, so this is the number to use for worked hours.",
+            "example": {
+              "hours": 35,
+              "minutes": 13
+            },
+            "properties": {
+              "hours": {
+                "description": "The number of whole hours.",
+                "type": "integer"
+              },
+              "minutes": {
+                "description": "The number of remaining minutes (0-59).",
+                "type": "integer"
+              }
+            },
+            "title": "WorkedHours",
+            "type": "object"
           },
           "unpaid_break_hours": {
             "$ref": "#/components/schemas/HoursAndMinutes"
@@ -58977,7 +59353,9 @@
           "weekend_hours",
           "night_hours",
           "on_call_hours",
-          "time_trackings"
+          "time_trackings",
+          "top_up_time_trackings",
+          "top_up_hours"
         ],
         "title": "Timesheet",
         "type": "object"
@@ -59079,6 +59457,22 @@
                   }
                 }
               ],
+              "top_up_hours": {
+                "hours": 5,
+                "minutes": 0
+              },
+              "top_up_time_trackings": [
+                {
+                  "date": "2026-10-11",
+                  "notes": "Guaranteed hours top-up",
+                  "reason": "guaranteed_hours",
+                  "total_hours": {
+                    "hours": 5,
+                    "minutes": 0
+                  },
+                  "type": "top_up"
+                }
+              ],
               "total_hours": {
                 "hours": 35,
                 "minutes": 13
@@ -59142,6 +59536,61 @@
           }
         },
         "title": "TooManyRequestsResponse",
+        "type": "object"
+      },
+      "TopUpTimeTracking": {
+        "additionalProperties": false,
+        "description": "An entry Remote writes to pay hours the employee did not work, such as the guaranteed hours on their contract. It is never worked time and never carries a work interval: `total_hours` is the amount this entry pays, and `date` is the day the entry is filed under. A `guaranteed_hours` entry covers the whole timesheet week, so its amount is not one day's pay.",
+        "example": {
+          "date": "2026-10-11",
+          "notes": "Guaranteed hours top-up",
+          "reason": "guaranteed_hours",
+          "total_hours": {
+            "hours": 5,
+            "minutes": 0
+          },
+          "type": "top_up"
+        },
+        "properties": {
+          "date": {
+            "description": "The day this entry is filed under. A `minimum_engagement` or `late_cancellation` entry is filed under the local day of the call-in, or of the shift the change was about, in the entry's timezone. A `guaranteed_hours` entry is filed under the last day of the timesheet week, or the last day in that week the contract guarantees hours; its `total_hours` covers the whole week, so it is not that day's pay.",
+            "format": "date",
+            "type": "string"
+          },
+          "notes": {
+            "description": "Free-text notes about this entry. Always present; both top-up writers set one.",
+            "nullable": true,
+            "type": "string"
+          },
+          "reason": {
+            "description": "Why Remote wrote the top-up. `guaranteed_hours`: the week's worked time is below the contract's guaranteed hours. `minimum_engagement`: a call-in is shorter than the policy's minimum paid time. `late_cancellation`: an employer cancelled, shortened or moved a shift inside the paid notice window, and the worker is paid the hours lost. Null only for an entry the system never writes.",
+            "enum": [
+              "guaranteed_hours",
+              "minimum_engagement",
+              "late_cancellation"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "total_hours": {
+            "$ref": "#/components/schemas/HoursAndMinutes"
+          },
+          "type": {
+            "description": "Always `top_up`: the entry pays hours the employee did not work.",
+            "enum": [
+              "top_up"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "notes",
+          "reason",
+          "date",
+          "total_hours"
+        ],
+        "title": "TopUpTimeTracking",
         "type": "object"
       },
       "TravelLetterRequest": {

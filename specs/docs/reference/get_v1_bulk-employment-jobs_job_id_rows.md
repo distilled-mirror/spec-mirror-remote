@@ -1053,6 +1053,31 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                     ],
                     "type": "object"
                   },
+                  "locked_field_overwrite": {
+                    "additionalProperties": false,
+                    "description": "Country pay item uploads only: how many active legal entity pay items submitting the upload will overwrite, because it changes their country pay item's locked fields. An upper bound, counted when the file was last validated. `null` before validation, after a row is edited until the file is validated again, and when validation couldn't check the changes",
+                    "nullable": true,
+                    "properties": {
+                      "count": {
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "skipped_reason": {
+                        "description": "Why `count` is 0 though the upload may change locked fields, so nothing is copied to legal entity pay items: `propagation_disabled` when copying from imports isn't turned on for this importer (checked first), `no_templates_update_permission` when the importer can't update country pay items",
+                        "enum": [
+                          "propagation_disabled",
+                          "no_templates_update_permission"
+                        ],
+                        "nullable": true,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "count",
+                      "skipped_reason"
+                    ],
+                    "type": "object"
+                  },
                   "team_member_counts": {
                     "additionalProperties": false,
                     "description": "Distinct team members across the complete import job, counted once even when they are split across several table records. `needs_changes` and `ready_to_submit` are mutually exclusive; `successfully_assigned` and `failed_to_assign` are subsets of `ready_to_submit`. The counts describe the job as of `job_stage`: the same rows count as needing changes before submission and as failed to assign afterwards.",

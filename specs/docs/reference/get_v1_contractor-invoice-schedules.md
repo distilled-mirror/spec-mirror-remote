@@ -744,7 +744,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "47fd324a-c394-48fd-a71b-2334952e94ca",
+            "example": "ba03bb97-f507-4543-a995-4616ccfb3f0d",
             "in": "query",
             "name": "employment_id",
             "required": false,
