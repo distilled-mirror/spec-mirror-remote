@@ -32,6 +32,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
 {
   "components": {
     "schemas": {
+      "RawFile": {
+        "description": "The file's raw bytes, sent as the response body with the file's own media type.",
+        "example": "file contents",
+        "format": "binary",
+        "title": "RawFile",
+        "type": "string"
+      },
       "ActionError": {
         "properties": {
           "action": {
@@ -229,13 +236,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         ],
         "title": "ParameterError",
         "type": "object"
-      },
-      "GenericFile": {
-        "description": "A file represented as a base64-encoded string.",
-        "example": "base64 encoded content",
-        "format": "binary",
-        "title": "GenericFile",
-        "type": "string"
       },
       "ForbiddenResponse": {
         "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
@@ -614,37 +614,37 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "content": {
               "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/jpeg": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/jpg": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/png": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/webp": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "text/csv": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },

@@ -61,6 +61,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "administrative_details": {
             "company_industry": "Information Technology",
             "entity_type": "c_corp",
+            "is_marijuana_related_business": "no",
             "mailing_address_same_as_filing": "yes",
             "naics_code": "12345",
             "sic_code": [

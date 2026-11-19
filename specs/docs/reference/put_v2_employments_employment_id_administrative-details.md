@@ -791,6 +791,30 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
               "type": "string"
             },
             "x-resource-type": "employment"
+          },
+          {
+            "description": "Version of the administrative_details form schema",
+            "example": 1,
+            "in": "query",
+            "name": "administrative_details_json_schema_version",
+            "required": false,
+            "schema": {
+              "default": "latest",
+              "oneOf": [
+                {
+                  "description": "Specific version number",
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "description": "Use latest version",
+                  "enum": [
+                    "latest"
+                  ],
+                  "type": "string"
+                }
+              ]
+            }
           }
         ],
         "requestBody": {

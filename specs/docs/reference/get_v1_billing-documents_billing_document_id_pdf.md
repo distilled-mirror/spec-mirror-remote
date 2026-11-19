@@ -32,6 +32,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
 {
   "components": {
     "schemas": {
+      "RawFile": {
+        "description": "The file's raw bytes, sent as the response body with the file's own media type.",
+        "example": "file contents",
+        "format": "binary",
+        "title": "RawFile",
+        "type": "string"
+      },
       "ActionError": {
         "properties": {
           "action": {
@@ -173,13 +180,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         ],
         "title": "ParameterError",
         "type": "object"
-      },
-      "GenericFile": {
-        "description": "A file represented as a base64-encoded string.",
-        "example": "base64 encoded content",
-        "format": "binary",
-        "title": "GenericFile",
-        "type": "string"
       }
     },
     "securitySchemes": {
@@ -538,9 +538,9 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },

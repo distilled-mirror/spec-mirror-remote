@@ -1495,9 +1495,9 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "ba03bb97-f507-4543-a995-4616ccfb3f0d",
+            "example": "75debc9d-288a-4a34-9aea-100f67ec2a61",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "23c4d7b7-a854-4cfe-8a12-dd7e34290da9",
+            "example": "9a2a748a-fe59-4e93-b540-a6468b87e9de",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "0d35a2ac-36a4-4a49-a109-a4e1b7b1ad30",
+            "example": "a6483885-6a3b-4f73-ba1a-2ac91671ba52",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "c8972907-6147-4ab7-873b-aed541b91c8e",
+            "example": "be916019-5976-45e1-b3d5-bfb87b5f5cb4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "e6105118-ca2a-4975-995f-985c4c4fb764",
+            "example": "042128f7-36ab-4935-a6b2-278d6e8de5e4",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "621a0fad-079b-42e7-a8e3-56c105ea9e4e",
+            "example": "b4022f33-50a8-4fdf-a925-d65f94f46a3c",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "5ed9eaca-1b70-43e6-ba14-d4ec4aee560c",
+            "example": "57348800-6359-4d9a-a823-355b69d430e7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "6e0d4837-211e-4eee-a2e9-fb9295b8f81c",
+            "example": "1e4a4981-da81-4445-bafb-c6e2c9ab9e9e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13946,7 +13946,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "f08fa446-f6af-4734-8fb4-722613a855b7",
+            "example": "0b55fd37-c172-4ad6-9170-c5bb1493830d",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14237,9 +14237,9 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
@@ -15485,37 +15485,37 @@
             "content": {
               "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/jpeg": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/jpg": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/png": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/webp": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "text/csv": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
@@ -15623,37 +15623,37 @@
             "content": {
               "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/jpeg": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/jpg": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/png": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "image/webp": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "text/csv": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
@@ -19735,9 +19735,9 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/csv": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
@@ -21047,17 +21047,17 @@
             "content": {
               "application/msword": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               },
               "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericFile"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
@@ -26806,6 +26806,30 @@
               "type": "string"
             },
             "x-resource-type": "employment"
+          },
+          {
+            "description": "Version of the administrative_details form schema",
+            "example": 1,
+            "in": "query",
+            "name": "administrative_details_json_schema_version",
+            "required": false,
+            "schema": {
+              "default": "latest",
+              "oneOf": [
+                {
+                  "description": "Specific version number",
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "description": "Use latest version",
+                  "enum": [
+                    "latest"
+                  ],
+                  "type": "string"
+                }
+              ]
+            }
           }
         ],
         "requestBody": {
@@ -28891,6 +28915,7 @@
           "administrative_details": {
             "company_industry": "Information Technology",
             "entity_type": "c_corp",
+            "is_marijuana_related_business": "no",
             "mailing_address_same_as_filing": "yes",
             "naics_code": "12345",
             "sic_code": [
@@ -31295,6 +31320,11 @@
           "updated_at": "2021-07-15T18:18:17"
         },
         "properties": {
+          "column_data_hash": {
+            "description": "Identifies the columns of the job's current file: its headers, in order. It changes when a file with other columns is uploaded.",
+            "nullable": true,
+            "type": "string"
+          },
           "column_mapping": {
             "additionalProperties": false,
             "description": "The column mapping for the import job. For times when imported data columns do not match the schema fields and\nneed to be manually mapped to the correct schema fields.\n",
@@ -55957,6 +55987,13 @@
         },
         "title": "RateLimitResponse",
         "type": "object"
+      },
+      "RawFile": {
+        "description": "The file's raw bytes, sent as the response body with the file's own media type.",
+        "example": "file contents",
+        "format": "binary",
+        "title": "RawFile",
+        "type": "string"
       },
       "RecurringIncentive": {
         "description": "A recurring incentive (e.g., monthly meal allowance, housing stipend) that automatically generates individual incentive payments on a monthly schedule.",

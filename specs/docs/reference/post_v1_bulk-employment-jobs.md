@@ -400,6 +400,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "updated_at": "2021-07-15T18:18:17"
         },
         "properties": {
+          "column_data_hash": {
+            "description": "Identifies the columns of the job's current file: its headers, in order. It changes when a file with other columns is uploaded.",
+            "nullable": true,
+            "type": "string"
+          },
           "column_mapping": {
             "additionalProperties": false,
             "description": "The column mapping for the import job. For times when imported data columns do not match the schema fields and\nneed to be manually mapped to the correct schema fields.\n",
