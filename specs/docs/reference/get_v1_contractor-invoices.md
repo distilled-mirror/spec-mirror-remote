@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-05-27T21:24:38.000Z
+updatedAt: 2026-11-20T04:28:08.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -342,7 +342,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
@@ -1002,7 +1003,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "042128f7-36ab-4935-a6b2-278d6e8de5e4",
+            "example": "c45a7cea-aa9f-4d4b-9529-6ecd4c131c40",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -1012,7 +1013,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "b4022f33-50a8-4fdf-a925-d65f94f46a3c",
+            "example": "d7bad925-b932-4278-bcb0-6524ec176981",
             "in": "query",
             "name": "employment_id",
             "required": false,

@@ -98,6 +98,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "type": "object"
       },
       "ValidationError": {
+        "description": "A request that fails this operation's schema gets errors keyed by the field's path joined\nwith `/`, never nested, each a list of messages, and no `message`\n(`{\"errors\": {\"params/reason\": [\"Missing field\"]}}`,\n`{\"errors\": {\"params/reason\": [\"Invalid string. Got: integer\"]}}`). A request the handler\nrefuses is usually keyed by field and nested for embedded fields\n(`{\"errors\": {\"address\": {\"city\": [\"can't be blank\"]}}}`); it may carry a `message`, and\nsome endpoints key `errors` by their own ids instead.\n",
         "example": {
           "errors": {
             "rejected_reason": [

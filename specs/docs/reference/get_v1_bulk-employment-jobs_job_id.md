@@ -407,9 +407,49 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                 },
                 "type": "array"
               },
+              "unavailable_columns": {
+                "description": "The names of file columns last mapped to fields this import doesn't have. Unless mapped again, they are not imported.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
               "unmapped_column_count": {
                 "description": "The number of columns that have not been mapped",
                 "type": "integer"
+              },
+              "unmapped_columns": {
+                "description": "The file columns not mapped to any field",
+                "items": {
+                  "additionalProperties": false,
+                  "example": {
+                    "index": 0,
+                    "name": "full_name",
+                    "sample_data": "Aaron Carter"
+                  },
+                  "properties": {
+                    "index": {
+                      "description": "The index of the data column in the file",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The name of the data column",
+                      "type": "string"
+                    },
+                    "sample_data": {
+                      "description": "A sample data value from the data column",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "index"
+                  ],
+                  "title": "ImportJobDataColumn",
+                  "type": "object"
+                },
+                "type": "array"
               },
               "unmapped_required_field_count": {
                 "description": "The number of required schema field paths that have not been mapped",
@@ -1174,7 +1214,12 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       "BadRequestResponse": {
         "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
         "example": {
-          "message": "invalid {resource}"
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
         },
         "oneOf": [
           {

@@ -240,7 +240,8 @@ This endpoint accepts any one of the following token types:
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
@@ -326,7 +327,12 @@ This endpoint accepts any one of the following token types:
       "BadRequestResponse": {
         "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
         "example": {
-          "message": "invalid {resource}"
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
         },
         "oneOf": [
           {

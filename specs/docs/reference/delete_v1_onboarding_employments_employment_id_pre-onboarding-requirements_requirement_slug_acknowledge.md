@@ -125,7 +125,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"

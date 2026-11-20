@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "75debc9d-288a-4a34-9aea-100f67ec2a61",
+            "example": "0e0d8245-fc12-4132-a05f-becb745daaae",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "9a2a748a-fe59-4e93-b540-a6468b87e9de",
+            "example": "4700b9a0-3ea9-4207-ba0e-e4d5a78fb28d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a6483885-6a3b-4f73-ba1a-2ac91671ba52",
+            "example": "8901da2d-2761-4e2f-83f1-67a7081663b6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "be916019-5976-45e1-b3d5-bfb87b5f5cb4",
+            "example": "550f4201-c8bc-485e-8f32-184afca36e79",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "042128f7-36ab-4935-a6b2-278d6e8de5e4",
+            "example": "c45a7cea-aa9f-4d4b-9529-6ecd4c131c40",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "b4022f33-50a8-4fdf-a925-d65f94f46a3c",
+            "example": "d7bad925-b932-4278-bcb0-6524ec176981",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "57348800-6359-4d9a-a823-355b69d430e7",
+            "example": "a9d3226d-0ba6-4420-94cf-437da7f0b529",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "1e4a4981-da81-4445-bafb-c6e2c9ab9e9e",
+            "example": "4248c168-8a00-43dd-997a-67b4373db297",
             "in": "path",
             "name": "id",
             "required": true,
@@ -9386,7 +9386,7 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Upserts the authenticated employee's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n| Company-scoped access token | Manage employments (`employments`) | - | - |",
+        "description": "Upserts the authenticated employee's bank account details.\n\nFor Global Payroll employees whose salary Remote pays out, a change to the bank details\nreplaces the account with a new default account that the company admin must approve, as\ndoes sending a denied account's details again. Salary is held until the admin approves.\nChanging only the label, or sending exactly the same details again, keeps the account as\nit is. A change returns 422 while a payment is in progress, while the account is under\ncompliance review, or when the account is used in a payment split. Deleted accounts are\nnot listed.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n| Company-scoped access token | Manage employments (`employments`) | - | - |",
         "operationId": "put_v1_employee_bank-account",
         "parameters": [
           {
@@ -13946,7 +13946,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "0b55fd37-c172-4ad6-9170-c5bb1493830d",
+            "example": "558fc5dc-527a-4937-a443-eae7e52a8cac",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14760,7 +14760,7 @@
     "/v1/employments/{employment_id}/invite": {
       "post": {
         "deprecated": false,
-        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nA company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted\nfrom incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the\n409 is a resource error with the code `resource_restricted` for the employment.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "post_v1_employments_employment_id_invite",
         "parameters": [
           {
@@ -14810,7 +14810,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConflictResponse"
+                  "$ref": "#/components/schemas/ConflictOrResourceErrorResponse"
                 }
               }
             },
@@ -29412,7 +29412,12 @@
       "BadRequestResponse": {
         "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
         "example": {
-          "message": "invalid {resource}"
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
         },
         "oneOf": [
           {
@@ -31402,9 +31407,49 @@
                 },
                 "type": "array"
               },
+              "unavailable_columns": {
+                "description": "The names of file columns last mapped to fields this import doesn't have. Unless mapped again, they are not imported.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
               "unmapped_column_count": {
                 "description": "The number of columns that have not been mapped",
                 "type": "integer"
+              },
+              "unmapped_columns": {
+                "description": "The file columns not mapped to any field",
+                "items": {
+                  "additionalProperties": false,
+                  "example": {
+                    "index": 0,
+                    "name": "full_name",
+                    "sample_data": "Aaron Carter"
+                  },
+                  "properties": {
+                    "index": {
+                      "description": "The index of the data column in the file",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The name of the data column",
+                      "type": "string"
+                    },
+                    "sample_data": {
+                      "description": "A sample data value from the data column",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "index"
+                  ],
+                  "title": "ImportJobDataColumn",
+                  "type": "object"
+                },
+                "type": "array"
               },
               "unmapped_required_field_count": {
                 "description": "The number of required schema field paths that have not been mapped",
@@ -33191,6 +33236,26 @@
         },
         "title": "CompleteOnboarding",
         "type": "object"
+      },
+      "ConflictOrResourceErrorResponse": {
+        "description": "Returned when the request conflicts with the current state of a resource (HTTP 409): either a plain message, or a structured error whose `message` object carries a machine-readable `code`.",
+        "example": {
+          "message": {
+            "code": "resource_restricted",
+            "message": "The employee can't be invited because the contract has a signing bonus. Adding incentives is currently unavailable because your account is restricted.",
+            "resource_id": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+            "resource_type": "employment"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ConflictResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ResourceErrorResponse"
+          }
+        ],
+        "title": "ConflictOrResourceErrorResponse"
       },
       "ConflictResponse": {
         "description": "Returned when the request conflicts with the current state of a resource (HTTP 409). For example, trying to create a resource that already exists or performing an action that requires the resource to be in a different state.",
@@ -41362,6 +41427,10 @@
           "manager": {
             "description": "The full name of the employee's manager.",
             "type": "string"
+          },
+          "requires_engagement_agreement_details": {
+            "description": "Whether this employment takes engagement agreement details. It depends on the country and the hiring model of the active contract. When false, saving engagement agreement details for this employment returns a 404.",
+            "type": "boolean"
           },
           "login_email": {
             "description": "The email address the employee uses to log in to the Remote platform.",
@@ -56810,6 +56879,7 @@
                   "action_unrecognized",
                   "action_invalid",
                   "resource_not_found",
+                  "resource_restricted",
                   "parameter_value_invalid",
                   "parameter_invalid_date",
                   "resource_invalid_state",
@@ -60472,7 +60542,8 @@
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
@@ -61529,6 +61600,7 @@
         "type": "object"
       },
       "ValidationError": {
+        "description": "A request that fails this operation's schema gets errors keyed by the field's path joined\nwith `/`, never nested, each a list of messages, and no `message`\n(`{\"errors\": {\"params/reason\": [\"Missing field\"]}}`,\n`{\"errors\": {\"params/reason\": [\"Invalid string. Got: integer\"]}}`). A request the handler\nrefuses is usually keyed by field and nested for embedded fields\n(`{\"errors\": {\"address\": {\"city\": [\"can't be blank\"]}}}`); it may carry a `message`, and\nsome endpoints key `errors` by their own ids instead.\n",
         "example": {
           "errors": {
             "rejected_reason": [

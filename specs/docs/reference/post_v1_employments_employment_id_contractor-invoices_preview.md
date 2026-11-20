@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-08-28T15:41:28.000Z
+updatedAt: 2026-11-20T04:28:08.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -126,7 +126,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
@@ -669,7 +670,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "0b55fd37-c172-4ad6-9170-c5bb1493830d",
+            "example": "558fc5dc-527a-4937-a443-eae7e52a8cac",
             "in": "path",
             "name": "employment_id",
             "required": true,

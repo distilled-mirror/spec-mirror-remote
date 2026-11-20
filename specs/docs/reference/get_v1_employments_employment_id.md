@@ -384,6 +384,10 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "description": "The full name of the employee's manager.",
             "type": "string"
           },
+          "requires_engagement_agreement_details": {
+            "description": "Whether this employment takes engagement agreement details. It depends on the country and the hiring model of the active contract. When false, saving engagement agreement details for this employment returns a 404.",
+            "type": "boolean"
+          },
           "login_email": {
             "description": "The email address the employee uses to log in to the Remote platform.",
             "type": "string"
@@ -795,7 +799,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
@@ -1130,7 +1135,12 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       "BadRequestResponse": {
         "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
         "example": {
-          "message": "invalid {resource}"
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
         },
         "oneOf": [
           {

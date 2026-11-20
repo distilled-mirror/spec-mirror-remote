@@ -166,7 +166,8 @@ This endpoint accepts any one of the following token types:
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"

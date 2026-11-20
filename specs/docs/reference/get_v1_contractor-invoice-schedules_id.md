@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-05-27T21:24:38.000Z
+updatedAt: 2026-11-20T04:28:08.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -242,7 +242,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
@@ -337,7 +338,12 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       "BadRequestResponse": {
         "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
         "example": {
-          "message": "invalid {resource}"
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
         },
         "oneOf": [
           {
@@ -826,7 +832,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "9a2a748a-fe59-4e93-b540-a6468b87e9de",
+            "example": "4700b9a0-3ea9-4207-ba0e-e4d5a78fb28d",
             "in": "path",
             "name": "id",
             "required": true,

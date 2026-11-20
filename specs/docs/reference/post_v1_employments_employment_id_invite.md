@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-05-27T21:16:20.000Z
+updatedAt: 2026-11-20T01:50:41.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -15,6 +15,10 @@ Requirements for the invitation to succeed:
 
 If there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.
 HTTP Status OK (200) is returned in case of success.
+
+A company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted
+from incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the
+409 is a resource error with the code `resource_restricted` for the employment.
 
 In case of the following error message:
 `"Please reselect benefits - the previous selection is no longer available"`
@@ -123,10 +127,93 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "some_field": [
               "is invalid"
             ]
-          }
+          },
+          "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
         "type": "object"
+      },
+      "ResourceErrorResponse": {
+        "description": "Returned when an operation fails due to a resource-level conflict or constraint. Includes a structured error with a machine-readable code, a human-readable message, and the type and ID of the affected resource.",
+        "example": {
+          "message": {
+            "code": "resource_already_exists",
+            "message": "There is already a submitted Employee termination request for this user, so you can't submit another one",
+            "resource_id": "aca8ba1f-8d3a-4de8-9ab4-e0fcb4b210be",
+            "resource_type": "termination_request"
+          }
+        },
+        "properties": {
+          "message": {
+            "properties": {
+              "code": {
+                "description": "A machine-readable error code identifying the specific type of resource error.",
+                "enum": [
+                  "resource_not_eligible",
+                  "resource_already_exists",
+                  "action_unrecognized",
+                  "action_invalid",
+                  "resource_not_found",
+                  "resource_restricted",
+                  "parameter_value_invalid",
+                  "parameter_invalid_date",
+                  "resource_invalid_state",
+                  "parameter_value_unknown",
+                  "request_body_empty",
+                  "request_internal_server_error",
+                  "parameter_required_missing",
+                  "parameter_one_of_required_missing",
+                  "parameter_too_many",
+                  "parameter_unknown",
+                  "parameter_map_empty",
+                  "request_idempotency_in_progress",
+                  "request_idempotency_key_reused",
+                  "resource_not_supported_for_country"
+                ],
+                "type": "string"
+              },
+              "message": {
+                "description": "A human-readable message explaining the error and how to resolve it.",
+                "type": "string"
+              },
+              "resource_id": {
+                "description": "The unique identifier of the specific resource that caused the error. May be null if the resource has not been created yet.",
+                "nullable": true,
+                "type": "string"
+              },
+              "resource_type": {
+                "description": "The type of resource that caused the error (e.g., \"termination_request\", \"employment\").",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ResourceErrorResponse",
+        "type": "object"
+      },
+      "ConflictOrResourceErrorResponse": {
+        "description": "Returned when the request conflicts with the current state of a resource (HTTP 409): either a plain message, or a structured error whose `message` object carries a machine-readable `code`.",
+        "example": {
+          "message": {
+            "code": "resource_restricted",
+            "message": "The employee can't be invited because the contract has a signing bonus. Adding incentives is currently unavailable because your account is restricted.",
+            "resource_id": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+            "resource_type": "employment"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ConflictResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ResourceErrorResponse"
+          }
+        ],
+        "title": "ConflictOrResourceErrorResponse"
       },
       "SuccessResponse": {
         "description": "A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).",
@@ -183,7 +270,12 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "BadRequestResponse": {
         "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
         "example": {
-          "message": "invalid {resource}"
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
         },
         "oneOf": [
           {
@@ -596,7 +688,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nA company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted\nfrom incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the\n409 is a resource error with the code `resource_restricted` for the employment.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "post_v1_employments_employment_id_invite",
         "parameters": [
           {
@@ -656,7 +748,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConflictResponse"
+                  "$ref": "#/components/schemas/ConflictOrResourceErrorResponse"
                 }
               }
             },
