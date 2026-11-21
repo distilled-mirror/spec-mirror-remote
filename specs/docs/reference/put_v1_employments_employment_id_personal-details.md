@@ -385,7 +385,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "type": "string"
           },
           "requires_engagement_agreement_details": {
-            "description": "Whether this employment takes engagement agreement details. It depends on the country and the hiring model of the active contract. When false, saving engagement agreement details for this employment returns a 404.",
+            "description": "Whether this employment takes engagement agreement details. Only EOR employments take them, and it depends on the country and the hiring model of the active contract. When false, saving engagement agreement details for this employment returns a 404.",
             "type": "boolean"
           },
           "login_email": {

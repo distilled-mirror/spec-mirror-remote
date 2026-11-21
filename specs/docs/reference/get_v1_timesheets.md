@@ -891,6 +891,15 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "nullable": true,
             "type": "string"
           },
+          "on_call_restriction": {
+            "description": "For `on_call` entries only: whether the on-call time was restricted (`restricted`: working, or had to stay at or near the workplace) or not (`unrestricted`: only had to be reachable). Empty when not answered, which counts as restricted.",
+            "enum": [
+              "restricted",
+              "unrestricted"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
           "time_breakdown": {
             "$ref": "#/components/schemas/TimeBreakdown"
           },

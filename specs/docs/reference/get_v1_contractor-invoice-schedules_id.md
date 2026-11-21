@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-11-20T04:28:08.000Z
+updatedAt: 2026-05-27T21:24:38.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -832,7 +832,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "4700b9a0-3ea9-4207-ba0e-e4d5a78fb28d",
+            "example": "bac29882-bd81-4b60-80dc-b198f57f573d",
             "in": "path",
             "name": "id",
             "required": true,

@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-11-20T04:28:08.000Z
+updatedAt: 2026-10-01T08:53:12.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -1014,7 +1014,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "4248c168-8a00-43dd-997a-67b4373db297",
+            "example": "18e2dad6-db50-4a14-954d-02bb984a2587",
             "in": "path",
             "name": "id",
             "required": true,

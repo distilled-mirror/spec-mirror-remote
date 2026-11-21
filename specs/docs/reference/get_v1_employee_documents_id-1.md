@@ -57,7 +57,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "example": {
           "data": {
             "document": {
-              "content": "data:application/pdf;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAACVCAYAAABRorhPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWF...",
+              "content": "data:application/pdf;base64,JVBERi0xLjQK...",
               "id": "9880b711-file-id-ecf8f551bd78",
               "inserted_at": "2021-07-15T18:18:17Z",
               "name": "id.pdf",

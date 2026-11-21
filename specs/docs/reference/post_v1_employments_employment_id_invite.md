@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-11-20T01:50:41.000Z
+updatedAt: 2026-05-27T21:16:20.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---

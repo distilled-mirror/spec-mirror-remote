@@ -95,7 +95,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "example": {
           "data": {
             "contract_document": {
-              "content": "data:application/pdf;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAACVCAYAAABRorhPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWF...",
+              "content": "data:application/pdf;base64,JVBERi0xLjQK...",
               "name": "id.pdf",
               "signatories": [
                 {

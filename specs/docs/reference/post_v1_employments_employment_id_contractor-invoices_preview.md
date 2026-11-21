@@ -1,5 +1,5 @@
 ---
-updatedAt: 2026-11-20T04:28:08.000Z
+updatedAt: 2026-08-28T15:41:28.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
@@ -256,7 +256,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "example": {
           "data": {
             "contractor_invoice_preview": {
-              "content": "data:application/pdf;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAACVCAYAAABRorhPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWF...",
+              "content": "data:application/pdf;base64,JVBERi0xLjQK...",
               "name": "contractor-invoice.pdf"
             }
           }
@@ -670,7 +670,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "558fc5dc-527a-4937-a443-eae7e52a8cac",
+            "example": "e1732a6f-f3db-4b19-956b-e88c23cfa0f0",
             "in": "path",
             "name": "employment_id",
             "required": true,
