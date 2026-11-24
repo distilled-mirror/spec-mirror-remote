@@ -193,7 +193,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         },
         "properties": {
           "date": {
-            "description": "The day this entry is filed under. A `minimum_engagement` or `late_cancellation` entry is filed under the local day of the call-in, or of the shift the change was about, in the entry's timezone. A `guaranteed_hours` entry is filed under the last day of the timesheet week, or the last day in that week the contract guarantees hours; its `total_hours` covers the whole week, so it is not that day's pay.",
+            "description": "The day this entry is filed under. A `minimum_engagement`, `late_cancellation` or `late_schedule_change` entry is filed under the local day of the call-in, or of the shift the change was about, in the entry's timezone. A `guaranteed_hours` entry is filed under the last day of the timesheet week, or the last day in that week the contract guarantees hours; its `total_hours` covers the whole week, so it is not that day's pay.",
             "format": "date",
             "type": "string"
           },
@@ -203,11 +203,12 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "string"
           },
           "reason": {
-            "description": "Why Remote wrote the top-up. `guaranteed_hours`: the week's worked time is below the contract's guaranteed hours. `minimum_engagement`: a call-in is shorter than the policy's minimum paid time. `late_cancellation`: an employer cancelled, shortened or moved a shift inside the paid notice window, and the worker is paid the hours lost. Null only for an entry the system never writes.",
+            "description": "Why Remote wrote the top-up. `guaranteed_hours`: the week's worked time, plus the paid breaks the policy counts, is below the contract's guaranteed hours. `minimum_engagement`: a call-in is shorter than the policy's minimum paid time. `late_cancellation`: an employer cancelled, shortened or moved a shift inside the paid notice window, and the worker is paid the hours lost. `late_schedule_change`: an employer added, lengthened or moved a shift inside the paid notice window, and the policy pays a fixed number of hours for each such change (US predictive scheduling). Null only for an entry the system never writes.",
             "enum": [
               "guaranteed_hours",
               "minimum_engagement",
-              "late_cancellation"
+              "late_cancellation",
+              "late_schedule_change"
             ],
             "nullable": true,
             "type": "string"

@@ -122,6 +122,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "$ref": "#/components/schemas/Date"
           },
           "hours": {
+            "description": "The hours taken off on this day. When the employee's work schedule decides the day, leave it out to book the scheduled time. Hours above the scheduled time are rejected, and a day with no scheduled time books 0.",
             "type": "integer"
           }
         },

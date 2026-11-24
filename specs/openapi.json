@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "fa7242e2-0752-4803-bc75-f9ce6681061d",
+            "example": "2e461977-25c1-4744-89bb-520cb292c11e",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "85d305a7-a36d-4444-a503-23f54778f7e1",
+            "example": "11dc9b10-9ec1-421a-adb0-e6eb9a72adfa",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "b5157bf3-bbd7-4a46-ab1d-7caad13b8fb1",
+            "example": "47b1832e-7385-4561-97e2-bc94fc20e33d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "d8cc06f8-8568-4ac0-ada0-9c034880b8ce",
+            "example": "a0554af9-8719-4ee9-94c5-2777c74930dc",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "d11813ec-2b22-4dd2-bf44-f3b701b12f81",
+            "example": "93afd327-8026-4e6a-baf4-783a6c579c29",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "4c846448-b2ac-4c7e-b803-c95d034e2ae7",
+            "example": "a9aefefa-dc54-4513-aa9b-8cf6aaf88a45",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "bc2523bf-ed1c-48f3-96fc-ffad3e72e05f",
+            "example": "9ac3dbb6-1d16-4c32-b219-a2c9cf63117f",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "9509b6e3-3ef5-4497-bf8a-885d449b1cd4",
+            "example": "82bd6bff-3794-494d-8360-36362b71e0b2",
             "in": "path",
             "name": "id",
             "required": true,
@@ -13946,7 +13946,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "a512656b-6cb7-4d68-8faf-7e9c87dbe98f",
+            "example": "d0652f2c-f0c7-4fdb-975a-fb39027b7578",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14760,7 +14760,7 @@
     "/v1/employments/{employment_id}/invite": {
       "post": {
         "deprecated": false,
-        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nA company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted\nfrom incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the\n409 is a resource error with the code `resource_restricted` for the employment.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n* An employment waiting for its onboarding reserve (`created_awaiting_reserve`) is invited only when Remote has unblocked onboarding for its legal entity. Otherwise the request returns 409.\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nA company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted\nfrom incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the\n409 is a resource error with the code `resource_restricted` for the employment.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "post_v1_employments_employment_id_invite",
         "parameters": [
           {
@@ -22254,7 +22254,7 @@
     "/v1/sandbox/contractors/employments/{employment_id}/rates": {
       "post": {
         "deprecated": false,
-        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Contractor of Record contractors, including ones not\nactive yet, and Contractor Management Plus contractors whose contract is signed cannot be seeded,\nsince their Statement of Work sets the rate: the endpoint returns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Without `statement_of_work`, Contractor of Record\ncontractors, including ones not active yet, and Contractor Management Plus contractors whose\ncontract is signed cannot be seeded, since their Statement of Work sets the rate: the endpoint\nreturns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nWith `statement_of_work`, the rate comes from a signed Statement of Work instead, made from\nRemote's templates as signature makes one, so the rate carries the Statement of Work's service\ndates and its contract documents are listed and open like any other. A contractor with no signed\nContractor Services Agreement from Remote's template gets one, signed, which holds their first\nStatement of Work and sets the main rate. Each later seed adds a Statement of Work document, whose\nrate is the main rate only when the contractor has none. This works for Contractor Management,\nContractor Management Plus and Contractor of Record contractors, whether or not Statements of Work\nare turned on for the company, but only for an active contractor. The company's owner makes and\nsigns the documents for the company, so the partner needs only the contractor rate permissions\nthis endpoint asks for. No email or in-app notification is sent, and the checks an employer's rate\nchange goes through, such as a Contractor of Record contractor's risk reserve, are skipped. As\nwhen an employer makes a new contract document, the contractor's documents that are not signed\nyet, such as a draft agreement, are archived. The `contract_document.status.changed` webhook fires\nfor the signed document and for each archived one, as when an employer makes and signs a document.\nWithout `pay_frequency` a rate is invoiced monthly; a `one_off` rate is paid on completion of the\nservices and takes no `pay_frequency`.\n\nThe Statement of Work goes through the contractor's own contract details form, so its rules apply:\nfor a Contractor Management Plus contractor a `service_start_date` in the past is rejected with\n`422`, while other contractors' Statements of Work may start in the past. A name another Statement\nof Work of the contractor already has with the same start date, a blank name, an end date before\nthe start date, an `amount` with more than two decimal places or a `pay_frequency` on a `one_off`\nrate is rejected with `422`, and nothing is seeded. Seeds without a name are never treated as\nduplicates. A contractor whose Contractor Management Plus upgrade waits for its agreement to be\nsigned is rejected with `422` too: seed once the upgrade has started, which happens shortly after\nthe agreement is signed, or cancel the upgrade with a `downgrade` first.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "post_v1_sandbox_contractors_employments_employment_id_rates",
         "parameters": [
           {
@@ -43656,6 +43656,7 @@
               "full_name": "Jane Smith",
               "type": "employee",
               "employment_lifecycle_stage": "employee_self_enrollment",
+              "emails_blocked_by_integration": false,
               "administrative_details": {},
               "company_id": "e31adae1-company-id-af5fba7dd803",
               "work_address_details": {},
@@ -43768,6 +43769,10 @@
                   },
                   {
                     "properties": {
+                      "emails_blocked_by_integration": {
+                        "description": "`true` when the employee is linked to an integration, such as an HRIS sync, and every Remote notification to them is turned off. Remote then doesn't invite them, and sends them only the emails it must, such as documents to sign. `false` otherwise.",
+                        "type": "boolean"
+                      },
                       "termination_date": {
                         "description": "Most updated termination date for the offboarding. This date is subject to change through the offboarding process even after it is finalized.",
                         "format": "date",
@@ -57327,6 +57332,9 @@
             "nullable": true,
             "type": "string"
           },
+          "statement_of_work": {
+            "$ref": "#/components/schemas/SandboxStatementOfWorkParams"
+          },
           "type": {
             "description": "The unit the amount is paid per.",
             "enum": [
@@ -57344,6 +57352,40 @@
           "type"
         ],
         "title": "SandboxCreateContractorRateParams",
+        "type": "object"
+      },
+      "SandboxStatementOfWorkParams": {
+        "additionalProperties": false,
+        "description": "Seeds the rate from a signed Statement of Work, whether or not Statements of Work are turned on\nfor the company. Omit it to set the main rate as an employer's rate edit does.\n",
+        "example": {
+          "name": "Website redesign",
+          "service_end_date": "2026-12-31",
+          "service_start_date": "2026-01-01"
+        },
+        "properties": {
+          "name": {
+            "description": "The Statement of Work's name, which can't be blank. Another Statement of Work of the contractor with the same name,\nignoring case and spaces, can't start on the same date.\n",
+            "maxLength": 255,
+            "minLength": 1,
+            "nullable": true,
+            "type": "string"
+          },
+          "service_end_date": {
+            "description": "The last day of the services. Omit it for services with no end date.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "service_start_date": {
+            "description": "The day the services start, and the rate with them.",
+            "format": "date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "service_start_date"
+        ],
+        "title": "SandboxStatementOfWorkParams",
         "type": "object"
       },
       "SendBackTimesheetParams": {
@@ -58896,6 +58938,7 @@
             "$ref": "#/components/schemas/Date"
           },
           "hours": {
+            "description": "The hours taken off on this day. When the employee's work schedule decides the day, leave it out to book the scheduled time. Hours above the scheduled time are rejected, and a day with no scheduled time books 0.",
             "type": "integer"
           }
         },
@@ -59669,7 +59712,7 @@
         },
         "properties": {
           "date": {
-            "description": "The day this entry is filed under. A `minimum_engagement` or `late_cancellation` entry is filed under the local day of the call-in, or of the shift the change was about, in the entry's timezone. A `guaranteed_hours` entry is filed under the last day of the timesheet week, or the last day in that week the contract guarantees hours; its `total_hours` covers the whole week, so it is not that day's pay.",
+            "description": "The day this entry is filed under. A `minimum_engagement`, `late_cancellation` or `late_schedule_change` entry is filed under the local day of the call-in, or of the shift the change was about, in the entry's timezone. A `guaranteed_hours` entry is filed under the last day of the timesheet week, or the last day in that week the contract guarantees hours; its `total_hours` covers the whole week, so it is not that day's pay.",
             "format": "date",
             "type": "string"
           },
@@ -59679,11 +59722,12 @@
             "type": "string"
           },
           "reason": {
-            "description": "Why Remote wrote the top-up. `guaranteed_hours`: the week's worked time is below the contract's guaranteed hours. `minimum_engagement`: a call-in is shorter than the policy's minimum paid time. `late_cancellation`: an employer cancelled, shortened or moved a shift inside the paid notice window, and the worker is paid the hours lost. Null only for an entry the system never writes.",
+            "description": "Why Remote wrote the top-up. `guaranteed_hours`: the week's worked time, plus the paid breaks the policy counts, is below the contract's guaranteed hours. `minimum_engagement`: a call-in is shorter than the policy's minimum paid time. `late_cancellation`: an employer cancelled, shortened or moved a shift inside the paid notice window, and the worker is paid the hours lost. `late_schedule_change`: an employer added, lengthened or moved a shift inside the paid notice window, and the policy pays a fixed number of hours for each such change (US predictive scheduling). Null only for an entry the system never writes.",
             "enum": [
               "guaranteed_hours",
               "minimum_engagement",
-              "late_cancellation"
+              "late_cancellation",
+              "late_schedule_change"
             ],
             "nullable": true,
             "type": "string"

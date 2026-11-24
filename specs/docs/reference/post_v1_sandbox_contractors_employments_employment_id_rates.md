@@ -10,12 +10,40 @@ Sets the contractor's main rate, the same way an employer's rate edit does. A ma
 `service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a
 Statement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint
 returns both while that Statement of Work is in force. This lets the rate endpoints be exercised
-without going through contract signature. Contractor of Record contractors, including ones not
-active yet, and Contractor Management Plus contractors whose contract is signed cannot be seeded,
-since their Statement of Work sets the rate: the endpoint returns `422`.
+without going through contract signature. Without `statement_of_work`, Contractor of Record
+contractors, including ones not active yet, and Contractor Management Plus contractors whose
+contract is signed cannot be seeded, since their Statement of Work sets the rate: the endpoint
+returns `422`.
 
 The currency is derived from the legal entity the contractor is paid in by. A rate in a
 currency the contractor cannot be paid in is rejected with `422`.
+
+With `statement_of_work`, the rate comes from a signed Statement of Work instead, made from
+Remote's templates as signature makes one, so the rate carries the Statement of Work's service
+dates and its contract documents are listed and open like any other. A contractor with no signed
+Contractor Services Agreement from Remote's template gets one, signed, which holds their first
+Statement of Work and sets the main rate. Each later seed adds a Statement of Work document, whose
+rate is the main rate only when the contractor has none. This works for Contractor Management,
+Contractor Management Plus and Contractor of Record contractors, whether or not Statements of Work
+are turned on for the company, but only for an active contractor. The company's owner makes and
+signs the documents for the company, so the partner needs only the contractor rate permissions
+this endpoint asks for. No email or in-app notification is sent, and the checks an employer's rate
+change goes through, such as a Contractor of Record contractor's risk reserve, are skipped. As
+when an employer makes a new contract document, the contractor's documents that are not signed
+yet, such as a draft agreement, are archived. The `contract_document.status.changed` webhook fires
+for the signed document and for each archived one, as when an employer makes and signs a document.
+Without `pay_frequency` a rate is invoiced monthly; a `one_off` rate is paid on completion of the
+services and takes no `pay_frequency`.
+
+The Statement of Work goes through the contractor's own contract details form, so its rules apply:
+for a Contractor Management Plus contractor a `service_start_date` in the past is rejected with
+`422`, while other contractors' Statements of Work may start in the past. A name another Statement
+of Work of the contractor already has with the same start date, a blank name, an end date before
+the start date, an `amount` with more than two decimal places or a `pay_frequency` on a `one_off`
+rate is rejected with `422`, and nothing is seeded. Seeds without a name are never treated as
+duplicates. A contractor whose Contractor Management Plus upgrade waits for its agreement to be
+signed is rejected with `422` too: seed once the upgrade has started, which happens shortly after
+the agreement is signed, or cancel the upgrade with a `downgrade` first.
 
 This endpoint is only available in Sandbox, otherwise it will respond with a 404.
 
@@ -319,6 +347,40 @@ This endpoint accepts any one of the following token types:
         "title": "ContractorRateStatementOfWork",
         "type": "object"
       },
+      "SandboxStatementOfWorkParams": {
+        "additionalProperties": false,
+        "description": "Seeds the rate from a signed Statement of Work, whether or not Statements of Work are turned on\nfor the company. Omit it to set the main rate as an employer's rate edit does.\n",
+        "example": {
+          "name": "Website redesign",
+          "service_end_date": "2026-12-31",
+          "service_start_date": "2026-01-01"
+        },
+        "properties": {
+          "name": {
+            "description": "The Statement of Work's name, which can't be blank. Another Statement of Work of the contractor with the same name,\nignoring case and spaces, can't start on the same date.\n",
+            "maxLength": 255,
+            "minLength": 1,
+            "nullable": true,
+            "type": "string"
+          },
+          "service_end_date": {
+            "description": "The last day of the services. Omit it for services with no end date.",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "service_start_date": {
+            "description": "The day the services start, and the rate with them.",
+            "format": "date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "service_start_date"
+        ],
+        "title": "SandboxStatementOfWorkParams",
+        "type": "object"
+      },
       "TooManyRequestsResponse": {
         "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
         "example": {
@@ -485,6 +547,9 @@ This endpoint accepts any one of the following token types:
             ],
             "nullable": true,
             "type": "string"
+          },
+          "statement_of_work": {
+            "$ref": "#/components/schemas/SandboxStatementOfWorkParams"
           },
           "type": {
             "description": "The unit the amount is paid per.",
@@ -834,7 +899,7 @@ This endpoint accepts any one of the following token types:
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Contractor of Record contractors, including ones not\nactive yet, and Contractor Management Plus contractors whose contract is signed cannot be seeded,\nsince their Statement of Work sets the rate: the endpoint returns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Sets the contractor's main rate, the same way an employer's rate edit does. A main rate without a\n`service_start_date` is updated in place and keeps its `id`. A main rate with one belongs to a\nStatement of Work and is kept: seeding adds a new main rate beside it, and the list endpoint\nreturns both while that Statement of Work is in force. This lets the rate endpoints be exercised\nwithout going through contract signature. Without `statement_of_work`, Contractor of Record\ncontractors, including ones not active yet, and Contractor Management Plus contractors whose\ncontract is signed cannot be seeded, since their Statement of Work sets the rate: the endpoint\nreturns `422`.\n\nThe currency is derived from the legal entity the contractor is paid in by. A rate in a\ncurrency the contractor cannot be paid in is rejected with `422`.\n\nWith `statement_of_work`, the rate comes from a signed Statement of Work instead, made from\nRemote's templates as signature makes one, so the rate carries the Statement of Work's service\ndates and its contract documents are listed and open like any other. A contractor with no signed\nContractor Services Agreement from Remote's template gets one, signed, which holds their first\nStatement of Work and sets the main rate. Each later seed adds a Statement of Work document, whose\nrate is the main rate only when the contractor has none. This works for Contractor Management,\nContractor Management Plus and Contractor of Record contractors, whether or not Statements of Work\nare turned on for the company, but only for an active contractor. The company's owner makes and\nsigns the documents for the company, so the partner needs only the contractor rate permissions\nthis endpoint asks for. No email or in-app notification is sent, and the checks an employer's rate\nchange goes through, such as a Contractor of Record contractor's risk reserve, are skipped. As\nwhen an employer makes a new contract document, the contractor's documents that are not signed\nyet, such as a draft agreement, are archived. The `contract_document.status.changed` webhook fires\nfor the signed document and for each archived one, as when an employer makes and signs a document.\nWithout `pay_frequency` a rate is invoiced monthly; a `one_off` rate is paid on completion of the\nservices and takes no `pay_frequency`.\n\nThe Statement of Work goes through the contractor's own contract details form, so its rules apply:\nfor a Contractor Management Plus contractor a `service_start_date` in the past is rejected with\n`422`, while other contractors' Statements of Work may start in the past. A name another Statement\nof Work of the contractor already has with the same start date, a blank name, an end date before\nthe start date, an `amount` with more than two decimal places or a `pay_frequency` on a `one_off`\nrate is rejected with `422`, and nothing is seeded. Seeds without a name are never treated as\nduplicates. A contractor whose Contractor Management Plus upgrade waits for its agreement to be\nsigned is rejected with `422` too: seed once the upgrade has started, which happens shortly after\nthe agreement is signed, or cancel the upgrade with a `downgrade` first.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "post_v1_sandbox_contractors_employments_employment_id_rates",
         "parameters": [
           {

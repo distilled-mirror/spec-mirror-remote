@@ -552,6 +552,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               "full_name": "Jane Smith",
               "type": "employee",
               "employment_lifecycle_stage": "employee_self_enrollment",
+              "emails_blocked_by_integration": false,
               "administrative_details": {},
               "company_id": "e31adae1-company-id-af5fba7dd803",
               "work_address_details": {},
@@ -664,6 +665,10 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   },
                   {
                     "properties": {
+                      "emails_blocked_by_integration": {
+                        "description": "`true` when the employee is linked to an integration, such as an HRIS sync, and every Remote notification to them is turned off. Remote then doesn't invite them, and sends them only the emails it must, such as documents to sign. `false` otherwise.",
+                        "type": "boolean"
+                      },
                       "termination_date": {
                         "description": "Most updated termination date for the offboarding. This date is subject to change through the offboarding process even after it is finalized.",
                         "format": "date",
