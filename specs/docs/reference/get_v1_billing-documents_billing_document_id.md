@@ -939,14 +939,14 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                       "prefunding_credit_note",
                       "reconciliation_credit_note",
                       "credit_note",
-                      "eor_reserve_credit_note",
-                      "contractor_management_invoice",
-                      "cor_service_invoice",
+                      "peo_service_invoice",
                       "eor_reserve_invoice",
-                      "payroll_service_invoice",
-                      "remote_plan_invoice",
                       "peo_payroll_invoice",
-                      "peo_service_invoice"
+                      "remote_plan_invoice",
+                      "contractor_management_invoice",
+                      "eor_reserve_credit_note",
+                      "payroll_service_invoice",
+                      "cor_service_invoice"
                     ],
                     "type": "string"
                   },

@@ -290,6 +290,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "BulkEmploymentImportJob": {
         "additionalProperties": false,
         "example": {
+          "can_cancel_reupload": false,
           "column_mapping": {
             "mapping": {
               "basic_info.age": {
@@ -389,6 +390,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "extra_metadata": "extra_metadata"
           },
           "name": "import-foobars",
+          "pending_reupload_mode": null,
           "processed_count": 0,
           "reupload_merge_fields": [],
           "reupload_modes": [
@@ -401,6 +403,10 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "updated_at": "2021-07-15T18:18:17"
         },
         "properties": {
+          "can_cancel_reupload": {
+            "description": "True while a merge or append file uploaded from review waits for its columns to be matched, outside an upload session. `cancel-reupload` then takes the job back to review with its rows, status, column mapping and `last_reupload_summary` as they were (it is refused while the job is `in_progress`).",
+            "type": "boolean"
+          },
           "column_data_hash": {
             "description": "Identifies the columns of the job's current file: its headers, in order. It changes when a file with other columns is uploaded.",
             "nullable": true,
@@ -729,7 +735,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "type": "object"
           },
           "last_reupload_summary": {
-            "description": "What the last merge or append did to the draft. Null after a replace, or while a newly uploaded file still waits for its columns to be matched. The counts stay until the next upload or replace: editing, deleting or fixing rows does not clear them.",
+            "description": "What the last merge or append did to the draft. Null after a replace, or while a newly uploaded file still waits for its columns to be matched. The counts stay until the next upload or replace: editing, deleting or fixing rows does not clear them, and a cancelled merge or append file (`cancel-reupload`) brings them back.",
             "nullable": true,
             "properties": {
               "added": {
@@ -783,7 +789,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "type": "string"
           },
           "pending_reupload_mode": {
-            "description": "Set while the file of a merge or append waits for its columns to be matched, with `stage` at `column_mapping`. Null otherwise: it is cleared once the mapping is confirmed, and `last_reupload_summary` then carries the counts.",
+            "description": "The mode of a merge or append re-upload that waits for its columns to be matched, with `stage` at `column_mapping`. While it is set, the rows are still the ones from before that file. Null otherwise: it is cleared once the mapping is confirmed, and `last_reupload_summary` then carries the counts. A `cancel-reupload` clears it too and brings back the previous `last_reupload_summary`.",
             "enum": [
               "merge_or_add",
               "merge_only",
@@ -1143,6 +1149,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "additionalProperties": false,
         "example": {
           "data": {
+            "can_cancel_reupload": false,
             "column_mapping": {
               "mapping": {
                 "basic_info.age": {
@@ -1242,6 +1249,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
               "extra_metadata": "extra_metadata"
             },
             "name": "import-foobars",
+            "pending_reupload_mode": null,
             "processed_count": 0,
             "reupload_merge_fields": [],
             "reupload_modes": [

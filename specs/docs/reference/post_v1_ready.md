@@ -1686,6 +1686,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "tags": [
           "Employment Management"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": ""
       }
     }

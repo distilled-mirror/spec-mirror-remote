@@ -55,6 +55,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "description": "**Deprecated — renamed to `correction_effective_date`**, which this value backfills. `correction_effective_date` wins when both are sent.",
             "format": "date",
             "type": "string",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-renamed-to": "correction_effective_date"
           },
           "correction_effective_date": {
@@ -73,6 +74,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "deprecated": true,
             "description": "**Deprecated — accepted and ignored.** Express a deduction as a negative `amount`.",
             "type": "boolean",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "pay_rate": {
@@ -83,12 +85,14 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "deprecated": true,
             "description": "**Deprecated — accepted and ignored.** The payout value belongs in the pay item's own `amount`.",
             "type": "integer",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "payout_currency_code": {
             "deprecated": true,
             "description": "**Deprecated — accepted and ignored.** The payout currency belongs in the pay item's own `currency`.",
             "type": "string",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "shift_code": {

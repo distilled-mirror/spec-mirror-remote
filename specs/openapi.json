@@ -1179,21 +1179,21 @@
             "required": false,
             "schema": {
               "enum": [
-                "reconciliation_credit_note",
                 "credit_note",
-                "prefunding_credit_note",
-                "eor_reserve_credit_note",
                 "supplemental_service_credit_note",
-                "reconciliation_invoice",
-                "contractor_management_invoice",
-                "cor_service_invoice",
+                "peo_service_invoice",
+                "prefunding_credit_note",
                 "eor_reserve_invoice",
                 "prefunding_invoice",
-                "supplemental_service_invoice",
-                "payroll_service_invoice",
-                "remote_plan_invoice",
                 "peo_payroll_invoice",
-                "peo_service_invoice"
+                "reconciliation_credit_note",
+                "supplemental_service_invoice",
+                "remote_plan_invoice",
+                "contractor_management_invoice",
+                "eor_reserve_credit_note",
+                "reconciliation_invoice",
+                "payroll_service_invoice",
+                "cor_service_invoice"
               ],
               "type": "string"
             }
@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "2e461977-25c1-4744-89bb-520cb292c11e",
+            "example": "15f3eec0-01b1-4876-9a6c-f250e90ed00d",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "11dc9b10-9ec1-421a-adb0-e6eb9a72adfa",
+            "example": "01ac2a34-f314-4783-b6ea-eeabdc429781",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "47b1832e-7385-4561-97e2-bc94fc20e33d",
+            "example": "76f98fdb-25a0-4587-b122-ea5679a12091",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "a0554af9-8719-4ee9-94c5-2777c74930dc",
+            "example": "76798971-6608-4d50-8c19-4efb8adb508c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "93afd327-8026-4e6a-baf4-783a6c579c29",
+            "example": "e712e0fb-8411-4796-bf3d-36825694a217",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "a9aefefa-dc54-4513-aa9b-8cf6aaf88a45",
+            "example": "c556bc58-0466-44df-b703-e2366d56ab3a",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "9ac3dbb6-1d16-4c32-b219-a2c9cf63117f",
+            "example": "af82a07a-1e2d-4bf9-a99c-b72b419537cb",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "82bd6bff-3794-494d-8360-36362b71e0b2",
+            "example": "7f929832-44fd-4425-8507-f3b061792b0d",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7225,6 +7225,7 @@
         "tags": [
           "Subscriptions"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": "POST /contractors/employments/{employment_id}/cor-termination-requests"
       }
     },
@@ -8111,7 +8112,7 @@
     "/v1/countries/{country_code}/{form}": {
       "get": {
         "deprecated": false,
-        "description": "Returns the json schema of a supported form. Possible form names are:\n```\n- address_details \n- administrative_details \n- bank_account_details \n- employment_basic_information \n- contractor_basic_information \n- contractor_contract_details \n- billing_address_details \n- contract_details \n- emergency_contact \n- emergency_contact_details \n- employment_document_details \n- engagement_agreement_details \n- personal_details \n- pricing_plan_details \n- company_basic_information \n- global_payroll_administrative_details \n- global_payroll_bank_account_details \n- global_payroll_basic_information \n- global_payroll_contract_details \n- global_payroll_federal_taxes \n- global_payroll_state_taxes \n- global_payroll_personal_details \n- benefit_renewal_request \n- hris_personal_details \n\n```\n\nMost forms require a company access token, as they are dependent on certain\nproperties of companies and their current employments. However, the `address_details`\nand `company_basic_information` forms can be accessed using client_credentials\nauthentication (without a company).\n\nThe `global_payroll_contract_details` form requires the `employment_id` query parameter,\nbecause its fields depend on the employment. For example, `overtime_eligible` is shown and\nrequired only when the employment's legal entity is not on Time & Attendance 2.0. A request\nwithout `employment_id` returns 400.\n\nThe `engagement_agreement_details` form takes an optional `employment_id`. With it, the schema\nis returned only when that employment's contract takes engagement agreement details (in the\nCzech Republic and Germany this depends on its hiring model); otherwise the response is 404. A\ncountry without this form still returns 422, as for other forms.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | - | - |\n| Customer API token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |",
+        "description": "Returns the json schema of a supported form. Possible form names are:\n```\n- address_details \n- administrative_details \n- bank_account_details \n- employment_basic_information \n- contractor_basic_information \n- contractor_contract_details \n- billing_address_details \n- contract_details \n- emergency_contact \n- emergency_contact_details \n- employment_document_details \n- engagement_agreement_details \n- personal_details \n- pricing_plan_details \n- company_basic_information \n- global_payroll_administrative_details \n- global_payroll_bank_account_details \n- global_payroll_basic_information \n- global_payroll_contract_details \n- global_payroll_federal_taxes \n- global_payroll_state_taxes \n- global_payroll_personal_details \n- benefit_renewal_request \n- hris_personal_details \n\n```\n\nMost forms require a company access token, as they are dependent on certain\nproperties of companies and their current employments. However, the `address_details`\nand `company_basic_information` forms can be accessed using client_credentials\nauthentication (without a company).\n\nThe `global_payroll_contract_details` form requires the `employment_id` query parameter,\nbecause its fields depend on the employment. For example, `overtime_eligible` is shown and\nrequired only when the employment's legal entity is not on Time & Attendance 2.0. A request\nwithout `employment_id` returns 400.\n\nThe `engagement_agreement_details` form takes an optional `employment_id`. With it, the schema\nis returned only when that employment's contract takes engagement agreement details (in the\nCzech Republic and Germany this depends on its hiring model); otherwise the response is 404. A\ncountry without this form still returns 422, as for other forms.\n\nThe `administrative_details` form takes an optional `employment_id`. With it, the schema is\ntailored to that employment: its legal entity, its status, its contract details and the\nadministrative details already saved for it. For example, in the United Kingdom stored values\nsuch as the P45 figures are returned as hidden constants; in France and Italy some Remote legal\nentities get extra fields; fields that can no longer change for an active employment are\nreturned read-only. The\nemployment must be a full-time EOR employment with an active contract in the requested country,\nthe employments that `PUT /v1/employments/{employment_id}/administrative-details` saves against\nthis form (otherwise 400). Because the schema\ncarries saved values, the caller needs a role with both the `people-employment` and the\n`people-sensitive-details` read permissions (otherwise 403) whose data scope covers the\nemployment (otherwise 404). Saving the details takes `employee-administrative-details` update\ninstead, so a role may save them without being able to read this tailored schema.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | - | - |\n| Customer API token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |",
         "operationId": "get_v1_countries_country_code_form",
         "parameters": [
           {
@@ -8137,7 +8138,7 @@
             "x-safe": true
           },
           {
-            "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details`, where it tailors the schema to that employment, and for `engagement_agreement_details`, where the schema is returned only if that employment's contract takes engagement agreement details.",
+            "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details` and `administrative_details`, where it tailors the schema to that employment, and for `engagement_agreement_details`, where the schema is returned only if that employment's contract takes engagement agreement details.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "in": "query",
             "name": "employment_id",
@@ -8231,6 +8232,16 @@
               }
             },
             "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountryFormForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "404": {
             "content": {
@@ -9000,6 +9011,72 @@
           }
         },
         "summary": "List Direct Offboardings",
+        "tags": [
+          "Global Payroll"
+        ]
+      }
+    },
+    "/v1/direct-offboardings/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Returns one offboarding of a global payroll employment by its ID. An offboarding the list endpoint doesn't show\nyou answers 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n| Customer API token | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |",
+        "operationId": "get_v1_direct-offboardings_id",
+        "parameters": [
+          {
+            "description": "Direct offboarding ID",
+            "example": "9a8f3c1e-2b4d-4e6f-8a0b-1c2d3e4f5a6b",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-resource-type": "direct_offboarding"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DirectOffboardingResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Show Direct Offboarding",
         "tags": [
           "Global Payroll"
         ]
@@ -13946,7 +14023,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "d0652f2c-f0c7-4fdb-975a-fb39027b7578",
+            "example": "5503dfee-1a11-4f7a-8adc-e26126a527ce",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -15586,6 +15663,7 @@
         "tags": [
           "Expenses"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": ""
       }
     },
@@ -18082,6 +18160,7 @@
         "tags": [
           "Pre-Onboarding Documents"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": "GET /onboarding/employments/{employment_id}/pre-onboarding-requirements"
       }
     },
@@ -18170,6 +18249,7 @@
         "tags": [
           "Pre-Onboarding Documents"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": "POST /onboarding/employments/{employment_id}/pre-onboarding-requirements/{requirement_slug}/documents"
       }
     },
@@ -20935,6 +21015,7 @@
         "tags": [
           "Employment Management"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": ""
       }
     },
@@ -23936,7 +24017,7 @@
             "required": false,
             "schema": {
               "default": 20,
-              "maximum": 100,
+              "maximum": 500,
               "minimum": 1,
               "type": "integer"
             }
@@ -24176,6 +24257,7 @@
         "tags": [
           "Time Off Balances"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": ""
       }
     },
@@ -30863,21 +30945,21 @@
                     },
                     "billing_document_type": {
                       "enum": [
-                        "reconciliation_credit_note",
                         "credit_note",
-                        "prefunding_credit_note",
-                        "eor_reserve_credit_note",
                         "supplemental_service_credit_note",
-                        "reconciliation_invoice",
-                        "contractor_management_invoice",
-                        "cor_service_invoice",
+                        "peo_service_invoice",
+                        "prefunding_credit_note",
                         "eor_reserve_invoice",
                         "prefunding_invoice",
-                        "supplemental_service_invoice",
-                        "payroll_service_invoice",
-                        "remote_plan_invoice",
                         "peo_payroll_invoice",
-                        "peo_service_invoice"
+                        "reconciliation_credit_note",
+                        "supplemental_service_invoice",
+                        "remote_plan_invoice",
+                        "contractor_management_invoice",
+                        "eor_reserve_credit_note",
+                        "reconciliation_invoice",
+                        "payroll_service_invoice",
+                        "cor_service_invoice"
                       ],
                       "type": "string"
                     },
@@ -31214,6 +31296,7 @@
       "BulkEmploymentImportJob": {
         "additionalProperties": false,
         "example": {
+          "can_cancel_reupload": false,
           "column_mapping": {
             "mapping": {
               "basic_info.age": {
@@ -31313,6 +31396,7 @@
             "extra_metadata": "extra_metadata"
           },
           "name": "import-foobars",
+          "pending_reupload_mode": null,
           "processed_count": 0,
           "reupload_merge_fields": [],
           "reupload_modes": [
@@ -31325,6 +31409,10 @@
           "updated_at": "2021-07-15T18:18:17"
         },
         "properties": {
+          "can_cancel_reupload": {
+            "description": "True while a merge or append file uploaded from review waits for its columns to be matched, outside an upload session. `cancel-reupload` then takes the job back to review with its rows, status, column mapping and `last_reupload_summary` as they were (it is refused while the job is `in_progress`).",
+            "type": "boolean"
+          },
           "column_data_hash": {
             "description": "Identifies the columns of the job's current file: its headers, in order. It changes when a file with other columns is uploaded.",
             "nullable": true,
@@ -31653,7 +31741,7 @@
             "type": "object"
           },
           "last_reupload_summary": {
-            "description": "What the last merge or append did to the draft. Null after a replace, or while a newly uploaded file still waits for its columns to be matched. The counts stay until the next upload or replace: editing, deleting or fixing rows does not clear them.",
+            "description": "What the last merge or append did to the draft. Null after a replace, or while a newly uploaded file still waits for its columns to be matched. The counts stay until the next upload or replace: editing, deleting or fixing rows does not clear them, and a cancelled merge or append file (`cancel-reupload`) brings them back.",
             "nullable": true,
             "properties": {
               "added": {
@@ -31707,7 +31795,7 @@
             "type": "string"
           },
           "pending_reupload_mode": {
-            "description": "Set while the file of a merge or append waits for its columns to be matched, with `stage` at `column_mapping`. Null otherwise: it is cleared once the mapping is confirmed, and `last_reupload_summary` then carries the counts.",
+            "description": "The mode of a merge or append re-upload that waits for its columns to be matched, with `stage` at `column_mapping`. While it is set, the rows are still the ones from before that file. Null otherwise: it is cleared once the mapping is confirmed, and `last_reupload_summary` then carries the counts. A `cancel-reupload` clears it too and brings back the previous `last_reupload_summary`.",
             "enum": [
               "merge_or_add",
               "merge_only",
@@ -31800,6 +31888,7 @@
         "additionalProperties": false,
         "example": {
           "data": {
+            "can_cancel_reupload": false,
             "column_mapping": {
               "mapping": {
                 "basic_info.age": {
@@ -31899,6 +31988,7 @@
               "extra_metadata": "extra_metadata"
             },
             "name": "import-foobars",
+            "pending_reupload_mode": null,
             "processed_count": 0,
             "reupload_merge_fields": [],
             "reupload_modes": [
@@ -37698,6 +37788,22 @@
         "title": "CountryCode",
         "type": "string"
       },
+      "CountryFormForbiddenResponse": {
+        "description": "Returned when the token lacks a required scope or role, and, for `administrative_details` with an `employment_id`, when none of the roles the token acts with holds both the `people-employment` and the `people-sensitive-details` read permissions. An employment outside the data scope of those roles answers 404.",
+        "example": {
+          "message": "Your role does not permit this action. Contact your company admin to review your permissions."
+        },
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "CountryFormForbiddenResponse",
+        "type": "object"
+      },
       "CountryFormResponse": {
         "description": "Object with required and optional fields, its descriptions and suggested presentation",
         "example": {
@@ -40006,6 +40112,42 @@
           "is_confidential_termination"
         ],
         "title": "DirectOffboarding",
+        "type": "object"
+      },
+      "DirectOffboardingResponse": {
+        "additionalProperties": false,
+        "description": "Response containing one offboarding of a global payroll employment.",
+        "example": {
+          "data": {
+            "direct_offboarding": {
+              "employment_id": "emp-xyz789",
+              "id": "offb-abc123",
+              "is_confidential_termination": true,
+              "last_working_day": "2026-08-30",
+              "status": "pending_payment",
+              "termination_date": "2026-08-31",
+              "type": "termination"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "additionalProperties": false,
+            "properties": {
+              "direct_offboarding": {
+                "$ref": "#/components/schemas/DirectOffboarding"
+              }
+            },
+            "required": [
+              "direct_offboarding"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "DirectOffboardingResponse",
         "type": "object"
       },
       "DownloadDocumentResponse": {
@@ -44805,6 +44947,7 @@
             "format": "date-time",
             "nullable": true,
             "type": "string",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "pre_onboarding_document_requirement_slug": {
@@ -45488,7 +45631,7 @@
             "type": "object"
           },
           "metadata": {
-            "description": "Row metadata. For login-email-selection-enabled imports (e.g. EOR bulk invite), each reviewed row carries a `login_email_signals` object with the per-row login-email review signals. For bulk Global Payroll invitations, a sent row carries `invite_outcome`.",
+            "description": "Row metadata. For login-email-selection-enabled imports (e.g. EOR bulk invite), each reviewed row carries a `login_email_signals` object with the per-row login-email review signals. For bulk Global Payroll invitations, a sent row carries `invite_outcome`. For job-title-eligibility-checked imports, a row that still passed validation may carry a `job_title_eligibility_notes` object with non-blocking advisory notes, nested by field path exactly like `errors`.",
             "properties": {
               "invite_outcome": {
                 "description": "Bulk Global Payroll invitations only: what the row's employee was sent. `already_onboarded` means they were already on the platform, so nothing was due.",
@@ -45500,6 +45643,26 @@
                   "already_onboarded"
                 ],
                 "type": "string"
+              },
+              "job_title_eligibility_notes": {
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "description": "An array of note messages for the given field",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "description": "Nested object with note messages for the field",
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "description": "Non-blocking advisory notes for a row that still passed validation, nested by field path exactly like `errors`",
+                "type": "object"
               },
               "login_email_signals": {
                 "description": "Per-row review-step signals for login email selection, present only when the feature is enabled. `sso_enforced` reflects whether SSO login is enforced for the row's category. `personal` and `work` report, for each provided email, whether it is already registered on another account.",
@@ -45651,7 +45814,7 @@
             "type": "integer"
           },
           "schema_variant_id": {
-            "description": "The id of the schema variant this row's fields follow, a key of `row_schema_variants` on the job-scoped json-schema response. `null` when the row uses the job-level schema. Only present for job types with per-row schema variants.",
+            "description": "The id of the schema variant this row's fields follow, a key of `row_schema_variants` on the job-scoped json-schema response. `null`, or an id `row_schema_variants` does not list, when the row uses the job-level schema. Only present for job types with per-row schema variants.",
             "nullable": true,
             "type": "string"
           },
@@ -51227,6 +51390,8 @@
           "timeoffs": [
             {
               "automatic": false,
+              "created_by_id": "93aaf0b3-1d79-4d2c-8d47-3d5406727d70",
+              "decline_reason": null,
               "document": {
                 "id": "9880b711-file-id-ecf8f551bd78",
                 "inserted_at": "2021-07-15T18:18:17Z",
@@ -51234,9 +51399,11 @@
                 "sub_type": "personal_id",
                 "type": "id"
               },
+              "edit_reason": null,
               "employment_id": "5e55386e-4f4f-4def-92f4-bdc19a5ce77d",
               "end_date": "2021-12-21",
               "id": "0073fcb5-b669-4e4a-b963-2a47744e75a1",
+              "inserted_at": "2021-12-01T09:12:44Z",
               "leave_policy": {
                 "leave_policy_variant_slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
                 "leave_type": "sick_leave",
@@ -51259,7 +51426,8 @@
               ],
               "timeoff_type": "paid_time_off",
               "timezone": "Asia/Kolkata",
-              "total_minutes": 960
+              "total_minutes": 960,
+              "updated_at": "2021-12-02T15:03:10Z"
             }
           ],
           "total_count": 1,
@@ -53991,6 +54159,7 @@
             "description": "**Deprecated — renamed to `correction_effective_date`**, which this value backfills. `correction_effective_date` wins when both are sent.",
             "format": "date",
             "type": "string",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-renamed-to": "correction_effective_date"
           },
           "correction_effective_date": {
@@ -54009,6 +54178,7 @@
             "deprecated": true,
             "description": "**Deprecated — accepted and ignored.** Express a deduction as a negative `amount`.",
             "type": "boolean",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "pay_rate": {
@@ -54019,12 +54189,14 @@
             "deprecated": true,
             "description": "**Deprecated — accepted and ignored.** The payout value belongs in the pay item's own `amount`.",
             "type": "integer",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "payout_currency_code": {
             "deprecated": true,
             "description": "**Deprecated — accepted and ignored.** The payout currency belongs in the pay item's own `currency`.",
             "type": "string",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "shift_code": {
@@ -58522,6 +58694,8 @@
         "description": "A time off record for an employee, representing a period of leave (e.g., vacation, sick leave, parental leave).",
         "example": {
           "automatic": false,
+          "created_by_id": "93aaf0b3-1d79-4d2c-8d47-3d5406727d70",
+          "decline_reason": null,
           "document": {
             "id": "9880b711-file-id-ecf8f551bd78",
             "inserted_at": "2021-07-15T18:18:17Z",
@@ -58529,9 +58703,11 @@
             "sub_type": "personal_id",
             "type": "id"
           },
+          "edit_reason": null,
           "employment_id": "5e55386e-4f4f-4def-92f4-bdc19a5ce77d",
           "end_date": "2021-12-21",
           "id": "0073fcb5-b669-4e4a-b963-2a47744e75a1",
+          "inserted_at": "2021-12-01T09:12:44Z",
           "leave_policy": {
             "leave_policy_variant_slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "leave_type": "sick_leave",
@@ -58554,7 +58730,8 @@
           ],
           "timeoff_type": "paid_time_off",
           "timezone": "Asia/Kolkata",
-          "total_minutes": 960
+          "total_minutes": 960,
+          "updated_at": "2021-12-02T15:03:10Z"
         },
         "properties": {
           "approved_at": {
@@ -58571,15 +58748,30 @@
             "type": "boolean"
           },
           "cancel_reason": {
-            "description": "The reason provided when the time off was cancelled. Null if not cancelled.",
+            "description": "The most recent reason given for cancelling this time off or requesting its cancellation. A declined cancellation request does not clear it. Null or absent when no reason was given or nothing was cancelled.",
             "nullable": true,
             "type": "string"
           },
           "cancelled_at": {
             "$ref": "#/components/schemas/NullableDateTime"
           },
+          "created_by_id": {
+            "description": "The unique identifier (UUID) of the user who entered the time off: the employee or contractor themselves, or a manager of the company (the `user_id` of `GET /v1/company-managers`; a manager who has since left the company keeps their id here but is no longer listed there). Null or absent when Remote staff entered it, for automatic time offs such as public holidays, for time offs entered by Remote's automated processes, and when no creator was recorded.",
+            "nullable": true,
+            "type": "string"
+          },
+          "decline_reason": {
+            "description": "The most recent reason given for declining this time off or a request to cancel it. A later edit, approval or cancellation does not clear it. Null or absent when no reason was given or nothing was declined.",
+            "nullable": true,
+            "type": "string"
+          },
           "document": {
             "$ref": "#/components/schemas/File"
+          },
+          "edit_reason": {
+            "description": "The reason given with the most recent edit of this time off, by a person or by one of Remote's own processes. Null or absent when never edited.",
+            "nullable": true,
+            "type": "string"
           },
           "employment_id": {
             "description": "The unique identifier (UUID) of the employment this time off belongs to.",
@@ -58592,6 +58784,11 @@
           },
           "id": {
             "description": "The unique identifier (UUID) of the time off record.",
+            "type": "string"
+          },
+          "inserted_at": {
+            "description": "When the time off was requested or entered, as a UTC date-time.",
+            "format": "date-time",
             "type": "string"
           },
           "leave_policy": {
@@ -58642,6 +58839,11 @@
             "description": "The total number of minutes taken off across all `timeoff_days`. Always equals the sum of the per-day `minutes` values.",
             "minimum": 0,
             "type": "integer"
+          },
+          "updated_at": {
+            "description": "When the time off was last changed, as a UTC date-time, at or after `inserted_at`.",
+            "format": "date-time",
+            "type": "string"
           }
         },
         "required": [
@@ -59129,6 +59331,8 @@
           "data": {
             "timeoff": {
               "automatic": false,
+              "created_by_id": "93aaf0b3-1d79-4d2c-8d47-3d5406727d70",
+              "decline_reason": null,
               "document": {
                 "id": "9880b711-file-id-ecf8f551bd78",
                 "inserted_at": "2021-07-15T18:18:17Z",
@@ -59136,9 +59340,11 @@
                 "sub_type": "personal_id",
                 "type": "id"
               },
+              "edit_reason": null,
               "employment_id": "5e55386e-4f4f-4def-92f4-bdc19a5ce77d",
               "end_date": "2021-12-21",
               "id": "0073fcb5-b669-4e4a-b963-2a47744e75a1",
+              "inserted_at": "2021-12-01T09:12:44Z",
               "leave_policy": {
                 "leave_policy_variant_slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
                 "leave_type": "sick_leave",
@@ -59161,7 +59367,8 @@
               ],
               "timeoff_type": "paid_time_off",
               "timezone": "Asia/Kolkata",
-              "total_minutes": 960
+              "total_minutes": 960,
+              "updated_at": "2021-12-02T15:03:10Z"
             }
           }
         },
@@ -61931,14 +62138,14 @@
               "prefunding_credit_note",
               "reconciliation_credit_note",
               "credit_note",
-              "eor_reserve_credit_note",
-              "contractor_management_invoice",
-              "cor_service_invoice",
+              "peo_service_invoice",
               "eor_reserve_invoice",
-              "payroll_service_invoice",
-              "remote_plan_invoice",
               "peo_payroll_invoice",
-              "peo_service_invoice"
+              "remote_plan_invoice",
+              "contractor_management_invoice",
+              "eor_reserve_credit_note",
+              "payroll_service_invoice",
+              "cor_service_invoice"
             ],
             "type": "string"
           },

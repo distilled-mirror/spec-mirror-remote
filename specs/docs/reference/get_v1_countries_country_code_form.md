@@ -50,6 +50,20 @@ is returned only when that employment's contract takes engagement agreement deta
 Czech Republic and Germany this depends on its hiring model); otherwise the response is 404. A
 country without this form still returns 422, as for other forms.
 
+The `administrative_details` form takes an optional `employment_id`. With it, the schema is
+tailored to that employment: its legal entity, its status, its contract details and the
+administrative details already saved for it. For example, in the United Kingdom stored values
+such as the P45 figures are returned as hidden constants; in France and Italy some Remote legal
+entities get extra fields; fields that can no longer change for an active employment are
+returned read-only. The
+employment must be a full-time EOR employment with an active contract in the requested country,
+the employments that `PUT /v1/employments/{employment_id}/administrative-details` saves against
+this form (otherwise 400). Because the schema
+carries saved values, the caller needs a role with both the `people-employment` and the
+`people-sensitive-details` read permissions (otherwise 403) whose data scope covers the
+employment (otherwise 404). Saving the details takes `employee-administrative-details` update
+instead, so a role may save them without being able to read this tailored schema.
+
 ## Authentication
 
 This endpoint accepts any one of the following token types:
@@ -97,6 +111,22 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "action"
         ],
         "title": "ActionError",
+        "type": "object"
+      },
+      "CountryFormForbiddenResponse": {
+        "description": "Returned when the token lacks a required scope or role, and, for `administrative_details` with an `employment_id`, when none of the roles the token acts with holds both the `people-employment` and the `people-sensitive-details` read permissions. An employment outside the data scope of those roles answers 404.",
+        "example": {
+          "message": "Your role does not permit this action. Contact your company admin to review your permissions."
+        },
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "CountryFormForbiddenResponse",
         "type": "object"
       },
       "NotFoundResponse": {
@@ -689,7 +719,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Returns the json schema of a supported form. Possible form names are:\n```\n- address_details \n- administrative_details \n- bank_account_details \n- employment_basic_information \n- contractor_basic_information \n- contractor_contract_details \n- billing_address_details \n- contract_details \n- emergency_contact \n- emergency_contact_details \n- employment_document_details \n- engagement_agreement_details \n- personal_details \n- pricing_plan_details \n- company_basic_information \n- global_payroll_administrative_details \n- global_payroll_bank_account_details \n- global_payroll_basic_information \n- global_payroll_contract_details \n- global_payroll_federal_taxes \n- global_payroll_state_taxes \n- global_payroll_personal_details \n- benefit_renewal_request \n- hris_personal_details \n\n```\n\nMost forms require a company access token, as they are dependent on certain\nproperties of companies and their current employments. However, the `address_details`\nand `company_basic_information` forms can be accessed using client_credentials\nauthentication (without a company).\n\nThe `global_payroll_contract_details` form requires the `employment_id` query parameter,\nbecause its fields depend on the employment. For example, `overtime_eligible` is shown and\nrequired only when the employment's legal entity is not on Time & Attendance 2.0. A request\nwithout `employment_id` returns 400.\n\nThe `engagement_agreement_details` form takes an optional `employment_id`. With it, the schema\nis returned only when that employment's contract takes engagement agreement details (in the\nCzech Republic and Germany this depends on its hiring model); otherwise the response is 404. A\ncountry without this form still returns 422, as for other forms.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | - | - |\n| Customer API token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |",
+        "description": "Returns the json schema of a supported form. Possible form names are:\n```\n- address_details \n- administrative_details \n- bank_account_details \n- employment_basic_information \n- contractor_basic_information \n- contractor_contract_details \n- billing_address_details \n- contract_details \n- emergency_contact \n- emergency_contact_details \n- employment_document_details \n- engagement_agreement_details \n- personal_details \n- pricing_plan_details \n- company_basic_information \n- global_payroll_administrative_details \n- global_payroll_bank_account_details \n- global_payroll_basic_information \n- global_payroll_contract_details \n- global_payroll_federal_taxes \n- global_payroll_state_taxes \n- global_payroll_personal_details \n- benefit_renewal_request \n- hris_personal_details \n\n```\n\nMost forms require a company access token, as they are dependent on certain\nproperties of companies and their current employments. However, the `address_details`\nand `company_basic_information` forms can be accessed using client_credentials\nauthentication (without a company).\n\nThe `global_payroll_contract_details` form requires the `employment_id` query parameter,\nbecause its fields depend on the employment. For example, `overtime_eligible` is shown and\nrequired only when the employment's legal entity is not on Time & Attendance 2.0. A request\nwithout `employment_id` returns 400.\n\nThe `engagement_agreement_details` form takes an optional `employment_id`. With it, the schema\nis returned only when that employment's contract takes engagement agreement details (in the\nCzech Republic and Germany this depends on its hiring model); otherwise the response is 404. A\ncountry without this form still returns 422, as for other forms.\n\nThe `administrative_details` form takes an optional `employment_id`. With it, the schema is\ntailored to that employment: its legal entity, its status, its contract details and the\nadministrative details already saved for it. For example, in the United Kingdom stored values\nsuch as the P45 figures are returned as hidden constants; in France and Italy some Remote legal\nentities get extra fields; fields that can no longer change for an active employment are\nreturned read-only. The\nemployment must be a full-time EOR employment with an active contract in the requested country,\nthe employments that `PUT /v1/employments/{employment_id}/administrative-details` saves against\nthis form (otherwise 400). Because the schema\ncarries saved values, the caller needs a role with both the `people-employment` and the\n`people-sensitive-details` read permissions (otherwise 403) whose data scope covers the\nemployment (otherwise 404). Saving the details takes `employee-administrative-details` update\ninstead, so a role may save them without being able to read this tailored schema.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Client credentials access token** (`OAuth2ClientCredentials`) — obtained through the Client Credentials flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Company-scoped access token (assertion) | Manage company resources (`company_admin`) | View forms (`form:read`) | - |\n| Client credentials access token | Manage company resources (`company_admin`) | - | - |\n| Customer API token | Manage company resources (`company_admin`) | View forms (`form:read`) | - |",
         "operationId": "get_v1_countries_country_code_form",
         "parameters": [
           {
@@ -725,7 +755,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "x-safe": true
           },
           {
-            "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details`, where it tailors the schema to that employment, and for `engagement_agreement_details`, where the schema is returned only if that employment's contract takes engagement agreement details.",
+            "description": "Required for `contract_amendment`, `global_payroll_contract_details` and `global_payroll_state_taxes` forms. Optional for `contract_details` and `administrative_details`, where it tailors the schema to that employment, and for `engagement_agreement_details`, where the schema is returned only if that employment's contract takes engagement agreement details.",
             "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "in": "query",
             "name": "employment_id",
@@ -819,6 +849,16 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               }
             },
             "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountryFormForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "404": {
             "content": {

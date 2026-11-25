@@ -164,21 +164,21 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                     },
                     "billing_document_type": {
                       "enum": [
-                        "reconciliation_credit_note",
                         "credit_note",
-                        "prefunding_credit_note",
-                        "eor_reserve_credit_note",
                         "supplemental_service_credit_note",
-                        "reconciliation_invoice",
-                        "contractor_management_invoice",
-                        "cor_service_invoice",
+                        "peo_service_invoice",
+                        "prefunding_credit_note",
                         "eor_reserve_invoice",
                         "prefunding_invoice",
-                        "supplemental_service_invoice",
-                        "payroll_service_invoice",
-                        "remote_plan_invoice",
                         "peo_payroll_invoice",
-                        "peo_service_invoice"
+                        "reconciliation_credit_note",
+                        "supplemental_service_invoice",
+                        "remote_plan_invoice",
+                        "contractor_management_invoice",
+                        "eor_reserve_credit_note",
+                        "reconciliation_invoice",
+                        "payroll_service_invoice",
+                        "cor_service_invoice"
                       ],
                       "type": "string"
                     },
@@ -626,21 +626,21 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "required": false,
             "schema": {
               "enum": [
-                "reconciliation_credit_note",
                 "credit_note",
-                "prefunding_credit_note",
-                "eor_reserve_credit_note",
                 "supplemental_service_credit_note",
-                "reconciliation_invoice",
-                "contractor_management_invoice",
-                "cor_service_invoice",
+                "peo_service_invoice",
+                "prefunding_credit_note",
                 "eor_reserve_invoice",
                 "prefunding_invoice",
-                "supplemental_service_invoice",
-                "payroll_service_invoice",
-                "remote_plan_invoice",
                 "peo_payroll_invoice",
-                "peo_service_invoice"
+                "reconciliation_credit_note",
+                "supplemental_service_invoice",
+                "remote_plan_invoice",
+                "contractor_management_invoice",
+                "eor_reserve_credit_note",
+                "reconciliation_invoice",
+                "payroll_service_invoice",
+                "cor_service_invoice"
               ],
               "type": "string"
             }
@@ -806,14 +806,14 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                       "prefunding_credit_note",
                       "reconciliation_credit_note",
                       "credit_note",
-                      "eor_reserve_credit_note",
-                      "contractor_management_invoice",
-                      "cor_service_invoice",
+                      "peo_service_invoice",
                       "eor_reserve_invoice",
-                      "payroll_service_invoice",
-                      "remote_plan_invoice",
                       "peo_payroll_invoice",
-                      "peo_service_invoice"
+                      "remote_plan_invoice",
+                      "contractor_management_invoice",
+                      "eor_reserve_credit_note",
+                      "payroll_service_invoice",
+                      "cor_service_invoice"
                     ],
                     "type": "string"
                   },

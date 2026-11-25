@@ -670,7 +670,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "d0652f2c-f0c7-4fdb-975a-fb39027b7578",
+            "example": "5503dfee-1a11-4f7a-8adc-e26126a527ce",
             "in": "path",
             "name": "employment_id",
             "required": true,

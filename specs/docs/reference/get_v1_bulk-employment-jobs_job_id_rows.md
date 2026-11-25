@@ -107,7 +107,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "object"
           },
           "metadata": {
-            "description": "Row metadata. For login-email-selection-enabled imports (e.g. EOR bulk invite), each reviewed row carries a `login_email_signals` object with the per-row login-email review signals. For bulk Global Payroll invitations, a sent row carries `invite_outcome`.",
+            "description": "Row metadata. For login-email-selection-enabled imports (e.g. EOR bulk invite), each reviewed row carries a `login_email_signals` object with the per-row login-email review signals. For bulk Global Payroll invitations, a sent row carries `invite_outcome`. For job-title-eligibility-checked imports, a row that still passed validation may carry a `job_title_eligibility_notes` object with non-blocking advisory notes, nested by field path exactly like `errors`.",
             "properties": {
               "invite_outcome": {
                 "description": "Bulk Global Payroll invitations only: what the row's employee was sent. `already_onboarded` means they were already on the platform, so nothing was due.",
@@ -119,6 +119,26 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                   "already_onboarded"
                 ],
                 "type": "string"
+              },
+              "job_title_eligibility_notes": {
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "description": "An array of note messages for the given field",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "description": "Nested object with note messages for the field",
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "description": "Non-blocking advisory notes for a row that still passed validation, nested by field path exactly like `errors`",
+                "type": "object"
               },
               "login_email_signals": {
                 "description": "Per-row review-step signals for login email selection, present only when the feature is enabled. `sso_enforced` reflects whether SSO login is enforced for the row's category. `personal` and `work` report, for each provided email, whether it is already registered on another account.",
@@ -270,7 +290,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "type": "integer"
           },
           "schema_variant_id": {
-            "description": "The id of the schema variant this row's fields follow, a key of `row_schema_variants` on the job-scoped json-schema response. `null` when the row uses the job-level schema. Only present for job types with per-row schema variants.",
+            "description": "The id of the schema variant this row's fields follow, a key of `row_schema_variants` on the job-scoped json-schema response. `null`, or an id `row_schema_variants` does not list, when the row uses the job-level schema. Only present for job types with per-row schema variants.",
             "nullable": true,
             "type": "string"
           },

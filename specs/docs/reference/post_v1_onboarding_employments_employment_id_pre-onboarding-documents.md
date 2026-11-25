@@ -256,6 +256,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "format": "date-time",
             "nullable": true,
             "type": "string",
+            "x-remote-deprecated-on": "2026-09-16",
             "x-remote-ignored": true
           },
           "pre_onboarding_document_requirement_slug": {
@@ -711,6 +712,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "tags": [
           "Pre-Onboarding Documents"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": "POST /onboarding/employments/{employment_id}/pre-onboarding-requirements/{requirement_slug}/documents"
       }
     }

@@ -1079,6 +1079,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "tags": [
           "Time Off Balances"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": ""
       }
     }

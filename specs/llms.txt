@@ -518,6 +518,7 @@
 ## API Reference: Offboarding
 - Global Payroll
   - [List Direct Offboardings](https://developer.remote.com/reference/get_v1_direct-offboardings.md): Lists offboardings for global payroll employments, optionally filtered by employment ID.  ## Authentication  This endpoint accepts any one of the following token types:  - **Company-scoped access…
+  - [Show Direct Offboarding](https://developer.remote.com/reference/get_v1_direct-offboardings_id.md): Returns one offboarding of a global payroll employment by its ID. An offboarding the list endpoint doesn't show you answers 404.  ## Authentication  This endpoint accepts any one of the following…
 - Terminations
   - [offboarding.completed](https://developer.remote.com/reference/offboardingcompleted.md): This event is triggered when an offboarding request is completed.
   - [offboarding.deleted](https://developer.remote.com/reference/offboardingdeleted-1.md): This event is triggered whenever an offboarding request is deleted.

@@ -637,6 +637,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "tags": [
           "Pre-Onboarding Documents"
         ],
+        "x-remote-deprecated-on": "2026-09-17",
         "x-remote-superseded-by": "GET /onboarding/employments/{employment_id}/pre-onboarding-requirements"
       }
     }

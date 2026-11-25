@@ -272,6 +272,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "data": {
             "timeoff": {
               "automatic": false,
+              "created_by_id": "93aaf0b3-1d79-4d2c-8d47-3d5406727d70",
+              "decline_reason": null,
               "document": {
                 "id": "9880b711-file-id-ecf8f551bd78",
                 "inserted_at": "2021-07-15T18:18:17Z",
@@ -279,9 +281,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
                 "sub_type": "personal_id",
                 "type": "id"
               },
+              "edit_reason": null,
               "employment_id": "5e55386e-4f4f-4def-92f4-bdc19a5ce77d",
               "end_date": "2021-12-21",
               "id": "0073fcb5-b669-4e4a-b963-2a47744e75a1",
+              "inserted_at": "2021-12-01T09:12:44Z",
               "leave_policy": {
                 "leave_policy_variant_slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
                 "leave_type": "sick_leave",
@@ -304,7 +308,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
               ],
               "timeoff_type": "paid_time_off",
               "timezone": "Asia/Kolkata",
-              "total_minutes": 960
+              "total_minutes": 960,
+              "updated_at": "2021-12-02T15:03:10Z"
             }
           }
         },
@@ -484,6 +489,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "description": "A time off record for an employee, representing a period of leave (e.g., vacation, sick leave, parental leave).",
         "example": {
           "automatic": false,
+          "created_by_id": "93aaf0b3-1d79-4d2c-8d47-3d5406727d70",
+          "decline_reason": null,
           "document": {
             "id": "9880b711-file-id-ecf8f551bd78",
             "inserted_at": "2021-07-15T18:18:17Z",
@@ -491,9 +498,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "sub_type": "personal_id",
             "type": "id"
           },
+          "edit_reason": null,
           "employment_id": "5e55386e-4f4f-4def-92f4-bdc19a5ce77d",
           "end_date": "2021-12-21",
           "id": "0073fcb5-b669-4e4a-b963-2a47744e75a1",
+          "inserted_at": "2021-12-01T09:12:44Z",
           "leave_policy": {
             "leave_policy_variant_slug": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
             "leave_type": "sick_leave",
@@ -516,7 +525,8 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           ],
           "timeoff_type": "paid_time_off",
           "timezone": "Asia/Kolkata",
-          "total_minutes": 960
+          "total_minutes": 960,
+          "updated_at": "2021-12-02T15:03:10Z"
         },
         "properties": {
           "approved_at": {
@@ -533,15 +543,30 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "type": "boolean"
           },
           "cancel_reason": {
-            "description": "The reason provided when the time off was cancelled. Null if not cancelled.",
+            "description": "The most recent reason given for cancelling this time off or requesting its cancellation. A declined cancellation request does not clear it. Null or absent when no reason was given or nothing was cancelled.",
             "nullable": true,
             "type": "string"
           },
           "cancelled_at": {
             "$ref": "#/components/schemas/NullableDateTime"
           },
+          "created_by_id": {
+            "description": "The unique identifier (UUID) of the user who entered the time off: the employee or contractor themselves, or a manager of the company (the `user_id` of `GET /v1/company-managers`; a manager who has since left the company keeps their id here but is no longer listed there). Null or absent when Remote staff entered it, for automatic time offs such as public holidays, for time offs entered by Remote's automated processes, and when no creator was recorded.",
+            "nullable": true,
+            "type": "string"
+          },
+          "decline_reason": {
+            "description": "The most recent reason given for declining this time off or a request to cancel it. A later edit, approval or cancellation does not clear it. Null or absent when no reason was given or nothing was declined.",
+            "nullable": true,
+            "type": "string"
+          },
           "document": {
             "$ref": "#/components/schemas/File"
+          },
+          "edit_reason": {
+            "description": "The reason given with the most recent edit of this time off, by a person or by one of Remote's own processes. Null or absent when never edited.",
+            "nullable": true,
+            "type": "string"
           },
           "employment_id": {
             "description": "The unique identifier (UUID) of the employment this time off belongs to.",
@@ -554,6 +579,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           },
           "id": {
             "description": "The unique identifier (UUID) of the time off record.",
+            "type": "string"
+          },
+          "inserted_at": {
+            "description": "When the time off was requested or entered, as a UTC date-time.",
+            "format": "date-time",
             "type": "string"
           },
           "leave_policy": {
@@ -604,6 +634,11 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "description": "The total number of minutes taken off across all `timeoff_days`. Always equals the sum of the per-day `minutes` values.",
             "minimum": 0,
             "type": "integer"
+          },
+          "updated_at": {
+            "description": "When the time off was last changed, as a UTC date-time, at or after `inserted_at`.",
+            "format": "date-time",
+            "type": "string"
           }
         },
         "required": [
