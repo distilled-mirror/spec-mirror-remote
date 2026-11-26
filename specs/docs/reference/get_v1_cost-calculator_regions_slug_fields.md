@@ -607,7 +607,7 @@ This endpoint accepts any one of the following token types:
             "x-safe": true
           },
           {
-            "description": "If the premium benefits should be included in the response",
+            "description": "If the premium benefits should be included in the response. Defaults to false.",
             "example": "true",
             "in": "query",
             "name": "include_premium_benefits",

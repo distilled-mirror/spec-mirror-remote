@@ -1180,20 +1180,20 @@
             "schema": {
               "enum": [
                 "credit_note",
+                "contractor_management_invoice",
+                "reconciliation_credit_note",
+                "eor_reserve_credit_note",
+                "supplemental_service_invoice",
+                "cor_service_invoice",
                 "supplemental_service_credit_note",
+                "prefunding_invoice",
+                "eor_reserve_invoice",
+                "payroll_service_invoice",
+                "reconciliation_invoice",
+                "peo_payroll_invoice",
                 "peo_service_invoice",
                 "prefunding_credit_note",
-                "eor_reserve_invoice",
-                "prefunding_invoice",
-                "peo_payroll_invoice",
-                "reconciliation_credit_note",
-                "supplemental_service_invoice",
-                "remote_plan_invoice",
-                "contractor_management_invoice",
-                "eor_reserve_credit_note",
-                "reconciliation_invoice",
-                "payroll_service_invoice",
-                "cor_service_invoice"
+                "remote_plan_invoice"
               ],
               "type": "string"
             }
@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "15f3eec0-01b1-4876-9a6c-f250e90ed00d",
+            "example": "0546d2fe-b6d6-464d-85a8-118b67ad4f88",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "01ac2a34-f314-4783-b6ea-eeabdc429781",
+            "example": "2beba0b6-75d8-4352-9e51-57f041c5f52b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "76f98fdb-25a0-4587-b122-ea5679a12091",
+            "example": "3c305caa-9d3b-4a1e-aa57-0019b506929c",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "76798971-6608-4d50-8c19-4efb8adb508c",
+            "example": "b6b39365-e64e-4319-b479-ffdcef6a361b",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "e712e0fb-8411-4796-bf3d-36825694a217",
+            "example": "36c30df6-450f-4700-9a26-1d59f08fc6b8",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "c556bc58-0466-44df-b703-e2366d56ab3a",
+            "example": "f2c6b08b-e8c7-416d-9639-0d03f05e33d8",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "af82a07a-1e2d-4bf9-a99c-b72b419537cb",
+            "example": "9ad351f4-94f3-4d3c-b6a7-f3af4b1d8fc9",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "7f929832-44fd-4425-8507-f3b061792b0d",
+            "example": "a5204306-8b9e-4840-8b6a-c62be3185ab0",
             "in": "path",
             "name": "id",
             "required": true,
@@ -7427,7 +7427,7 @@
         "operationId": "get_v1_cost-calculator_countries",
         "parameters": [
           {
-            "description": "If the premium benefits should be included in the response",
+            "description": "If the premium benefits should be included in the response. Defaults to false.",
             "example": "true",
             "in": "query",
             "name": "include_premium_benefits",
@@ -7634,7 +7634,7 @@
             "x-safe": true
           },
           {
-            "description": "If the premium benefits should be included in the response",
+            "description": "If the premium benefits should be included in the response. Defaults to false.",
             "example": "true",
             "in": "query",
             "name": "include_premium_benefits",
@@ -14023,7 +14023,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "5503dfee-1a11-4f7a-8adc-e26126a527ce",
+            "example": "27cd5ee8-a6cf-4087-84c2-0229764b19c0",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -23281,7 +23281,7 @@
     "/v1/scim/v2/Groups": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard. When your integration enforces role data scopes, it lists only the groups the roles the token acts with can see (all of them, unless a role is scoped by department), each with only the members inside that scope.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Groups",
         "parameters": [
           {
@@ -23375,7 +23375,7 @@
     "/v1/scim/v2/Groups/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a single group (department) for the authenticated company by group ID\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a single group (department) for the authenticated company by group ID. When your integration enforces role data scopes, a group outside the data scope of the roles the token acts with answers 404, and the group lists only the members inside that scope.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Groups_id",
         "parameters": [
           {
@@ -23440,7 +23440,7 @@
     "/v1/scim/v2/Users": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a list of users for the authenticated company following SCIM 2.0 standard\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a list of users for the authenticated company following SCIM 2.0 standard. When your integration enforces role data scopes, it lists and counts only the users inside the data scope of the roles the token acts with.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Users",
         "parameters": [
           {
@@ -23534,7 +23534,7 @@
     "/v1/scim/v2/Users/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Retrieves a single user for the authenticated company by user ID\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
+        "description": "Retrieves a single user for the authenticated company by user ID. When your integration enforces role data scopes, a user outside the data scope of the roles the token acts with answers 404.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).",
         "operationId": "get_v1_scim_v2_Users_id",
         "parameters": [
           {
@@ -27404,7 +27404,7 @@
     "/v2/employments/{employment_id}/billing-address-details": {
       "put": {
         "deprecated": false,
-        "description": "Updates employment's billing address details.\n\nThe billing address is replaced: optional fields that aren't sent are cleared.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates employment's billing address details.\n\nThe billing address is replaced: optional fields that aren't sent are cleared.\n\nThe billing address belongs to the employee's bank account. If the employee has a bank\naccount, only its address changes: the bank details, country and currency stay as they are.\nThe stored bank details are checked again, so the update returns 422 when they no longer\npass a check, while the bank account is on compliance review, or when the bank account has no\ncountry (set the bank account details first).\nUpdating the address of an existing bank account can send the employee a \"Bank Account\nUpdated\" email.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "put_v2_employments_employment_id_billing-address-details",
         "parameters": [
           {
@@ -28895,12 +28895,12 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
+                "assigned_billing_legal_entities",
                 "employment_countries",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "onboarding_reports"
               ],
               "example": "all",
               "nullable": false,
@@ -30946,20 +30946,20 @@
                     "billing_document_type": {
                       "enum": [
                         "credit_note",
+                        "contractor_management_invoice",
+                        "reconciliation_credit_note",
+                        "eor_reserve_credit_note",
+                        "supplemental_service_invoice",
+                        "cor_service_invoice",
                         "supplemental_service_credit_note",
+                        "prefunding_invoice",
+                        "eor_reserve_invoice",
+                        "payroll_service_invoice",
+                        "reconciliation_invoice",
+                        "peo_payroll_invoice",
                         "peo_service_invoice",
                         "prefunding_credit_note",
-                        "eor_reserve_invoice",
-                        "prefunding_invoice",
-                        "peo_payroll_invoice",
-                        "reconciliation_credit_note",
-                        "supplemental_service_invoice",
-                        "remote_plan_invoice",
-                        "contractor_management_invoice",
-                        "eor_reserve_credit_note",
-                        "reconciliation_invoice",
-                        "payroll_service_invoice",
-                        "cor_service_invoice"
+                        "remote_plan_invoice"
                       ],
                       "type": "string"
                     },
@@ -57055,9 +57055,9 @@
                   "resource_already_exists",
                   "action_unrecognized",
                   "action_invalid",
+                  "parameter_value_invalid",
                   "resource_not_found",
                   "resource_restricted",
-                  "parameter_value_invalid",
                   "parameter_invalid_date",
                   "resource_invalid_state",
                   "parameter_value_unknown",
@@ -62138,14 +62138,14 @@
               "prefunding_credit_note",
               "reconciliation_credit_note",
               "credit_note",
-              "peo_service_invoice",
-              "eor_reserve_invoice",
-              "peo_payroll_invoice",
-              "remote_plan_invoice",
               "contractor_management_invoice",
               "eor_reserve_credit_note",
+              "cor_service_invoice",
+              "eor_reserve_invoice",
               "payroll_service_invoice",
-              "cor_service_invoice"
+              "peo_payroll_invoice",
+              "peo_service_invoice",
+              "remote_plan_invoice"
             ],
             "type": "string"
           },

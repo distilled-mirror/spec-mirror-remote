@@ -188,12 +188,12 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "direct_and_indirect_reports",
+                "assigned_billing_legal_entities",
                 "employment_countries",
+                "direct_and_indirect_reports",
                 "employment_departments",
                 "employment_company_structure_nodes",
-                "onboarding_reports",
-                "assigned_billing_legal_entities"
+                "onboarding_reports"
               ],
               "example": "all",
               "nullable": false,
