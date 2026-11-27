@@ -141,6 +141,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                 "employment.contractor_of_record_termination.cancelled",
                 "employment.contractor_of_record_termination.executed",
                 "employment.contractor_of_record_termination.initiated",
+                "employment.contractor_rates.updated",
                 "employment.details.updated",
                 "employment.employment_agreement.available",
                 "employment.cor_hiring.invoice_created",

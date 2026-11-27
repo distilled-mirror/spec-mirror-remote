@@ -9,6 +9,8 @@ agentTools:
 Approves the given timesheet.
 
 Contractor timesheets can't be approved through the API and are rejected with `422`.
+Some timesheets Remote reopened for a Payroll check can only be approved by Remote. They are rejected
+with `422` and code `resource_invalid_state`; send them back if the hours are wrong.
 
 ## Authentication
 
@@ -39,29 +41,6 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "example": "PRT",
         "title": "CountryCode",
         "type": "string"
-      },
-      "ActionError": {
-        "properties": {
-          "action": {
-            "description": "The action that lead to the error message.",
-            "type": "string"
-          },
-          "code": {
-            "description": "An error code that describes the nature of the error.",
-            "type": "string"
-          },
-          "message": {
-            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "code",
-          "message",
-          "action"
-        ],
-        "title": "ActionError",
-        "type": "object"
       },
       "MinimalTimesheet": {
         "additionalProperties": false,
@@ -175,66 +154,6 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "title": "NotFoundResponse",
         "type": "object"
       },
-      "UnprocessableEntityResponse": {
-        "anyOf": [
-          {
-            "properties": {
-              "errors": {
-                "type": "object"
-              }
-            },
-            "required": [
-              "errors"
-            ],
-            "type": "object"
-          },
-          {
-            "properties": {
-              "message": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ParameterError"
-                  },
-                  {
-                    "items": {
-                      "$ref": "#/components/schemas/ParameterError"
-                    },
-                    "title": "ParameterErrors",
-                    "type": "array"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ActionError"
-                  },
-                  {
-                    "items": {
-                      "$ref": "#/components/schemas/ActionError"
-                    },
-                    "title": "ActionErrors",
-                    "type": "array"
-                  }
-                ]
-              }
-            },
-            "required": [
-              "message"
-            ],
-            "type": "object"
-          }
-        ],
-        "example": {
-          "errors": {
-            "some_field": [
-              "is invalid"
-            ]
-          },
-          "message": "Invalid request parameters"
-        },
-        "title": "UnprocessableEntityResponse",
-        "type": "object"
-      },
       "UuidSlug": {
         "description": "A unique identifier in UUID v4 format.",
         "example": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
@@ -255,6 +174,53 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "nullable": false,
         "title": "TimesheetStatus",
         "type": "string"
+      },
+      "BadRequestResponse": {
+        "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
+        "example": {
+          "errors": {
+            "cursor": [
+              "is invalid"
+            ]
+          },
+          "message": "Invalid request parameters"
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "message": {
+                "description": "A human-readable error message describing what was wrong with the request.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "message": {
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "title": "BadRequestResponse",
+        "type": "object"
       },
       "UnauthorizedResponse": {
         "description": "Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.",
@@ -280,32 +246,59 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "title": "Date",
         "type": "string"
       },
-      "ParameterError": {
+      "ApproveTimesheetErrorResponse": {
+        "description": "Returned when the timesheet can't be approved. A timesheet Remote holds for a Payroll check also has `field_errors` with code `resource_invalid_state`.",
         "example": {
-          "code": "invalid_param",
-          "message": "Invalid parameter",
-          "param": "employment_id"
+          "field_errors": [
+            {
+              "code": "resource_invalid_state",
+              "field": null,
+              "message": "Remote is checking the week of January 2, 2023 with Payroll before it's approved, so only Remote can approve it. If the hours are wrong, send it back with a reason."
+            }
+          ],
+          "message": "Remote is checking the week of January 2, 2023 with Payroll before it's approved, so only Remote can approve it. If the hours are wrong, send it back with a reason."
         },
         "properties": {
-          "code": {
-            "description": "An error code that describes the nature of the error.",
-            "type": "string"
+          "errors": {
+            "description": "Validation errors, keyed by field.",
+            "type": "object"
+          },
+          "field_errors": {
+            "description": "The structured errors. Branch on `code`, not on the message.",
+            "items": {
+              "properties": {
+                "code": {
+                  "description": "An error code that describes the nature of the error.",
+                  "type": "string"
+                },
+                "field": {
+                  "description": "The request field this error relates to, or null when the timesheet's state refuses it.",
+                  "nullable": true,
+                  "type": "string"
+                },
+                "message": {
+                  "description": "A developer-friendly message describing this error.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "code",
+                "message"
+              ],
+              "type": "object"
+            },
+            "type": "array"
           },
           "message": {
-            "description": "A developer friendly error message that gives details on what the error was and how it may be remedied.",
-            "type": "string"
-          },
-          "param": {
-            "description": "The parameter that lead to the error message.",
+            "description": "A human-readable summary of why it can't be approved.",
             "type": "string"
           }
         },
         "required": [
-          "code",
-          "message",
-          "param"
+          "message"
         ],
-        "title": "ParameterError",
+        "title": "ApproveTimesheetErrorResponse",
         "type": "object"
       }
     },
@@ -637,7 +630,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Approves the given timesheet.\n\nContractor timesheets can't be approved through the API and are rejected with `422`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Company-scoped access token (assertion) | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Customer API token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |",
+        "description": "Approves the given timesheet.\n\nContractor timesheets can't be approved through the API and are rejected with `422`.\nSome timesheets Remote reopened for a Payroll check can only be approved by Remote. They are rejected\nwith `422` and code `resource_invalid_state`; send them back if the hours are wrong.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Company-scoped access token (assertion) | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Customer API token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |",
         "operationId": "post_v1_timesheets_timesheet_id_approve",
         "parameters": [
           {
@@ -663,6 +656,16 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             },
             "description": "Success"
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
           "401": {
             "content": {
               "application/json": {
@@ -687,7 +690,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/ApproveTimesheetErrorResponse"
                 }
               }
             },

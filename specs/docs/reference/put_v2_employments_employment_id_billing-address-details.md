@@ -18,6 +18,10 @@ country (set the bank account details first).
 Updating the address of an existing bank account can send the employee a "Bank Account
 Updated" email.
 
+Returns 403 when the user the token acts for isn't allowed to manage this employee, or when
+Remote has frozen the employee's data. Contact Remote support if you think
+the freeze is an error.
+
 This endpoint requires and returns country-specific data. The exact required and returned fields will
 vary depending on which country the employment is in. To see the list of parameters for each country,
 see the **Show form schema** endpoint under the [Countries](#tag/Countries) category.
@@ -194,6 +198,22 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
         "title": "EmploymentBillingAddressDetailsParams",
         "type": "object"
       },
+      "EmploymentDetailsForbiddenResponse": {
+        "description": "Returned when the token lacks the scope or the user's role lacks the permission, when the user may not manage this employee, or while Remote has frozen the employee's data.",
+        "example": {
+          "message": "Editing data for this employee is currently frozen. Please contact Remote support if you think this is an error."
+        },
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "EmploymentDetailsForbiddenResponse",
+        "type": "object"
+      },
       "EmploymentStatus": {
         "description": "The current status of the employment record.\n\n- `active`: The employee is fully onboarded and actively working.\n- `created`: The employment has been created but onboarding has not started.\n- `pre_hire`: A pre-hire employment record, created before formal onboarding begins.\n- `created_awaiting_reserve`: The employment is created but waiting for a risk reserve deposit to be paid.\n- `created_reserve_paid`: The risk reserve has been paid and the employment can proceed with onboarding.\n- `initiated`: Onboarding has been started by the employer.\n- `invited`: The employee has been invited to complete their self-enrollment on Remote.\n- `pending`: The employment is pending review or further action before it can become active.\n- `review`: The employment is under review by Remote (e.g., contract or compliance review).\n- `job_title_review`: The job title is pending verification by Remote; once approved, the employment returns to `created`.\n- `pending_post_self_enrollment_actions`: Self-enrollment is complete, but some actions are still missing before the employment can be activated.\n- `archived`: The employment has been terminated or offboarded.\n- `deleted`: The employment record has been deleted.\n",
         "enum": [
@@ -333,23 +353,6 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "param"
         ],
         "title": "ParameterError",
-        "type": "object"
-      },
-      "ForbiddenResponse": {
-        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
-        "example": {
-          "message": "Forbidden"
-        },
-        "properties": {
-          "message": {
-            "pattern": "Forbidden",
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
-        ],
-        "title": "ForbiddenResponse",
         "type": "object"
       },
       "EmploymentDetailsOnlyResponse": {
@@ -797,7 +800,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "put": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Updates employment's billing address details.\n\nThe billing address is replaced: optional fields that aren't sent are cleared.\n\nThe billing address belongs to the employee's bank account. If the employee has a bank\naccount, only its address changes: the bank details, country and currency stay as they are.\nThe stored bank details are checked again, so the update returns 422 when they no longer\npass a check, while the bank account is on compliance review, or when the bank account has no\ncountry (set the bank account details first).\nUpdating the address of an existing bank account can send the employee a \"Bank Account\nUpdated\" email.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates employment's billing address details.\n\nThe billing address is replaced: optional fields that aren't sent are cleared.\n\nThe billing address belongs to the employee's bank account. If the employee has a bank\naccount, only its address changes: the bank details, country and currency stay as they are.\nThe stored bank details are checked again, so the update returns 422 when they no longer\npass a check, while the bank account is on compliance review, or when the bank account has no\ncountry (set the bank account details first).\nUpdating the address of an existing bank account can send the employee a \"Bank Account\nUpdated\" email.\n\nReturns 403 when the user the token acts for isn't allowed to manage this employee, or when\nRemote has frozen the employee's data. Contact Remote support if you think\nthe freeze is an error.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "put_v2_employments_employment_id_billing-address-details",
         "parameters": [
           {
@@ -882,7 +885,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForbiddenResponse"
+                  "$ref": "#/components/schemas/EmploymentDetailsForbiddenResponse"
                 }
               }
             },

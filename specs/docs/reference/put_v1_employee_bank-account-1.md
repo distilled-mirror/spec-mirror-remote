@@ -16,6 +16,9 @@ it is. A change returns 422 while a payment is in progress, while the account is
 compliance review, or when the account is used in a payment split. Deleted accounts are
 not listed.
 
+Returns 403 when Remote has frozen the employee's data.
+Contact Remote support if you think the freeze is an error.
+
 This endpoint requires and returns country-specific data. The exact fields vary depending on which
 country the authenticated employee's employment is in. Query the
 [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`
@@ -154,6 +157,22 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "message": "Invalid request parameters"
         },
         "title": "UnprocessableEntityResponse",
+        "type": "object"
+      },
+      "EmploymentDetailsForbiddenResponse": {
+        "description": "Returned when the token lacks the scope or the user's role lacks the permission, when the user may not manage this employee, or while Remote has frozen the employee's data.",
+        "example": {
+          "message": "Editing data for this employee is currently frozen. Please contact Remote support if you think this is an error."
+        },
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "EmploymentDetailsForbiddenResponse",
         "type": "object"
       },
       "EmploymentStatus": {
@@ -302,23 +321,6 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
           "bank_account_details"
         ],
         "title": "EmploymentBankAccountDetailsParams",
-        "type": "object"
-      },
-      "ForbiddenResponse": {
-        "description": "Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.",
-        "example": {
-          "message": "Forbidden"
-        },
-        "properties": {
-          "message": {
-            "pattern": "Forbidden",
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
-        ],
-        "title": "ForbiddenResponse",
         "type": "object"
       },
       "EmploymentDetailsOnlyResponse": {
@@ -702,7 +704,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
       "put": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Upserts the authenticated employee's bank account details.\n\nFor Global Payroll employees whose salary Remote pays out, a change to the bank details\nreplaces the account with a new default account that the company admin must approve, as\ndoes sending a denied account's details again. Salary is held until the admin approves.\nChanging only the label, or sending exactly the same details again, keeps the account as\nit is. A change returns 422 while a payment is in progress, while the account is under\ncompliance review, or when the account is used in a payment split. Deleted accounts are\nnot listed.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n| Company-scoped access token | Manage employments (`employments`) | - | - |",
+        "description": "Upserts the authenticated employee's bank account details.\n\nFor Global Payroll employees whose salary Remote pays out, a change to the bank details\nreplaces the account with a new default account that the company admin must approve, as\ndoes sending a denied account's details again. Salary is held until the admin approves.\nChanging only the label, or sending exactly the same details again, keeps the account as\nit is. A change returns 422 while a payment is in progress, while the account is under\ncompliance review, or when the account is used in a payment split. Deleted accounts are\nnot listed.\n\nReturns 403 when Remote has frozen the employee's data.\nContact Remote support if you think the freeze is an error.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n| Company-scoped access token | Manage employments (`employments`) | - | - |",
         "operationId": "put_v1_employee_bank-account",
         "parameters": [
           {
@@ -776,7 +778,7 @@ Any one of the scopes in a token type's row is enough. `all:write` works too.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForbiddenResponse"
+                  "$ref": "#/components/schemas/EmploymentDetailsForbiddenResponse"
                 }
               }
             },

@@ -1003,7 +1003,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "36c30df6-450f-4700-9a26-1d59f08fc6b8",
+            "example": "3580ea88-7408-4869-9b4c-0c4aecca55a7",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -1013,7 +1013,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "f2c6b08b-e8c7-416d-9639-0d03f05e33d8",
+            "example": "37f94485-a59b-46d4-aa1b-58cd67dd78d5",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -1707,6 +1707,55 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "summary": "employment.contractor_of_record_termination.cancelled",
         "tags": [
           "Employments"
+        ]
+      }
+    },
+    "employment.contractor_rates.updated": {
+      "post": {
+        "deprecated": false,
+        "description": "This event is triggered when the rates `GET /contractors/employments/{employment_id}/rates`\nreturns for a contractor change: a rate is added, dropped or edited. It covers rate changes\nmade by the employer, rates agreed by signing a contractor services agreement or a Statement\nof Work, and Statements of Work that are replaced or ended. A replacement or an ending dated\nahead sends this event on the day it takes effect, at about 00:15 UTC. Changes to the contract\ndates alone don't send it.\n\nThe payload only identifies the contractor: fetch their rates again to see the change.\n\nThis event may be delivered more than once, so it is safe to process repeatedly. For example,\na change made between 00:00 and 00:15 UTC that takes effect that day sends it when made and\nagain at about 00:15 UTC.\n\nWhen Remote links an existing rate to the Statement of Work it came from, the rate's\n`statement_of_work` and service dates are filled in without this event.\n",
+        "operationId": "employment.contractor_rates.updated",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "example": {
+                  "company_id": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                  "employment_id": "102172fe-4e09-480c-bd70-09cfeb34022a",
+                  "event_type": "employment.contractor_rates.updated"
+                },
+                "properties": {
+                  "company_id": {
+                    "description": "The unique identifier of the related company.",
+                    "type": "string"
+                  },
+                  "employment_id": {
+                    "description": "The unique identifier of the contractor's employment.",
+                    "type": "string"
+                  },
+                  "event_type": {
+                    "description": "The webhook event type identifier.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "employment_id",
+                  "company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 200 response confirms that the webhook was delivered."
+          }
+        },
+        "security": [],
+        "summary": "employment.contractor_rates.updated",
+        "tags": [
+          "Rates"
         ]
       }
     },

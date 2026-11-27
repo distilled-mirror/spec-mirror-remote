@@ -1,14 +1,12 @@
 ---
-updatedAt: 2026-05-27T21:11:47.000Z
+updatedAt: 2026-11-26T14:30:58.000Z
 agentTools:
   projectIndex: https://developer.remote.com/llms.txt
 ---
 
-# Show Billing Document. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.
+# Download a billing document PDF
 
-Shows a billing document details.
-
-Please contact api-support@remote.com to request access to this endpoint.
+Downloads a billing document PDF
 
 ## Authentication
 
@@ -34,6 +32,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
 {
   "components": {
     "schemas": {
+      "RawFile": {
+        "description": "The file's raw bytes, sent as the response body with the file's own media type.",
+        "example": "file contents",
+        "format": "binary",
+        "title": "RawFile",
+        "type": "string"
+      },
       "ActionError": {
         "properties": {
           "action": {
@@ -55,52 +60,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "action"
         ],
         "title": "ActionError",
-        "type": "object"
-      },
-      "BillingDocumentResponse": {
-        "additionalProperties": false,
-        "description": "Information of a billing document",
-        "example": {
-          "data": {
-            "billing_document": {
-              "billing_document_currency": "USD",
-              "billing_document_number": "12345678901",
-              "billing_document_period": "2023-12",
-              "billing_document_type": "reconciliation_invoice",
-              "company_id": "305ae616-2ef6-4b2d-bed3-b75eb3ccc069",
-              "id": "8772a9f1-b43c-46be-a1ce-e50b6819f5ee",
-              "issued_date": "2024-03-01",
-              "items": [
-                {
-                  "billing_document_amount": 1000000,
-                  "billing_document_currency": "USD",
-                  "employment_id": "0d25c513-employment-id-198557128104",
-                  "source_amount": 500000,
-                  "source_currency": "USD",
-                  "type": "base_salary"
-                }
-              ],
-              "total": "12345"
-            }
-          }
-        },
-        "properties": {
-          "data": {
-            "properties": {
-              "billing_document": {
-                "$ref": "#/components/schemas/BillingDocument"
-              }
-            },
-            "required": [
-              "billing_document"
-            ],
-            "type": "object"
-          }
-        },
-        "required": [
-          "data"
-        ],
-        "title": "BillingDocumentResponse",
         "type": "object"
       },
       "NotFoundResponse": {
@@ -178,145 +137,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "title": "UnprocessableEntityResponse",
         "type": "object"
       },
-      "BillingDocument": {
-        "additionalProperties": false,
-        "description": "A billing document (invoice or credit note) issued to a company by Remote for employment management services.",
-        "example": {
-          "billing_document_currency": "USD",
-          "billing_document_number": "12345678901",
-          "billing_document_period": "2023-12",
-          "billing_document_type": "reconciliation_invoice",
-          "company_id": "305ae616-2ef6-4b2d-bed3-b75eb3ccc069",
-          "id": "8772a9f1-b43c-46be-a1ce-e50b6819f5ee",
-          "issued_date": "2024-03-01",
-          "items": [
-            {
-              "billing_document_amount": 1000000,
-              "billing_document_currency": "USD",
-              "employment_id": "0d25c513-employment-id-198557128104",
-              "source_amount": 500000,
-              "source_currency": "USD",
-              "type": "base_salary"
-            }
-          ],
-          "total": "12345"
-        },
-        "properties": {
-          "billing_document_currency": {
-            "description": "The ISO 4217 currency code of the billing document.",
-            "type": "string"
-          },
-          "billing_document_number": {
-            "description": "The human-readable document number (e.g., invoice number).",
-            "type": "string"
-          },
-          "billing_document_period": {
-            "description": "The billing period this document covers, in YYYY-MM format.",
-            "type": "string"
-          },
-          "billing_document_type": {
-            "description": "The type of billing document.\n\n- `reconciliation_invoice`: A regular invoice reconciling payroll costs for the period.\n- `prefunding_invoice`: An invoice for advance funding of payroll before it is processed.\n- `supplemental_service_invoice`: An invoice for additional services beyond standard payroll.\n- `reconciliation_credit_note`: A credit note adjusting a previous reconciliation invoice.\n",
-            "type": "string"
-          },
-          "company_id": {
-            "description": "The unique identifier (UUID) of the company this billing document belongs to.",
-            "type": "string"
-          },
-          "id": {
-            "description": "The unique identifier (UUID) of the billing document.",
-            "type": "string"
-          },
-          "issued_date": {
-            "description": "The date the billing document was issued (ISO 8601 date format).",
-            "type": "string"
-          },
-          "items": {
-            "description": "The line items that make up this billing document.",
-            "items": {
-              "$ref": "#/components/schemas/BillingDocumentAmountItem"
-            },
-            "type": "array"
-          },
-          "total": {
-            "description": "The total amount of the billing document, in cents.",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "id",
-          "billing_document_period",
-          "billing_document_number",
-          "billing_document_type",
-          "company_id",
-          "issued_date",
-          "billing_document_currency",
-          "total",
-          "items"
-        ],
-        "title": "BillingDocument",
-        "type": "object"
-      },
-      "TooManyRequestsResponse": {
-        "description": "Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.",
-        "example": {
-          "message": "Too many requests"
-        },
-        "properties": {
-          "message": {
-            "pattern": "Too many requests",
-            "type": "string"
-          }
-        },
-        "title": "TooManyRequestsResponse",
-        "type": "object"
-      },
-      "BadRequestResponse": {
-        "description": "Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.",
-        "example": {
-          "errors": {
-            "cursor": [
-              "is invalid"
-            ]
-          },
-          "message": "Invalid request parameters"
-        },
-        "oneOf": [
-          {
-            "properties": {
-              "message": {
-                "description": "A human-readable error message describing what was wrong with the request.",
-                "type": "string"
-              }
-            },
-            "required": [
-              "message"
-            ],
-            "type": "object"
-          },
-          {
-            "properties": {
-              "message": {
-                "properties": {
-                  "code": {
-                    "type": "string"
-                  },
-                  "message": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "code",
-                  "message"
-                ],
-                "type": "object"
-              }
-            },
-            "type": "object"
-          }
-        ],
-        "title": "BadRequestResponse",
-        "type": "object"
-      },
       "UnauthorizedResponse": {
         "description": "Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.",
         "example": {
@@ -360,54 +180,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "param"
         ],
         "title": "ParameterError",
-        "type": "object"
-      },
-      "BillingDocumentAmountItem": {
-        "additionalProperties": false,
-        "description": "A line item on a billing document, representing a specific cost category (e.g., base salary, allowances, taxes) for an employment.",
-        "example": {
-          "billing_document_amount": 1000000,
-          "billing_document_currency": "USD",
-          "employment_id": "0d25c513-employment-id-198557128104",
-          "source_amount": 500000,
-          "source_currency": "USD",
-          "type": "base_salary"
-        },
-        "properties": {
-          "billing_document_amount": {
-            "description": "The amount for this line item in the billing document currency, in cents.",
-            "type": "integer"
-          },
-          "billing_document_currency": {
-            "description": "The ISO 4217 currency code of the billing document.",
-            "nullable": true,
-            "type": "string"
-          },
-          "employment_id": {
-            "description": "The unique identifier (UUID) of the employment this line item relates to. Null for company-level charges.",
-            "nullable": true,
-            "type": "string"
-          },
-          "source_amount": {
-            "description": "The original amount in the source (local) currency, in cents. May differ from billing_document_amount due to currency conversion.",
-            "type": "integer"
-          },
-          "source_currency": {
-            "description": "The ISO 4217 currency code of the source (local) currency. Null if same as billing document currency.",
-            "nullable": true,
-            "type": "string"
-          },
-          "type": {
-            "description": "The cost category for this line item (e.g., \"base_salary\", \"allowances\", \"bonuses\", \"deductions\", \"taxes\").",
-            "type": "string"
-          }
-        },
-        "required": [
-          "type",
-          "billing_document_amount",
-          "billing_document_currency"
-        ],
-        "title": "BillingDocumentAmountItem",
         "type": "object"
       }
     },
@@ -735,12 +507,12 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
   },
   "openapi": "3.1.0",
   "paths": {
-    "/v1/billing-documents/{billing_document_id}": {
+    "/v1/billing-documents/{billing_document_id}/pdf": {
       "get": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Shows a billing document details.\n\nPlease contact api-support@remote.com to request access to this endpoint.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n| Company-scoped access token (assertion) | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n| Customer API token | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |",
-        "operationId": "get_v1_billing-documents_billing_document_id",
+        "description": "Downloads a billing document PDF\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:read` and `all:write` work too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n| Company-scoped access token (assertion) | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n| Customer API token | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |",
+        "operationId": "get_v1_billing-documents_billing_document_id_pdf",
         "parameters": [
           {
             "description": "An access token of one of the types listed in this endpoint's Authentication section, as `Bearer <ACCESS TOKEN>`.\n\nA token from the Refresh Token flow is of the same type as the token issued with that refresh token.\n",
@@ -748,16 +520,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "in": "header",
             "name": "Authorization",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "The company the accessed resource belongs to. Send it whenever you know which one you mean. Requests that don't resolve to a company fail with \"Company not found\".",
-            "example": "93t3j-company-id-9suej43",
-            "in": "query",
-            "name": "company_id",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -772,38 +534,18 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               "type": "string"
             },
             "x-resource-type": "billing_document"
-          },
-          {
-            "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
-            "example": true,
-            "in": "query",
-            "name": "include_unrecognized_types",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
           }
         ],
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/pdf": {
                 "schema": {
-                  "$ref": "#/components/schemas/BillingDocumentResponse"
+                  "$ref": "#/components/schemas/RawFile"
                 }
               }
             },
             "description": "Success"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestResponse"
-                }
-              }
-            },
-            "description": "Bad Request"
           },
           "401": {
             "content": {
@@ -834,16 +576,6 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
               }
             },
             "description": "Unprocessable Entity"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TooManyRequestsResponse"
-                }
-              }
-            },
-            "description": "Too Many Requests"
           }
         },
         "security": [
@@ -886,7 +618,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
             "CustomerAPIToken": []
           }
         ],
-        "summary": "Show Billing Document. Requires a token issued via the authorization_code grant (company_manager role) — not usable with a client_credentials (integration) token.",
+        "summary": "Download a billing document PDF",
         "tags": [
           "Billing Documents"
         ]
@@ -938,15 +670,15 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
                       "supplemental_service_credit_note",
                       "prefunding_credit_note",
                       "reconciliation_credit_note",
-                      "credit_note",
-                      "contractor_management_invoice",
-                      "eor_reserve_credit_note",
-                      "cor_service_invoice",
                       "eor_reserve_invoice",
+                      "credit_note",
                       "payroll_service_invoice",
+                      "cor_service_invoice",
+                      "contractor_management_invoice",
                       "peo_payroll_invoice",
-                      "peo_service_invoice",
-                      "remote_plan_invoice"
+                      "eor_reserve_credit_note",
+                      "remote_plan_invoice",
+                      "peo_service_invoice"
                     ],
                     "type": "string"
                   },

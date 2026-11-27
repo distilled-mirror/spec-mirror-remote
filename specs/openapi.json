@@ -1179,21 +1179,21 @@
             "required": false,
             "schema": {
               "enum": [
-                "credit_note",
-                "contractor_management_invoice",
-                "reconciliation_credit_note",
-                "eor_reserve_credit_note",
-                "supplemental_service_invoice",
-                "cor_service_invoice",
-                "supplemental_service_credit_note",
-                "prefunding_invoice",
                 "eor_reserve_invoice",
-                "payroll_service_invoice",
+                "prefunding_invoice",
+                "credit_note",
                 "reconciliation_invoice",
-                "peo_payroll_invoice",
-                "peo_service_invoice",
+                "supplemental_service_credit_note",
+                "payroll_service_invoice",
+                "reconciliation_credit_note",
+                "cor_service_invoice",
                 "prefunding_credit_note",
-                "remote_plan_invoice"
+                "contractor_management_invoice",
+                "supplemental_service_invoice",
+                "peo_payroll_invoice",
+                "eor_reserve_credit_note",
+                "remote_plan_invoice",
+                "peo_service_invoice"
               ],
               "type": "string"
             }
@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "0546d2fe-b6d6-464d-85a8-118b67ad4f88",
+            "example": "91e4ffae-0b08-467f-b72f-31d2b810490e",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "2beba0b6-75d8-4352-9e51-57f041c5f52b",
+            "example": "1c59cd0e-9768-4c3e-a907-09dc3379edca",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "3c305caa-9d3b-4a1e-aa57-0019b506929c",
+            "example": "e119451c-1a39-4636-bc09-5fc95b0cdaa7",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "b6b39365-e64e-4319-b479-ffdcef6a361b",
+            "example": "3c98de77-4a86-4efa-b4bd-e9f00fa947e4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "36c30df6-450f-4700-9a26-1d59f08fc6b8",
+            "example": "3580ea88-7408-4869-9b4c-0c4aecca55a7",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "f2c6b08b-e8c7-416d-9639-0d03f05e33d8",
+            "example": "37f94485-a59b-46d4-aa1b-58cd67dd78d5",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "9ad351f4-94f3-4d3c-b6a7-f3af4b1d8fc9",
+            "example": "ba2c26e5-fa12-497f-a65e-c5bbec8cd7c1",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "a5204306-8b9e-4840-8b6a-c62be3185ab0",
+            "example": "90cf2425-80f4-4743-80c5-45419dc9c6e6",
             "in": "path",
             "name": "id",
             "required": true,
@@ -9014,6 +9014,78 @@
         "tags": [
           "Global Payroll"
         ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Starts the offboarding of an active Global Payroll employee, as the Offboarding form in Remote does. Remote's\npayroll team is told, and the offboarding then follows the company's approval flow. It is never completed through\nthe API.\n\nAnswers 422 when the employment isn't an active Global Payroll employment, already has an open offboarding, or\nwhen the request sends a field or a date that isn't supported yet. To offboard an Employer of Record employment,\nuse `POST /v1/offboardings`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage offboarding (`offboarding:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage offboarding (`offboarding:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage offboarding (`offboarding:write`) |",
+        "operationId": "post_v1_direct-offboardings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDirectOffboardingParams"
+              }
+            }
+          },
+          "description": "Direct offboarding",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DirectOffboardingResponse"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Create Direct Offboarding",
+        "tags": [
+          "Global Payroll"
+        ]
       }
     },
     "/v1/direct-offboardings/{id}": {
@@ -9463,7 +9535,7 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Upserts the authenticated employee's bank account details.\n\nFor Global Payroll employees whose salary Remote pays out, a change to the bank details\nreplaces the account with a new default account that the company admin must approve, as\ndoes sending a denied account's details again. Salary is held until the admin approves.\nChanging only the label, or sending exactly the same details again, keeps the account as\nit is. A change returns 422 while a payment is in progress, while the account is under\ncompliance review, or when the account is used in a payment split. Deleted accounts are\nnot listed.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n| Company-scoped access token | Manage employments (`employments`) | - | - |",
+        "description": "Upserts the authenticated employee's bank account details.\n\nFor Global Payroll employees whose salary Remote pays out, a change to the bank details\nreplaces the account with a new default account that the company admin must approve, as\ndoes sending a denied account's details again. Salary is held until the admin approves.\nChanging only the label, or sending exactly the same details again, keeps the account as\nit is. A change returns 422 while a payment is in progress, while the account is under\ncompliance review, or when the account is used in a payment split. Deleted accounts are\nnot listed.\n\nReturns 403 when Remote has frozen the employee's data.\nContact Remote support if you think the freeze is an error.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Employee-scoped access token** (`OAuth2Assertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by the employee through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Employee-scoped access token | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n| Company-scoped access token | Manage employments (`employments`) | - | - |",
         "operationId": "put_v1_employee_bank-account",
         "parameters": [
           {
@@ -9537,7 +9609,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForbiddenResponse"
+                  "$ref": "#/components/schemas/EmploymentDetailsForbiddenResponse"
                 }
               }
             },
@@ -14023,7 +14095,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "27cd5ee8-a6cf-4087-84c2-0229764b19c0",
+            "example": "d8130497-d4e4-4be8-9a41-dead6a7c3050",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -14837,7 +14909,7 @@
     "/v1/employments/{employment_id}/invite": {
       "post": {
         "deprecated": false,
-        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n* An employment waiting for its onboarding reserve (`created_awaiting_reserve`) is invited only when Remote has unblocked onboarding for its legal entity. Otherwise the request returns 409.\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nA company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted\nfrom incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the\n409 is a resource error with the code `resource_restricted` for the employment.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* For EOR employments, `provisional_start_date` must consider the minimum onboarding time of the employment's country. Global Payroll employments have no minimum onboarding time and can have back-dated start dates.\n* An employment waiting for its onboarding reserve (`created_awaiting_reserve`) is invited only when Remote has unblocked onboarding for its legal entity. Otherwise the request returns 409.\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nA company restricted by Compliance also gets a 409: when it can't hire new employees, or when it is restricted\nfrom incentive pay and the employment's `contract_details` has a signing bonus. In the signing bonus case, the\n409 is a resource error with the code `resource_restricted` for the employment.\n\nIn case of the following error message:\n`\"Please reselect benefits - the previous selection is no longer available\"`\nit means that the benefit options have been updated and the employment's benefits are no longer compliant with the new schema.\n\nIn this case, reselect benefits by updating `contract_details` JSON Schema form.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "post_v1_employments_employment_id_invite",
         "parameters": [
           {
@@ -25271,7 +25343,7 @@
     "/v1/timesheets/{timesheet_id}/approve": {
       "post": {
         "deprecated": false,
-        "description": "Approves the given timesheet.\n\nContractor timesheets can't be approved through the API and are rejected with `422`.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Company-scoped access token (assertion) | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Customer API token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |",
+        "description": "Approves the given timesheet.\n\nContractor timesheets can't be approved through the API and are rejected with `422`.\nSome timesheets Remote reopened for a Payroll check can only be approved by Remote. They are rejected\nwith `422` and code `resource_invalid_state`; send them back if the hours are wrong.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Company-scoped access token (assertion) | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Customer API token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |",
         "operationId": "post_v1_timesheets_timesheet_id_approve",
         "parameters": [
           {
@@ -25297,6 +25369,16 @@
             },
             "description": "Success"
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
           "401": {
             "content": {
               "application/json": {
@@ -25321,7 +25403,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UnprocessableEntityResponse"
+                  "$ref": "#/components/schemas/ApproveTimesheetErrorResponse"
                 }
               }
             },
@@ -27016,7 +27098,7 @@
     "/v2/employments/{employment_id}/bank-account-details": {
       "put": {
         "deprecated": false,
-        "description": "Updates employment's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates employment's bank account details.\n\nReturns 403 when the user the token acts for isn't allowed to manage this employee, or when\nRemote has frozen the employee's data. Contact Remote support if you think\nthe freeze is an error.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "put_v2_employments_employment_id_bank-account-details",
         "parameters": [
           {
@@ -27101,7 +27183,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForbiddenResponse"
+                  "$ref": "#/components/schemas/EmploymentDetailsForbiddenResponse"
                 }
               }
             },
@@ -27404,7 +27486,7 @@
     "/v2/employments/{employment_id}/billing-address-details": {
       "put": {
         "deprecated": false,
-        "description": "Updates employment's billing address details.\n\nThe billing address is replaced: optional fields that aren't sent are cleared.\n\nThe billing address belongs to the employee's bank account. If the employee has a bank\naccount, only its address changes: the bank details, country and currency stay as they are.\nThe stored bank details are checked again, so the update returns 422 when they no longer\npass a check, while the bank account is on compliance review, or when the bank account has no\ncountry (set the bank account details first).\nUpdating the address of an existing bank account can send the employee a \"Bank Account\nUpdated\" email.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
+        "description": "Updates employment's billing address details.\n\nThe billing address is replaced: optional fields that aren't sent are cleared.\n\nThe billing address belongs to the employee's bank account. If the employee has a bank\naccount, only its address changes: the bank details, country and currency stay as they are.\nThe stored bank details are checked again, so the update returns 422 when they no longer\npass a check, while the bank account is on compliance review, or when the bank account has no\ncountry (set the bank account details first).\nUpdating the address of an existing bank account can send the employee a \"Bank Account\nUpdated\" email.\n\nReturns 403 when the user the token acts for isn't allowed to manage this employee, or when\nRemote has frozen the employee's data. Contact Remote support if you think\nthe freeze is an error.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Company-scoped access token (assertion) | Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n| Customer API token | Manage employments (`employments`) | - | Manage employments (`employment:write`) |",
         "operationId": "put_v2_employments_employment_id_billing-address-details",
         "parameters": [
           {
@@ -27489,7 +27571,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForbiddenResponse"
+                  "$ref": "#/components/schemas/EmploymentDetailsForbiddenResponse"
                 }
               }
             },
@@ -28895,10 +28977,10 @@
                 "rps",
                 "secondary_reports",
                 "direct_reports",
-                "assigned_billing_legal_entities",
                 "employment_countries",
-                "direct_and_indirect_reports",
                 "employment_departments",
+                "direct_and_indirect_reports",
+                "assigned_billing_legal_entities",
                 "employment_company_structure_nodes",
                 "onboarding_reports"
               ],
@@ -29164,6 +29246,61 @@
           "approver_id"
         ],
         "title": "ApproveTimeoffParams",
+        "type": "object"
+      },
+      "ApproveTimesheetErrorResponse": {
+        "description": "Returned when the timesheet can't be approved. A timesheet Remote holds for a Payroll check also has `field_errors` with code `resource_invalid_state`.",
+        "example": {
+          "field_errors": [
+            {
+              "code": "resource_invalid_state",
+              "field": null,
+              "message": "Remote is checking the week of January 2, 2023 with Payroll before it's approved, so only Remote can approve it. If the hours are wrong, send it back with a reason."
+            }
+          ],
+          "message": "Remote is checking the week of January 2, 2023 with Payroll before it's approved, so only Remote can approve it. If the hours are wrong, send it back with a reason."
+        },
+        "properties": {
+          "errors": {
+            "description": "Validation errors, keyed by field.",
+            "type": "object"
+          },
+          "field_errors": {
+            "description": "The structured errors. Branch on `code`, not on the message.",
+            "items": {
+              "properties": {
+                "code": {
+                  "description": "An error code that describes the nature of the error.",
+                  "type": "string"
+                },
+                "field": {
+                  "description": "The request field this error relates to, or null when the timesheet's state refuses it.",
+                  "nullable": true,
+                  "type": "string"
+                },
+                "message": {
+                  "description": "A developer-friendly message describing this error.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "code",
+                "message"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "A human-readable summary of why it can't be approved.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ApproveTimesheetErrorResponse",
         "type": "object"
       },
       "ApprovedTravelLetter": {
@@ -30945,21 +31082,21 @@
                     },
                     "billing_document_type": {
                       "enum": [
-                        "credit_note",
-                        "contractor_management_invoice",
-                        "reconciliation_credit_note",
-                        "eor_reserve_credit_note",
-                        "supplemental_service_invoice",
-                        "cor_service_invoice",
-                        "supplemental_service_credit_note",
-                        "prefunding_invoice",
                         "eor_reserve_invoice",
-                        "payroll_service_invoice",
+                        "prefunding_invoice",
+                        "credit_note",
                         "reconciliation_invoice",
-                        "peo_payroll_invoice",
-                        "peo_service_invoice",
+                        "supplemental_service_credit_note",
+                        "payroll_service_invoice",
+                        "reconciliation_credit_note",
+                        "cor_service_invoice",
                         "prefunding_credit_note",
-                        "remote_plan_invoice"
+                        "contractor_management_invoice",
+                        "supplemental_service_invoice",
+                        "peo_payroll_invoice",
+                        "eor_reserve_credit_note",
+                        "remote_plan_invoice",
+                        "peo_service_invoice"
                       ],
                       "type": "string"
                     },
@@ -38496,6 +38633,136 @@
         ],
         "title": "CreateCustomFieldDefinitionParams"
       },
+      "CreateDirectOffboardingParams": {
+        "description": "Starts the offboarding of an active Global Payroll employee, as the Offboarding form in Remote does.\n\nNot supported yet, and answered with 422 when sent: `is_confidential_termination`,\n`country_specific_details`, `final_payment_details` and `offboarding_files`. A `termination_date` or\n`last_working_day` before today, in UTC, is not supported yet either.\n",
+        "example": {
+          "employment_id": "5e55386e-4f4f-4def-92f4-bdc19a5ce77d",
+          "last_working_day": "2026-12-30",
+          "notification_date": "2026-12-01",
+          "pay_through_date": "2026-12-31",
+          "regrettable_termination": "non_regrettable",
+          "termination_date": "2026-12-31",
+          "termination_reason": "termination_by_customer_reason_performance",
+          "type": "termination"
+        },
+        "properties": {
+          "additional_notes": {
+            "description": "Anything else Remote's payroll team should know.",
+            "type": "string"
+          },
+          "employment_id": {
+            "description": "The unique identifier (UUID) of the Global Payroll employment to offboard.",
+            "type": "string"
+          },
+          "last_working_day": {
+            "description": "The employee's last working day. Today or later.",
+            "format": "date",
+            "type": "string"
+          },
+          "notification_date": {
+            "description": "The date the employee was told about the offboarding.",
+            "format": "date",
+            "type": "string"
+          },
+          "pay_through_date": {
+            "description": "The last day the employee is paid for.",
+            "format": "date",
+            "type": "string"
+          },
+          "regrettable_termination": {
+            "description": "Whether the company regrets losing the employee.",
+            "enum": [
+              "regrettable",
+              "non_regrettable"
+            ],
+            "type": "string"
+          },
+          "termination_date": {
+            "description": "The date the employment ends. Today or later.",
+            "format": "date",
+            "type": "string"
+          },
+          "termination_reason": {
+            "description": "The reason for the offboarding. Required for every type except `mutual_agreement`, and it must belong to\nthe type:\n\n- `end_of_contract`: `termination_by_customer_reason_end_of_contract`\n- `resignation`: `resignation_reason_company_culture_or_values`, `resignation_reason_dissatisfaction_with_remote_service`, `resignation_reason_incapacity_to_perform_inherent_duties`, `resignation_reason_infrastructure_challenges`, `resignation_reason_lack_of_recognition`, `resignation_reason_leadership`, `resignation_reason_mutual_agreement`, `resignation_reason_other_job_opportunity`, `resignation_reason_personal_reasons`, `resignation_reason_position_does_not_meet_expectations`, `resignation_reason_relationship_with_coworkers`, `resignation_reason_relocation_leaving_remote`, `resignation_reason_remuneration_and_benefits`, `resignation_reason_retirement`, `resignation_reason_other`, `resignation_reason_education_return_to_school`, `resignation_reason_health_reasons`, `resignation_reason_job_dissatisfaction`, `resignation_reason_manager_dissatisfaction`, `resignation_reason_compensation_and_recognition_dissatisfaction`, `resignation_reason_company_dissatisfaction`, `termination_by_customer_reason_job_abandonment`\n- `retirement`: `retirement`\n- `termination`: `termination_by_customer_reason_background_check`, `termination_by_customer_reason_cancellation_before_start_date`, `termination_by_customer_reason_compliance_issue`, `termination_by_customer_reason_dissatisfaction_with_remote_service`, `termination_by_customer_reason_gross_misconduct`, `termination_by_customer_reason_incapacity_to_perform_inherent_duties`, `termination_by_customer_reason_job_abandonment`, `termination_by_customer_reason_mutual_agreement`, `termination_by_customer_reason_performance`, `termination_by_customer_reason_values`, `termination_by_customer_reason_workforce_reduction`, `termination_by_customer_reason_other`, `termination_by_customer_death_or_disability`, `termination_by_customer_expiry_of_leave_of_absence`, `termination_by_customer_disentanglement`, `termination_by_customer_reason_end_of_fixed_term_contract`, `termination_by_customer_reason_end_of_fixed_term_contract_compliance_issue`, `termination_by_customer_reason_end_of_fixed_term_contract_incapacity_to_perform_inherent_duties`, `termination_by_customer_reason_end_of_fixed_term_contract_local_regulations_max_term_reached`, `termination_by_customer_reason_end_of_fixed_term_contract_misconduct`, `termination_by_customer_reason_end_of_fixed_term_contract_operational_reasons`, `termination_by_customer_reason_end_of_fixed_term_contract_other`, `termination_by_customer_reason_end_of_fixed_term_contract_performance`, `termination_by_customer_reason_end_of_fixed_term_contract_redundancy`, `termination_by_customer_reason_end_of_fixed_term_contract_values`, `termination_by_customer_reason_end_of_contract`\n",
+            "enum": [
+              "resignation_reason_company_culture_or_values",
+              "resignation_reason_company_dissatisfaction",
+              "resignation_reason_compensation_and_recognition_dissatisfaction",
+              "resignation_reason_dissatisfaction_with_remote_service",
+              "resignation_reason_education_return_to_school",
+              "resignation_reason_health_reasons",
+              "resignation_reason_incapacity_to_perform_inherent_duties",
+              "resignation_reason_infrastructure_challenges",
+              "resignation_reason_job_dissatisfaction",
+              "resignation_reason_lack_of_recognition",
+              "resignation_reason_leadership",
+              "resignation_reason_manager_dissatisfaction",
+              "resignation_reason_mutual_agreement",
+              "resignation_reason_other",
+              "resignation_reason_other_job_opportunity",
+              "resignation_reason_personal_reasons",
+              "resignation_reason_position_does_not_meet_expectations",
+              "resignation_reason_relationship_with_coworkers",
+              "resignation_reason_relocation_leaving_remote",
+              "resignation_reason_remuneration_and_benefits",
+              "resignation_reason_retirement",
+              "retirement",
+              "termination_by_customer_death_or_disability",
+              "termination_by_customer_disentanglement",
+              "termination_by_customer_expiry_of_leave_of_absence",
+              "termination_by_customer_reason_background_check",
+              "termination_by_customer_reason_cancellation_before_start_date",
+              "termination_by_customer_reason_compliance_issue",
+              "termination_by_customer_reason_dissatisfaction_with_remote_service",
+              "termination_by_customer_reason_end_of_contract",
+              "termination_by_customer_reason_end_of_fixed_term_contract",
+              "termination_by_customer_reason_end_of_fixed_term_contract_compliance_issue",
+              "termination_by_customer_reason_end_of_fixed_term_contract_incapacity_to_perform_inherent_duties",
+              "termination_by_customer_reason_end_of_fixed_term_contract_local_regulations_max_term_reached",
+              "termination_by_customer_reason_end_of_fixed_term_contract_misconduct",
+              "termination_by_customer_reason_end_of_fixed_term_contract_operational_reasons",
+              "termination_by_customer_reason_end_of_fixed_term_contract_other",
+              "termination_by_customer_reason_end_of_fixed_term_contract_performance",
+              "termination_by_customer_reason_end_of_fixed_term_contract_redundancy",
+              "termination_by_customer_reason_end_of_fixed_term_contract_values",
+              "termination_by_customer_reason_gross_misconduct",
+              "termination_by_customer_reason_incapacity_to_perform_inherent_duties",
+              "termination_by_customer_reason_job_abandonment",
+              "termination_by_customer_reason_mutual_agreement",
+              "termination_by_customer_reason_other",
+              "termination_by_customer_reason_performance",
+              "termination_by_customer_reason_values",
+              "termination_by_customer_reason_workforce_reduction"
+            ],
+            "type": "string"
+          },
+          "termination_reason_description": {
+            "description": "Explains the reason. Required when `termination_reason` is one of the `..._other` reasons.",
+            "type": "string"
+          },
+          "type": {
+            "description": "Why the employment ends.",
+            "enum": [
+              "termination",
+              "resignation",
+              "mutual_agreement",
+              "retirement",
+              "end_of_contract"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "employment_id",
+          "type",
+          "termination_date",
+          "last_working_day",
+          "notification_date",
+          "pay_through_date"
+        ],
+        "title": "CreateDirectOffboardingParams",
+        "type": "object"
+      },
       "CreateEmployeeTimeoffParams": {
         "description": "Employee timeoff creation params",
         "example": {
@@ -39579,6 +39846,7 @@
                 "employment.contractor_of_record_termination.cancelled",
                 "employment.contractor_of_record_termination.executed",
                 "employment.contractor_of_record_termination.initiated",
+                "employment.contractor_rates.updated",
                 "employment.details.updated",
                 "employment.employment_agreement.available",
                 "employment.cor_hiring.invoice_created",
@@ -42394,6 +42662,22 @@
           "data"
         ],
         "title": "EmploymentCustomFieldValueResponse",
+        "type": "object"
+      },
+      "EmploymentDetailsForbiddenResponse": {
+        "description": "Returned when the token lacks the scope or the user's role lacks the permission, when the user may not manage this employee, or while Remote has frozen the employee's data.",
+        "example": {
+          "message": "Editing data for this employee is currently frozen. Please contact Remote support if you think this is an error."
+        },
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "EmploymentDetailsForbiddenResponse",
         "type": "object"
       },
       "EmploymentDetailsOnlyResponse": {
@@ -57056,14 +57340,14 @@
                   "action_unrecognized",
                   "action_invalid",
                   "parameter_value_invalid",
+                  "parameter_invalid_date",
+                  "parameter_required_missing",
                   "resource_not_found",
                   "resource_restricted",
-                  "parameter_invalid_date",
                   "resource_invalid_state",
                   "parameter_value_unknown",
                   "request_body_empty",
                   "request_internal_server_error",
-                  "parameter_required_missing",
                   "parameter_one_of_required_missing",
                   "parameter_too_many",
                   "parameter_unknown",
@@ -61324,6 +61608,7 @@
                 "employment.contractor_of_record_termination.cancelled",
                 "employment.contractor_of_record_termination.executed",
                 "employment.contractor_of_record_termination.initiated",
+                "employment.contractor_rates.updated",
                 "employment.details.updated",
                 "employment.employment_agreement.available",
                 "employment.cor_hiring.invoice_created",
@@ -61949,6 +62234,7 @@
                 "employment.contractor_of_record_termination.cancelled",
                 "employment.contractor_of_record_termination.executed",
                 "employment.contractor_of_record_termination.initiated",
+                "employment.contractor_rates.updated",
                 "employment.details.updated",
                 "employment.employment_agreement.available",
                 "employment.cor_hiring.invoice_created",
@@ -62137,15 +62423,15 @@
               "supplemental_service_credit_note",
               "prefunding_credit_note",
               "reconciliation_credit_note",
-              "credit_note",
-              "contractor_management_invoice",
-              "eor_reserve_credit_note",
-              "cor_service_invoice",
               "eor_reserve_invoice",
+              "credit_note",
               "payroll_service_invoice",
+              "cor_service_invoice",
+              "contractor_management_invoice",
               "peo_payroll_invoice",
-              "peo_service_invoice",
-              "remote_plan_invoice"
+              "eor_reserve_credit_note",
+              "remote_plan_invoice",
+              "peo_service_invoice"
             ],
             "type": "string"
           },
@@ -62217,6 +62503,7 @@
               "employment.contractor_of_record_termination.cancelled",
               "employment.contractor_of_record_termination.executed",
               "employment.contractor_of_record_termination.initiated",
+              "employment.contractor_rates.updated",
               "employment.details.updated",
               "employment.employment_agreement.available",
               "employment.cor_hiring.invoice_created",

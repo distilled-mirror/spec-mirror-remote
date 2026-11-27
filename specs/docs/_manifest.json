@@ -1,6 +1,6 @@
 {
   "source": "https://developer.remote.com/llms.txt",
-  "count": 428,
+  "count": 430,
   "pages": [
     {
       "page": "https://developer.remote.com/reference/background_checkstatusupdated",
@@ -236,6 +236,11 @@
       "page": "https://developer.remote.com/reference/employmentcontractor_of_record_terminationcancelled-1",
       "markdown": "https://developer.remote.com/reference/employmentcontractor_of_record_terminationcancelled-1.md",
       "file": "reference/employmentcontractor_of_record_terminationcancelled-1.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/employmentcontractor_ratesupdated",
+      "markdown": "https://developer.remote.com/reference/employmentcontractor_ratesupdated.md",
+      "file": "reference/employmentcontractor_ratesupdated.md"
     },
     {
       "page": "https://developer.remote.com/reference/employmentcor_hiringinvoice_created-1",
@@ -493,24 +498,24 @@
       "file": "reference/get_v1_benefit-renewal-requests_benefit_renewal_request_id_schema.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_billing-documents",
-      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents.md",
-      "file": "reference/get_v1_billing-documents.md"
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown-1.md",
+      "file": "reference/get_v1_billing-documents_billing_document_id_breakdown-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id",
-      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id.md",
-      "file": "reference/get_v1_billing-documents_billing_document_id.md"
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf-1.md",
+      "file": "reference/get_v1_billing-documents_billing_document_id_pdf-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown",
-      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_breakdown.md",
-      "file": "reference/get_v1_billing-documents_billing_document_id_breakdown.md"
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id-1.md",
+      "file": "reference/get_v1_billing-documents_billing_document_id-1.md"
     },
     {
-      "page": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf",
-      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents_billing_document_id_pdf.md",
-      "file": "reference/get_v1_billing-documents_billing_document_id_pdf.md"
+      "page": "https://developer.remote.com/reference/get_v1_billing-documents-1",
+      "markdown": "https://developer.remote.com/reference/get_v1_billing-documents-1.md",
+      "file": "reference/get_v1_billing-documents-1.md"
     },
     {
       "page": "https://developer.remote.com/reference/get_v1_bulk-employment-jobs_job_id",
@@ -1601,6 +1606,11 @@
       "page": "https://developer.remote.com/reference/post_v1_custom-fields",
       "markdown": "https://developer.remote.com/reference/post_v1_custom-fields.md",
       "file": "reference/post_v1_custom-fields.md"
+    },
+    {
+      "page": "https://developer.remote.com/reference/post_v1_direct-offboardings",
+      "markdown": "https://developer.remote.com/reference/post_v1_direct-offboardings.md",
+      "file": "reference/post_v1_direct-offboardings.md"
     },
     {
       "page": "https://developer.remote.com/reference/post_v1_documents",

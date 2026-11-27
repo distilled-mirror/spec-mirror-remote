@@ -187,15 +187,15 @@ This event is triggered when a new billing document is issued to the company.
                       "supplemental_service_credit_note",
                       "prefunding_credit_note",
                       "reconciliation_credit_note",
-                      "credit_note",
-                      "contractor_management_invoice",
-                      "eor_reserve_credit_note",
-                      "cor_service_invoice",
                       "eor_reserve_invoice",
+                      "credit_note",
                       "payroll_service_invoice",
+                      "cor_service_invoice",
+                      "contractor_management_invoice",
                       "peo_payroll_invoice",
-                      "peo_service_invoice",
-                      "remote_plan_invoice"
+                      "eor_reserve_credit_note",
+                      "remote_plan_invoice",
+                      "peo_service_invoice"
                     ],
                     "type": "string"
                   },
