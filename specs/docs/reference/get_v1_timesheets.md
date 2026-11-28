@@ -240,11 +240,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "current_page": 1,
           "timesheets": [
             {
+              "approval_blocked_reason": null,
               "approval_required": true,
               "break_hours": {
                 "hours": 35,
                 "minutes": 13
               },
+              "can_approve": true,
               "country_code": "PRT",
               "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "end_date": "2021-07-01",
@@ -422,11 +424,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
         "additionalProperties": false,
         "description": "A timesheet represents an employee's recorded working hours for a specific date range. It contains aggregated hour totals and individual time tracking entries. Timesheets progress through a lifecycle: open (draft) -> submitted -> approved -> processed, or they may be sent back for revision.",
         "example": {
+          "approval_blocked_reason": null,
           "approval_required": true,
           "break_hours": {
             "hours": 35,
             "minutes": 13
           },
+          "can_approve": true,
           "country_code": "PRT",
           "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "end_date": "2021-07-01",
@@ -543,12 +547,21 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           }
         },
         "properties": {
+          "approval_blocked_reason": {
+            "description": "Null when `can_approve` is true; otherwise the first reason approval is blocked, in this order:\n`missing_permission`, `contractor`, `not_submitted`, `held_for_payroll_check`,\n`employment_not_active`, `superseded_by_correction`.\nThis is an open list: clients must accept new values added in the future.\n",
+            "nullable": true,
+            "type": "string"
+          },
           "approval_required": {
             "description": "Whether this timesheet requires explicit approval before it can be processed. When false, the timesheet may be auto-approved based on the company's configuration.",
             "type": "boolean"
           },
           "break_hours": {
             "$ref": "#/components/schemas/HoursAndMinutes"
+          },
+          "can_approve": {
+            "description": "Whether the timesheet's current state and the user's RBAC permissions allow company approval. OAuth scopes are not checked: a read-only token can use a separate write token to approve. Re-read before approving; concurrent changes can still prevent approval.",
+            "type": "boolean"
           },
           "country_code": {
             "$ref": "#/components/schemas/CountryCode"
@@ -665,6 +678,8 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "employment_id",
           "submitted_at",
           "approval_required",
+          "can_approve",
+          "approval_blocked_reason",
           "notes",
           "regular_hours",
           "total_hours",

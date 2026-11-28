@@ -1179,21 +1179,21 @@
             "required": false,
             "schema": {
               "enum": [
-                "eor_reserve_invoice",
-                "prefunding_invoice",
-                "credit_note",
-                "reconciliation_invoice",
-                "supplemental_service_credit_note",
-                "payroll_service_invoice",
-                "reconciliation_credit_note",
-                "cor_service_invoice",
-                "prefunding_credit_note",
-                "contractor_management_invoice",
-                "supplemental_service_invoice",
-                "peo_payroll_invoice",
                 "eor_reserve_credit_note",
+                "supplemental_service_invoice",
+                "supplemental_service_credit_note",
+                "cor_service_invoice",
+                "peo_payroll_invoice",
+                "eor_reserve_invoice",
+                "reconciliation_invoice",
+                "credit_note",
+                "reconciliation_credit_note",
+                "peo_service_invoice",
+                "contractor_management_invoice",
+                "prefunding_invoice",
                 "remote_plan_invoice",
-                "peo_service_invoice"
+                "payroll_service_invoice",
+                "prefunding_credit_note"
               ],
               "type": "string"
             }
@@ -4954,7 +4954,7 @@
           },
           {
             "description": "Filters contractor invoice schedules by employment id matching the value.",
-            "example": "91e4ffae-0b08-467f-b72f-31d2b810490e",
+            "example": "a6f97fc7-ba17-40ed-8d07-66c6287265d4",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5260,7 +5260,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "1c59cd0e-9768-4c3e-a907-09dc3379edca",
+            "example": "87261572-c7f4-4195-9dec-c36a84088fc4",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5354,7 +5354,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "e119451c-1a39-4636-bc09-5fc95b0cdaa7",
+            "example": "19a159a3-9c99-49b4-8901-63c2f3a11228",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5439,7 +5439,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "3c98de77-4a86-4efa-b4bd-e9f00fa947e4",
+            "example": "547bd734-644c-4242-a32b-53fae341bf51",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5589,7 +5589,7 @@
           },
           {
             "description": "Filters contractor invoices by invoice schedule ID matching the value.",
-            "example": "3580ea88-7408-4869-9b4c-0c4aecca55a7",
+            "example": "b0b696e1-1504-4a87-840f-f26bd66a87e2",
             "in": "query",
             "name": "contractor_invoice_schedule_id",
             "required": false,
@@ -5599,7 +5599,7 @@
           },
           {
             "description": "Filters contractor invoices by the employment ID matching the value. Returns 404 when the employment does not exist or belongs to another company.",
-            "example": "37f94485-a59b-46d4-aa1b-58cd67dd78d5",
+            "example": "70ce0d2b-d799-40ee-a5cc-1d4717c768e3",
             "in": "query",
             "name": "employment_id",
             "required": false,
@@ -5808,7 +5808,7 @@
         "parameters": [
           {
             "description": "Resource unique identifier",
-            "example": "ba2c26e5-fa12-497f-a65e-c5bbec8cd7c1",
+            "example": "f7904859-f30c-4921-a2b9-e2d39ae8501e",
             "in": "path",
             "name": "id",
             "required": true,
@@ -5884,7 +5884,7 @@
         "parameters": [
           {
             "description": "Contractor invoice identifier",
-            "example": "90cf2425-80f4-4743-80c5-45419dc9c6e6",
+            "example": "18221ed2-b69c-4d85-86f9-4f5d308deda8",
             "in": "path",
             "name": "id",
             "required": true,
@@ -14095,7 +14095,7 @@
         "parameters": [
           {
             "description": "Employment identifier",
-            "example": "d8130497-d4e4-4be8-9a41-dead6a7c3050",
+            "example": "951dff35-9d15-4769-91b7-17a4ed4aa74a",
             "in": "path",
             "name": "employment_id",
             "required": true,
@@ -25343,7 +25343,7 @@
     "/v1/timesheets/{timesheet_id}/approve": {
       "post": {
         "deprecated": false,
-        "description": "Approves the given timesheet.\n\nContractor timesheets can't be approved through the API and are rejected with `422`.\nSome timesheets Remote reopened for a Payroll check can only be approved by Remote. They are rejected\nwith `422` and code `resource_invalid_state`; send them back if the hours are wrong.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Company-scoped access token (assertion) | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Customer API token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |",
+        "description": "Approves the given timesheet.\n\nRead `can_approve` and `approval_blocked_reason` on the full timesheet response before approving.\nRefusals caused by the timesheet's state return `422` with `field_errors` code `resource_invalid_state`.\nContractor timesheets can't be approved through the API and are rejected with `422`.\nSome timesheets Remote reopened for a Payroll check can only be approved by Remote. They are rejected\nwith `422` and code `resource_invalid_state`; send them back if the hours are wrong.\n\n## Authentication\n\nThis endpoint accepts any one of the following token types:\n\n- **Company-scoped access token** (`OAuth2AuthorizationCode`) — obtained by a company manager through the Authorization Code flow or the Refresh Token flow. See [Authentication for partners](https://developer.remote.com/docs/authentication-for-partners).\n- **Company-scoped access token (assertion)** (`OAuth2CompanyManagerAssertion`) — obtained through the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant for a company manager. See [OAuth Assertion](https://developer.remote.com/docs/authorization-method-oauth-assertion).\n- **Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page, with the scopes they choose there. See [Authorization for customers](https://developer.remote.com/docs/authorization-for-customers).\n\n## Scopes\n\nAny one of the scopes in a token type's row is enough. `all:write` works too.\n\n| Token type | Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|---|\n| Company-scoped access token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Company-scoped access token (assertion) | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n| Customer API token | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |",
         "operationId": "post_v1_timesheets_timesheet_id_approve",
         "parameters": [
           {
@@ -25369,16 +25369,6 @@
             },
             "description": "Success"
           },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequestResponse"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
           "401": {
             "content": {
               "application/json": {
@@ -25388,6 +25378,16 @@
               }
             },
             "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimesheetForbiddenResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
           },
           "404": {
             "content": {
@@ -29029,6 +29029,7 @@
       },
       "AccountsMinimalCompanyAdmin": {
         "additionalProperties": false,
+        "description": "May be redacted for an employer user: `name` and `slug` are sentinels, listed in `redacted_fields`, without the employment's added-by attribute permission.",
         "example": {
           "job_title": "HR Manager",
           "name": "John Smith",
@@ -29042,6 +29043,13 @@
           "name": {
             "nullable": false,
             "type": "string"
+          },
+          "redacted_fields": {
+            "description": "Names of fields redacted because the caller lacks the required attribute permission",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "slug": {
             "$ref": "#/components/schemas/Slug"
@@ -29249,7 +29257,7 @@
         "type": "object"
       },
       "ApproveTimesheetErrorResponse": {
-        "description": "Returned when the timesheet can't be approved. A timesheet Remote holds for a Payroll check also has `field_errors` with code `resource_invalid_state`.",
+        "description": "Returned when the timesheet's state prevents approval, with `field_errors` code `resource_invalid_state`.",
         "example": {
           "field_errors": [
             {
@@ -29298,7 +29306,8 @@
           }
         },
         "required": [
-          "message"
+          "message",
+          "field_errors"
         ],
         "title": "ApproveTimesheetErrorResponse",
         "type": "object"
@@ -31082,21 +31091,21 @@
                     },
                     "billing_document_type": {
                       "enum": [
-                        "eor_reserve_invoice",
-                        "prefunding_invoice",
-                        "credit_note",
-                        "reconciliation_invoice",
-                        "supplemental_service_credit_note",
-                        "payroll_service_invoice",
-                        "reconciliation_credit_note",
-                        "cor_service_invoice",
-                        "prefunding_credit_note",
-                        "contractor_management_invoice",
-                        "supplemental_service_invoice",
-                        "peo_payroll_invoice",
                         "eor_reserve_credit_note",
+                        "supplemental_service_invoice",
+                        "supplemental_service_credit_note",
+                        "cor_service_invoice",
+                        "peo_payroll_invoice",
+                        "eor_reserve_invoice",
+                        "reconciliation_invoice",
+                        "credit_note",
+                        "reconciliation_credit_note",
+                        "peo_service_invoice",
+                        "contractor_management_invoice",
+                        "prefunding_invoice",
                         "remote_plan_invoice",
-                        "peo_service_invoice"
+                        "payroll_service_invoice",
+                        "prefunding_credit_note"
                       ],
                       "type": "string"
                     },
@@ -51787,11 +51796,13 @@
           "current_page": 1,
           "timesheets": [
             {
+              "approval_blocked_reason": null,
               "approval_required": true,
               "break_hours": {
                 "hours": 35,
                 "minutes": 13
               },
+              "can_approve": true,
               "country_code": "PRT",
               "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "end_date": "2021-07-01",
@@ -59750,11 +59761,13 @@
         "additionalProperties": false,
         "description": "A timesheet represents an employee's recorded working hours for a specific date range. It contains aggregated hour totals and individual time tracking entries. Timesheets progress through a lifecycle: open (draft) -> submitted -> approved -> processed, or they may be sent back for revision.",
         "example": {
+          "approval_blocked_reason": null,
           "approval_required": true,
           "break_hours": {
             "hours": 35,
             "minutes": 13
           },
+          "can_approve": true,
           "country_code": "PRT",
           "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
           "end_date": "2021-07-01",
@@ -59871,12 +59884,21 @@
           }
         },
         "properties": {
+          "approval_blocked_reason": {
+            "description": "Null when `can_approve` is true; otherwise the first reason approval is blocked, in this order:\n`missing_permission`, `contractor`, `not_submitted`, `held_for_payroll_check`,\n`employment_not_active`, `superseded_by_correction`.\nThis is an open list: clients must accept new values added in the future.\n",
+            "nullable": true,
+            "type": "string"
+          },
           "approval_required": {
             "description": "Whether this timesheet requires explicit approval before it can be processed. When false, the timesheet may be auto-approved based on the company's configuration.",
             "type": "boolean"
           },
           "break_hours": {
             "$ref": "#/components/schemas/HoursAndMinutes"
+          },
+          "can_approve": {
+            "description": "Whether the timesheet's current state and the user's RBAC permissions allow company approval. OAuth scopes are not checked: a read-only token can use a separate write token to approve. Re-read before approving; concurrent changes can still prevent approval.",
+            "type": "boolean"
           },
           "country_code": {
             "$ref": "#/components/schemas/CountryCode"
@@ -59993,6 +60015,8 @@
           "employment_id",
           "submitted_at",
           "approval_required",
+          "can_approve",
+          "approval_blocked_reason",
           "notes",
           "regular_hours",
           "total_hours",
@@ -60010,17 +60034,35 @@
         "title": "Timesheet",
         "type": "object"
       },
+      "TimesheetForbiddenResponse": {
+        "description": "Returned when the token's scope or the user's RBAC permissions do not allow the action.",
+        "example": {
+          "message": "Your role does not permit this action. Contact your company admin to review your permissions."
+        },
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "TimesheetForbiddenResponse",
+        "type": "object"
+      },
       "TimesheetResponse": {
         "additionalProperties": false,
         "description": "Response containing a full timesheet with all hour breakdowns and time tracking entries.",
         "example": {
           "data": {
             "timesheet": {
+              "approval_blocked_reason": null,
               "approval_required": true,
               "break_hours": {
                 "hours": 35,
                 "minutes": 13
               },
+              "can_approve": true,
               "country_code": "PRT",
               "employment_id": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
               "end_date": "2021-07-01",
@@ -62423,15 +62465,15 @@
               "supplemental_service_credit_note",
               "prefunding_credit_note",
               "reconciliation_credit_note",
+              "eor_reserve_credit_note",
+              "cor_service_invoice",
+              "peo_payroll_invoice",
               "eor_reserve_invoice",
               "credit_note",
-              "payroll_service_invoice",
-              "cor_service_invoice",
+              "peo_service_invoice",
               "contractor_management_invoice",
-              "peo_payroll_invoice",
-              "eor_reserve_credit_note",
               "remote_plan_invoice",
-              "peo_service_invoice"
+              "payroll_service_invoice"
             ],
             "type": "string"
           },

@@ -1184,6 +1184,7 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
       },
       "AccountsMinimalCompanyAdmin": {
         "additionalProperties": false,
+        "description": "May be redacted for an employer user: `name` and `slug` are sentinels, listed in `redacted_fields`, without the employment's added-by attribute permission.",
         "example": {
           "job_title": "HR Manager",
           "name": "John Smith",
@@ -1197,6 +1198,13 @@ Any one of the scopes in a token type's row is enough. `all:read` and `all:write
           "name": {
             "nullable": false,
             "type": "string"
+          },
+          "redacted_fields": {
+            "description": "Names of fields redacted because the caller lacks the required attribute permission",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "slug": {
             "$ref": "#/components/schemas/Slug"
